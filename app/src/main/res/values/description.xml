@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="A1_2_YELLOW">Воспаление, сильная аномальная нагрузка, прилив, жарко очень</string>
+  <string name="A1_2_RED">Алкоголь, похмелье, альдегиды, Кетоны, напряжение со стороны печени, поджелудочной железы </string>
+  <string name="A1_2_BURGUNDY">если кожа сухая, то резкий стресс во время измерения</string>
+
+  <string name="A1_3_RED">Воспаление, раны, нарушение барьера кожи</string>
+  <string name="A1_3_BURGUNDY"> Сильное  воспаление,раны, нарушение барьера кожи</string>
+  <string name="A1_3_CRIMSON"> Аномальная энергия при занятиях практиками, много кофе, завышен при критических днях со стороны работающего яичника</string>
+
+  <string name="A1_4_RED">Напряжение поджелудочной(вероятность сахарного диабета)Слабость,  истощение организма, еслилевая = правой</string>
+  <string name="A1_4_RED_EXTRA">Резкая боль, сильное воспаление в проекции органа, слабость, истощение, резкий прилив</string>
+  <string name="A1_4_BURGUNDY">Стресс в момент измерения, много кофе. </string>
+
+  <string name="A1_5_YELLOW">Стресс, слабость тела </string>
+  <string name="A1_5_RED">Напряжение поджелудочной(вероятность сахарного диабета), гормональный дисбаланс</string>
+  <string name="A1_5_BURGUNDY">Сильное воспаление</string>
+
+  <string name="A1_7_RED">Адреналин, резкий стресс, прилив </string>
+
+  <string name="A1_8_RED">Алкоголь, похмелье, почки</string>
+
+  <string name="A2_3_YELLOW">Слабость, прилив при гормональных нарушениях, критических днях</string>
+  <string name="A2_3_BLUE">испарина</string>
+
+  <string name="A2_4_RED">Кетоны, сахар выше нормы, гормоны сильно разбалансированы</string>
+  <string name="A2_4_BURGUNDY">Очень тяжелое состояние, слабость.истощение</string>
+
+  <string name="A2_5_RED">Кетоны, сахар выше нормы, гормоны сильно разбалансированы </string>
+
+  <string name="A2_6_RED">Спазм.Не надежен!!!</string>
+  <string name="A2_6_BURGUNDY">Воспаление, спазм, прилив, алкоголь</string>
+  <string name="A2_6_CRIMSON">При практиках любых</string>
+
+  <string name="A3_5_BLUE">жарко</string>
+  <string name="A3_5_YELLOW">Спазм органов ЖКТ, желчевывод. путей, боль </string>
+  <string name="A3_5_RED">Альдегиды, продукты перегара</string>
+
+  <string name="A3_7_RED">Спазм желчного</string>
+  <string name="A3_7_BURGUNDY">На ногах, животе: воспаление, отеки</string>
+
+  <string name="A3_8_RED">Алкоголь, перегар. Если не принимал алкоголь – то большие проблемы с органами выделения и ЖКТ</string>
+
+  <string name="A4_5_YELLOW">Застой желчи, проверять печень</string>
+  <string name="A4_5_RED">Кетоны (СД), азотистые,кр. дни</string>
+  <string name="A4_5_CRIMSON">Аномальная энергия при практиках, если нет влаги!</string>
+
+  <string name="A4_6_BURGUNDY">Сильные воспаление, истощение стресс, кетоны</string>
+  <string name="A4_6_CRIMSON">Сильные воспаление, истощение стресс</string>
+
+  <string name="A4_8_RED">сахар, поджелужочная ослаблен организм. Стресс, волнение </string>
+
+  <string name="A5_6_RED">Голод, усталость, недосып, сердечная недостаточность</string>
+  <string name="A5_6_BURGUNDY">Стресс???</string>
+  <string name="A5_6_CRIMSON">Критическое состояние жарко, прилив, стресс, раны</string>
+
+  <string name="A5_8_RED">Альдегиды, кетоны, похмелье</string>
+  <string name="A5_8_CRIMSOM">При занятиях практиками</string>
+
+  <string name="A6_7_RED">Боль, спазм, критические дни, дисбаланс гормонов, сердечная недостаточность</string>
+
+  <string name="A7_8_BLUE">жарко</string>
+  <string name="A7_8_YELLOW">Пониженная температура, слабость, хроническая усталость Не надежно!!!!</string>
+  <string name="A7_8_RED">Альдегиды, похмелье</string>
+  <string name="A7_8_BURGUNDY">Очень жарко, острая боль</string>
+</resources>

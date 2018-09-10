@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  android:focusable="true"
+  android:fitsSystemWindows="true"
+  android:orientation="vertical">
+  <LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
+    <TextView
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:paddingLeft= "@dimen/tvinput_padding_left"
+      android:paddingEnd="10dp"
+      android:text="@string/sensor_1"
+      android:visibility="visible"/>
+
+    <EditText
+      android:id="@+id/sens_1"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:inputType="number"/>
+  </LinearLayout>
+
+  <LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
+    <TextView
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:paddingLeft= "@dimen/tvinput_padding_left"
+      android:paddingRight="10dp"
+      android:text="@string/sensor_2"
+      android:visibility="visible"/>
+    <EditText
+      android:id="@+id/sens_2"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:inputType="number"/>
+  </LinearLayout>
+  <LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
+    <TextView
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:paddingLeft= "@dimen/tvinput_padding_left"
+      android:paddingRight="10dp"
+      android:text="@string/sensor_3"
+      android:visibility="visible"/>
+    <EditText
+      android:id="@+id/sens_3"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:inputType="number"/>
+  </LinearLayout>
+
+  <LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
+    <TextView
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:paddingLeft= "@dimen/tvinput_padding_left"
+      android:paddingRight="10dp"
+      android:text="@string/sensor_4"
+      android:visibility="visible"/>
+    <EditText
+      android:id="@+id/sens_4"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:inputType="number"/>
+  </LinearLayout>
+  <LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
+    <TextView
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:paddingLeft= "@dimen/tvinput_padding_left"
+      android:paddingRight="10dp"
+      android:text="@string/sensor_5"
+      android:visibility="visible"/>
+    <EditText
+      android:id="@+id/sens_5"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:inputType="number"/>
+  </LinearLayout>
+  <LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
+    <TextView
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:paddingLeft= "@dimen/tvinput_padding_left"
+      android:paddingRight="10dp"
+      android:text="@string/sensor_6"
+      android:visibility="visible"/>
+    <EditText
+      android:id="@+id/sens_6"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:inputType="number"/>
+  </LinearLayout>
+  <LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
+    <TextView
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:paddingLeft= "@dimen/tvinput_padding_left"
+      android:paddingRight="10dp"
+      android:text="@string/sensor_7"
+      android:visibility="visible"/>
+    <EditText
+      android:id="@+id/sens_7"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:inputType="number"/>
+  </LinearLayout>
+  <LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
+    <TextView
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:paddingLeft= "@dimen/tvinput_padding_left"
+      android:paddingRight="10dp"
+      android:text="@string/sensor_8"
+      android:visibility="visible"/>
+    <EditText
+      android:id="@+id/sens_8"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:inputType="number"/>
+  </LinearLayout>
+
+  <LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
+    <TextView
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:text="@string/practice"/>
+
+    <CheckBox
+      android:id="@+id/cbPractice"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"/>
+  </LinearLayout>
+
+  <Button
+    android:id="@+id/btSubmit"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="@string/submit"/>
+
+</LinearLayout>
