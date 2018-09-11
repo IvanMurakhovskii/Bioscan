@@ -25,8 +25,10 @@ public class ResultA4_5 extends BaseResult {
       setColorRED();
       setPossibleReasons(R.string.A4_5_RED);
     } else if(getA() >= 1.4 && getA() <= 1.9){
-      setColorCRIMSON();
-      setPossibleReasons(R.string.A4_5_CRIMSON);
+      if(isPractice()){
+        setColorCRIMSON();
+        setPossibleReasons(R.string.A4_5_CRIMSON);
+      }
     }
   }
 

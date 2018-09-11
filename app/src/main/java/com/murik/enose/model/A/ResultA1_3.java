@@ -20,6 +20,7 @@ public class ResultA1_3 extends BaseResult {
       setColorGREEN();
     } else if(getA() >= 0.65 && getA() <= 0.75){
       setColorYELLOW();
+      setPossibleReasons(R.string.YELLOW);
     } else if(getA() >= 0.6 && getA() <= 0.64){
       setColorRED();
       setPossibleReasons(R.string.A1_3_RED);

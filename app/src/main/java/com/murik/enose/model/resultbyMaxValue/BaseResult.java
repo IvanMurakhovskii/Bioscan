@@ -70,7 +70,7 @@ public abstract class BaseResult implements ResultBySens {
 
   }
   public void setPossibleReasons(int discriptionId) {
-    this.possibleReasons = context.getResources().getString(discriptionId);
+        this.possibleReasons = context.getResources().getString(discriptionId);
   }
 
   @Override
@@ -85,5 +85,25 @@ public abstract class BaseResult implements ResultBySens {
   @Override
   public String getLegend() {
     return legend;
+  }
+
+  @Override
+  public String getCommentYELLOW() {
+    return context.getResources().getString(R.string.YELLOW) + "\n" + getCommentRED();
+  }
+
+  @Override
+  public String getCommentRED() {
+    return null;
+  }
+
+  @Override
+  public String getCommnetBURGUNDY() {
+    return null;
+  }
+
+  @Override
+  public String getCommentCRIMSON() {
+    return null;
   }
 }
