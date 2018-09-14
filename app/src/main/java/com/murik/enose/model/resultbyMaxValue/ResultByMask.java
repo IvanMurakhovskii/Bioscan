@@ -1,5 +1,7 @@
 package com.murik.enose.model.resultbyMaxValue;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.ArrayList;
 
 
@@ -27,8 +29,14 @@ public class ResultByMask {
       max = dataSensorMax.get(i);
       ArrayList<Double> tmpA = new ArrayList<>();
       for(int j = i+1; j < dataSensorMax.size(); j++){
-        tmp = max/dataSensorMax.get(j);
-        tmpA.add(tmp);
+          tmp = max/dataSensorMax.get(j);
+          if(!Double.isNaN(tmp) && !Double.isInfinite(tmp)){
+            tmp = new BigDecimal(tmp).setScale(2, RoundingMode.DOWN).doubleValue();
+          }
+
+          tmpA.add(tmp);
+
+
       }
 
     A.add(tmpA);

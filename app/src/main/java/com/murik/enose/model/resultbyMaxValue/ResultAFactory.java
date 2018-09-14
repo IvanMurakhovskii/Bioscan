@@ -16,6 +16,7 @@ import com.murik.enose.model.A.ResultA3_8;
 import com.murik.enose.model.A.ResultA4_5;
 import com.murik.enose.model.A.ResultA4_6;
 import com.murik.enose.model.A.ResultA4_8;
+import com.murik.enose.model.A.ResultA5_6;
 import com.murik.enose.model.A.ResultA5_8;
 import com.murik.enose.model.A.ResultA6_7;
 import com.murik.enose.model.A.ResultA7_8;
@@ -61,6 +62,7 @@ public class ResultAFactory {
     A.add(new ResultA4_6(resultByMask.getA4_6(),isPrectice, context));
     A.add(new ResultA6_7(resultByMask.getA6_7(),isPrectice, context));
     A.add(new ResultA5_8(resultByMask.getA5_8(),isPrectice, context));
+    A.add(new ResultA5_6(resultByMask.getA5_6(),isPrectice, context));
 
 
   }

@@ -1,6 +1,7 @@
 package com.murik.enose.model.resultbyMaxValue;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.support.v4.content.ContextCompat;
 import com.murik.enose.R;
 import com.murik.enose.model.ResultBySens;
@@ -18,6 +19,11 @@ public abstract class BaseResult implements ResultBySens {
       this.context = context;
       this.isPractice = isPractice;
       setColorGREEN();
+
+      if(Double.isNaN(A) || Double.isInfinite(A)) {
+        color = Color.WHITE;
+        return;
+      }
       setResult();
     }
 
@@ -69,8 +75,12 @@ public abstract class BaseResult implements ResultBySens {
     color = ContextCompat.getColor(context, R.color.colorResultBlue);
 
   }
-  public void setPossibleReasons(int discriptionId) {
-        this.possibleReasons = context.getResources().getString(discriptionId);
+  public void setPossibleReasons(String possibleReasons) {
+        this.possibleReasons = possibleReasons;
+  }
+
+  public String getResources(int idRes){
+      return context.getResources().getString(idRes);
   }
 
   @Override
@@ -87,23 +97,4 @@ public abstract class BaseResult implements ResultBySens {
     return legend;
   }
 
-  @Override
-  public String getCommentYELLOW() {
-    return context.getResources().getString(R.string.YELLOW) + "\n" + getCommentRED();
-  }
-
-  @Override
-  public String getCommentRED() {
-    return null;
-  }
-
-  @Override
-  public String getCommnetBURGUNDY() {
-    return null;
-  }
-
-  @Override
-  public String getCommentCRIMSON() {
-    return null;
-  }
 }

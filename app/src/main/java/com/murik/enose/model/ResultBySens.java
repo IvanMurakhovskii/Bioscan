@@ -9,9 +9,6 @@ public interface ResultBySens {
    String getResultComment();
    Context getContext();
    String getLegend();
-   String getCommentYELLOW();
-   String getCommentRED();
-   String getCommnetBURGUNDY();
-   String getCommentCRIMSON();
+   String getResources(int idRes);
 
 }
