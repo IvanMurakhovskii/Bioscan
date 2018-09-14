@@ -18,16 +18,17 @@ public class ResultA2_6 extends BaseResult {
       setColorGREEN();
     } else if(getA() == 1.4){
       setColorYELLOW();
+      setPossibleReasons(getResources(R.string.YELLOW) + "\n" + getResources(R.string.A2_6_RED));
     } else if(getA() > 1.4 && getA() < 1.7){
       setColorRED();
-      setPossibleReasons(R.string.A2_6_RED);
+      setPossibleReasons(getResources(R.string.A2_6_RED));
     } else if(getA() >= 1.7){
       if(isPractice()){
         setColorCRIMSON();
-        setPossibleReasons(R.string.A2_6_CRIMSON);
+        setPossibleReasons(getResources(R.string.A2_6_CRIMSON));
       } else {
         setColorBURGUNDY();
-        setPossibleReasons(R.string.A2_6_BURGUNDY);
+        setPossibleReasons(getResources(R.string.A2_6_BURGUNDY));
       }
 
     }

@@ -20,16 +20,18 @@ public class ResultA1_3 extends BaseResult {
       setColorGREEN();
     } else if(getA() >= 0.65 && getA() <= 0.75){
       setColorYELLOW();
-      setPossibleReasons(R.string.YELLOW);
+      setPossibleReasons(getResources(R.string.YELLOW) + "\n" + getResources(R.string.A1_3_RED));
     } else if(getA() >= 0.6 && getA() <= 0.64){
       setColorRED();
-      setPossibleReasons(R.string.A1_3_RED);
+      setPossibleReasons(getResources(R.string.A1_3_RED));
     } else if(getA() < 0.6){
       setColorBURGUNDY();
-      setPossibleReasons(R.string.A1_3_BURGUNDY);
+      setPossibleReasons(getResources(R.string.A1_3_BURGUNDY));
     } else if(getA() >= 1.23 && getA() <= 1.35){
-      setColorCRIMSON();
-      setPossibleReasons(R.string.A1_3_CRIMSON);
+      if(isPractice()) {
+        setColorCRIMSON();
+        setPossibleReasons(getResources(R.string.A1_3_CRIMSON));
+      }
     }
   }
 

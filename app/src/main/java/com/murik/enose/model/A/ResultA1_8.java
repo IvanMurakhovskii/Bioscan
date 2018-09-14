@@ -18,7 +18,7 @@ public class ResultA1_8 extends BaseResult {
       setColorGREEN();
     } else if(getA() >= 0.45 && getA() <= 0.55){
       setColorRED();
-      setPossibleReasons(R.string.A1_8_RED);
+      setPossibleReasons(getResources(R.string.A1_8_RED));
     }
   }
 }

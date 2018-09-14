@@ -20,10 +20,10 @@ public class ResultA3_7 extends BaseResult {
       setColorGREEN();
     } else if(getA() == 1){
       setColorRED();
-      setPossibleReasons(R.string.A3_7_RED);
+      setPossibleReasons(getResources(R.string.A3_7_RED));
     } else if(getA() > 2.4){
       setColorBURGUNDY();
-      setPossibleReasons(R.string.A3_7_BURGUNDY);
+      setPossibleReasons(getResources(R.string.A3_7_BURGUNDY));
     }
   }
 }

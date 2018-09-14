@@ -20,14 +20,14 @@ public class ResultA4_5 extends BaseResult {
       setColorGREEN();
     } else if(getA() >= 2.5 && getA() <= 2.8){
       setColorYELLOW();
-      setPossibleReasons(R.string.A4_5_YELLOW);
+      setPossibleReasons(getResources(R.string.A4_5_YELLOW));
     } else if(getA() > 2.8){
       setColorRED();
-      setPossibleReasons(R.string.A4_5_RED);
+      setPossibleReasons(getResources(R.string.A4_5_RED));
     } else if(getA() >= 1.4 && getA() <= 1.9){
       if(isPractice()){
         setColorCRIMSON();
-        setPossibleReasons(R.string.A4_5_CRIMSON);
+        setPossibleReasons(getResources(R.string.A4_5_CRIMSON));
       }
     }
   }

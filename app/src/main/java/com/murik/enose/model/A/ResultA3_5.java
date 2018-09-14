@@ -20,10 +20,10 @@ public class ResultA3_5 extends BaseResult {
       setColorGREEN();
     } else if(getA() >= 0.8 && getA() <=0.9){
       setColorYELLOW();
-      setPossibleReasons(R.string.A3_5_YELLOW);
+      setPossibleReasons(getResources(R.string.A3_5_YELLOW));
     } else if( getA() >= 1.5 && getA() <= 1.6){
       setColorRED();
-      setPossibleReasons(R.string.A3_5_RED);
+      setPossibleReasons(getResources(R.string.A3_5_RED));
     }
   }
 

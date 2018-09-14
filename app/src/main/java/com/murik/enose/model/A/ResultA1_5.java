@@ -16,15 +16,15 @@ public class ResultA1_5 extends BaseResult {
   public void setResult() {
     if(getA() > 0.95){
       setColorGREEN();
-    } else if((getA() >= 0.90 && getA() <= 0.94) || getA() < 0.81){
+    } else if((getA() >= 0.90 && getA() <= 0.94)){
       setColorYELLOW();
-      setPossibleReasons(R.string.A1_5_YELLOW);
+      setPossibleReasons(getResources(R.string.A1_5_YELLOW));
     } else if(getA() < 0.9 && getA() > 0.81){
       setColorRED();
-      setPossibleReasons(R.string.A1_5_RED);
+      setPossibleReasons(getResources(R.string.A1_5_RED));
     } else if(getA() <= 0.6){
       setColorBURGUNDY();
-      setPossibleReasons(R.string.A1_5_BURGUNDY);
+      setPossibleReasons(getResources(R.string.A1_5_BURGUNDY));
     }
   }
 }

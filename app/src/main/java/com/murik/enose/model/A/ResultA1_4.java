@@ -18,13 +18,13 @@ public class ResultA1_4 extends BaseResult {
       setColorGREEN();
     } else if(getA() >= 0.38 && getA() < 0.43){
       setColorRED();
-      setPossibleReasons(R.string.A1_4_RED);
+      setPossibleReasons(getResources(R.string.A1_4_RED));
     } else if(getA() <= 0.3){
       setColorRED();
-      setPossibleReasons(R.string.A1_4_RED_EXTRA);
+      setPossibleReasons(getResources(R.string.A1_4_RED_EXTRA));
     } else if(getA() >= 0.7){
       setColorBURGUNDY();
-      setPossibleReasons(R.string.A1_4_BURGUNDY);
+      setPossibleReasons(getResources(R.string.A1_4_BURGUNDY));
     }
   }
 }

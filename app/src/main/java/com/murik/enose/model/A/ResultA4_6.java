@@ -15,14 +15,15 @@ public class ResultA4_6 extends BaseResult {
   @Override
   public void setResult() {
     if(getA() < 4.8){
-      setColorYELLOW();
+      setColorGREEN();
+      //setPossibleReasons(getResources(R.string.YELLOW) + "\n" +  getResources(R.string.A4_6_BURGUNDY));
     } else if(getA() >= 4.8 && getA() <= 5.8){
       if(isPractice()){
         setColorCRIMSON();
-        setPossibleReasons(R.string.A4_6_CRIMSON);
+        setPossibleReasons(getResources(R.string.A4_6_CRIMSON));
       } else {
-        setColorBURGUNDY();
-        setPossibleReasons(R.string.A4_6_BURGUNDY);
+        setColorRED();
+        setPossibleReasons(getResources(R.string.A4_6_BURGUNDY));
       }
 
     }
