@@ -57,14 +57,23 @@ public class RealmAdapter extends RealmRecyclerViewAdapter<DataSensorRealm, Real
       });
       realmViewHolder.itemView.setOnClickListener(event -> {
         ArrayList<Integer> dataSens= new ArrayList<>();
-        dataSens.add(data.getDataSens1());
+        //todo
+        dataSens.add(data.getLeftHandData().getDataSens1());
+        dataSens.add(data.getLeftHandData().getDataSens2());
+        dataSens.add(data.getLeftHandData().getDataSens3());
+        dataSens.add(data.getLeftHandData().getDataSens4());
+        dataSens.add(data.getLeftHandData().getDataSens5());
+        dataSens.add(data.getLeftHandData().getDataSens6());
+        dataSens.add(data.getLeftHandData().getDataSens7());
+        dataSens.add(data.getLeftHandData().getDataSens8());
+       /* dataSens.add(data.getDataSens1());
         dataSens.add(data.getDataSens2());
         dataSens.add(data.getDataSens3());
         dataSens.add(data.getDataSens4());
         dataSens.add(data.getDataSens5());
         dataSens.add(data.getDataSens6());
         dataSens.add(data.getDataSens7());
-        dataSens.add(data.getDataSens8());
+        dataSens.add(data.getDataSens8());*/
 
         inputData.setDatasens(dataSens);
         inputData.setPractice(data.isPractice());

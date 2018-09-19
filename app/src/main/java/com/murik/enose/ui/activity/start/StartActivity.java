@@ -8,6 +8,9 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AlertDialog.Builder;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 import com.arellomobile.mvp.MvpAppCompatActivity;
@@ -70,12 +73,11 @@ public class StartActivity extends MvpAppCompatActivity implements StartView{
     setContentView(R.layout.activity_start);
     bottomAppBar = findViewById(R.id.bottom_app_bar);
     bottomAppBar.setHideOnScroll(true);
+    setSupportActionBar(bottomAppBar);
 
-   //bottomAppBar.setFabAlignmentMode(0);
-
-    //setSupportActionBar(bottomAppBar);
     FloatingActionButton fab = findViewById(R.id.fab);
     fab.setOnClickListener((View view) ->{
+      //todo replaceFragment
         App.INSTANCE.getRouter().navigateTo(Screens.INPUT_FRAGMENT);
       });
 
@@ -107,10 +109,21 @@ public class StartActivity extends MvpAppCompatActivity implements StartView{
     }
   }
 
-  /*@Override
+  @Override
   public boolean onCreateOptionsMenu(Menu menu) {
     MenuInflater inflater = getMenuInflater();
     inflater.inflate(R.menu.menu_start, menu);
     return true;
-  }*/
+  }
+
+  @Override
+  public boolean onOptionsItemSelected(MenuItem item) {
+    switch (item.getItemId()) {
+      case R.id.app_bar_home:
+        App.INSTANCE.getRouter().newScreenChain(Screens.REALM_FRAGMENT);
+        return true;
+      default:
+        return super.onOptionsItemSelected(item);
+    }
+  }
 }

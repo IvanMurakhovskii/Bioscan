@@ -9,16 +9,55 @@ public class DataSensorRealm extends RealmObject {
   @PrimaryKey
   private long id;
   private String descriptions;
-  private int dataSens1;
+  /*private int dataSens1;
   private int dataSens2;
   private int dataSens3;
   private int dataSens4;
   private int dataSens5;
   private int dataSens6;
   private int dataSens7;
-  private int dataSens8;
+  private int dataSens8;*/
+
   private boolean isPractice;
   private long time;
+
+  //todo migrations
+  private DataSensor leftHandData;
+  private DataSensor rightHandData;
+  private int gender;
+  private int hand;
+
+  public void setGender(int gender) {
+    this.gender = gender;
+  }
+
+  public int getGender() {
+    return gender;
+  }
+
+  public void setHand(int hand) {
+    this.hand = hand;
+  }
+
+  public int getHand() {
+    return hand;
+  }
+
+  public void setLeftHandData(DataSensor leftHandData) {
+    this.leftHandData = leftHandData;
+  }
+
+  public void setRightHandData(DataSensor rightHandData) {
+    this.rightHandData = rightHandData;
+  }
+
+  public DataSensor getLeftHandData() {
+    return leftHandData;
+  }
+
+  public DataSensor getRightHandData() {
+    return rightHandData;
+  }
 
   public void setTime(long time) {
     this.time = time;
@@ -52,7 +91,7 @@ public class DataSensorRealm extends RealmObject {
     return id;
   }
 
-  public void setDataSens1(int dataSens1) {
+  /* void setDataSens1(int dataSens1) {
     this.dataSens1 = dataSens1;
   }
 
@@ -114,5 +153,5 @@ public class DataSensorRealm extends RealmObject {
 
   public int getDataSens8() {
     return dataSens8;
-  }
+  }*/
 }

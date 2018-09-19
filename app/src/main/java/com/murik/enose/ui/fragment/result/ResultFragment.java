@@ -14,9 +14,11 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 import com.arellomobile.mvp.MvpAppCompatFragment;
@@ -51,8 +53,6 @@ public class ResultFragment extends MvpAppCompatFragment implements ResultView {
 
   private RecyclerView mResultRecycler;
   private PieChart pieChart;
-  private Button btnSave;
-  private Button btnScreenshot;
 
   public static Fragment newInstance(InputData resultBySens) {
     ResultFragment fragment = new ResultFragment();
@@ -78,6 +78,7 @@ public class ResultFragment extends MvpAppCompatFragment implements ResultView {
     if(bundle != null){
      inputData =  bundle.getParcelable(CALCULATE_A_KEY);
     }
+    setHasOptionsMenu(true);
     return inflater.inflate(R.layout.fragment_result, container, false);
 
   }
@@ -87,12 +88,6 @@ public class ResultFragment extends MvpAppCompatFragment implements ResultView {
     super.onViewCreated(view, savedInstanceState);
     mResultRecycler = view.findViewById(R.id.result_recycler_view);
     pieChart = view.findViewById(R.id.result_pie_chart);
-    btnScreenshot = view.findViewById(R.id.btnScreenshot);
-    btnScreenshot.setOnClickListener(event -> {
-      onScreenshotButtonClick();
-    });
-    btnSave = view.findViewById(R.id.btnSave);
-    btnSave.setOnClickListener(event -> mResultPresenter.onSaveButtonClick());
     mResultPresenter.setContext(getContext());
   }
 
@@ -135,7 +130,7 @@ public class ResultFragment extends MvpAppCompatFragment implements ResultView {
     pieChart.getLegend().setEnabled(false);
     pieChart.setDrawEntryLabels(true);
     pieChart.setEntryLabelColor(Color.BLACK);
-    pieChart.setEntryLabelTextSize(7f);
+    pieChart.setEntryLabelTextSize(12f);
     pieChart.setData(pieData);
   }
 
@@ -154,9 +149,8 @@ public class ResultFragment extends MvpAppCompatFragment implements ResultView {
     final EditText userinput = (EditText) saveDialog.findViewById(R.id.etDiscription);
     final AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
     builder.setView(saveDialog)
-        .setTitle("Описание");
+        .setTitle("Сохранить?");
     builder.setPositiveButton("Save", (dialog, id) -> {
-
           mResultPresenter.onSave(userinput.getText().toString(), inputData);
         }
     )
@@ -165,6 +159,7 @@ public class ResultFragment extends MvpAppCompatFragment implements ResultView {
         .create();
     builder.show();
   }
+
   @Override
   public void calculateResult() {
     mResultPresenter.calculateResult(inputData);
@@ -208,5 +203,27 @@ public class ResultFragment extends MvpAppCompatFragment implements ResultView {
       requestPermissions(new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},1024);
     }
 
+  }
+
+  @Override
+  public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+    inflater.inflate(R.menu.menu_result_fragment, menu);
+    super.onCreateOptionsMenu(menu, inflater);
+  }
+
+  @Override
+  public boolean onOptionsItemSelected(MenuItem item) {
+    switch (item.getItemId()){
+      case R.id.app_bar_screen:{
+        onScreenshotButtonClick();
+        return true;
+      }
+      case R.id.app_bar_save: {
+        mResultPresenter.onSaveButtonClick();
+        return true;
+      }
+      default:
+        return super.onOptionsItemSelected(item);
+    }
   }
 }

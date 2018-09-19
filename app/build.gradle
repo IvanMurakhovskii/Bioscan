@@ -40,13 +40,15 @@ dependencies {
     annotationProcessor 'com.arello-mobile:moxy-compiler:1.5.5'
 
     //realm
-    //implementation 'io.realm:realm-android:0.87.5'
     implementation 'io.realm:android-adapters:2.1.1'
-    //annotationProcessor 'io.realm:realm-android:0.87.5'
 
     //Cicerone
     implementation 'ru.terrakok.cicerone:cicerone:3.0.0'
 
     //graph
     implementation 'com.github.PhilJay:MPAndroidChart:v3.0.3'
+
+    //swipe selector
+    implementation 'com.roughike:swipe-selector:1.0.6'
+
 }

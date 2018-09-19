@@ -52,8 +52,8 @@ public class ResultPresenter extends MvpPresenter<ResultView> {
 
   public void onBindPlacesViewPosition(int position,ResultViewHolder holder){
 
-    DecimalFormat df = new DecimalFormat("#.####");
-    df.setRoundingMode(RoundingMode.CEILING);
+    DecimalFormat df = new DecimalFormat("#.##");
+    df.setRoundingMode(RoundingMode.HALF_UP);
 
     holder.setDivider(res.get(position).getViewColor());
     holder.setTvComment(res.get(position).getLegend() +" =" + df.format(res.get(position).getA()) +"\n" + res.get(position).getResultComment());

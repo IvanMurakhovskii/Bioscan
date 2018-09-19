@@ -4,6 +4,9 @@ import android.os.Build.VERSION;
 import android.os.Build.VERSION_CODES;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -43,7 +46,7 @@ public class InputFragment extends MvpAppCompatFragment implements InputView {
   public View onCreateView(final LayoutInflater inflater, final ViewGroup container,
       final Bundle savedInstanceState) {
     View view =  inflater.inflate(R.layout.fragment_input, container, false);
-
+    setHasOptionsMenu(true);
     return view;
   }
 
@@ -87,5 +90,19 @@ public class InputFragment extends MvpAppCompatFragment implements InputView {
       }
     }
     return maxSens;
+  }
+
+  @Override
+  public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+    inflater.inflate(R.menu.menu_input_fragment, menu);
+    super.onCreateOptionsMenu(menu, inflater);
+  }
+
+  @Override
+  public boolean onOptionsItemSelected(MenuItem item) {
+    switch (item.getItemId()){
+
+    }
+    return super.onOptionsItemSelected(item);
   }
 }

@@ -43,7 +43,6 @@ public class RealmFragment extends MvpAppCompatFragment implements RealmView {
     super.onViewCreated(view, savedInstanceState);
     recyclerView = view.findViewById(R.id.realm_recycler);
     realmController = new RealmController();
-
     initRecyclerView();
 
   }
