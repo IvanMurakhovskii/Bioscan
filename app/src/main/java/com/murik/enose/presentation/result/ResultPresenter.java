@@ -12,6 +12,7 @@ import com.murik.enose.model.ResultBySens;
 import com.murik.enose.model.dto.InputDataParcelable;
 import com.murik.enose.model.resultbyMaxValue.ResultAFactory;
 import com.murik.enose.model.resultbyMaxValue.ResultByMask;
+import com.murik.enose.ui.fragment.result.recycler.HeaderViewHolder;
 import com.murik.enose.ui.fragment.result.recycler.ResultViewHolder;
 import java.math.RoundingMode;
 import java.text.DecimalFormat;
@@ -23,6 +24,7 @@ public class ResultPresenter extends MvpPresenter<ResultView> {
   private ResultAFactory resultAFactory;
   ArrayList<ResultBySens> res = new ArrayList<>();
   Context context;
+  private InputDataParcelable data;
 
   public ResultPresenter() {
   }
@@ -37,6 +39,7 @@ public class ResultPresenter extends MvpPresenter<ResultView> {
   }
 
   public void calculateResult(InputDataParcelable data){
+    this.data = data;
     resultAFactory = new ResultAFactory(new ResultByMask(),data, Const.LEFT_HAND, context);
     if(resultAFactory.calculateResultA()){
       resultBySens = resultAFactory.getA();
@@ -54,7 +57,9 @@ public class ResultPresenter extends MvpPresenter<ResultView> {
 
     }
   }
-
+  public void onBindHeader(int position, HeaderViewHolder holder){
+      holder.setTvDescriptions(data.getDescriptions());
+  }
   public void onBindPlacesViewPosition(int position,ResultViewHolder holder){
 
     DecimalFormat df = new DecimalFormat("#.##");
