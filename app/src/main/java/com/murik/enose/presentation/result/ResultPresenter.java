@@ -5,10 +5,11 @@ import android.content.Context;
 import com.arellomobile.mvp.InjectViewState;
 import com.arellomobile.mvp.MvpPresenter;
 import com.murik.enose.App;
+import com.murik.enose.Const;
 import com.murik.enose.Screens;
-import com.murik.enose.model.InputData;
 import com.murik.enose.model.RealmController;
 import com.murik.enose.model.ResultBySens;
+import com.murik.enose.model.dto.InputDataParcelable;
 import com.murik.enose.model.resultbyMaxValue.ResultAFactory;
 import com.murik.enose.model.resultbyMaxValue.ResultByMask;
 import com.murik.enose.ui.fragment.result.recycler.ResultViewHolder;
@@ -35,19 +36,23 @@ public class ResultPresenter extends MvpPresenter<ResultView> {
     getViewState().calculateResult();
   }
 
-  public void calculateResult(InputData data){
-    resultAFactory = new ResultAFactory(new ResultByMask(),data, context);
-    resultAFactory.calculateResultA();
-    resultBySens = resultAFactory.getA();
-    if(!res.isEmpty()){
-      res.clear();
+  public void calculateResult(InputDataParcelable data){
+    resultAFactory = new ResultAFactory(new ResultByMask(),data, Const.LEFT_HAND, context);
+    if(resultAFactory.calculateResultA()){
+      resultBySens = resultAFactory.getA();
+      if(!res.isEmpty()){
+        res.clear();
+      }
+      for(int i = 0; i < resultBySens.size(); i++){
+        if(resultBySens.get(i).getResultComment() != null)
+          res.add(resultBySens.get(i));
+      }
+
+      getViewState().initPieChart(resultAFactory.getA());
+      getViewState().initRecyclerView();
+    } else {
+
     }
-    for(int i = 0; i < resultBySens.size(); i++){
-      if(resultBySens.get(i).getResultComment() != null)
-        res.add(resultBySens.get(i));
-    }
-    getViewState().initPieChart(resultAFactory.getA());
-    getViewState().initRecyclerView();
   }
 
   public void onBindPlacesViewPosition(int position,ResultViewHolder holder){
@@ -67,10 +72,10 @@ public class ResultPresenter extends MvpPresenter<ResultView> {
   public void onSaveButtonClick(){
     getViewState().showDialog();
   }
-  public void onSave(String discriptions, InputData data){
+  public void onSave(InputDataParcelable data){
 
     RealmController realmController = new RealmController();
-    realmController.addInfo(discriptions, data);
+    realmController.addInfo(data);
     App.INSTANCE.getRouter().newScreenChain(Screens.REALM_FRAGMENT);
   }
 }

@@ -21,7 +21,6 @@ public class DataSensorRealm extends RealmObject {
   private boolean isPractice;
   private long time;
 
-  //todo migrations
   private DataSensor leftHandData;
   private DataSensor rightHandData;
   private int gender;

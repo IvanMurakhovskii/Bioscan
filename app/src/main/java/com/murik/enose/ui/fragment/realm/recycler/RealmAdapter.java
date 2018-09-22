@@ -6,7 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import com.murik.enose.R;
-import com.murik.enose.model.InputData;
+import com.murik.enose.model.dto.InputDataParcelable;
 import com.murik.enose.model.dto.DataSensorRealm;
 import com.murik.enose.presentation.realm.RealmPresenter;
 import io.realm.OrderedRealmCollection;
@@ -19,7 +19,7 @@ import java.util.ArrayList;
 public class RealmAdapter extends RealmRecyclerViewAdapter<DataSensorRealm, RealmViewHolder> {
 
   RealmPresenter presenter;
-  InputData inputData = new InputData();
+  InputDataParcelable inputDataParcelable = new InputDataParcelable();
   public RealmAdapter(
       @Nullable OrderedRealmCollection<DataSensorRealm> data, boolean autoUpdate, RealmPresenter presenter) {
     super(data, autoUpdate);
@@ -38,9 +38,6 @@ public class RealmAdapter extends RealmRecyclerViewAdapter<DataSensorRealm, Real
   public void onBindViewHolder(@NonNull RealmViewHolder realmViewHolder, int i) {
     Realm realm = Realm.getDefaultInstance();
       DataSensorRealm data = getData().get(i);
-      /*if(resultDto.getDescription() == null){tmp = "null";} else {
-        tmp = resultDto.getDescription();
-      }*/
 
     SimpleDateFormat df = new SimpleDateFormat("EEE, d MMM yyyy, HH:mm");
     String date = df.format(data.getTime());
@@ -48,36 +45,45 @@ public class RealmAdapter extends RealmRecyclerViewAdapter<DataSensorRealm, Real
 
       realmViewHolder.setTvTime(date);
 
-
       realmViewHolder.btnDelete.setOnClickListener(event -> {
         realm.executeTransaction( r ->  {
           RealmResults<DataSensorRealm> result = r.where(DataSensorRealm.class).equalTo("id",data.getId()).findAll();
           result.deleteAllFromRealm();
         });
       });
-      realmViewHolder.itemView.setOnClickListener(event -> {
-        ArrayList<Integer> dataSens= new ArrayList<>();
-        //todo
-        dataSens.add(data.getLeftHandData().getDataSens1());
-        dataSens.add(data.getLeftHandData().getDataSens2());
-        dataSens.add(data.getLeftHandData().getDataSens3());
-        dataSens.add(data.getLeftHandData().getDataSens4());
-        dataSens.add(data.getLeftHandData().getDataSens5());
-        dataSens.add(data.getLeftHandData().getDataSens6());
-        dataSens.add(data.getLeftHandData().getDataSens7());
-        dataSens.add(data.getLeftHandData().getDataSens8());
-       /* dataSens.add(data.getDataSens1());
-        dataSens.add(data.getDataSens2());
-        dataSens.add(data.getDataSens3());
-        dataSens.add(data.getDataSens4());
-        dataSens.add(data.getDataSens5());
-        dataSens.add(data.getDataSens6());
-        dataSens.add(data.getDataSens7());
-        dataSens.add(data.getDataSens8());*/
 
-        inputData.setDatasens(dataSens);
-        inputData.setPractice(data.isPractice());
-        presenter.onItemRecyclerClick(inputData);
+      realmViewHolder.itemView.setOnClickListener(event -> {
+        ArrayList<Integer> leftHandDataSens = new ArrayList<>();
+        ArrayList<Integer> rightHandDataSens = new ArrayList<>();
+
+        if(data.getLeftHandData() != null){
+          leftHandDataSens.add(data.getLeftHandData().getDataSens1());
+          leftHandDataSens.add(data.getLeftHandData().getDataSens2());
+          leftHandDataSens.add(data.getLeftHandData().getDataSens3());
+          leftHandDataSens.add(data.getLeftHandData().getDataSens4());
+          leftHandDataSens.add(data.getLeftHandData().getDataSens5());
+          leftHandDataSens.add(data.getLeftHandData().getDataSens6());
+          leftHandDataSens.add(data.getLeftHandData().getDataSens7());
+          leftHandDataSens.add(data.getLeftHandData().getDataSens8());
+        }
+
+        if(data.getRightHandData() != null){
+          rightHandDataSens.add(data.getLeftHandData().getDataSens1());
+          rightHandDataSens.add(data.getLeftHandData().getDataSens2());
+          rightHandDataSens.add(data.getLeftHandData().getDataSens3());
+          rightHandDataSens.add(data.getLeftHandData().getDataSens4());
+          rightHandDataSens.add(data.getLeftHandData().getDataSens5());
+          rightHandDataSens.add(data.getLeftHandData().getDataSens6());
+          rightHandDataSens.add(data.getLeftHandData().getDataSens7());
+          rightHandDataSens.add(data.getLeftHandData().getDataSens8());
+        }
+
+        inputDataParcelable.setRightHandDataSensor(rightHandDataSens);
+        inputDataParcelable.setLeftHandDataSensor(leftHandDataSens);
+        inputDataParcelable.setPractice(data.isPractice());
+        inputDataParcelable.setDescriptions(data.getDescriptions());
+        inputDataParcelable.setGender(data.getGender());
+        presenter.onItemRecyclerClick(inputDataParcelable);
       });
   }
 

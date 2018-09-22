@@ -18,7 +18,7 @@ import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.murik.enose.App;
 import com.murik.enose.R;
 import com.murik.enose.Screens;
-import com.murik.enose.model.InputData;
+import com.murik.enose.model.dto.InputDataParcelable;
 import com.murik.enose.presentation.start.StartPresenter;
 import com.murik.enose.presentation.start.StartView;
 import com.murik.enose.ui.fragment.input.InputFragment;
@@ -45,7 +45,7 @@ public class StartActivity extends MvpAppCompatActivity implements StartView{
     protected Fragment createFragment(String screenKey, Object data) {
       switch (screenKey) {
         case Screens.RESULT_FRAGMENT:
-          return ResultFragment.newInstance((InputData) data);
+          return ResultFragment.newInstance((InputDataParcelable) data);
         case Screens.INPUT_FRAGMENT:
           return InputFragment.newInstance();
         case Screens.REALM_FRAGMENT:

@@ -1,7 +1,6 @@
 package com.murik.enose.ui.fragment.result;
 
 import android.Manifest;
-import android.app.AlertDialog;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.Color;
@@ -10,6 +9,7 @@ import android.os.Environment;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog.Builder;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -19,7 +19,6 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
 import android.widget.Toast;
 import com.arellomobile.mvp.MvpAppCompatFragment;
 import com.arellomobile.mvp.presenter.InjectPresenter;
@@ -29,8 +28,8 @@ import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.data.PieEntry;
 import com.murik.enose.R;
-import com.murik.enose.model.InputData;
 import com.murik.enose.model.ResultBySens;
+import com.murik.enose.model.dto.InputDataParcelable;
 import com.murik.enose.presentation.result.ResultPresenter;
 import com.murik.enose.presentation.result.ResultView;
 import com.murik.enose.ui.fragment.result.recycler.ResultAdapter;
@@ -48,13 +47,13 @@ public class ResultFragment extends MvpAppCompatFragment implements ResultView {
   @InjectPresenter
   ResultPresenter mResultPresenter;
 
-  InputData inputData;
+  InputDataParcelable inputDataParcelable;
 
 
   private RecyclerView mResultRecycler;
   private PieChart pieChart;
 
-  public static Fragment newInstance(InputData resultBySens) {
+  public static Fragment newInstance(InputDataParcelable resultBySens) {
     ResultFragment fragment = new ResultFragment();
 
     Bundle args = new Bundle();
@@ -76,7 +75,7 @@ public class ResultFragment extends MvpAppCompatFragment implements ResultView {
       final Bundle savedInstanceState) {
     Bundle bundle = getArguments();
     if(bundle != null){
-     inputData =  bundle.getParcelable(CALCULATE_A_KEY);
+     inputDataParcelable =  bundle.getParcelable(CALCULATE_A_KEY);
     }
     setHasOptionsMenu(true);
     return inflater.inflate(R.layout.fragment_result, container, false);
@@ -110,12 +109,8 @@ public class ResultFragment extends MvpAppCompatFragment implements ResultView {
       colors.add(sensResult.get(i).getViewColor());
     }
 
-    //pieChart.setHoleColorTransparent(true);
-
-
     PieDataSet dataSet = new PieDataSet(entries, " ");
 
-    //dataSet.setSliceSpace(4);
     dataSet.setAutomaticallyDisableSliceSpacing(true);
     PieData pieData = new PieData(dataSet);
     pieData.setValueTextSize(0f);
@@ -144,14 +139,10 @@ public class ResultFragment extends MvpAppCompatFragment implements ResultView {
   @Override
   public void showDialog() {
 
-    LayoutInflater inflater = LayoutInflater.from(getContext());
-    final View saveDialog = inflater.inflate(R.layout.dialog_save, null);
-    final EditText userinput = (EditText) saveDialog.findViewById(R.id.etDiscription);
-    final AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-    builder.setView(saveDialog)
-        .setTitle("Сохранить?");
+    android.support.v7.app.AlertDialog.Builder builder = new Builder(getContext());
+    builder.setMessage("Сохранить?");
     builder.setPositiveButton("Save", (dialog, id) -> {
-          mResultPresenter.onSave(userinput.getText().toString(), inputData);
+          mResultPresenter.onSave(inputDataParcelable);
         }
     )
         .setNegativeButton("Cancel", (dialog, id) ->
@@ -162,7 +153,7 @@ public class ResultFragment extends MvpAppCompatFragment implements ResultView {
 
   @Override
   public void calculateResult() {
-    mResultPresenter.calculateResult(inputData);
+    mResultPresenter.calculateResult(inputDataParcelable);
   }
 
   public void onScreenshotButtonClick(){
@@ -226,4 +217,5 @@ public class ResultFragment extends MvpAppCompatFragment implements ResultView {
         return super.onOptionsItemSelected(item);
     }
   }
+
 }

@@ -48,7 +48,8 @@ dependencies {
     //graph
     implementation 'com.github.PhilJay:MPAndroidChart:v3.0.3'
 
-    //swipe selector
-    implementation 'com.roughike:swipe-selector:1.0.6'
+    implementation 'com.ernestoyaquello.stepperform:vertical-stepper-form:0.9.9'
+
+    implementation 'com.rengwuxian.materialedittext:library:2.1.4'
 
 }

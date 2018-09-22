@@ -1,6 +1,8 @@
 package com.murik.enose.model;
 
+import com.murik.enose.model.dto.DataSensor;
 import com.murik.enose.model.dto.DataSensorRealm;
+import com.murik.enose.model.dto.InputDataParcelable;
 import io.realm.Realm;
 import io.realm.RealmResults;
 import java.util.Date;
@@ -13,26 +15,44 @@ public class RealmController{
 
   }
 
-  public void addInfo(String description, InputData dataSens) {
+  public void addInfo(InputDataParcelable dataSens) {
 
     Realm.getDefaultInstance().executeTransaction( realm -> {
-        DataSensorRealm data = realm.createObject(DataSensorRealm.class, getNextKey());
-        Date date = new Date();
-        long time = date.getTime();
-        data.setTime(time);
-        data.setDescriptions(description);
-        data.setPractice(dataSens.isPractice());
-      /*DataSensor dataSensor = new DataSensor();
-      dataSensor.setDataSens1(dataSens.getDatasens().get(0));
-        /*data.setDataSens1(dataSens.getDatasens().get(0));
-        data.setDataSens2(dataSens.getDatasens().get(1));
-        data.setDataSens3(dataSens.getDatasens().get(2));
-        data.setDataSens4(dataSens.getDatasens().get(3));
-        data.setDataSens5(dataSens.getDatasens().get(4));
-        data.setDataSens6(dataSens.getDatasens().get(5));
-        data.setDataSens7(dataSens.getDatasens().get(6));
-        data.setDataSens8(dataSens.getDatasens().get(7));*/
-        });
+      DataSensorRealm data = realm.createObject(DataSensorRealm.class, getNextKey());
+      Date date = new Date();
+      long time = date.getTime();
+      data.setTime(time);
+      data.setDescriptions(dataSens.getDescriptions());
+      data.setPractice(dataSens.isPractice());
+      data.setGender(dataSens.getGender());
+
+      DataSensor rightHandDataSensor = realm.createObject(DataSensor.class);
+      DataSensor leftHandDataSensor = realm.createObject(DataSensor.class);
+
+      if (!dataSens.getRightHandDataSensor().isEmpty()) {
+        rightHandDataSensor.setDataSens1(dataSens.getRightHandDataSensor().get(0));
+        rightHandDataSensor.setDataSens2(dataSens.getRightHandDataSensor().get(1));
+        rightHandDataSensor.setDataSens3(dataSens.getRightHandDataSensor().get(2));
+        rightHandDataSensor.setDataSens4(dataSens.getRightHandDataSensor().get(3));
+        rightHandDataSensor.setDataSens5(dataSens.getRightHandDataSensor().get(4));
+        rightHandDataSensor.setDataSens6(dataSens.getRightHandDataSensor().get(5));
+        rightHandDataSensor.setDataSens7(dataSens.getRightHandDataSensor().get(6));
+        rightHandDataSensor.setDataSens8(dataSens.getRightHandDataSensor().get(7));
+      }
+
+      if (!dataSens.getRightHandDataSensor().isEmpty()) {
+        leftHandDataSensor.setDataSens1(dataSens.getLeftHandDataSensor().get(0));
+        leftHandDataSensor.setDataSens2(dataSens.getLeftHandDataSensor().get(1));
+        leftHandDataSensor.setDataSens3(dataSens.getLeftHandDataSensor().get(2));
+        leftHandDataSensor.setDataSens4(dataSens.getLeftHandDataSensor().get(3));
+        leftHandDataSensor.setDataSens5(dataSens.getLeftHandDataSensor().get(4));
+        leftHandDataSensor.setDataSens6(dataSens.getLeftHandDataSensor().get(5));
+        leftHandDataSensor.setDataSens7(dataSens.getLeftHandDataSensor().get(6));
+        leftHandDataSensor.setDataSens8(dataSens.getLeftHandDataSensor().get(7));
+      }
+      data.setLeftHandData(leftHandDataSensor);
+      data.setRightHandData(rightHandDataSensor);
+    });
   }
 
   public RealmResults<DataSensorRealm> getInfo(){
