@@ -40,7 +40,7 @@ public class RealmController{
         rightHandDataSensor.setDataSens8(dataSens.getRightHandDataSensor().get(7));
       }
 
-      if (!dataSens.getRightHandDataSensor().isEmpty()) {
+      if (!dataSens.getLeftHandDataSensor().isEmpty()) {
         leftHandDataSensor.setDataSens1(dataSens.getLeftHandDataSensor().get(0));
         leftHandDataSensor.setDataSens2(dataSens.getLeftHandDataSensor().get(1));
         leftHandDataSensor.setDataSens3(dataSens.getLeftHandDataSensor().get(2));

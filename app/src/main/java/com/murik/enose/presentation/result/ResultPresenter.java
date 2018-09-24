@@ -20,11 +20,12 @@ import java.util.ArrayList;
 
 @InjectViewState
 public class ResultPresenter extends MvpPresenter<ResultView> {
-  ArrayList<ResultBySens> resultBySens = new ArrayList<>();
+  private ArrayList<ResultBySens> resultBySens = new ArrayList<>();
   private ResultAFactory resultAFactory;
-  ArrayList<ResultBySens> res = new ArrayList<>();
-  Context context;
+  private ArrayList<ResultBySens> res = new ArrayList<>();
+  private Context context;
   private InputDataParcelable data;
+  private int hand = Const.LEFT_HAND;
 
   public ResultPresenter() {
   }
@@ -38,9 +39,10 @@ public class ResultPresenter extends MvpPresenter<ResultView> {
     getViewState().calculateResult();
   }
 
-  public void calculateResult(InputDataParcelable data){
+  public void calculateResult(InputDataParcelable data, int hand){
+
     this.data = data;
-    resultAFactory = new ResultAFactory(new ResultByMask(),data, Const.LEFT_HAND, context);
+    resultAFactory = new ResultAFactory(new ResultByMask(),data, hand, context);
     if(resultAFactory.calculateResultA()){
       resultBySens = resultAFactory.getA();
       if(!res.isEmpty()){

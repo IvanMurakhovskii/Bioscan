@@ -68,14 +68,14 @@ public class RealmAdapter extends RealmRecyclerViewAdapter<DataSensorRealm, Real
         }
 
         if(data.getRightHandData() != null){
-          rightHandDataSens.add(data.getLeftHandData().getDataSens1());
-          rightHandDataSens.add(data.getLeftHandData().getDataSens2());
-          rightHandDataSens.add(data.getLeftHandData().getDataSens3());
-          rightHandDataSens.add(data.getLeftHandData().getDataSens4());
-          rightHandDataSens.add(data.getLeftHandData().getDataSens5());
-          rightHandDataSens.add(data.getLeftHandData().getDataSens6());
-          rightHandDataSens.add(data.getLeftHandData().getDataSens7());
-          rightHandDataSens.add(data.getLeftHandData().getDataSens8());
+          rightHandDataSens.add(data.getRightHandData().getDataSens1());
+          rightHandDataSens.add(data.getRightHandData().getDataSens2());
+          rightHandDataSens.add(data.getRightHandData().getDataSens3());
+          rightHandDataSens.add(data.getRightHandData().getDataSens4());
+          rightHandDataSens.add(data.getRightHandData().getDataSens5());
+          rightHandDataSens.add(data.getRightHandData().getDataSens6());
+          rightHandDataSens.add(data.getRightHandData().getDataSens7());
+          rightHandDataSens.add(data.getRightHandData().getDataSens8());
         }
 
         inputDataParcelable.setRightHandDataSensor(rightHandDataSens);

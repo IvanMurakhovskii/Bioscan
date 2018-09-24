@@ -31,10 +31,8 @@ public class InputFragment extends MvpAppCompatFragment implements InputView, Ve
 
   public static final int DESCRIPTION_STEP_NUM = 0;
   public static final int OTHER_INFORMATION_STEP_NUM = 1;
-  public static final int INPUT_RIGHT_HAND_STEP_NUM = 2;
-  public static final int INPUT_LEFT_HAND_STEP_NUM = 3;
-
-
+  public static final int INPUT_LEFT_HAND_STEP_NUM = 2;
+  public static final int INPUT_RIGHT_HAND_STEP_NUM = 3;
 
   @InjectPresenter
   InputPresenter mInputPresenter;
@@ -182,9 +180,9 @@ public class InputFragment extends MvpAppCompatFragment implements InputView, Ve
       input.setDescriptions(etDiscriptions.getText().toString());
       input.setGender(gender);
       input.setPractice(swPractice.isChecked());
-      input.setLeftHandDataSensor(getEditTextData(leftHandSensorData));
       input.setRightHandDataSensor(getEditTextData(rightHandSensorData));
-      mInputPresenter.onSubmitButtonClick(input);
+      input.setLeftHandDataSensor(getEditTextData(leftHandSensorData));
+    mInputPresenter.onSubmitButtonClick(input);
 
   }
 

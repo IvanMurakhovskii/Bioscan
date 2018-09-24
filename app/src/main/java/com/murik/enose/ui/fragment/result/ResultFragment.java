@@ -23,7 +23,6 @@ import android.widget.Toast;
 import com.arellomobile.mvp.MvpAppCompatFragment;
 import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.github.mikephil.charting.charts.PieChart;
-import com.github.mikephil.charting.components.Description;
 import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.data.PieEntry;
@@ -42,7 +41,9 @@ public class ResultFragment extends MvpAppCompatFragment implements ResultView {
 
   public static final String TAG = "ResultFragment";
   public static final String CALCULATE_A_KEY = "RESULT_A";
+  public static final String ARG_PAGE = "ARG_PAGE";
 
+  private int mPage;
 
   @InjectPresenter
   ResultPresenter mResultPresenter;
@@ -53,11 +54,12 @@ public class ResultFragment extends MvpAppCompatFragment implements ResultView {
   private RecyclerView mResultRecycler;
   private PieChart pieChart;
 
-  public static Fragment newInstance(InputDataParcelable resultBySens) {
+  public static Fragment newInstance(InputDataParcelable resultBySens, int mPage) {
     ResultFragment fragment = new ResultFragment();
 
     Bundle args = new Bundle();
     args.putParcelable(CALCULATE_A_KEY, resultBySens);
+    args.putInt(ARG_PAGE, mPage);
     fragment.setArguments(args);
 
     return fragment;
@@ -76,6 +78,7 @@ public class ResultFragment extends MvpAppCompatFragment implements ResultView {
     Bundle bundle = getArguments();
     if(bundle != null){
      inputDataParcelable =  bundle.getParcelable(CALCULATE_A_KEY);
+     mPage = bundle.getInt(ARG_PAGE);
     }
     setHasOptionsMenu(true);
     return inflater.inflate(R.layout.fragment_result, container, false);
@@ -115,8 +118,8 @@ public class ResultFragment extends MvpAppCompatFragment implements ResultView {
     PieData pieData = new PieData(dataSet);
     pieData.setValueTextSize(0f);
 
-    Description des = pieChart.getDescription();
-    des.setEnabled(false);
+    /*Description des = pieChart.getDescription();
+    des.setEnabled(false);*/
 
     dataSet.setColors(colors);
 
@@ -126,6 +129,7 @@ public class ResultFragment extends MvpAppCompatFragment implements ResultView {
     pieChart.setDrawEntryLabels(true);
     pieChart.setEntryLabelColor(Color.BLACK);
     pieChart.setEntryLabelTextSize(12f);
+    pieChart.notifyDataSetChanged();
     pieChart.setData(pieData);
   }
 
@@ -153,7 +157,8 @@ public class ResultFragment extends MvpAppCompatFragment implements ResultView {
 
   @Override
   public void calculateResult() {
-    mResultPresenter.calculateResult(inputDataParcelable);
+
+    mResultPresenter.calculateResult(inputDataParcelable, mPage);
   }
 
   public void onScreenshotButtonClick(){
@@ -162,12 +167,11 @@ public class ResultFragment extends MvpAppCompatFragment implements ResultView {
     int check = ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.WRITE_EXTERNAL_STORAGE);
     if (check == PackageManager.PERMISSION_GRANTED) {
       try {
-        // image naming and path  to include sd card  appending name you choose for file
+
         File directory = new File(Environment.getExternalStorageDirectory().toString() +File.separator + "Enose");
         directory.mkdirs();
         String mPath = Environment.getExternalStorageDirectory().toString()  + "/Enose/" + now + ".jpg";
 
-        // create bitmap screen capture
         View v1 = getActivity().getWindow().getDecorView().getRootView();
         v1.setDrawingCacheEnabled(true);
         Bitmap bitmap = Bitmap.createBitmap(v1.getDrawingCache());
@@ -184,9 +188,8 @@ public class ResultFragment extends MvpAppCompatFragment implements ResultView {
         outputStream.flush();
         outputStream.close();
 
-        // openScreenshot(imageFile);
+
       } catch (Throwable e) {
-        // Several error may come o ut with file handling or DOM
         Log.d("ScreenShotActivity", "Failed to capture screenshot because:" + e.getMessage());
         e.printStackTrace();
       }
@@ -204,6 +207,7 @@ public class ResultFragment extends MvpAppCompatFragment implements ResultView {
 
   @Override
   public boolean onOptionsItemSelected(MenuItem item) {
+
     switch (item.getItemId()){
       case R.id.app_bar_screen:{
         onScreenshotButtonClick();

@@ -23,7 +23,7 @@ import com.murik.enose.presentation.start.StartPresenter;
 import com.murik.enose.presentation.start.StartView;
 import com.murik.enose.ui.fragment.input.InputFragment;
 import com.murik.enose.ui.fragment.realm.RealmFragment;
-import com.murik.enose.ui.fragment.result.ResultFragment;
+import com.murik.enose.ui.fragment.result.ResultTabFragment;
 import ru.terrakok.cicerone.Navigator;
 import ru.terrakok.cicerone.android.SupportFragmentNavigator;
 
@@ -40,32 +40,36 @@ public class StartActivity extends MvpAppCompatActivity implements StartView{
 
     return intent;
   }
-  private Navigator navigator = new SupportFragmentNavigator(getSupportFragmentManager(),R.id.main_container) {
-    @Override
-    protected Fragment createFragment(String screenKey, Object data) {
-      switch (screenKey) {
-        case Screens.RESULT_FRAGMENT:
-          return ResultFragment.newInstance((InputDataParcelable) data);
-        case Screens.INPUT_FRAGMENT:
-          return InputFragment.newInstance();
-        case Screens.REALM_FRAGMENT:
-          return RealmFragment.newInstance();
-        default:
-          throw new RuntimeException("Unkown screen key");
+  private Navigator navigator;
 
+  {
+    navigator = new SupportFragmentNavigator(getSupportFragmentManager(), R.id.main_container) {
+      @Override
+      protected Fragment createFragment(String screenKey, Object data) {
+        switch (screenKey) {
+          case Screens.RESULT_FRAGMENT:
+            return ResultTabFragment.newInstance((InputDataParcelable) data);
+          case Screens.INPUT_FRAGMENT:
+            return InputFragment.newInstance();
+          case Screens.REALM_FRAGMENT:
+            return RealmFragment.newInstance();
+          default:
+            throw new RuntimeException("Unkown screen key");
+
+        }
       }
-    }
 
-    @Override
-    protected void showSystemMessage(String message) {
-      Toast.makeText(StartActivity.this, message, Toast.LENGTH_SHORT).show();
-    }
+      @Override
+      protected void showSystemMessage(String message) {
+        Toast.makeText(StartActivity.this, message, Toast.LENGTH_SHORT).show();
+      }
 
-    @Override
-    protected void exit() {
-      finish();
-    }
-  };
+      @Override
+      protected void exit() {
+        finish();
+      }
+    };
+  }
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
