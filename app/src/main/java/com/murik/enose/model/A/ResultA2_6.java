@@ -2,13 +2,14 @@ package com.murik.enose.model.A;
 
 import android.content.Context;
 import com.murik.enose.R;
+import com.murik.enose.model.dto.InputDataParcelable;
 import com.murik.enose.model.resultbyMaxValue.BaseResult;
 
 public class ResultA2_6 extends BaseResult {
 
 
-  public ResultA2_6(double A, boolean isPractice, Context context) {
-    super(A, isPractice, context);
+  public ResultA2_6(double A, InputDataParcelable inputData, Context context) {
+    super(A, inputData, context);
     setLegend("A2_6");
   }
 
@@ -23,7 +24,7 @@ public class ResultA2_6 extends BaseResult {
       setColorRED();
       setPossibleReasons(getResources(R.string.A2_6_RED));
     } else if(getA() >= 1.7){
-      if(isPractice()){
+      if(getInputData().isPractice()){
         setColorCRIMSON();
         setPossibleReasons(getResources(R.string.A2_6_CRIMSON));
       } else {

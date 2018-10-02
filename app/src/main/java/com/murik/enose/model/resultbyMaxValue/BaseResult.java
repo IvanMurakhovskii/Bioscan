@@ -5,6 +5,7 @@ import android.graphics.Color;
 import android.support.v4.content.ContextCompat;
 import com.murik.enose.R;
 import com.murik.enose.model.ResultBySens;
+import com.murik.enose.model.dto.InputDataParcelable;
 
 public abstract class BaseResult implements ResultBySens {
     private double A;
@@ -12,12 +13,12 @@ public abstract class BaseResult implements ResultBySens {
     private String possibleReasons = null;
     private Context context;
     private String legend;
-    private boolean isPractice;
+    private InputDataParcelable inputData;
 
-    public BaseResult(double A,boolean isPractice, Context context){
+    public BaseResult(double A,InputDataParcelable inputData, Context context){
       this.A = A;
       this.context = context;
-      this.isPractice = isPractice;
+      this.inputData = inputData;
       setColorGREEN();
 
       if(Double.isNaN(A) || Double.isInfinite(A)) {
@@ -27,12 +28,8 @@ public abstract class BaseResult implements ResultBySens {
       setResult();
     }
 
-  public void setPractice(boolean practice) {
-    isPractice = practice;
-  }
-
-  public boolean isPractice() {
-    return isPractice;
+  public InputDataParcelable getInputData() {
+    return inputData;
   }
 
   @Override

@@ -1,17 +1,21 @@
 package com.murik.enose.ui.activity.start;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.bottomappbar.BottomAppBar;
-import android.support.design.widget.FloatingActionButton;
+import android.support.annotation.NonNull;
+import android.support.design.widget.NavigationView;
+import android.support.design.widget.NavigationView.OnNavigationItemSelectedListener;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AlertDialog.Builder;
+import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.Toast;
 import com.arellomobile.mvp.MvpAppCompatActivity;
 import com.arellomobile.mvp.presenter.InjectPresenter;
@@ -27,21 +31,18 @@ import com.murik.enose.ui.fragment.result.ResultTabFragment;
 import ru.terrakok.cicerone.Navigator;
 import ru.terrakok.cicerone.android.SupportFragmentNavigator;
 
-public class StartActivity extends MvpAppCompatActivity implements StartView{
+public class StartActivity extends MvpAppCompatActivity implements StartView, OnNavigationItemSelectedListener{
     public static final String TAG = "StartActivity";
 
   @InjectPresenter
   StartPresenter mStartPresenter;
 
-  private BottomAppBar bottomAppBar;
-
   public static Intent getIntent(final Context context) {
     Intent intent = new Intent(context, StartActivity.class);
-
     return intent;
   }
-  private Navigator navigator;
 
+  private Navigator navigator;
   {
     navigator = new SupportFragmentNavigator(getSupportFragmentManager(), R.id.main_container) {
       @Override
@@ -71,32 +72,23 @@ public class StartActivity extends MvpAppCompatActivity implements StartView{
     };
   }
 
+  @SuppressLint("RestrictedApi")
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_start);
-    bottomAppBar = findViewById(R.id.bottom_app_bar);
-    bottomAppBar.setHideOnScroll(true);
-    setSupportActionBar(bottomAppBar);
+    Toolbar toolbar =  findViewById(R.id.toolbar);
+    setSupportActionBar(toolbar);
 
-    FloatingActionButton fab = findViewById(R.id.fab);
-    fab.setOnClickListener((View view) ->{
-      //todo replaceFragment
-        App.INSTANCE.getRouter().navigateTo(Screens.INPUT_FRAGMENT);
-      });
+    DrawerLayout drawer =  findViewById(R.id.drawer_layout);
+    ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+        this, drawer, toolbar,R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+    drawer.addDrawerListener(toggle);
+    toggle.syncState();
 
-  }
+    NavigationView navigationView = findViewById(R.id.nav_view);
+    navigationView.setNavigationItemSelectedListener(this);
 
-  @Override
-  protected void onResume() {
-    super.onResume();
-    App.INSTANCE.getNavigatorHolder().setNavigator(navigator);
-  }
-
-  @Override
-  protected void onPause() {
-    super.onPause();
-    App.INSTANCE.getNavigatorHolder().removeNavigator();
   }
 
   public void onBackPressed() {
@@ -122,12 +114,33 @@ public class StartActivity extends MvpAppCompatActivity implements StartView{
 
   @Override
   public boolean onOptionsItemSelected(MenuItem item) {
-    switch (item.getItemId()) {
-      case R.id.app_bar_home:
+     return false;
+  }
+
+  @Override
+  public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+    switch (menuItem.getItemId()){
+      case R.id.app_bar_home:{
         App.INSTANCE.getRouter().newScreenChain(Screens.REALM_FRAGMENT);
         return true;
+      }
+      case R.id.app_input:{
+        App.INSTANCE.getRouter().replaceScreen(Screens.INPUT_FRAGMENT);
+        return true;
+      }
       default:
-        return super.onOptionsItemSelected(item);
+        return super.onOptionsItemSelected(menuItem);
     }
+  }
+  @Override
+  protected void onResume() {
+    super.onResume();
+    App.INSTANCE.getNavigatorHolder().setNavigator(navigator);
+  }
+
+  @Override
+  protected void onPause() {
+    super.onPause();
+    App.INSTANCE.getNavigatorHolder().removeNavigator();
   }
 }

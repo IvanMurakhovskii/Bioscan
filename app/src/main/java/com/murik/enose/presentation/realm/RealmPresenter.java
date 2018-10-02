@@ -10,7 +10,6 @@ import com.murik.enose.model.dto.InputDataParcelable;
 @InjectViewState
 public class RealmPresenter extends MvpPresenter<RealmView> {
   public void onItemRecyclerClick(InputDataParcelable dataSens){
-
     App.INSTANCE.getRouter().navigateTo(Screens.RESULT_FRAGMENT, dataSens);
   }
 }
