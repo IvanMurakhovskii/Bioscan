@@ -8,9 +8,9 @@ import com.murik.enose.model.dto.InputDataParcelable;
 import com.murik.enose.ui.fragment.result.ResultFragment;
 
 public class ResultTabPageAdapter extends FragmentPagerAdapter {
-  final int PAGE_COUNT = 2;
+  final int PAGE_COUNT = 3;
   InputDataParcelable inputDataParcelable;
-  private String tabTitles[] = new String[] {"left hand", "right hand"};
+  private String tabTitles[] = new String[] {"ЛЕВАЯ ", "ПРАВАЯ", "СРЕДНЕЕ"};
   private Context context;
 
 

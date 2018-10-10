@@ -17,6 +17,7 @@ import com.murik.enose.model.A.ResultA3_8;
 import com.murik.enose.model.A.ResultA4_5;
 import com.murik.enose.model.A.ResultA4_6;
 import com.murik.enose.model.A.ResultA4_8;
+import com.murik.enose.model.A.ResultA5_6;
 import com.murik.enose.model.A.ResultA5_8;
 import com.murik.enose.model.A.ResultA6_7;
 import com.murik.enose.model.A.ResultA7_8;
@@ -39,6 +40,11 @@ public class ResultAFactory {
       this.maxSensResult = inputData.getLeftHandDataSensor();
     } else if(hand == Const.RIGHT_HAND){
       this.maxSensResult = inputData.getRightHandDataSensor();
+    } else if(hand == Const.MEAN_HAND) {
+      for(int i = 0; i < inputData.getRightHandDataSensor().size(); i++){
+        this.maxSensResult.add(inputData.getRightHandDataSensor().get(i)
+            + inputData.getLeftHandDataSensor().get(i));
+      }
     }
     this.inputData = inputData;
     this.resultByMask = resultByMask;
@@ -68,7 +74,8 @@ public class ResultAFactory {
       A.add(new ResultA4_6(resultByMask.getA4_6(),inputData, context));
       A.add(new ResultA6_7(resultByMask.getA6_7(),inputData, context));
       A.add(new ResultA5_8(resultByMask.getA5_8(),inputData, context));
-      //A.add(new ResultA5_6(resultByMask.getA5_6(),isPrectice, context));
+      A.add(new ResultA5_6(resultByMask.getA5_6(),inputData, context));
+
       return true;
     } else {
       return false;

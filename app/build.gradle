@@ -50,6 +50,11 @@ dependencies {
 
     implementation 'com.ernestoyaquello.stepperform:vertical-stepper-form:0.9.9'
 
+    //dagger2
+    /*implementation 'com.google.dagger:dagger-android:2.17'
+    implementation 'com.google.dagger:dagger-android-support:2.17'
+    annotationProcessor 'com.google.dagger:dagger-android-processor:2.17'*/
+
     implementation 'com.rengwuxian.materialedittext:library:2.1.4'
 
     implementation 'co.dift.ui.swipetoaction:library:1.1'

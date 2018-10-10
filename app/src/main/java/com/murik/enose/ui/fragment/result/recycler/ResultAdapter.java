@@ -11,8 +11,8 @@ import com.murik.enose.presentation.result.ResultPresenter;
 
 public class ResultAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
 
-  public static final int TYPE_HEADER = 0;
-  public static final int TYPE_ITEM = 1;
+  private static final int TYPE_HEADER = 0;
+  private static final int TYPE_ITEM = 1;
   private final ResultPresenter presenter;
 
   public ResultAdapter(ResultPresenter presenter) {
@@ -50,7 +50,9 @@ public class ResultAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
       presenter.onBindHeader(position, (HeaderViewHolder) holder);
       return;
     }
-    presenter.onBindPlacesViewPosition(position, (ResultViewHolder) holder);
+    else if(holder instanceof ResultViewHolder){
+      presenter.onBindPlacesViewPosition(position, (ResultViewHolder) holder);
+    }
   }
 
 

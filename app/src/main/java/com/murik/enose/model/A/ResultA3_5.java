@@ -10,7 +10,7 @@ public class ResultA3_5 extends BaseResult {
 
   public ResultA3_5(double A, InputDataParcelable inputData, Context context) {
     super(A, inputData, context);
-    setLegend("A3_5");
+    setLegend("3_5");
   }
 
   @Override
@@ -24,6 +24,9 @@ public class ResultA3_5 extends BaseResult {
       setPossibleReasons(getResources(R.string.A3_5_YELLOW));
     } else if( getA() >= 1.5 && getA() <= 1.6){
       setColorRED();
+      setPossibleReasons(getResources(R.string.A3_5_RED));
+    } else  if(getA() > 1.6){
+      setColorBURGUNDY();
       setPossibleReasons(getResources(R.string.A3_5_RED));
     }
   }

@@ -44,17 +44,18 @@
   <string name="A3_8_RED">Алкоголь, перегар. Если не принимал алкоголь – то большие проблемы с органами выделения и ЖКТ</string>
 
   <string name="A4_5_YELLOW">Застой желчи, проверять печень</string>
-  <string name="A4_5_RED">Кетоны (СД), азотистые,кр. дни</string>
+  <string name="A4_5_RED">Кетоны (СД), азотистые</string>
   <string name="A4_5_CRIMSON">Аномальная энергия при практиках, если нет влаги!</string>
 
   <string name="A4_6_BURGUNDY">Сильные воспаление, истощение стресс, кетоны</string>
   <string name="A4_6_CRIMSON">Особое сосотояние энергии</string>
 
-  <string name="A4_8_RED">Сахар, поджелужочная ослаблен организм. Стресс, волнение </string>
+  <string name="A4_8_RED">Сахар, поджелужочная ослаблен организм. Стресс, волнение</string>
 
   <string name="A5_6_RED">Голод, усталость, недосып, сердечная недостаточность</string>
+  <string name="A5_6_RED_2">Жарко, прилив, стресс, раны </string>
   <string name="A5_6_BURGUNDY">Стресс???</string>
-  <string name="A5_6_CRIMSON">Критическое состояние жарко, прилив, стресс, раны</string>
+  <string name="A5_6_CRIMSON">Критическое состояние</string>
 
   <string name="A5_8_RED">Альдегиды, кетоны, похмелье</string>
   <string name="A5_8_CRIMSOM">При занятиях практиками</string>

@@ -10,7 +10,7 @@ public class ResultA1_7 extends BaseResult {
 
   public ResultA1_7(double A, InputDataParcelable inputData, Context context) {
     super(A, inputData, context);
-    setLegend("A1_7");
+    setLegend("1_7");
   }
 
   @Override

@@ -17,7 +17,7 @@ public class RealmController{
 
   public void addInfo(InputDataParcelable dataSens) {
 
-    Realm.getDefaultInstance().executeTransaction( realm -> {
+    realm.executeTransaction( realm -> {
       DataSensorRealm data = realm.createObject(DataSensorRealm.class, getNextKey());
       Date date = new Date();
       long time = date.getTime();
@@ -52,17 +52,20 @@ public class RealmController{
       }
       data.setLeftHandData(leftHandDataSensor);
       data.setRightHandData(rightHandDataSensor);
+      realm.close();
     });
   }
 
+
   public RealmResults<DataSensorRealm> getInfo(){
-    return realm.where(DataSensorRealm.class).findAll();
+    return realm.where(DataSensorRealm.class).findAllAsync();
   }
 
   private int getNextKey() {
     if(realm.where(DataSensorRealm.class).max("id") == null){
       return 0;
+    } else {
+      return realm.where(DataSensorRealm.class).max("id").intValue() + 1;
     }
-    return realm.where(DataSensorRealm.class).max("id").intValue() + 1;
   }
 }

@@ -55,15 +55,13 @@ public class ResultPresenter extends MvpPresenter<ResultView> {
 
       getViewState().initPieChart(resultAFactory.getA());
       getViewState().initRecyclerView();
-    } else {
-
     }
   }
   public void onBindHeader(int position, HeaderViewHolder holder){
       holder.setTvDescriptions(data.getDescriptions());
   }
-  public void onBindPlacesViewPosition(int position,ResultViewHolder holder){
-
+  public void onBindPlacesViewPosition(int pos,ResultViewHolder holder){
+    int position = pos - 1;
     DecimalFormat df = new DecimalFormat("#.##");
     df.setRoundingMode(RoundingMode.HALF_UP);
 
@@ -73,7 +71,7 @@ public class ResultPresenter extends MvpPresenter<ResultView> {
   }
 
   public int getResultRowsCount() {
-    return res.size();
+    return res.size() + 1;
   }
 
   public void onSaveButtonClick(){

@@ -5,4 +5,5 @@ public class Const {
   public static final int GENDER_MALE = 1;
   public static final int LEFT_HAND = 0;
   public static final int RIGHT_HAND = 1;
+  public static final int MEAN_HAND = 2;
 }

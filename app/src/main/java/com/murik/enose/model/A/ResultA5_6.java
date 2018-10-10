@@ -10,7 +10,7 @@ public class ResultA5_6 extends BaseResult {
 
   public ResultA5_6(double A, InputDataParcelable inputData, Context context) {
     super(A, inputData, context);
-    setLegend("A5_6");
+    setLegend("5_6");
   }
 
   @Override
@@ -28,6 +28,9 @@ public class ResultA5_6 extends BaseResult {
       if(getInputData().isPractice()){
         setColorCRIMSON();
         setPossibleReasons(getResources(R.string.A5_6_CRIMSON));
+      } else {
+        setColorRED();
+        setPossibleReasons(getResources(R.string.A5_6_RED_2));
       }
     }
   }

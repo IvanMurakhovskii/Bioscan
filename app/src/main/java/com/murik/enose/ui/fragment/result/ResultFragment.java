@@ -6,6 +6,7 @@ import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Environment;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
@@ -23,6 +24,7 @@ import android.widget.Toast;
 import com.arellomobile.mvp.MvpAppCompatFragment;
 import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.github.mikephil.charting.charts.PieChart;
+import com.github.mikephil.charting.components.Description;
 import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.data.PieEntry;
@@ -50,7 +52,6 @@ public class ResultFragment extends MvpAppCompatFragment implements ResultView {
 
   InputDataParcelable inputDataParcelable;
 
-
   private RecyclerView mResultRecycler;
   private PieChart pieChart;
 
@@ -71,7 +72,7 @@ public class ResultFragment extends MvpAppCompatFragment implements ResultView {
     //mResultPresenter = createResultPresenter();
 
   }
-
+  @NonNull
   @Override
   public View onCreateView(final LayoutInflater inflater, final ViewGroup container,
       final Bundle savedInstanceState) {
@@ -84,7 +85,7 @@ public class ResultFragment extends MvpAppCompatFragment implements ResultView {
     return inflater.inflate(R.layout.fragment_result, container, false);
 
   }
-
+  @NonNull
   @Override
   public void onViewCreated(final View view, final Bundle savedInstanceState) {
     super.onViewCreated(view, savedInstanceState);
@@ -118,8 +119,8 @@ public class ResultFragment extends MvpAppCompatFragment implements ResultView {
     PieData pieData = new PieData(dataSet);
     pieData.setValueTextSize(0f);
 
-    /*Description des = pieChart.getDescription();
-    des.setEnabled(false);*/
+    Description des = pieChart.getDescription();
+    des.setEnabled(false);
 
     dataSet.setColors(colors);
 
@@ -128,7 +129,7 @@ public class ResultFragment extends MvpAppCompatFragment implements ResultView {
     pieChart.getLegend().setEnabled(false);
     pieChart.setDrawEntryLabels(true);
     pieChart.setEntryLabelColor(Color.BLACK);
-    pieChart.setEntryLabelTextSize(12f);
+    pieChart.setEntryLabelTextSize(16f);
     pieChart.notifyDataSetChanged();
     pieChart.setData(pieData);
   }
@@ -145,9 +146,7 @@ public class ResultFragment extends MvpAppCompatFragment implements ResultView {
 
     android.support.v7.app.AlertDialog.Builder builder = new Builder(getContext());
     builder.setMessage("Сохранить?");
-    builder.setPositiveButton("Save", (dialog, id) -> {
-          mResultPresenter.onSave(inputDataParcelable);
-        }
+    builder.setPositiveButton("Save", (dialog, id) -> mResultPresenter.onSave(inputDataParcelable)
     )
         .setNegativeButton("Cancel", (dialog, id) ->
             dialog.cancel())
@@ -182,9 +181,7 @@ public class ResultFragment extends MvpAppCompatFragment implements ResultView {
         FileOutputStream outputStream = new FileOutputStream(imageFile);
         int quality = 100;
         bitmap.compress(Bitmap.CompressFormat.JPEG, quality, outputStream);
-        if(bitmap != null) {
-          Toast.makeText(getContext(), "Screenshot saved..!", Toast.LENGTH_LONG).show();
-        }
+        Toast.makeText(getContext(), "Screenshot saved..!", Toast.LENGTH_LONG).show();
         outputStream.flush();
         outputStream.close();
 

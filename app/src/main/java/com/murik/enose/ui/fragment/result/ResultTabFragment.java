@@ -31,6 +31,7 @@ public class ResultTabFragment  extends Fragment {
 
     return fragment;
   }
+  @NonNull
   @Override
   public View onCreateView(final LayoutInflater inflater, final ViewGroup container,
       final Bundle savedInstanceState) {
@@ -48,10 +49,10 @@ public class ResultTabFragment  extends Fragment {
     tabLayout = view.findViewById(R.id.sliding_tabs);
     viewPager = view.findViewById(R.id.viewpager);
 
-    ResultTabPageAdapter adapter = new ResultTabPageAdapter(getChildFragmentManager(), getActivity(), inputDataParcelable);
+    ResultTabPageAdapter adapter = new ResultTabPageAdapter(getChildFragmentManager(), getActivity().getApplicationContext(), inputDataParcelable);
     viewPager.setAdapter(adapter);
 
-    viewPager.setOffscreenPageLimit(2);
+    viewPager.setOffscreenPageLimit(3);
     tabLayout.setupWithViewPager(viewPager);
   }
 }
