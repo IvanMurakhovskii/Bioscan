@@ -2,13 +2,13 @@ package com.murik.enose.model.A;
 
 import android.content.Context;
 import com.murik.enose.R;
-import com.murik.enose.model.dto.InputDataParcelable;
+import com.murik.enose.model.dto.DataByMaxParcelable;
 import com.murik.enose.model.resultbyMaxValue.BaseResult;
 
 public class ResultA4_8 extends BaseResult {
 
 
-  public ResultA4_8(double A, InputDataParcelable inputData, Context context) {
+  public ResultA4_8(double A, DataByMaxParcelable inputData, Context context) {
     super(A, inputData, context);
     setLegend("4_8");
   }

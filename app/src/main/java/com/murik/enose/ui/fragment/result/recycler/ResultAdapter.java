@@ -47,7 +47,7 @@ public class ResultAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
   public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
 
     if(holder instanceof HeaderViewHolder){
-      presenter.onBindHeader(position, (HeaderViewHolder) holder);
+      presenter.onBindHeader((HeaderViewHolder) holder);
       return;
     }
     else if(holder instanceof ResultViewHolder){

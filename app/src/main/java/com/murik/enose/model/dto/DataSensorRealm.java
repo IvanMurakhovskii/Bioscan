@@ -4,19 +4,28 @@ import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
 
 
-public class DataSensorRealm extends RealmObject {
+public class  DataSensorRealm extends RealmObject {
 
   @PrimaryKey
   private long id;
   private String descriptions;
 
   private boolean isPractice;
+  private boolean isFullData;
   private long time;
 
   private DataSensor leftHandData;
   private DataSensor rightHandData;
   private int gender;
   private int hand;
+
+  public void setFullData(boolean fullData) {
+    isFullData = fullData;
+  }
+
+  public boolean isFullData() {
+    return isFullData;
+  }
 
   public void setGender(int gender) {
     this.gender = gender;
@@ -66,8 +75,8 @@ public class DataSensorRealm extends RealmObject {
     return isPractice;
   }
 
-  public void setDescriptions(String discriptions) {
-    this.descriptions = discriptions;
+  public void setDescriptions(String descriptions) {
+    this.descriptions = descriptions;
   }
 
   public String getDescriptions() {

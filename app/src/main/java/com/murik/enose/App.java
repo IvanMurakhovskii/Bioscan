@@ -20,7 +20,7 @@ public class App extends Application {
     cicirone = Cicerone.create();
     Realm.init(this);
     RealmConfiguration config = new RealmConfiguration.Builder().name("myrealm.realm")
-        .schemaVersion(4)
+        .schemaVersion(5)
         .migration(new ReamMigration())
         .build();
     Realm.setDefaultConfiguration(config);

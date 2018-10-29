@@ -9,9 +9,8 @@ import com.murik.enose.Const;
 import com.murik.enose.Screens;
 import com.murik.enose.model.RealmController;
 import com.murik.enose.model.ResultBySens;
-import com.murik.enose.model.dto.InputDataParcelable;
+import com.murik.enose.model.dto.DataByMaxParcelable;
 import com.murik.enose.model.resultbyMaxValue.ResultAFactory;
-import com.murik.enose.model.resultbyMaxValue.ResultByMask;
 import com.murik.enose.ui.fragment.result.recycler.HeaderViewHolder;
 import com.murik.enose.ui.fragment.result.recycler.ResultViewHolder;
 import java.math.RoundingMode;
@@ -24,7 +23,7 @@ public class ResultPresenter extends MvpPresenter<ResultView> {
   private ResultAFactory resultAFactory;
   private ArrayList<ResultBySens> res = new ArrayList<>();
   private Context context;
-  private InputDataParcelable data;
+  private DataByMaxParcelable data;
   private int hand = Const.LEFT_HAND;
 
   public ResultPresenter() {
@@ -39,10 +38,10 @@ public class ResultPresenter extends MvpPresenter<ResultView> {
     getViewState().calculateResult();
   }
 
-  public void calculateResult(InputDataParcelable data, int hand){
+  public void calculateResult(DataByMaxParcelable data, int hand){
 
     this.data = data;
-    resultAFactory = new ResultAFactory(new ResultByMask(),data, hand, context);
+    resultAFactory = new ResultAFactory(data, hand, context);
     if(resultAFactory.calculateResultA()){
       resultBySens = resultAFactory.getA();
       if(!res.isEmpty()){
@@ -57,7 +56,7 @@ public class ResultPresenter extends MvpPresenter<ResultView> {
       getViewState().initRecyclerView();
     }
   }
-  public void onBindHeader(int position, HeaderViewHolder holder){
+  public void onBindHeader(HeaderViewHolder holder){
       holder.setTvDescriptions(data.getDescriptions());
   }
   public void onBindPlacesViewPosition(int pos,ResultViewHolder holder){
@@ -77,10 +76,10 @@ public class ResultPresenter extends MvpPresenter<ResultView> {
   public void onSaveButtonClick(){
     getViewState().showDialog();
   }
-  public void onSave(InputDataParcelable data){
+  public void onSave(DataByMaxParcelable data){
 
     RealmController realmController = new RealmController();
-    realmController.addInfo(data);
+    realmController.addInfoMax(data);
     App.INSTANCE.getRouter().newScreenChain(Screens.REALM_FRAGMENT);
   }
 }

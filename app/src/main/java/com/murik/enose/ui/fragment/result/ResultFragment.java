@@ -30,7 +30,7 @@ import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.data.PieEntry;
 import com.murik.enose.R;
 import com.murik.enose.model.ResultBySens;
-import com.murik.enose.model.dto.InputDataParcelable;
+import com.murik.enose.model.dto.DataByMaxParcelable;
 import com.murik.enose.presentation.result.ResultPresenter;
 import com.murik.enose.presentation.result.ResultView;
 import com.murik.enose.ui.fragment.result.recycler.ResultAdapter;
@@ -50,12 +50,12 @@ public class ResultFragment extends MvpAppCompatFragment implements ResultView {
   @InjectPresenter
   ResultPresenter mResultPresenter;
 
-  InputDataParcelable inputDataParcelable;
+  DataByMaxParcelable inputDataParcelable;
 
   private RecyclerView mResultRecycler;
   private PieChart pieChart;
 
-  public static Fragment newInstance(InputDataParcelable resultBySens, int mPage) {
+  public static Fragment newInstance(DataByMaxParcelable resultBySens, int mPage) {
     ResultFragment fragment = new ResultFragment();
 
     Bundle args = new Bundle();
@@ -136,7 +136,7 @@ public class ResultFragment extends MvpAppCompatFragment implements ResultView {
 
   @Override
   public void initRecyclerView(){
-    mResultRecycler.setLayoutManager(new LinearLayoutManager(getContext()));
+      mResultRecycler.setLayoutManager(new LinearLayoutManager(getContext()));
     ResultAdapter adapter = new ResultAdapter(mResultPresenter);
     mResultRecycler.setAdapter(adapter);
   }

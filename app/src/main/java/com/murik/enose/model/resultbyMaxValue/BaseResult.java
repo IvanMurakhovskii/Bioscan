@@ -5,7 +5,7 @@ import android.graphics.Color;
 import android.support.v4.content.ContextCompat;
 import com.murik.enose.R;
 import com.murik.enose.model.ResultBySens;
-import com.murik.enose.model.dto.InputDataParcelable;
+import com.murik.enose.model.dto.DataByMaxParcelable;
 
 public abstract class BaseResult implements ResultBySens {
     private double A;
@@ -13,9 +13,9 @@ public abstract class BaseResult implements ResultBySens {
     private String possibleReasons = null;
     private Context context;
     private String legend;
-    private InputDataParcelable inputData;
+    private DataByMaxParcelable inputData;
 
-    public BaseResult(double A,InputDataParcelable inputData, Context context){
+    public BaseResult(double A,DataByMaxParcelable inputData, Context context){
       this.A = A;
       this.context = context;
       this.inputData = inputData;
@@ -28,7 +28,7 @@ public abstract class BaseResult implements ResultBySens {
       setResult();
     }
 
-  public InputDataParcelable getInputData() {
+  public DataByMaxParcelable getInputData() {
     return inputData;
   }
 
@@ -53,6 +53,8 @@ public abstract class BaseResult implements ResultBySens {
      this.A = A;
     }
 
+  public void setColorPRIMARY_DARK(){ color = ContextCompat.getColor(context, R.color.colorPrimaryDark); }
+  public void setColorGRAY(){ color = Color.GRAY; }
   public void setColorBURGUNDY(){
     color = ContextCompat.getColor(context, R.color.colorResultBurgundy);
   }

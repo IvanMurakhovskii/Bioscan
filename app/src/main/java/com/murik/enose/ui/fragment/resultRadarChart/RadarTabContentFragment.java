@@ -1,4 +1,4 @@
-package com.murik.enose.ui.fragment.result;
+package com.murik.enose.ui.fragment.resultRadarChart;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -10,44 +10,41 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import com.murik.enose.R;
-import com.murik.enose.model.dto.DataByMaxParcelable;
-import com.murik.enose.ui.fragment.result.tab.ResultTabPageAdapter;
+import com.murik.enose.model.dto.SensorDataFullParcelable;
+import com.murik.enose.ui.fragment.resultRadarChart.tab.ResultRadarChartTabAdapter;
 
-public class ResultTabFragment  extends Fragment {
+public class RadarTabContentFragment extends Fragment {
 
-  public static final String CALCULATE_A_KEY = "RESULT_A";
-
-
-  DataByMaxParcelable inputDataParcelable;
+  private SensorDataFullParcelable inputDataParcelable;
   private TabLayout tabLayout;
   private ViewPager viewPager;
 
-  public static Fragment newInstance(DataByMaxParcelable resultBySens) {
+  /*public static Fragment newInstance(DataByMaxParcelable resultBySens) {
     ResultTabFragment fragment = new ResultTabFragment();
 
     Bundle args = new Bundle();
-    args.putParcelable(CALCULATE_A_KEY, resultBySens);
-    fragment.setArguments(args);
-
-    return fragment;
-  }
-
-  /*public static Fragment newInstance(SensorDataFullParcelable resultBySens) {
-    ResultTabFragment fragment = new ResultTabFragment();
-
-    Bundle args = new Bundle();
-    args.putParcelable(CALCULATE_A_KEY, resultBySens);
+    args.putParcelable(ResultRadarChartFragment.DATA, resultBySens);
     fragment.setArguments(args);
 
     return fragment;
   }*/
+
+  public static Fragment newInstance(SensorDataFullParcelable resultBySens) {
+    RadarTabContentFragment fragment = new RadarTabContentFragment();
+
+    Bundle args = new Bundle();
+    args.putParcelable(ResultRadarChartFragment.DATA, resultBySens);
+    fragment.setArguments(args);
+
+    return fragment;
+  }
   @NonNull
   @Override
   public View onCreateView(final LayoutInflater inflater, final ViewGroup container,
       final Bundle savedInstanceState) {
     Bundle bundle = getArguments();
     if(bundle != null){
-      inputDataParcelable =  bundle.getParcelable(CALCULATE_A_KEY);
+      inputDataParcelable =  bundle.getParcelable(ResultRadarChartFragment.DATA);
     }
     setHasOptionsMenu(true);
     return inflater.inflate(R.layout.fragment_tab_content, container, false);
@@ -59,10 +56,11 @@ public class ResultTabFragment  extends Fragment {
     tabLayout = view.findViewById(R.id.sliding_tabs);
     viewPager = view.findViewById(R.id.viewpager);
 
-    ResultTabPageAdapter adapter = new ResultTabPageAdapter(getChildFragmentManager(), getActivity().getApplicationContext(), inputDataParcelable);
+    ResultRadarChartTabAdapter adapter = new ResultRadarChartTabAdapter(getChildFragmentManager(), getActivity().getApplicationContext(), inputDataParcelable);
     viewPager.setAdapter(adapter);
 
     //viewPager.setOffscreenPageLimit(3);
     tabLayout.setupWithViewPager(viewPager);
   }
+
 }

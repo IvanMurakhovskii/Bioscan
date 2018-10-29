@@ -5,7 +5,9 @@ import android.os.Parcelable;
 import com.murik.enose.Const;
 import java.util.ArrayList;
 
-public class InputDataParcelable implements Parcelable{
+
+
+public class DataByMaxParcelable implements Parcelable {
 
 
   private String descriptions;
@@ -14,7 +16,7 @@ public class InputDataParcelable implements Parcelable{
   private int gender = Const.GENDER_MALE;
   private boolean isPractice;
 
-   public InputDataParcelable(){
+  public DataByMaxParcelable(){
 
   }
 
@@ -53,8 +55,9 @@ public class InputDataParcelable implements Parcelable{
   public void setPractice(boolean practice) {
     isPractice = practice;
   }
+
   public boolean isPractice(){
-     return isPractice;
+    return isPractice;
   }
 
   @Override
@@ -64,33 +67,33 @@ public class InputDataParcelable implements Parcelable{
 
   @Override
   public void writeToParcel(Parcel dest, int flags) {
-     dest.writeString(descriptions);
-     dest.writeInt(gender);
-     dest.writeList(rightHandDataSensor);
-     dest.writeList(leftHandDataSensor);
-     dest.writeByte((byte) (isPractice ? 1 : 0));
+    dest.writeString(descriptions);
+    dest.writeInt(gender);
+    dest.writeList(rightHandDataSensor);
+    dest.writeList(leftHandDataSensor);
+    dest.writeByte((byte) (isPractice ? 1 : 0));
   }
-  public static final Parcelable.Creator<InputDataParcelable> CREATOR = new Parcelable.Creator<InputDataParcelable>() {
+  public static final Parcelable.Creator<DataByMaxParcelable> CREATOR = new Parcelable.Creator<DataByMaxParcelable>() {
 
     @Override
-    public InputDataParcelable createFromParcel(Parcel source) {
-      return new InputDataParcelable(source);
+    public DataByMaxParcelable createFromParcel(Parcel source) {
+      return new DataByMaxParcelable(source);
     }
 
     @Override
-    public InputDataParcelable[] newArray(int size) {
-      return new InputDataParcelable[size];
+    public DataByMaxParcelable[] newArray(int size) {
+      return new DataByMaxParcelable[size];
     }
   };
 
-  private InputDataParcelable(Parcel parcel){
+  private DataByMaxParcelable(Parcel parcel){
     rightHandDataSensor = new ArrayList<>();
     leftHandDataSensor = new ArrayList<>();
     isPractice = parcel.readByte() != 0;
-     parcel.readList(rightHandDataSensor, Integer.class.getClassLoader());
-     parcel.readList(leftHandDataSensor, Integer.class.getClassLoader());
-     descriptions = parcel.readString();
-     gender = parcel.readInt();
+    parcel.readList(rightHandDataSensor, Integer.class.getClassLoader());
+    parcel.readList(leftHandDataSensor, Integer.class.getClassLoader());
+    descriptions = parcel.readString();
+    gender = parcel.readInt();
 
   }
 

@@ -12,8 +12,8 @@ public class ResultByMask {
   private ArrayList<ArrayList<Double>> A = new ArrayList<>();
   private ArrayList<Double> signalParts;
 
-  public ResultByMask() {
-    //this.dataSensorMax = dataSensorMax;
+  public ResultByMask(ArrayList<Integer> dataSensorMax) {
+    this.dataSensorMax = dataSensorMax;
     //calculateResult();
   }
   

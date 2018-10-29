@@ -17,7 +17,7 @@ import com.arellomobile.mvp.MvpAppCompatFragment;
 import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.murik.enose.Const;
 import com.murik.enose.R;
-import com.murik.enose.model.dto.InputDataParcelable;
+import com.murik.enose.model.dto.DataByMaxParcelable;
 import com.murik.enose.presentation.input.InputPresenter;
 import com.murik.enose.presentation.input.InputView;
 import ernestoyaquello.com.verticalstepperform.VerticalStepperFormLayout;
@@ -95,9 +95,9 @@ public class InputFragment extends MvpAppCompatFragment implements InputView, Ve
 
   public ArrayList<Integer> getEditTextData (ArrayList<EditText> sensorData) {
 
-
     ArrayList<Integer> maxSens = new ArrayList<>();
     for (int i = 0; i < sensorData.size(); i++) {
+
       if (VERSION.SDK_INT >= VERSION_CODES.GINGERBREAD) {
         if (sensorData.get(i).getText().toString().isEmpty()) {
           maxSens.add(0);
@@ -176,7 +176,7 @@ public class InputFragment extends MvpAppCompatFragment implements InputView, Ve
 
   @Override
   public void sendData() {
-      InputDataParcelable input = new InputDataParcelable();
+      DataByMaxParcelable input = new DataByMaxParcelable();
       input.setDescriptions(etDiscriptions.getText().toString());
       input.setGender(gender);
       input.setPractice(swPractice.isChecked());
