@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+  <android.support.constraint.ConstraintLayout
+    android:layout_width="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_height="match_parent"
+    android:padding="@dimen/default_padding_bottom">
+
+    <android.support.v7.widget.RecyclerView
+      android:id="@+id/xmlFileRecycler"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="8dp"
+      android:layout_marginStart="8dp"
+      android:layout_marginEnd="8dp"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toTopOf="parent">
+    </android.support.v7.widget.RecyclerView>
+
+  <LinearLayout
+    android:id="@+id/linearLayout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="8dp"
+    android:layout_marginStart="8dp"
+    android:layout_marginEnd="8dp"
+    android:orientation="vertical"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@+id/xmlFileRecycler">
+
+    <RadioGroup
+      android:id="@+id/rg_gender_xml"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:paddingBottom="16dp"
+      android:orientation="horizontal">
+      <RadioButton
+        android:id="@+id/rb_male_xml"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:checked="true"
+        android:text="Муж"
+        />
+      <RadioButton
+        android:id="@+id/rb_feminine_xml"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Жен"
+        />
+    </RadioGroup>
+
+    <RadioGroup
+      android:id="@+id/rg_hand"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:paddingBottom="16dp"
+      android:orientation="horizontal">
+      <RadioButton
+        android:id="@+id/rb_lefr_hand_xml"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:checked="true"
+        android:text="@string/left_hand"
+        />
+      <RadioButton
+        android:id="@+id/rb_right_hand_xml"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/right_hand"
+        />
+    </RadioGroup>
+
+    <android.support.v7.widget.SwitchCompat
+      android:id="@+id/sc_practice_xml"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:paddingBottom="@dimen/default_padding_bottom"
+      android:text="@string/practice"/>
+
+  </LinearLayout>
+  <android.support.v7.widget.AppCompatButton
+    android:id="@+id/btnSaveFromXml"
+    style="@android:style/DeviceDefault.SegmentedButton"
+    android:layout_width="0dp"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="8dp"
+    android:layout_marginStart="8dp"
+    android:layout_marginEnd="8dp"
+    android:background="@color/colorPrimary"
+    android:drawableLeft="@drawable/ic_save_black_24dp"
+    android:text="@string/save"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@+id/linearLayout"/>
+
+  </android.support.constraint.ConstraintLayout>
+
+

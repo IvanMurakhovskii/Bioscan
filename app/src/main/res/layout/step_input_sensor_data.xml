@@ -3,21 +3,20 @@
   xmlns:android="http://schemas.android.com/apk/res/android"
   android:layout_width="match_parent"
   android:layout_height="wrap_content"
+  android:screenReaderFocusable="true"
   android:orientation="vertical"
   android:focusable="true">
 
-    <android.support.design.widget.TextInputLayout
-      android:layout_width="150dp"
+  <android.support.design.widget.TextInputLayout
+    android:layout_width="150dp"
+    android:layout_height="wrap_content"
+    android:hint="@string/sensor_1">
+    <EditText
+      android:id="@+id/sens_1"
+      android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      android:hint="@string/sensor_1">
-      <EditText
-        android:id="@+id/sens_1"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:inputType="number"/>
-    </android.support.design.widget.TextInputLayout>
-
-
+      android:inputType="number"/>
+  </android.support.design.widget.TextInputLayout>
 
   <android.support.design.widget.TextInputLayout
     android:layout_width="150dp"
