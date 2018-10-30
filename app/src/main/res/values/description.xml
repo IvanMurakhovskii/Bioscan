@@ -2,71 +2,94 @@
 <resources>
 
   <string name="YELLOW">Пограничное состояние: </string>
-  <string name="A1_2_YELLOW">Воспаление, сильная аномальная нагрузка, прилив, жарко очень</string>
-  <string name="A1_2_RED">Алкоголь, похмелье, альдегиды, Кетоны, напряжение со стороны печени, поджелудочной железы </string>
-  <string name="A1_2_BURGUNDY">если кожа сухая, то резкий стресс во время измерения</string>
+  <string name="A1_2_BLUE"> Стрес/прилив, жарко очень</string>
+  <string name="A1_2_CRIMSON">Воспаление, сильная аномальная нагрузка</string>
+  <string name="A1_2_YELLOW">Раздражение</string>
+  <string name="A1_2_RED">Алкоголь ,альдегиды (похмелье)</string>
+  <string name="A1_2_RED_EXTRA">Кетоны, напряжение со стороны печени, поджелудочной железы </string>
+  <string name="A1_2_BURGUNDY">Резкий стресс во время измерения/Силья сонливость</string>
 
-  <string name="A1_3_RED">Нарушение барьера кожи,  жарко,  стресс, раны</string>
-  <string name="A1_3_BURGUNDY"> Сильное  воспаление,раны, нарушение барьера кожи</string>
+  <string name="A1_3_YELLOW">Воспаление</string>
+  <string name="A1_3_RED">Воспаление(для тела: нарушение барьера кожи, раны)</string>
+  <string name="A1_3_RED_MAN">Алкалоиды, кофе, чая, возбуждение</string>
+  <string name="A1_3_BURGUNDY"> Сильное  воспаление</string>
   <string name="A1_3_CRIMSON">Много кофе</string>
   <string name="A1_3_CRIMSON_FEMININE">Завышен при критических днях со стороны работающего яичника</string>
 
-  <string name="A1_4_RED">Напряжение поджелудочной(вероятность сахарного диабета)Слабость,  истощение организма</string>
+  <string name="A1_4_RED">Напряжение поджелудочной желзы \n слабость,  истощение организма</string>
   <string name="A1_4_RED_EXTRA">Резкая боль, сильное воспаление в проекции органа, слабость, истощение, резкий прилив</string>
-  <string name="A1_4_BURGUNDY">Стресс в момент измерения, много кофе. </string>
+  <string name="A1_4_BURGUNDY">Стресс в момент измерения</string>
 
-  <string name="A1_5_YELLOW">Стресс, слабость тела </string>
-  <string name="A1_5_RED">Напряжение поджелудочной(вероятность сахарного диабета), гормональный дисбаланс</string>
+  <string name="A1_5_YELLOW">Стресс, слабость</string>
+  <string name="A1_5_RED">Напряжение поджелудочной железы/нарушение работы эндокринной системы \n Гормональный дисбаланс</string>
   <string name="A1_5_BURGUNDY">Сильное воспаление</string>
 
-  <string name="A1_7_RED">Адреналин, резкий стресс, прилив </string>
+  <string name="A1_7_BLUE">Испарина, стресс, прилив</string>
+  <string name="A1_7_RED">Адреналин, кортизол, резкий стресс, прилив энергии</string>
 
-  <string name="A1_8_RED">Алкоголь, похмелье, почки</string>
+  <string name="A1_8_YELLOW">Голод</string>
+  <string name="A1_8_RED">Алкоголь, похмелье, почки(?)</string>
 
-  <string name="A2_3_YELLOW">Слабость, прилив при гормональных нарушениях, критических днях</string>
-  <string name="A2_3_YELLOW_FEMININE">Прилив при гормональных нарушениях, критических днях</string>
 
-  <string name="A2_4_RED">Кетоны, сахар выше нормы, гормоны сильно разбалансированы</string>
-  <string name="A2_4_BURGUNDY">Очень тяжелое состояние, слабость.истощение</string>
+  <string name="A2_3_BLUE">Испарина, легкий стресс</string>
+  <string name="A2_3_YELLOW">Слабость, прилив при гормональных нарушениях</string>
 
-  <string name="A2_5_RED">Кетоны, сахар выше нормы, гормоны сильно разбалансированы </string>
 
-  <string name="A2_6_RED">Спазм.Не надежен!!!</string>
-  <string name="A2_6_BURGUNDY">Воспаление, спазм, прилив, алкоголь</string>
-  <string name="A2_6_CRIMSON">При практиках любых</string>
+  <string name="A2_4_RED">Кетоны, сахар выше нормы, наружение работы эндокринной системы</string>
+  <string name="A2_4_BURGUNDY">Тяжелое состояние, слабость, истощение</string>
 
-  <string name="A3_5_YELLOW">Спазм органов ЖКТ, желчевывод. путей, боль </string>
+  <string name="A2_5_YELLOW">Кетоны, нарушение работы эндокринной системы</string>
+  <string name="A2_5_RED">Кетоны, сахар выше нормы, нарушение работы эндокринной системы</string>
+
+  <string name="A2_6_RED">Спазм </string>
+  <string name="A2_6_BURGUNDY">Воспаление \n сильный спазм \n Прилив, алкоголь</string>
+
+
+  <string name="A3_5_BLUE">Жарко,испарина</string>
+  <string name="A3_5_YELLOW">Спазм органов ЖКТ, желчевыводящих  путей, боль </string>
   <string name="A3_5_RED">Альдегиды, продукты перегара</string>
 
-  <string name="A3_7_RED">Спазм желчного</string>
-  <string name="A3_7_BURGUNDY">На ногах, животе: воспаление, отеки</string>
+  <string name="A3_7_RED">Спазм желчных протоков</string>
+  <string name="A3_7_BURGUNDY">Острая боль(на ногах, животе: воспаление, отеки)</string>
 
-  <string name="A3_8_RED">Алкоголь, перегар. Если не принимал алкоголь – то большие проблемы с органами выделения и ЖКТ</string>
+  <string name="A3_8_YELLOW">Алкоголь, перегар, печень</string>
+  <string name="A3_8_RED">Алкоголь, перегар, печень (Если не принимал алкоголь, то проблемы или активная работа ЖКТ)</string>
 
-  <string name="A4_5_YELLOW">Застой желчи, проверять печень</string>
-  <string name="A4_5_RED">Кетоны (СД), азотистые</string>
-  <string name="A4_5_CRIMSON">Аномальная энергия при практиках, если нет влаги!</string>
+  <string name="A4_5_YELLOW">Застой желчи, проверять печень, воспаление</string>
+  <string name="A4_5_RED">Кетоны, нарушение работы пожжелудочной железы, азотистые(избыток белков)</string>
+  <string name="A4_5_RED_EXTRA">Стресс, спазм</string>
+  <string name="A4_5_CRIMSON">Аномальная энергия</string>
 
-  <string name="A4_6_BURGUNDY">Сильные воспаление, истощение стресс, кетоны</string>
-  <string name="A4_6_CRIMSON">Особое сосотояние энергии</string>
+  <string name="A4_6_YELLOW">Истощение, стресс, сонливость</string>
+  <string name="A4_6_RED">Сильное воспаление,истощение, стресс, кетоны</string>
+  <string name="A4_6_BURGUNDY">Критичный упадок сил, голод</string>
+  <string name="A4_6_CRIMSON">Изменение обменных процессов</string>
 
-  <string name="A4_8_RED">Сахар, поджелужочная ослаблен организм. Стресс, волнение</string>
 
+  <string name="A4_8_RED">Проблемы с поджелужочной железой \n ослаблен организм \n сильный стресс, волнение</string>
+
+  <string name="A5_6_BLUE">Жарко, прилив</string>
+  <string name="A5_6_YELLOW">Стресс</string>
   <string name="A5_6_RED">Голод, усталость, недосып, сердечная недостаточность</string>
   <string name="A5_6_RED_2">Жарко, прилив, стресс, раны </string>
-  <string name="A5_6_BURGUNDY">Стресс???</string>
-  <string name="A5_6_CRIMSON">Критическое состояние</string>
+  <string name="A5_6_BURGUNDY">Стресс</string>
+
 
   <string name="A5_8_RED">Альдегиды, кетоны, похмелье</string>
-  <string name="A5_8_CRIMSOM">При занятиях практиками</string>
 
-  <string name="A6_7_RED">Боль, спазм дисбаланс гормонов, сердечная недостаточность</string>
+
+  <string name="A6_7_YELLOW">Боль, спазм</string>
+  <string name="A6_7_RED">Боль, спазм, нарушение работы эндокринной системы, кортизол, сердечная недостаточность(?)</string>
 
   <string name="A7_8_YELLOW">Пониженная температура, слабость, хроническая усталость Не надежно!!!!</string>
   <string name="A7_8_RED">Альдегиды, похмелье</string>
   <string name="A7_8_BURGUNDY">Очень жарко, острая боль</string>
 
-  <string name="Man">Горманальный стреес</string>
+  <string name="Practice">Аномальная энергия</string>
+  <string name="voter">Влага</string>
   <string name="FEMININE">Критичекие дни</string>
+  <string name="GIGROPAT">Гигропатия</string>
+  <string name="GIGROMETR">Гигрометр</string>
+
 
 </resources>

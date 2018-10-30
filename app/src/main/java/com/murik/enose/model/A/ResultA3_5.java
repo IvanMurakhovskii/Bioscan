@@ -18,16 +18,16 @@ public class ResultA3_5 extends BaseResult {
     if(getA() > 1.3 && getA() < 1.5){
       setColorBLUE();
       setPossibleReasons(getResources(R.string.A3_5_BLUE));
-    } else if( getA() <  1.25){
+    } else if( getA() <=  1.3 && getA() > 0.9){
       setColorGREEN();
-    } else if(getA() >= 0.8 && getA() <=0.9){
+    } else if(getA() >= 0.7 && getA() <= 0.9){
       setColorYELLOW();
       setPossibleReasons(getResources(R.string.A3_5_YELLOW));
     } else if( getA() >= 1.5 && getA() <= 1.6){
       setColorRED();
       setPossibleReasons(getResources(R.string.A3_5_RED));
     } else  if(getA() > 2){
-      setColorBURGUNDY();
+      setColorPRIMARY_DARK();
       setPossibleReasons(getResources(R.string.GIGROPAT));
     }
   }

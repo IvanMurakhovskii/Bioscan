@@ -17,7 +17,10 @@ public class ResultA1_8 extends BaseResult {
   public void setResult() {
     if(getA() < 0.45){
       setColorGREEN();
-    } else if(getA() >= 0.45 && getA() <= 0.55){
+    } else if(getA() >=0.45 && getA() <= 0.47){
+      setColorYELLOW();
+      setPossibleReasons(getResources(R.string.A1_8_YELLOW));
+    } else if(getA() > 0.47 && getA() <= 0.55){
       setColorRED();
       setPossibleReasons(getResources(R.string.A1_8_RED));
     }

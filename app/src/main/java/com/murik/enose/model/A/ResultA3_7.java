@@ -15,14 +15,15 @@ public class ResultA3_7 extends BaseResult {
 
   @Override
   public void setResult() {
-    if(getA() >= 2 && getA() <= 2.5){
+    if(getA() >= 2 && getA() < 2.5){
       setColorBLUE();
+      setPossibleReasons(getResources(R.string.voter));
     } else if(getA() < 2){
       setColorGREEN();
     } else if(getA() == 1){
       setColorRED();
       setPossibleReasons(getResources(R.string.A3_7_RED));
-    } else if(getA() > 2.5){
+    } else if(getA() >= 2.5){
       setColorBURGUNDY();
       setPossibleReasons(getResources(R.string.A3_7_BURGUNDY));
     }

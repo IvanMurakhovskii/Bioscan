@@ -13,21 +13,19 @@ public class ResultA2_3 extends BaseResult{
     super(A, inputData, context);
     setLegend("2_3");
   }
-
+//todo проверить условие
   @Override
   public void setResult() {
     if(getA() > 0.5){
       setColorGREEN();
-    } else if(getA() > 0.5 && getA() <= 0.6){
-      setColorYELLOW();
-      setPossibleReasons(getResources(R.string.A2_3_YELLOW));
-      if(getInputData().getGender() == Const.GENDER_FEMININE){
-        setPossibleReasons(getResources(R.string.A2_3_YELLOW) + "\n" + getResources(R.string.A2_3_YELLOW_FEMININE));
+    } else if (getA() == 0.5) {
+      if(getInputData().getGender() == Const.GENDER_MALE) {
+        setColorBLUE();
+        setPossibleReasons(getResources(R.string.A2_3_BLUE));
+      } else {
+        setColorYELLOW();
+        setPossibleReasons(getResources(R.string.A2_3_YELLOW) + "\n" + getResources(R.string.FEMININE));
       }
-
-    } if (getA() == 0.5) {
-      setColorBLUE();
     }
   }
-
 }

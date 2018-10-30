@@ -15,9 +15,9 @@ public class ResultA2_4 extends BaseResult {
 
   @Override
   public void setResult() {
-    if(getA() > 0.3){
+    if(getA() >= 0.3){
       setColorGREEN();
-    } else if(getA() >= 0.25 && getA() <= 0.3){
+    } else if(getA() >= 0.25 && getA() < 0.3){
       setColorRED();
       setPossibleReasons(getResources(R.string.A2_4_RED));
     } else if(getA() >= 0.16 && getA() <= 0.24){

@@ -14,9 +14,9 @@ public class ResultA6_8 extends BaseResult {
 
   @Override
   public void setResult() {
-    if(getA() >= 0.28 && getA() < 0.32){
+    if(getA() >= 0.28 && getA() <= 0.32){
       setColorBLUE();
-      setPossibleReasons(getResources(R.string.GIGROMETR));
+      setPossibleReasons(getResources(R.string.GIGROMETR) + "/n" + getResources(R.string.A7_8_BURGUNDY));
     } else if(getA() < 0.28){
       setColorGREEN();
     }

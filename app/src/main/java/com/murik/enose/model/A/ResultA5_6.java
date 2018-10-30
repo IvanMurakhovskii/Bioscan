@@ -15,25 +15,22 @@ public class ResultA5_6 extends BaseResult {
 
   @Override
   public void setResult() {
-    if(getA() < 1){
+    if (getA() < 1) {
       setColorGRAY();
-    } else if(getA() > 1.9 && getA() < 2.3){
-      setColorBLUE();
-      setPossibleReasons("Жарко, испарина");
-
-    } else if(getA() > 1.5 && getA() < 1.9 ){
+    }  else if (getA() >= 1.5) {
       setColorGREEN();
-    } else if(getA() >= 1.2 && getA() <= 1.5){
+    } else if (getA() >= 1 && getA() < 1.5) {
       setColorRED();
       setPossibleReasons(getResources(R.string.A5_6_RED));
-    } /*else if(getA() > 1.5 && getA() < 1.8){
-      setColorBURGUNDY();
-      setPossibleReasons(getResources(R.string.A5_6_BURGUNDY));
-    } */
-    else if(getA() > 2){
-      if(getInputData().isPractice()){
-        setColorCRIMSON();
-        setPossibleReasons(getResources(R.string.A5_6_CRIMSON));
+    } else if (getA() > 2.3) {
+      if (!getInputData().isPractice()) {
+        setColorGREEN();
+      } else if (getA() > 2) {
+        if (getInputData().isPractice()) {
+          setColorCRIMSON();
+          setPossibleReasons(
+              getResources(R.string.practice) + "\n" + getResources(R.string.A5_6_BURGUNDY));
+        }
       }
     }
   }

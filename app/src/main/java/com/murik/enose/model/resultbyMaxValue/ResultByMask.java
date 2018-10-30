@@ -31,7 +31,11 @@ public class ResultByMask {
       for(int j = i+1; j < dataSensorMax.size(); j++){
           tmp = max/dataSensorMax.get(j);
           if(!Double.isNaN(tmp) && !Double.isInfinite(tmp)){
-            tmp = new BigDecimal(tmp).setScale(2, RoundingMode.DOWN).doubleValue();
+            if(tmp > 1.0){
+              tmp = new BigDecimal(tmp).setScale(1, RoundingMode.DOWN).doubleValue();
+            } else {
+              tmp = new BigDecimal(tmp).setScale(2, RoundingMode.DOWN).doubleValue();
+            }
           }
 
           tmpA.add(tmp);

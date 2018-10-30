@@ -15,29 +15,33 @@ public class ResultA1_3 extends BaseResult {
 
   @Override
   public void setResult() {
-    if(getA() >= 0.7 && getA() <= 0.84){
+    if (getA() >= 0.7 && getA() < 0.85) {
       setColorBLUE();
-    } else if(getA() >= 1.4){
+      setPossibleReasons(getResources(R.string.voter));
+    } else if (getA() >= 0.85 && getA() <= 1.4) {
       setColorGREEN();
-    } else if(getA() >= 0.65 && getA() <= 0.75){
+    } else if (getA() >= 0.65 && getA() <= 0.7) {
       setColorYELLOW();
-      setPossibleReasons(getResources(R.string.YELLOW) + "\n" + getResources(R.string.A1_3_RED));
-    } else if(getA() >= 0.6 && getA() <= 0.64){
+      setPossibleReasons(getResources(R.string.A1_3_YELLOW));
+    } else if (getA() >= 0.6 && getA() < 0.65) {
       setColorRED();
       setPossibleReasons(getResources(R.string.A1_3_RED));
-    } else if(getA() < 0.6){
-      setColorBURGUNDY();
-      setPossibleReasons(getResources(R.string.A1_3_BURGUNDY));
-    } else if(getA() >= 1.23 && getA() <= 1.35){
-      if(getInputData().isPractice()) {
+    } else if (getA() > 1.4) {
+      if (getInputData().isPractice()) {
         setColorCRIMSON();
-        if(getInputData().getGender() == Const.GENDER_MALE){
-          setPossibleReasons(getResources(R.string.A1_3_CRIMSON) +   "\n" + getResources(R.string.Man));
-        } else if(getInputData().getGender() == Const.GENDER_FEMININE){
-          setPossibleReasons(getResources(R.string.A1_3_CRIMSON) +   "\n" + getResources(R.string.A1_3_CRIMSON_FEMININE));
-
+        setPossibleReasons(getResources(R.string.Practice));
+      } else {
+        setColorYELLOW();
+        if (getInputData().getGender() == Const.GENDER_MALE) {
+          setPossibleReasons(getResources(R.string.A1_3_RED_MAN));
+        } else {
+          setPossibleReasons(getResources(R.string.A1_3_RED_MAN) + "\n" + getResources(
+              R.string.A1_3_CRIMSON_FEMININE));
         }
       }
+    } else if (getA() < 0.6) {
+      setColorBURGUNDY();
+      setPossibleReasons(getResources(R.string.A1_3_BURGUNDY));
     }
   }
 

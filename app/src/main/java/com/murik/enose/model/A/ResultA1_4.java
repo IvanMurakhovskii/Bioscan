@@ -25,7 +25,7 @@ public class ResultA1_4 extends BaseResult {
       setPossibleReasons(getResources(R.string.A1_4_RED_EXTRA));
     } else if(getA() >= 0.7){
       setColorBURGUNDY();
-      setPossibleReasons(getResources(R.string.A1_4_BURGUNDY));
+      setPossibleReasons(getResources(R.string.A1_4_BURGUNDY) +"\n"+ getResources(R.string.A1_3_RED_MAN));
     }
   }
 }

@@ -20,12 +20,14 @@ public class ResultA6_7 extends BaseResult {
       setColorGREEN();
     } else if(getA() >= 0.85 && getA() < 0.9){
       setColorYELLOW();
-      setPossibleReasons(getResources(R.string.YELLOW) + "\n" + getResources(R.string.A6_7_RED));
+      setPossibleReasons(getResources(R.string.YELLOW) + "\n" + getResources(R.string.A6_7_YELLOW));
     } else if(getA() >= 0.9){
       setColorRED();
-      setPossibleReasons(getResources(R.string.A6_7_RED));
+
       if(getInputData().getGender() == Const.GENDER_FEMININE){
-        setPossibleReasons(getResources(R.string.A6_7_RED) +"\n"+ getResources(R.string.FEMININE));
+        setPossibleReasons(getResources(R.string.FEMININE) +"\n"+ getResources(R.string.A6_7_RED));
+      } else {
+        setPossibleReasons(getResources(R.string.A6_7_RED));
       }
     }
   }

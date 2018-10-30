@@ -12,24 +12,23 @@ public class ResultA1_2 extends BaseResult {
     super(A, inputData, context);
     setLegend("1_2");
   }
-
+  //todo добавить "сухая кожа". Если кожа сухая(без практик) - цвет - красный, комментарий - Воспаление
   public void setResult(){
-    if (getA() >= 1.14 && getA() < 2){
-      setColorGREEN();
-    } else if(getA() >= 0.9 && getA() < 1.14){
-      setColorBLUE();
-      setPossibleReasons(getResources(R.string.A1_2_BLUE));
-    } else if(getA() >= 1.3 && getA() <= 1.5){
-      setColorYELLOW();
-      setPossibleReasons(getResources(R.string.A1_2_YELLOW));
-    }else if(getA() < 0.9){
+   if(getA() >= 0.9 && getA() <= 1.14){
+     if(getInputData().isPractice()){
+       setColorCRIMSON();
+       setPossibleReasons(getResources(R.string.A1_2_CRIMSON));
+     } else {
+       setColorBLUE();
+       setPossibleReasons(getResources(R.string.A1_2_BLUE));
+     }
+    } else if (getA() > 1.1 && getA() <= 2 ){
+         setColorGREEN();
+    } else if(getA() < 0.9) {
       setColorRED();
-      if(getA() > 1.5 && getA() <1.7){
-        setPossibleReasons(getResources(R.string.A1_2_RED_EXTRA));
-      } else {
-        setPossibleReasons(getResources(R.string.A1_2_RED));
-      }
-    } else if(getA() >= 2){
+      setPossibleReasons(getResources(R.string.A1_2_RED));
+    } else if(getA() > 2){
+     //todo если кожа не сухая цвет - белый
       setColorBURGUNDY();
       setPossibleReasons(getResources(R.string.A1_2_BURGUNDY));
     }

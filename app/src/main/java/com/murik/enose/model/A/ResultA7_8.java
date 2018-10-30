@@ -17,7 +17,7 @@ public class ResultA7_8 extends BaseResult {
   public void setResult() {
     if(getA() == 0.7){
       setColorBLUE();
-    } else if(getA() < 0.25){
+    } else if(getA() < 0.25 && getA() > 0.2){
       setColorGREEN();
     } else if(getA() >= 0.1 && getA() <= 0.2){
       setColorYELLOW();

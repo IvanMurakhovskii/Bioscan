@@ -23,14 +23,15 @@ public class ResultA5_8 extends BaseResult {
       setColorYELLOW();
       setPossibleReasons(getResources(R.string.YELLOW) + "\n" + getResources(R.string.A5_8_RED));
     } else if(getA() > 0.35 && getA() < 0.39){
-      if(getInputData().isPractice()){
-        setColorCRIMSON();
-        setPossibleReasons(getResources(R.string.A5_8_CRIMSOM));
-      } else {
         setColorRED();
         setPossibleReasons(getResources(R.string.A5_8_RED));
+    }  else if(getA() >=0.4 && getA() <= 0.5){
+      setColorBURGUNDY();
+    } else if(getA() > 0.6){
+      if(getInputData().isPractice()) {
+        setColorCRIMSON();
+        setPossibleReasons(getResources(R.string.Practice));
       }
-
     }
   }
 }
