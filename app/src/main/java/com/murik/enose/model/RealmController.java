@@ -337,10 +337,9 @@ public class RealmController {
   }
 
 
- /* public DataSensorRealm getInfoById(int id){
-    DataSensorRealm de =  realm.where(DataSensorRealm.class).equalTo("id", id).findFirst();
-    de.getLeftHandData().getDataSens1();
-  }*/
+  public DataSensorRealm getInfoById(int id){
+   return realm.where(DataSensorRealm.class).equalTo("id", id).findFirst();
+  }
 
   public RealmResults<DataSensorRealm> getInfo() {
     return realm.where(DataSensorRealm.class).findAllAsync();

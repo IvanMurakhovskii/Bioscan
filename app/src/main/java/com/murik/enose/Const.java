@@ -15,4 +15,17 @@ public class Const {
   public static final String SENSOR_6 = "SID0006";
   public static final String SENSOR_7 = "SID0007";
   public static final String SENSOR_8 = "SID0008";
+
+  public static final int[] TOTAL = {30, 45, 60, 80, 100, 120, 180};
+  public static final int[] HEALTH = {150, 160, 170};
+  public static final int[] ENERGY = {110, 120, 130, 140, 150};
+  public static final int[] BAD = {20, 30, 180};
+  public static final int[] ENDOKRIN = {10, 20, 30, 60};
+
+  public static final int PAGE_TOTAL = 0;
+  public static final int PAGE_HEALTH = 1;
+  public static final int PAGE_ENERGY = 2;
+  public static final int PAGE_BAD = 3;
+  public static final int PAGE_ENDOKRIN = 4;
+
 }

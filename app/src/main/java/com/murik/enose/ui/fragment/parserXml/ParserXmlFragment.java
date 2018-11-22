@@ -1,7 +1,6 @@
 package com.murik.enose.ui.fragment.parserXml;
 
 import android.os.Bundle;
-import android.os.Environment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SwitchCompat;
@@ -16,6 +15,7 @@ import com.murik.enose.Const;
 import com.murik.enose.R;
 import com.murik.enose.presentation.parserXml.ParserXmlPresenter;
 import com.murik.enose.presentation.parserXml.ParserXmlView;
+import com.murik.enose.ui.activity.start.ProgressDisplay;
 import com.murik.enose.ui.fragment.parserXml.recycler.ParserXmlAdapter;
 
 public class ParserXmlFragment extends MvpAppCompatFragment implements ParserXmlView {
@@ -23,6 +23,7 @@ public class ParserXmlFragment extends MvpAppCompatFragment implements ParserXml
   public static final String TAG = "ParserXmlFragment";
   @InjectPresenter
   ParserXmlPresenter mParserXmlPresenter;
+
 
 
   private RecyclerView mRecycler;
@@ -59,11 +60,11 @@ public class ParserXmlFragment extends MvpAppCompatFragment implements ParserXml
     rgHand = view.findViewById(R.id.rg_hand);
     btnSave =  view.findViewById(R.id.btnSaveFromXml);
     scPractice = view.findViewById(R.id.sc_practice_xml);
-    mParserXmlPresenter.getListFiles(Environment.getExternalStorageDirectory());
     btnSave.setVisibility(View.INVISIBLE);
     grGender.setOnCheckedChangeListener((group,checkedId) -> {
       switch (checkedId){
         case R.id.rb_male_xml:
+
           gender = Const.GENDER_MALE;
           break;
         case R.id.rb_feminine_xml:
@@ -90,13 +91,27 @@ public class ParserXmlFragment extends MvpAppCompatFragment implements ParserXml
 
   }
 
-  public void initRecyclerView(){
+  public void initRecyclerView(ParserXmlAdapter adapter){
     mRecycler.setLayoutManager(new LinearLayoutManager(getContext()));
-    ParserXmlAdapter adapter = new ParserXmlAdapter(mParserXmlPresenter);
+
     mRecycler.setAdapter(adapter);
   }
 
   public void setVisibilitySaveButton(int visibility){
     btnSave.setVisibility(visibility);
+  }
+
+  @Override
+  public void showProgress() {
+    if (getActivity() instanceof ProgressDisplay) {
+      ((ProgressDisplay) getActivity()).showProgress();
+    }
+  }
+
+  @Override
+  public void hideProgress() {
+    if (getActivity() instanceof ProgressDisplay) {
+      ((ProgressDisplay) getActivity()).hideProgress();
+    }
   }
 }

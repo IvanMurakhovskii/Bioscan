@@ -10,22 +10,22 @@ import com.murik.enose.ui.fragment.resultRadarChart.ResultRadarChartFragment;
 
 public class ResultRadarChartTabAdapter  extends FragmentPagerAdapter {
 
-    private final int PAGE_COUNT = 4;
 
     private SensorDataFullParcelable sensorDataFullParcelable;
-
-    private String tabTitle[] = new String[] {"Total", "Health", "Energy", "Bad"};
+    private final int PAGE_COUNT = 5;
+    private String tabTitle[] = new String[] {"Total", "Health", "Energy", "Bad", "Endokrin"};
     private Context context;
 
-    public ResultRadarChartTabAdapter(FragmentManager fm, Context context, SensorDataFullParcelable sensorDataFullParcelable) {
+    public ResultRadarChartTabAdapter(FragmentManager fm, SensorDataFullParcelable sensorDataFullParcelable) {
       super(fm);
-      this.context = context;
       this.sensorDataFullParcelable = sensorDataFullParcelable;
+
     }
 
-    @Override
+
+  @Override
     public Fragment getItem(int position) {
-      return ResultRadarChartFragment.newInstance(sensorDataFullParcelable, position);
+      return ResultRadarChartFragment.newInstance(position, sensorDataFullParcelable);
     }
 
     @Override

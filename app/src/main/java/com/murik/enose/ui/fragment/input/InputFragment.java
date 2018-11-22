@@ -215,24 +215,24 @@ public class InputFragment extends MvpAppCompatFragment implements InputView, Ve
 
   private View createRightHandDataStep(){
     LayoutInflater inflater = LayoutInflater.from(getContext());
-    View view =  inflater.inflate(R.layout.step_input_sensor_data, null, false);
+    View view =  inflater.inflate(R.layout.step_right_sensor_data, null, false);
     if(!rightHandSensorData.isEmpty()){
       rightHandSensorData.clear();
     }
-    rightHandSensorData.add(view.findViewById(R.id.sens_1));
-    rightHandSensorData.add(view.findViewById(R.id.sens_2));
-    rightHandSensorData.add(view.findViewById(R.id.sens_3));
-    rightHandSensorData.add(view.findViewById(R.id.sens_4));
-    rightHandSensorData.add(view.findViewById(R.id.sens_5));
-    rightHandSensorData.add(view.findViewById(R.id.sens_6));
-    rightHandSensorData.add(view.findViewById(R.id.sens_7));
-    rightHandSensorData.add(view.findViewById(R.id.sens_8));
+    rightHandSensorData.add(view.findViewById(R.id.sens_1r));
+    rightHandSensorData.add(view.findViewById(R.id.sens_2r));
+    rightHandSensorData.add(view.findViewById(R.id.sens_3r));
+    rightHandSensorData.add(view.findViewById(R.id.sens_4r));
+    rightHandSensorData.add(view.findViewById(R.id.sens_5r));
+    rightHandSensorData.add(view.findViewById(R.id.sens_6r));
+    rightHandSensorData.add(view.findViewById(R.id.sens_7r));
+    rightHandSensorData.add(view.findViewById(R.id.sens_8r));
     return view;
   }
 
   private View createLeftHandDataStep(){
     LayoutInflater inflater = LayoutInflater.from(getContext());
-    View view =  inflater.inflate(R.layout.step_input_sensor_data, null, false);
+    View view =  inflater.inflate(R.layout.step_left_input_sensor_data, null, false);
     if(!leftHandSensorData.isEmpty()){
       leftHandSensorData.clear();
     }

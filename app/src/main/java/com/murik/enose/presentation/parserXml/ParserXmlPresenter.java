@@ -2,27 +2,32 @@
 
 
  import android.os.Environment;
-import android.support.annotation.NonNull;
-import android.util.Log;
-import android.view.View;
-import com.arellomobile.mvp.InjectViewState;
-import com.arellomobile.mvp.MvpPresenter;
-import com.murik.enose.model.RealmController;
-import com.murik.enose.model.dto.SensorDataFullParcelable;
-import com.murik.enose.ui.fragment.parserXml.recycler.ParserXmlViewHolder;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.Map;
-import java.util.Queue;
-import org.xmlpull.v1.XmlPullParser;
-import org.xmlpull.v1.XmlPullParserException;
-import org.xmlpull.v1.XmlPullParserFactory;
+ import android.support.annotation.NonNull;
+ import android.util.Log;
+ import android.view.View;
+ import com.arellomobile.mvp.InjectViewState;
+ import com.arellomobile.mvp.MvpPresenter;
+ import com.murik.enose.model.RealmController;
+ import com.murik.enose.model.dto.SensorDataFullParcelable;
+ import com.murik.enose.ui.fragment.parserXml.recycler.ParserXmlAdapter;
+ import com.murik.enose.ui.fragment.parserXml.recycler.ParserXmlViewHolder;
+ import io.reactivex.Observer;
+ import io.reactivex.android.schedulers.AndroidSchedulers;
+ import io.reactivex.disposables.Disposable;
+ import io.reactivex.schedulers.Schedulers;
+ import java.io.File;
+ import java.io.FileInputStream;
+ import java.io.FileNotFoundException;
+ import java.io.IOException;
+ import java.util.ArrayList;
+ import java.util.Arrays;
+ import java.util.HashMap;
+ import java.util.LinkedList;
+ import java.util.Map;
+ import java.util.Queue;
+ import org.xmlpull.v1.XmlPullParser;
+ import org.xmlpull.v1.XmlPullParserException;
+ import org.xmlpull.v1.XmlPullParserFactory;
 
  @InjectViewState
 public class ParserXmlPresenter extends MvpPresenter<ParserXmlView> {
@@ -32,19 +37,58 @@ public class ParserXmlPresenter extends MvpPresenter<ParserXmlView> {
    public static final String POINT_TAG = "point";
    public static final String LOG_TAG = "MyLogs";
 
-   SensorDataFullParcelable sensorDataFullParcelable = new SensorDataFullParcelable();
-   private ArrayList<File> arrayList = null;
+
+   private ParserXmlAdapter adapter = new ParserXmlAdapter(this);
+   private SensorDataFullParcelable sensorDataFullParcelable = new SensorDataFullParcelable();
+   private ArrayList<File> arrayList = new ArrayList<>();
    private String descriptions = "";
    private String key = "";
    private int initial = 0;
    private File file = null;
 
    @Override
+   protected void onFirstViewAttach() {
+     super.onFirstViewAttach();
+     searchFile();
+   }
+
+   @Override
    public void attachView(ParserXmlView view) {
      super.attachView(view);
-     arrayList = getListFiles(Environment.getExternalStorageDirectory());
-     getViewState().initRecyclerView();
-   }
+     getViewState().initRecyclerView(adapter);
+     }
+
+public void searchFile(){
+  getViewState().showProgress();
+  getListFiles(Environment.getExternalStorageDirectory())
+      .subscribeOn(Schedulers.io())
+      .observeOn(AndroidSchedulers.mainThread())
+      .subscribe(new Observer<File>() {
+        @Override
+        public void onSubscribe(Disposable d) {
+        }
+
+        @Override
+        public void onNext(File file) {
+          arrayList.add(file);
+          adapter.notifyItemChanged(arrayList.size() - 1);
+          Log.d("MyLog", "OnNext" );
+        }
+
+        @Override
+        public void onError(Throwable e) {
+          getViewState().hideProgress();
+          Log.d("MyLog", e.getMessage() );
+        }
+
+        @Override
+        public void onComplete() {
+          Log.d("MyLog", "OnComplete" );
+
+          getViewState().hideProgress();
+        }
+      });
+}
 
    public void OnBindViewHolder(@NonNull ParserXmlViewHolder parserXmlViewHolder, int i){
     parserXmlViewHolder.setTvFileName(arrayList.get(i));
@@ -86,83 +130,32 @@ public class ParserXmlPresenter extends MvpPresenter<ParserXmlView> {
       }
     }
 
-   public ArrayList<File> getListFiles(File parentDir) {
 
-     ArrayList<File> inFiles = new ArrayList<>();
-     Queue<File> files = new LinkedList<>();
-     if(parentDir.listFiles() != null) {
-       files.addAll(Arrays.asList(parentDir.listFiles()));
-     } else {
+
+
+   public io.reactivex.Observable<File> getListFiles(File parentDir) {
+
+     return io.reactivex.Observable.create(emmiter -> {
+       ArrayList<File> inFiles = new ArrayList<>();
+       Queue<File> files = new LinkedList<>();
+       if(parentDir.listFiles() != null) {
+         files.addAll(Arrays.asList(parentDir.listFiles()));
+       } else {
+         emmiter.onError(new Throwable("cresti"));
 //       App.INSTANCE.getRouter().showSystemMessage("Подходящие файлы не обнаружены");
-     }
-
-     while (!files.isEmpty()) {
-       File file = files.remove();
-       if (file.isDirectory()) {
-         files.addAll(Arrays.asList(file.listFiles()));
-       } else if (file.getName().endsWith(".XML")) {
-         inFiles.add(file);
        }
-     }
-  //todo
-     /*DisposableObserver<Queue<File>> file1 = Observable.fromArray(files)
-         .observeOn(Schedulers.io())
-         .subscribeWith(new DisposableObserver<Queue<File>>() {
-           @Override
-           public void onNext(Queue<File> files) {
-             while (!files.isEmpty()) {
-               File file = files.remove();
-               if (file.isDirectory()) {
-                 files.addAll(Arrays.asList(file.listFiles()));
-               } else if (file.getName().endsWith(".XML")) {
-                 inFiles.add(file);
-                 //Log.d("Tag", "OnNext: " + file.getName());
-               }
-             }
-           }
-
-           @Override
-           public void onError(Throwable e) {
-             Log.d("Tag", e.getMessage());
-           }
-
-           @Override
-           public void onComplete() {
-
-           }
-         });
-
-             /*(new Observer<Queue<File>>() {
-           @Override
-           public void onSubscribe(Disposable d) {
-
-           }
-
-           @Override
-           public void onNext(Queue<File> files) {
-
-             while (!files.isEmpty()) {
-               File file = files.remove();
-               if (file.isDirectory()) {
-                 files.addAll(Arrays.asList(file.listFiles()));
-               } else if (file.getName().endsWith(".XML")) {
-                 inFiles.add(file);
-                 Log.d("Tag", "OnNext: " + file.getName());
-               }
-             }
-           }
-           @Override
-           public void onError(Throwable e) {
-             Log.d("Tag", e.getMessage());
-           }
-
-           @Override
-           public void onComplete() {
-             Log.d("Tag", "complite");
-           }
-         });*/
-
-     return inFiles;
+       while (!files.isEmpty()) {
+         File file = files.remove();
+         if (file.isDirectory()) {
+           files.addAll(Arrays.asList(file.listFiles()));
+         } else if (file.getName().endsWith(".XML")) {
+           //inFiles.add(file);
+           emmiter.onNext(file);
+         }
+       }
+       emmiter.onComplete();
+       //emmiter.onNext(inFiles);
+     });
    }
 
    public  Map<String, ArrayList<Integer>> passeXML(File file) throws XmlPullParserException {

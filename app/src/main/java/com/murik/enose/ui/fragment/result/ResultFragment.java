@@ -69,7 +69,6 @@ public class ResultFragment extends MvpAppCompatFragment implements ResultView {
   @Override
   public void onCreate(@Nullable Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-    //mResultPresenter = createResultPresenter();
 
   }
   @NonNull

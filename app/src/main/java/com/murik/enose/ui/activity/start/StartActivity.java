@@ -1,10 +1,9 @@
 package com.murik.enose.ui.activity.start;
 
 import android.Manifest;
+import android.Manifest.permission;
 import android.annotation.SuppressLint;
 import android.bluetooth.BluetoothAdapter;
-import android.bluetooth.BluetoothDevice;
-import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -22,10 +21,10 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AlertDialog.Builder;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Toast;
 import com.arellomobile.mvp.MvpAppCompatActivity;
 import com.arellomobile.mvp.presenter.InjectPresenter;
@@ -36,44 +35,31 @@ import com.murik.enose.model.dto.DataByMaxParcelable;
 import com.murik.enose.model.dto.SensorDataFullParcelable;
 import com.murik.enose.presentation.start.StartPresenter;
 import com.murik.enose.presentation.start.StartView;
+import com.murik.enose.ui.fragment.bluetooth.BluetoothConnectionFragment;
 import com.murik.enose.ui.fragment.input.InputFragment;
 import com.murik.enose.ui.fragment.parserXml.ParserXmlFragment;
 import com.murik.enose.ui.fragment.realm.RealmFragment;
 import com.murik.enose.ui.fragment.result.ResultTabFragment;
 import com.murik.enose.ui.fragment.resultRadarChart.RadarTabContentFragment;
-import java.util.Set;
 import ru.terrakok.cicerone.Navigator;
 import ru.terrakok.cicerone.android.SupportFragmentNavigator;
 
-public class StartActivity extends MvpAppCompatActivity implements StartView, OnNavigationItemSelectedListener{
+public class StartActivity extends MvpAppCompatActivity implements StartView, OnNavigationItemSelectedListener, ProgressDisplay{
     public static final String TAG = "StartActivity";
 
   @InjectPresenter
   StartPresenter mStartPresenter;
-  BluetoothAdapter mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
+
+
+  private Toolbar toolbar;
   private int REQUEST_ENABLE_BT = 0;
+
+
 
   public static Intent getIntent(final Context context) {
     Intent intent = new Intent(context, StartActivity.class);
     return intent;
   }
-
-  private final BroadcastReceiver mReceiver = new BroadcastReceiver() {
-    public void onReceive(Context context, Intent intent) {
-      String action = intent.getAction();
-      Log.d("MyLog", "searching");
-
-      if (BluetoothDevice.ACTION_FOUND.equals(action)) {
-        // Discovery has found a device. Get the BluetoothDevice
-        // object and its info from the Intent.
-        BluetoothDevice device = intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);
-         String deviceName = device.getName();
-        String deviceHardwareAddress = device.getAddress(); // MAC address
-        Log.d("MyLog", "Name: " + device.getName() + "  Address: " + device.getAddress());
-
-      }
-    }
-  };
 
   private Navigator navigator;
   {
@@ -91,6 +77,8 @@ public class StartActivity extends MvpAppCompatActivity implements StartView, On
             return ParserXmlFragment.newInstance();
           case Screens.FULL_RESULT_FRAGMENT:
             return RadarTabContentFragment.newInstance((SensorDataFullParcelable) data);
+          case Screens.BLUETOOTH_FRAGMENT:
+            return BluetoothConnectionFragment.newInstance();
           default:
             throw new RuntimeException("Unkown screen key");
 
@@ -114,7 +102,7 @@ public class StartActivity extends MvpAppCompatActivity implements StartView, On
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_start);
-    Toolbar toolbar =  findViewById(R.id.toolbar);
+    toolbar =  findViewById(R.id.toolbar);
     setSupportActionBar(toolbar);
 
     DrawerLayout drawer =  findViewById(R.id.drawer_layout);
@@ -126,6 +114,16 @@ public class StartActivity extends MvpAppCompatActivity implements StartView, On
     NavigationView navigationView = findViewById(R.id.nav_view);
     navigationView.setNavigationItemSelectedListener(this);
 
+  }
+
+  private void requestPermissions(){
+     int androidVersion = Build.VERSION.SDK_INT;
+    if (androidVersion >= 23){
+      ActivityCompat.requestPermissions(this,
+          new String[]{Manifest.permission.ACCESS_FINE_LOCATION,
+              Manifest.permission.ACCESS_COARSE_LOCATION,
+          }, 0);
+    }
   }
 
   public void onBackPressed() {
@@ -172,8 +170,17 @@ public class StartActivity extends MvpAppCompatActivity implements StartView, On
         return true;
       }
       case R.id.app_bar_bluetooth:{
-
-        bluetoothConnenction();
+        requestAppPermissions();
+        if (App.INSTANCE.getmBluetoothAdapter() == null ) {
+          return false;
+        }
+        if (!App.INSTANCE.getmBluetoothAdapter().isEnabled()) {
+          Intent enableBtIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
+          startActivityForResult(enableBtIntent, REQUEST_ENABLE_BT);
+        }
+        if (App.INSTANCE.getmBluetoothAdapter().isEnabled()){
+          App.INSTANCE.getRouter().replaceScreen(Screens.BLUETOOTH_FRAGMENT);
+        }
        return true;
       }
       default:
@@ -181,58 +188,24 @@ public class StartActivity extends MvpAppCompatActivity implements StartView, On
     }
   }
 
-  public void bluetoothConnenction() {
 
-    if ( mBluetoothAdapter == null ) {
-      return;
-    }
-
-    if (!mBluetoothAdapter.isEnabled()) {
-      Intent enableBtIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
-      startActivityForResult(enableBtIntent, REQUEST_ENABLE_BT);
-    } else  {
-      searchBluetoothDevices();
-    }
-
-  }
-  private void searchBluetoothDevices(){
-    Set<BluetoothDevice> pairedDevices = mBluetoothAdapter.getBondedDevices();
-
-    if (pairedDevices.size() > 0) {
-      for (BluetoothDevice device : pairedDevices) {
-        Log.d("MyLog", "Name: " + device.getName() + "  Address: " + device.getAddress());
-      }
-     // IntentFilter filter = new IntentFilter(BluetoothDevice.ACTION_FOUND);
-     // registerReceiver(mReceiver, filter);
-    }
-  }
-
-  @Override
-  protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-    super.onActivityResult(requestCode, resultCode, data);
-
-    if(resultCode == RESULT_OK){
-      searchBluetoothDevices();
-      Toast.makeText(this, "bluetooth is Enable", Toast.LENGTH_SHORT).show();
-    } else {
-      Toast.makeText(this, "bluetooth is Disable", Toast.LENGTH_SHORT).show();
-    }
-  }
 
   protected void requestAppPermissions() {
     if (android.os.Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
       return;
     }
 
-    if (hasReadPermissions() && hasWritePermissions()) {
+    if (hasReadPermissions() && hasWritePermissions() && hasCorseLocationPermissions() && hasBluetoothAdminPermissions()) {
       return;
     }
 
     ActivityCompat.requestPermissions(this,
         new String[] {
             Manifest.permission.READ_EXTERNAL_STORAGE,
-            Manifest.permission.WRITE_EXTERNAL_STORAGE
-        }, 0); // your request code
+            Manifest.permission.WRITE_EXTERNAL_STORAGE,
+            permission.ACCESS_COARSE_LOCATION,
+            permission.BLUETOOTH_ADMIN,
+        }, 0);
   }
 
   private boolean hasReadPermissions() {
@@ -242,7 +215,13 @@ public class StartActivity extends MvpAppCompatActivity implements StartView, On
   private boolean hasWritePermissions() {
     return (ContextCompat.checkSelfPermission(getBaseContext(), Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED);
   }
+  private boolean hasCorseLocationPermissions() {
+    return (ContextCompat.checkSelfPermission(getBaseContext(), permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED);
+  }
 
+  private boolean hasBluetoothAdminPermissions() {
+    return (ContextCompat.checkSelfPermission(getBaseContext(), permission.BLUETOOTH_ADMIN) == PackageManager.PERMISSION_GRANTED);
+  }
   @Override
   protected void onResume() {
     super.onResume();
@@ -250,9 +229,30 @@ public class StartActivity extends MvpAppCompatActivity implements StartView, On
   }
 
   @Override
+  protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+    super.onActivityResult(requestCode, resultCode, data);
+
+    if(resultCode == RESULT_OK){
+      App.INSTANCE.getRouter().replaceScreen(Screens.BLUETOOTH_FRAGMENT);
+      Toast.makeText(this, "bluetooth is Enable", Toast.LENGTH_SHORT).show();
+    } else {
+      Toast.makeText(this, "bluetooth is Disable", Toast.LENGTH_SHORT).show();
+    }
+  }
+
+  @Override
   protected void onPause() {
     super.onPause();
     App.INSTANCE.getNavigatorHolder().removeNavigator();
-   // unregisterReceiver(mReceiver);
+
+  }
+  public void showProgress() {
+    findViewById(R.id.toolbar_progress_bar).setVisibility(View.VISIBLE);
+  }
+
+  public void hideProgress() {
+    findViewById(R.id.toolbar_progress_bar).setVisibility(View.GONE);
   }
 }
+
+

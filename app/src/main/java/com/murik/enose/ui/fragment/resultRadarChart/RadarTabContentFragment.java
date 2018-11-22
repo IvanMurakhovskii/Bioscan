@@ -9,25 +9,16 @@ import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import com.arellomobile.mvp.MvpAppCompatFragment;
 import com.murik.enose.R;
 import com.murik.enose.model.dto.SensorDataFullParcelable;
 import com.murik.enose.ui.fragment.resultRadarChart.tab.ResultRadarChartTabAdapter;
 
-public class RadarTabContentFragment extends Fragment {
+public  class RadarTabContentFragment extends MvpAppCompatFragment{
 
   private SensorDataFullParcelable inputDataParcelable;
   private TabLayout tabLayout;
   private ViewPager viewPager;
-
-  /*public static Fragment newInstance(DataByMaxParcelable resultBySens) {
-    ResultTabFragment fragment = new ResultTabFragment();
-
-    Bundle args = new Bundle();
-    args.putParcelable(ResultRadarChartFragment.DATA, resultBySens);
-    fragment.setArguments(args);
-
-    return fragment;
-  }*/
 
   public static Fragment newInstance(SensorDataFullParcelable resultBySens) {
     RadarTabContentFragment fragment = new RadarTabContentFragment();
@@ -56,11 +47,10 @@ public class RadarTabContentFragment extends Fragment {
     tabLayout = view.findViewById(R.id.sliding_tabs);
     viewPager = view.findViewById(R.id.viewpager);
 
-    ResultRadarChartTabAdapter adapter = new ResultRadarChartTabAdapter(getChildFragmentManager(), getActivity().getApplicationContext(), inputDataParcelable);
+    ResultRadarChartTabAdapter adapter = new ResultRadarChartTabAdapter(getChildFragmentManager(), inputDataParcelable);
     viewPager.setAdapter(adapter);
 
-    //viewPager.setOffscreenPageLimit(3);
+    viewPager.setOffscreenPageLimit(3);
     tabLayout.setupWithViewPager(viewPager);
   }
-
 }
