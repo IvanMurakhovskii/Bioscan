@@ -13,7 +13,7 @@ public class ResultRadarChartTabAdapter  extends FragmentPagerAdapter {
 
     private SensorDataFullParcelable sensorDataFullParcelable;
     private final int PAGE_COUNT = 5;
-    private String tabTitle[] = new String[] {"Total", "Health", "Energy", "Bad", "Endokrin"};
+    private String tabTitle[] = new String[] {"Total","Endokrin", "Energy", "Health", "Bad"};
     private Context context;
 
     public ResultRadarChartTabAdapter(FragmentManager fm, SensorDataFullParcelable sensorDataFullParcelable) {

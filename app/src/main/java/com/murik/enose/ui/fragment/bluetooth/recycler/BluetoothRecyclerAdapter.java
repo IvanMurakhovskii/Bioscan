@@ -7,7 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import com.murik.enose.R;
-import com.murik.enose.presentation.bluetooth.BluetoothConnectionPresenter;
+import com.murik.enose.presentation.presenter.bluetooth.BluetoothConnectionPresenter;
 
 public class BluetoothRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 

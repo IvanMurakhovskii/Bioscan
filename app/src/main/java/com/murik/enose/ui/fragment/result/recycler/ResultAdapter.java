@@ -6,7 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import com.murik.enose.R;
-import com.murik.enose.presentation.result.ResultPresenter;
+import com.murik.enose.presentation.presenter.result.ResultPresenter;
 
 
 public class ResultAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{

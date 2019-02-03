@@ -31,8 +31,8 @@ import com.github.mikephil.charting.data.PieEntry;
 import com.murik.enose.R;
 import com.murik.enose.model.ResultBySens;
 import com.murik.enose.model.dto.DataByMaxParcelable;
-import com.murik.enose.presentation.result.ResultPresenter;
-import com.murik.enose.presentation.result.ResultView;
+import com.murik.enose.presentation.presenter.result.ResultPresenter;
+import com.murik.enose.presentation.view.result.ResultView;
 import com.murik.enose.ui.fragment.result.recycler.ResultAdapter;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -130,6 +130,7 @@ public class ResultFragment extends MvpAppCompatFragment implements ResultView {
     pieChart.setEntryLabelColor(Color.BLACK);
     pieChart.setEntryLabelTextSize(16f);
     pieChart.notifyDataSetChanged();
+    pieChart.setTouchEnabled(false);
     pieChart.setData(pieData);
   }
 

@@ -23,9 +23,9 @@ public class Const {
   public static final int[] ENDOKRIN = {10, 20, 30, 60};
 
   public static final int PAGE_TOTAL = 0;
-  public static final int PAGE_HEALTH = 1;
+  public static final int PAGE_ENDOKRIN = 1;
   public static final int PAGE_ENERGY = 2;
-  public static final int PAGE_BAD = 3;
-  public static final int PAGE_ENDOKRIN = 4;
+  public static final int PAGE_HEALTH = 3;
+  public static final int PAGE_BAD = 4;
 
 }

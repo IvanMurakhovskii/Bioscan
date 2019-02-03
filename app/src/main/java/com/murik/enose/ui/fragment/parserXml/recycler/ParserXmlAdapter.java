@@ -7,7 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import com.murik.enose.R;
-import com.murik.enose.presentation.parserXml.ParserXmlPresenter;
+import com.murik.enose.presentation.presenter.parserXml.ParserXmlPresenter;
 
 public class ParserXmlAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 

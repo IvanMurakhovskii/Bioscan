@@ -27,7 +27,7 @@
   <string name="A1_7_BLUE">Испарина, стресс, прилив</string>
   <string name="A1_7_RED">Адреналин, кортизол, резкий стресс, прилив энергии</string>
 
-  <string name="A1_8_YELLOW">Голод</string>
+  <string name="A1_8_YELLOW">Голод, спазм</string>
   <string name="A1_8_RED">Алкоголь, похмелье, почки(?)</string>
 
 
@@ -66,7 +66,7 @@
   <string name="A4_6_CRIMSON">Изменение обменных процессов</string>
 
 
-  <string name="A4_8_RED">Проблемы с поджелужочной железой \n ослаблен организм \n сильный стресс, волнение</string>
+  <string name="A4_8_RED">Проблемы с поджелужочной железой \n ослаблен организм \n сильный стресс, волнение/боль</string>
 
   <string name="A5_6_BLUE">Жарко, прилив</string>
   <string name="A5_6_YELLOW">Стресс</string>
@@ -87,9 +87,10 @@
 
   <string name="Practice">Аномальная энергия</string>
   <string name="voter">Влага</string>
-  <string name="FEMININE">Критичекие дни</string>
+  <string name="FEMININE">Изменение гормонального фона</string>
   <string name="GIGROPAT">Гигропатия</string>
   <string name="GIGROMETR">Гигрометр</string>
+  <string name="lowEnergy">Критическое снижение энергии</string>
 
 
 </resources>

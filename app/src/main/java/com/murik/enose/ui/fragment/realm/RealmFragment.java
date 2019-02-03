@@ -13,8 +13,8 @@ import com.murik.enose.App;
 import com.murik.enose.R;
 import com.murik.enose.Screens;
 import com.murik.enose.model.RealmController;
-import com.murik.enose.presentation.realm.RealmPresenter;
-import com.murik.enose.presentation.realm.RealmView;
+import com.murik.enose.presentation.presenter.realm.RealmPresenter;
+import com.murik.enose.presentation.view.realm.RealmView;
 import com.murik.enose.ui.fragment.realm.recycler.RealmAdapter;
 
 public class RealmFragment extends MvpAppCompatFragment implements RealmView {

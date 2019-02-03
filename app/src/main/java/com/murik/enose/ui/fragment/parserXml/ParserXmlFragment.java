@@ -13,8 +13,8 @@ import com.arellomobile.mvp.MvpAppCompatFragment;
 import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.murik.enose.Const;
 import com.murik.enose.R;
-import com.murik.enose.presentation.parserXml.ParserXmlPresenter;
-import com.murik.enose.presentation.parserXml.ParserXmlView;
+import com.murik.enose.presentation.presenter.parserXml.ParserXmlPresenter;
+import com.murik.enose.presentation.view.parserXML.ParserXmlView;
 import com.murik.enose.ui.activity.start.ProgressDisplay;
 import com.murik.enose.ui.fragment.parserXml.recycler.ParserXmlAdapter;
 

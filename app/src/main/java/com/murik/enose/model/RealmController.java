@@ -21,7 +21,6 @@ public class RealmController {
 
   }
 
-
   public void addInfoFull(SensorDataFullParcelable dataSens) {
 
     realm.executeTransaction(realm -> {
@@ -325,6 +324,12 @@ public class RealmController {
     });
   }
 
+  public Boolean updateLeftHandDataById(long id){
+
+
+    return true;
+  }
+
   public RealmList<Integer> createRealmList(ArrayList<Integer> sens) {
 
     RealmList<Integer> sensorRealmList = new RealmList<>();
@@ -337,7 +342,7 @@ public class RealmController {
   }
 
 
-  public DataSensorRealm getInfoById(int id){
+  public DataSensorRealm findById(int id){
    return realm.where(DataSensorRealm.class).equalTo("id", id).findFirst();
   }
 

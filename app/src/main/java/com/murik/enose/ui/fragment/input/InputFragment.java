@@ -18,8 +18,8 @@ import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.murik.enose.Const;
 import com.murik.enose.R;
 import com.murik.enose.model.dto.DataByMaxParcelable;
-import com.murik.enose.presentation.input.InputPresenter;
-import com.murik.enose.presentation.input.InputView;
+import com.murik.enose.presentation.presenter.input.InputPresenter;
+import com.murik.enose.presentation.view.input.InputView;
 import ernestoyaquello.com.verticalstepperform.VerticalStepperFormLayout;
 import ernestoyaquello.com.verticalstepperform.interfaces.VerticalStepperForm;
 import java.util.ArrayList;
@@ -118,7 +118,6 @@ public class InputFragment extends MvpAppCompatFragment implements InputView, Ve
   @Override
   public boolean onOptionsItemSelected(MenuItem item) {
     switch (item.getItemId()){
-
     }
     return super.onOptionsItemSelected(item);
   }

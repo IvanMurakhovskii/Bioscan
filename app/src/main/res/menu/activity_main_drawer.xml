@@ -20,6 +20,10 @@
       android:id="@+id/app_bar_bluetooth"
       android:title="Подключиться к прибору"
       android:icon="@android:drawable/stat_sys_data_bluetooth"/>
+    <item
+      android:id="@+id/app_bar_live_chart"
+      android:title="Live Chart"
+      android:icon="@android:drawable/stat_sys_data_bluetooth"/>
   </group>
 
 </menu>

@@ -57,27 +57,27 @@ public class ResultAFactory {
       resultByMask.setDataSensorMax(maxSensResult);
       resultByMask.calculateA();
 
-      A.add(new ResultA6_8(resultByMask.getA6_8(),inputData, context));
-      A.add(new ResultA1_2(resultByMask.getA1_2(),inputData, context));
-      A.add(new ResultA2_3(resultByMask.getA2_3(),inputData, context));
-      A.add(new ResultA3_5(resultByMask.getA3_5(),inputData, context));
-      A.add(new ResultA3_7(resultByMask.getA3_7(),inputData, context));
-      A.add(new ResultA4_8(resultByMask.getA4_8(),inputData, context));
-      //A.add(new ResultA7_8(resultByMask.getA7_8(),inputData, context));
-      A.add(new ResultA1_4(resultByMask.getA1_4(),inputData, context));
       A.add(new ResultA1_3(resultByMask.getA1_3(),inputData, context));
       A.add(new ResultA1_5(resultByMask.getA1_5(),inputData, context));
-      A.add(new ResultA3_8(resultByMask.getA3_8(),inputData, context));
-      A.add(new ResultA2_4(resultByMask.getA2_4(),inputData, context));
-      A.add(new ResultA1_7(resultByMask.getA1_7(),inputData, context));
       A.add(new ResultA1_8(resultByMask.getA1_8(),inputData, context));
+      A.add(new ResultA1_4(resultByMask.getA1_4(),inputData, context));
+      A.add(new ResultA2_4(resultByMask.getA2_4(),inputData, context));
       A.add(new ResultA2_5(resultByMask.getA2_5(),inputData, context));
-      A.add(new ResultA4_5(resultByMask.getA4_5(),inputData, context));
-      A.add(new ResultA2_6(resultByMask.getA2_6(),inputData, context));
-      A.add(new ResultA4_6(resultByMask.getA4_6(),inputData, context));
       A.add(new ResultA6_7(resultByMask.getA6_7(),inputData, context));
-      //A.add(new ResultA5_8(resultByMask.getA5_8(),inputData, context));
+      A.add(new ResultA3_8(resultByMask.getA3_8(),inputData, context));
+      A.add(new ResultA4_5(resultByMask.getA4_5(),inputData, context));
+      A.add(new ResultA4_6(resultByMask.getA4_6(),inputData, context));
+      A.add(new ResultA6_8(resultByMask.getA6_8(),inputData, context));
+      A.add(new ResultA1_2(resultByMask.getA1_2(),inputData, context));
       A.add(new ResultA5_6(resultByMask.getA5_6(),inputData, context));
+      A.add(new ResultA3_5(resultByMask.getA3_5(),inputData, context));
+      A.add(new ResultA3_7(resultByMask.getA3_7(),inputData, context));
+      A.add(new ResultA2_3(resultByMask.getA2_3(),inputData, context));
+      A.add(new ResultA4_8(resultByMask.getA4_8(),inputData, context));
+      //A.add(new ResultA7_8(resultByMask.getA7_8(),inputData, context));
+      A.add(new ResultA1_7(resultByMask.getA1_7(),inputData, context));
+      A.add(new ResultA2_6(resultByMask.getA2_6(),inputData, context));
+      //A.add(new ResultA5_8(resultByMask.getA5_8(),inputData, context));
 
       return true;
     } else {

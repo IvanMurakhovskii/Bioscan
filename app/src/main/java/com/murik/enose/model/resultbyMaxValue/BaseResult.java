@@ -61,6 +61,11 @@ public abstract class BaseResult implements ResultBySens {
   public void setColorRED(){
      color = ContextCompat.getColor(context, R.color.colorResultRed);
   }
+
+  public void setColor(int color) {
+    this.color = color;
+  }
+
   public void setColorCRIMSON(){
     color = ContextCompat.getColor(context, R.color.colorResultCrimson);
   }
@@ -72,7 +77,6 @@ public abstract class BaseResult implements ResultBySens {
   }
   public void setColorBLUE(){
     color = ContextCompat.getColor(context, R.color.colorResultBlue);
-
   }
   public void setPossibleReasons(String possibleReasons) {
         this.possibleReasons = possibleReasons;

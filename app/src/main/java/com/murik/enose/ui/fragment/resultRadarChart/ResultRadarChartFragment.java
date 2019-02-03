@@ -20,8 +20,8 @@ import com.github.mikephil.charting.interfaces.datasets.IRadarDataSet;
 import com.murik.enose.Const;
 import com.murik.enose.R;
 import com.murik.enose.model.dto.SensorDataFullParcelable;
-import com.murik.enose.presentation.resultRadarChart.ResultRadarChartPresenter;
-import com.murik.enose.presentation.resultRadarChart.ResultRadarChartView;
+import com.murik.enose.presentation.presenter.resultRadarChart.ResultRadarChartPresenter;
+import com.murik.enose.presentation.view.resultRadarChart.ResultRadarChartView;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -36,7 +36,7 @@ public class ResultRadarChartFragment extends MvpAppCompatFragment implements Re
   ResultRadarChartPresenter mResultRadarChartPresenter;
 
   private int mPage = 2;
-
+  final private float testChartSize = 18;
   private RadarChart radarChart;
   private Button btnResult;
 
@@ -68,7 +68,6 @@ public class ResultRadarChartFragment extends MvpAppCompatFragment implements Re
     super.onViewCreated(view, savedInstanceState);
 
     radarChart = view.findViewById(R.id.radarChart);
-    btnResult = view.findViewById(R.id.btnResult);
     mResultRadarChartPresenter.createRadarChart(mPage);
   }
 
@@ -78,9 +77,7 @@ public class ResultRadarChartFragment extends MvpAppCompatFragment implements Re
 
     //int defaultSquare = SquareChart(entries);
     //int sensSquare = SquareChart(entries1);
-
     //difference = (1 - ((float)defaultSquare/(float)sensSquare))*100;
-
     //tvInfo.setText(String.valueOf(difference));
     //setProgressBar
 
@@ -91,27 +88,33 @@ public class ResultRadarChartFragment extends MvpAppCompatFragment implements Re
    lable.add("45");
 
    if(!entryLeftHand.isEmpty()){
-     RadarDataSet dataSet_leftHand = new RadarDataSet(entryLeftHand, "left hand");
+     RadarDataSet dataSet_leftHand = new RadarDataSet(entryLeftHand, "");
       dataSet_leftHand.setDrawFilled(true);
       dataSet_leftHand.setFillColor(color);
       dataSet_leftHand.setColor(Color.BLACK);
+      dataSet_leftHand.setValueTextSize(40);
       DATA_SET.add(dataSet_leftHand);
     }
     if(!entryRightHand.isEmpty()){
-      RadarDataSet dataSet_rightHand = new RadarDataSet(entryRightHand, "right hand");
+      RadarDataSet dataSet_rightHand = new RadarDataSet(entryRightHand,"");
       dataSet_rightHand.setDrawFilled(true);
       dataSet_rightHand.setFillColor(color);
       dataSet_rightHand.setColor(Color.BLUE);
+      dataSet_rightHand.setValueTextSize(40);
       DATA_SET.add(dataSet_rightHand);
     }
     Description des = radarChart.getDescription();
-    des.setText(description);
+    des.setText("");
     RadarData radarData = new RadarData(DATA_SET);
     radarData.setLabels(lable);
     radarChart.setData(radarData);
 
+    radarChart.setRotationX(0);
+
     XAxis x = radarChart.getXAxis();
+    x.setTextSize(testChartSize);
     YAxis y = radarChart.getYAxis();
+    y.setTextSize(testChartSize);
 
 
 
@@ -125,6 +128,7 @@ public class ResultRadarChartFragment extends MvpAppCompatFragment implements Re
 
     int count = 0;
     if(mPage == Const.PAGE_TOTAL){
+
       count = (int) x.getAxisMaximum()/Const.TOTAL.length - 1;
     } else if(mPage == Const.PAGE_HEALTH){
       count = (int) x.getAxisMaximum()/Const.HEALTH.length- 1;
@@ -136,11 +140,19 @@ public class ResultRadarChartFragment extends MvpAppCompatFragment implements Re
       count = (int) x.getAxisMaximum()/Const.ENDOKRIN.length- 1;
     }
 
-    x.setLabelCount(count);
-    x.setGranularityEnabled(true);
+    //x.setLabelCount(count, true);
+    x.setEnabled(false);
+    //x.setLabelCount(count);
+    //y.setGranularityEnabled(true);
+
+    y.setGranularity(count);
+    y.setAxisMinimum(0f);
+    //x.setGranularityEnabled(true);
     y.setDrawTopYLabelEntry(false);
     radarData.setDrawValues(false);
+    radarChart.setTouchEnabled(false);
     radarChart.setSkipWebLineCount(count);
+
     radarChart.invalidate();
   }
 }

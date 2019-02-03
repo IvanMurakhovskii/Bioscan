@@ -33,9 +33,12 @@ import com.murik.enose.R;
 import com.murik.enose.Screens;
 import com.murik.enose.model.dto.DataByMaxParcelable;
 import com.murik.enose.model.dto.SensorDataFullParcelable;
-import com.murik.enose.presentation.start.StartPresenter;
-import com.murik.enose.presentation.start.StartView;
+import com.murik.enose.presentation.presenter.start.StartPresenter;
+import com.murik.enose.presentation.view.start.StartView;
+import com.murik.enose.service.BluetoothService;
+import com.murik.enose.ui.fragment.LiveBluetoothChart.LiveBluetoothChartFragment;
 import com.murik.enose.ui.fragment.bluetooth.BluetoothConnectionFragment;
+import com.murik.enose.ui.fragment.dimension.BluetoothDimensionFragment;
 import com.murik.enose.ui.fragment.input.InputFragment;
 import com.murik.enose.ui.fragment.parserXml.ParserXmlFragment;
 import com.murik.enose.ui.fragment.realm.RealmFragment;
@@ -79,6 +82,10 @@ public class StartActivity extends MvpAppCompatActivity implements StartView, On
             return RadarTabContentFragment.newInstance((SensorDataFullParcelable) data);
           case Screens.BLUETOOTH_FRAGMENT:
             return BluetoothConnectionFragment.newInstance();
+          case Screens.BLUETOOTH_LIVE_CHART_FRAGMENT:
+              return LiveBluetoothChartFragment.newInstance();
+          case Screens.BLUETOOTH_DIMENSION_FRAGMENT:
+            return BluetoothDimensionFragment.newInstance();
           default:
             throw new RuntimeException("Unkown screen key");
 
@@ -128,6 +135,9 @@ public class StartActivity extends MvpAppCompatActivity implements StartView, On
 
   public void onBackPressed() {
     int count = getSupportFragmentManager().getBackStackEntryCount();
+    if(count > 1){
+      App.INSTANCE.getRouter().replaceScreen(Screens.RESULT_FRAGMENT);
+    }
     if(count == 1){
       AlertDialog.Builder builder = new Builder(this);
       builder.setMessage("Вы уверены, что хотите выйти?")
@@ -144,12 +154,22 @@ public class StartActivity extends MvpAppCompatActivity implements StartView, On
   public boolean onCreateOptionsMenu(Menu menu) {
     MenuInflater inflater = getMenuInflater();
     inflater.inflate(R.menu.menu_start, menu);
+    MenuItem disconnectGattItem =  menu.findItem(R.id.app_bar_disconnect_bluetooth);
+   /* if(App.INSTANCE.getmBluetoothGatt() == null){
+      disconnectGattItem.setVisible(false);
+    } else {
+      disconnectGattItem.setVisible(true);
+    }*/
     return true;
   }
 
   @Override
   public boolean onOptionsItemSelected(MenuItem item) {
-     return false;
+     switch (item.getItemId()){
+       case R.id.app_bar_disconnect_bluetooth:
+     }
+
+    return false;
   }
 
 
@@ -182,6 +202,10 @@ public class StartActivity extends MvpAppCompatActivity implements StartView, On
           App.INSTANCE.getRouter().replaceScreen(Screens.BLUETOOTH_FRAGMENT);
         }
        return true;
+      }
+      case R.id.app_bar_live_chart: {
+        App.INSTANCE.getRouter().replaceScreen(Screens.BLUETOOTH_LIVE_CHART_FRAGMENT);
+        return true;
       }
       default:
         return super.onOptionsItemSelected(menuItem);
@@ -243,9 +267,23 @@ public class StartActivity extends MvpAppCompatActivity implements StartView, On
   @Override
   protected void onPause() {
     super.onPause();
-    App.INSTANCE.getNavigatorHolder().removeNavigator();
+  }
+
+  @Override
+  protected void onStop() {
+    super.onStop();
 
   }
+
+  @Override
+  protected void onDestroy() {
+    super.onDestroy();
+    App.INSTANCE.getNavigatorHolder().removeNavigator();
+    Intent intent = new Intent(this,BluetoothService.class);
+    stopService(intent);
+
+  }
+
   public void showProgress() {
     findViewById(R.id.toolbar_progress_bar).setVisibility(View.VISIBLE);
   }
@@ -253,6 +291,7 @@ public class StartActivity extends MvpAppCompatActivity implements StartView, On
   public void hideProgress() {
     findViewById(R.id.toolbar_progress_bar).setVisibility(View.GONE);
   }
+
 }
 
 

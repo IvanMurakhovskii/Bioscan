@@ -16,8 +16,8 @@ public class ResultA1_7 extends BaseResult {
   @Override
   public void setResult() {
     if(getA() < 1.1){
-      setColorPRIMARY_DARK();
-      setPossibleReasons(getResources( R.string.GIGROPAT));
+      setColorCRIMSON();
+      setPossibleReasons(getResources( R.string.GIGROPAT) +"\n"+ getResources(R.string.lowEnergy) );
     } else if(getA() <= 1.9 && getA() >= 1.1){
       setColorGREEN();
     } else if(getA() > 1.9 && getA() <= 2.3){
