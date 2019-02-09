@@ -24,7 +24,7 @@ import com.murik.enose.R;
 import com.murik.enose.Screens;
 import com.murik.enose.presentation.presenter.liveBluetoothChart.LiveBluetoothChartPresenter;
 import com.murik.enose.presentation.view.liveBluetoothChart.LiveBluetoothChartView;
-import com.murik.enose.service.BluetoothService;
+import com.murik.enose.service.Impl.BluetoothImplService;
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
@@ -56,8 +56,8 @@ public class LiveBluetoothChartFragment extends MvpAppCompatFragment implements 
       String action = intent.getAction();
 
 
-      if (BluetoothService.ACTION_CHARACTERISTIC_CHANGE.equals(action)) {
-        String str = intent.getStringExtra(BluetoothService.EXTRA_DATA);
+      if (BluetoothImplService.ACTION_CHARACTERISTIC_CHANGE.equals(action)) {
+        String str = intent.getStringExtra(BluetoothImplService.EXTRA_DATA);
         mLiveBluetoothChartPresenter.addDataFromDevice(str);
         Observable.create(emitter -> {
 
@@ -118,7 +118,7 @@ public class LiveBluetoothChartFragment extends MvpAppCompatFragment implements 
     super.onResume();
     //getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
     IntentFilter filter = new IntentFilter();
-    filter.addAction(BluetoothService.ACTION_CHARACTERISTIC_CHANGE);
+    filter.addAction(BluetoothImplService.ACTION_CHARACTERISTIC_CHANGE);
     getActivity().registerReceiver(broadcastReceiver, filter);
 
   }

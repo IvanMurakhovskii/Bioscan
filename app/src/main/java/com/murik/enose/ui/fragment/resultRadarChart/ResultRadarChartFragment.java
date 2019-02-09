@@ -105,12 +105,15 @@ public class ResultRadarChartFragment extends MvpAppCompatFragment implements Re
     }
     Description des = radarChart.getDescription();
     des.setText("");
-    RadarData radarData = new RadarData(DATA_SET);
-    radarData.setLabels(lable);
-    radarChart.setData(radarData);
+    RadarData radarData;
+    if(!DATA_SET.isEmpty()){
+      radarData = new RadarData(DATA_SET);
+      radarData.setLabels(lable);
+      radarChart.setData(radarData);
+      radarData.setDrawValues(false);
+    }
 
     radarChart.setRotationX(0);
-
     XAxis x = radarChart.getXAxis();
     x.setTextSize(testChartSize);
     YAxis y = radarChart.getYAxis();
@@ -149,10 +152,9 @@ public class ResultRadarChartFragment extends MvpAppCompatFragment implements Re
     y.setAxisMinimum(0f);
     //x.setGranularityEnabled(true);
     y.setDrawTopYLabelEntry(false);
-    radarData.setDrawValues(false);
+
     radarChart.setTouchEnabled(false);
     radarChart.setSkipWebLineCount(count);
-
     radarChart.invalidate();
   }
 }

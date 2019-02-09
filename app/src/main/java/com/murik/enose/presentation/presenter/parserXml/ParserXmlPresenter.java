@@ -135,35 +135,11 @@ public void searchFile(){
     }
 
 
-
-
-   public io.reactivex.Observable<File> getListFiles(File parentDir) {
-
-     return io.reactivex.Observable.create(emmiter -> {
-       ArrayList<File> inFiles = new ArrayList<>();
-       Queue<File> files = new LinkedList<>();
-       if(parentDir.listFiles() != null) {
-         files.addAll(Arrays.asList(parentDir.listFiles()));
-       } else {
-         emmiter.onError(new Throwable("cresti"));
-//       App.INSTANCE.getRouter().showSystemMessage("Подходящие файлы не обнаружены");
-       }
-       while (!files.isEmpty()) {
-         File file = files.remove();
-         if (file.isDirectory()) {
-           files.addAll(Arrays.asList(file.listFiles()));
-         } else if (file.getName().endsWith(".XML")) {
-           //inFiles.add(file);
-           emmiter.onNext(file);
-         }
-       }
-       emmiter.onComplete();
-       //emmiter.onNext(inFiles);
-     });
-   }
-
    public  Map<String, ArrayList<Integer>> passeXML(File file) throws XmlPullParserException {
 
+     String key = "";
+     String descriptions = "";
+     int initial = 0;
      Map<String, ArrayList<Integer>> sensprMap = new HashMap<>();
      ArrayList<Integer> sensor = new ArrayList<>();
 
@@ -176,7 +152,7 @@ public void searchFile(){
      try {
        fis = new FileInputStream(file);
      } catch (FileNotFoundException e) {
-       Log.d(LOG_TAG, e.getMessage().toString());
+       //Log.d(LOG_TAG, e.getMessage().toString());
      }
      parser.setInput(fis, null);
 
@@ -228,5 +204,32 @@ public void searchFile(){
      sensorDataFullParcelable.setDescriptions(descriptions);
 
      return sensprMap;
+   }
+
+
+
+   public io.reactivex.Observable<File> getListFiles(File parentDir) {
+
+     return io.reactivex.Observable.create(emmiter -> {
+       ArrayList<File> inFiles = new ArrayList<>();
+       Queue<File> files = new LinkedList<>();
+       if(parentDir.listFiles() != null) {
+         files.addAll(Arrays.asList(parentDir.listFiles()));
+       } else {
+         emmiter.onError(new Throwable("cresti"));
+//       App.INSTANCE.getRouter().showSystemMessage("Подходящие файлы не обнаружены");
+       }
+       while (!files.isEmpty()) {
+         File file = files.remove();
+         if (file.isDirectory()) {
+           files.addAll(Arrays.asList(file.listFiles()));
+         } else if (file.getName().endsWith(".XML")) {
+           //inFiles.add(file);
+           emmiter.onNext(file);
+         }
+       }
+       emmiter.onComplete();
+       //emmiter.onNext(inFiles);
+     });
    }
 }

@@ -1,4 +1,4 @@
-package com.murik.enose.model.dto;
+package com.murik.enose.model.Entity;
 
 import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;

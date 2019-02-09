@@ -15,7 +15,7 @@ import com.murik.enose.Const;
 import com.murik.enose.R;
 import com.murik.enose.presentation.presenter.parserXml.ParserXmlPresenter;
 import com.murik.enose.presentation.view.parserXML.ParserXmlView;
-import com.murik.enose.ui.activity.start.ProgressDisplay;
+import com.murik.enose.ui.activity.ProgressDisplay;
 import com.murik.enose.ui.fragment.parserXml.recycler.ParserXmlAdapter;
 
 public class ParserXmlFragment extends MvpAppCompatFragment implements ParserXmlView {

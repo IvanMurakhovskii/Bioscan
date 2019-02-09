@@ -1,10 +1,10 @@
 package com.murik.enose.model;
 
 import com.murik.enose.Const;
-import com.murik.enose.model.dto.DataSensor;
-import com.murik.enose.model.dto.DataSensorRealm;
+import com.murik.enose.model.Entity.DataSensor;
+import com.murik.enose.model.Entity.DataSensorRealm;
 import com.murik.enose.model.dto.DataByMaxParcelable;
-import com.murik.enose.model.dto.RealmInt;
+import com.murik.enose.model.Entity.RealmInt;
 import com.murik.enose.model.dto.SensorDataFullParcelable;
 import io.realm.Realm;
 import io.realm.RealmList;
@@ -12,6 +12,7 @@ import io.realm.RealmResults;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
+import java.util.Objects;
 
 public class RealmController {
 
@@ -33,27 +34,23 @@ public class RealmController {
       data.setGender(dataSens.getGender());
       data.setFullData(true);
 
-
-
-
       DataSensor rightHandDataSensor = realm.createObject(DataSensor.class);
       DataSensor leftHandDataSensor = realm.createObject(DataSensor.class);
 
-
-
-
-      if(!dataSens.getDataSensorMapRightHand().isEmpty()){
-        if (!dataSens.getDataSensorMapRightHand().get(Const.SENSOR_1).isEmpty()) {
-          RealmList<RealmInt> realmInts = new RealmList<>();
-          for (int i = 0; i < dataSens.getDataSensorMapRightHand().get(Const.SENSOR_1).size();
-              i++) {
-            RealmInt realmInt = realm.createObject(RealmInt.class);
-            realmInt.setValue(dataSens.getDataSensorMapRightHand().get(Const.SENSOR_1).get(i));
-            realmInts.add(realmInt);
+      if(!dataSens.getDataSensorMapRightHand().isEmpty() && dataSens.getDataSensorMapRightHand() != null){
+        if(dataSens.getDataSensorMapRightHand().get(Const.SENSOR_1) != null){
+          if (!dataSens.getDataSensorMapRightHand().get(Const.SENSOR_1).isEmpty()) {
+            RealmList<RealmInt> realmInts = new RealmList<>();
+            for (int i = 0; i < dataSens.getDataSensorMapRightHand().get(Const.SENSOR_1).size();
+                i++) {
+              RealmInt realmInt = realm.createObject(RealmInt.class);
+              realmInt.setValue(dataSens.getDataSensorMapRightHand().get(Const.SENSOR_1).get(i));
+              realmInts.add(realmInt);
+            }
+            rightHandDataSensor.setDataSens1(realmInts);
           }
-          rightHandDataSensor.setDataSens1(realmInts);
         }
-
+        if(dataSens.getDataSensorMapRightHand().get(Const.SENSOR_2) != null){
           if (!dataSens.getDataSensorMapRightHand().get(Const.SENSOR_2).isEmpty()) {
             RealmList<RealmInt> realmInts = new RealmList<>();
             for (int i = 0; i < dataSens.getDataSensorMapRightHand().get(Const.SENSOR_2).size(); i++) {
@@ -63,6 +60,8 @@ public class RealmController {
             }
             rightHandDataSensor.setDataSens2(realmInts);
           }
+        }
+        if(dataSens.getDataSensorMapRightHand().get(Const.SENSOR_3) != null){
           if (!dataSens.getDataSensorMapRightHand().get(Const.SENSOR_3).isEmpty()) {
             RealmList<RealmInt> realmInts = new RealmList<>();
             for (int i = 0; i < dataSens.getDataSensorMapRightHand().get(Const.SENSOR_3).size(); i++) {
@@ -72,127 +71,154 @@ public class RealmController {
             }
             rightHandDataSensor.setDataSens3(realmInts);
           }
-          if (!dataSens.getDataSensorMapRightHand().get(Const.SENSOR_4).isEmpty()) {
-            RealmList<RealmInt> realmInts = new RealmList<>();
-            for (int i = 0; i < dataSens.getDataSensorMapRightHand().get(Const.SENSOR_4).size(); i++) {
-              RealmInt realmInt = realm.createObject(RealmInt.class);
-              realmInt.setValue(dataSens.getDataSensorMapRightHand().get(Const.SENSOR_4).get(i));
-              realmInts.add(realmInt);
-            }
-            rightHandDataSensor.setDataSens4(realmInts);
-          }
-          if (!dataSens.getDataSensorMapRightHand().get(Const.SENSOR_5).isEmpty()) {
-            RealmList<RealmInt> realmInts = new RealmList<>();
-            for (int i = 0; i < dataSens.getDataSensorMapRightHand().get(Const.SENSOR_5).size(); i++) {
-              RealmInt realmInt = realm.createObject(RealmInt.class);
-              realmInt.setValue(dataSens.getDataSensorMapRightHand().get(Const.SENSOR_5).get(i));
-              realmInts.add(realmInt);
-            }
-            rightHandDataSensor.setDataSens5(realmInts);
-          }
-          if (!dataSens.getDataSensorMapRightHand().get(Const.SENSOR_6).isEmpty()) {
-            RealmList<RealmInt> realmInts = new RealmList<>();
-            for (int i = 0; i < dataSens.getDataSensorMapRightHand().get(Const.SENSOR_6).size(); i++) {
-              RealmInt realmInt = realm.createObject(RealmInt.class);
-              realmInt.setValue(dataSens.getDataSensorMapRightHand().get(Const.SENSOR_6).get(i));
-              realmInts.add(realmInt);
-            }
-            rightHandDataSensor.setDataSens6(realmInts);
+        }
+         if(dataSens.getDataSensorMapRightHand().get(Const.SENSOR_4) != null){
+           if (!dataSens.getDataSensorMapRightHand().get(Const.SENSOR_4).isEmpty()) {
+             RealmList<RealmInt> realmInts = new RealmList<>();
+             for (int i = 0; i < dataSens.getDataSensorMapRightHand().get(Const.SENSOR_4).size(); i++) {
+               RealmInt realmInt = realm.createObject(RealmInt.class);
+               realmInt.setValue(dataSens.getDataSensorMapRightHand().get(Const.SENSOR_4).get(i));
+               realmInts.add(realmInt);
+             }
+             rightHandDataSensor.setDataSens4(realmInts);
+           }
+         }
+         if(dataSens.getDataSensorMapRightHand().get(Const.SENSOR_5) != null){
+           if (!dataSens.getDataSensorMapRightHand().get(Const.SENSOR_5).isEmpty()) {
+             RealmList<RealmInt> realmInts = new RealmList<>();
+             for (int i = 0; i < dataSens.getDataSensorMapRightHand().get(Const.SENSOR_5).size(); i++) {
+               RealmInt realmInt = realm.createObject(RealmInt.class);
+               realmInt.setValue(dataSens.getDataSensorMapRightHand().get(Const.SENSOR_5).get(i));
+               realmInts.add(realmInt);
+             }
+             rightHandDataSensor.setDataSens5(realmInts);
+           }
+         }
+         if(dataSens.getDataSensorMapRightHand().get(Const.SENSOR_6) != null){
+           if (!dataSens.getDataSensorMapRightHand().get(Const.SENSOR_6).isEmpty()) {
+             RealmList<RealmInt> realmInts = new RealmList<>();
+             for (int i = 0; i < dataSens.getDataSensorMapRightHand().get(Const.SENSOR_6).size(); i++) {
+               RealmInt realmInt = realm.createObject(RealmInt.class);
+               realmInt.setValue(dataSens.getDataSensorMapRightHand().get(Const.SENSOR_6).get(i));
+               realmInts.add(realmInt);
+             }
+             rightHandDataSensor.setDataSens6(realmInts);
+           }
+         }
+         if(dataSens.getDataSensorMapRightHand().get(Const.SENSOR_7) != null){
+           if (!dataSens.getDataSensorMapRightHand().get(Const.SENSOR_7).isEmpty()) {
+             RealmList<RealmInt> realmInts = new RealmList<>();
+             for (int i = 0; i < dataSens.getDataSensorMapRightHand().get(Const.SENSOR_7).size(); i++) {
+               RealmInt realmInt = realm.createObject(RealmInt.class);
+               realmInt.setValue(dataSens.getDataSensorMapRightHand().get(Const.SENSOR_7).get(i));
+               realmInts.add(realmInt);
+             }
+             rightHandDataSensor.setDataSens7(realmInts);
+           }
+         }
+         if(dataSens.getDataSensorMapRightHand().get(Const.SENSOR_8) != null){
+           if (!dataSens.getDataSensorMapRightHand().get(Const.SENSOR_8).isEmpty()) {
+             RealmList<RealmInt> realmInts = new RealmList<>();
+             for (int i = 0; i < dataSens.getDataSensorMapRightHand().get(Const.SENSOR_8).size(); i++) {
+               RealmInt realmInt = realm.createObject(RealmInt.class);
+               realmInt.setValue(dataSens.getDataSensorMapRightHand().get(Const.SENSOR_8).get(i));
+               realmInts.add(realmInt);
+             }
+             rightHandDataSensor.setDataSens8(realmInts);
+           }
+         }
+         }
 
-          }
-          if (!dataSens.getDataSensorMapRightHand().get(Const.SENSOR_7).isEmpty()) {
+
+      if(!dataSens.getDataSensorMapLeftHand().isEmpty() && dataSens.getDataSensorMapLeftHand() != null){
+        if(dataSens.getDataSensorMapLeftHand().get(Const.SENSOR_1) != null){
+          if (!dataSens.getDataSensorMapLeftHand().get(Const.SENSOR_1).isEmpty()) {
             RealmList<RealmInt> realmInts = new RealmList<>();
-            for (int i = 0; i < dataSens.getDataSensorMapRightHand().get(Const.SENSOR_7).size(); i++) {
+            for (int i = 0; i < dataSens.getDataSensorMapLeftHand().get(Const.SENSOR_1).size(); i++) {
               RealmInt realmInt = realm.createObject(RealmInt.class);
-              realmInt.setValue(dataSens.getDataSensorMapRightHand().get(Const.SENSOR_7).get(i));
+              realmInt.setValue(dataSens.getDataSensorMapLeftHand().get(Const.SENSOR_1).get(i));
               realmInts.add(realmInt);
             }
-            rightHandDataSensor.setDataSens7(realmInts);
+            leftHandDataSensor.setDataSens1(realmInts);
           }
-          if (!dataSens.getDataSensorMapRightHand().get(Const.SENSOR_8).isEmpty()) {
+        }
+        if(dataSens.getDataSensorMapLeftHand().get(Const.SENSOR_2) != null){
+          if (!dataSens.getDataSensorMapLeftHand().get(Const.SENSOR_2).isEmpty()) {
             RealmList<RealmInt> realmInts = new RealmList<>();
-            for (int i = 0; i < dataSens.getDataSensorMapRightHand().get(Const.SENSOR_8).size(); i++) {
+            for (int i = 0; i < dataSens.getDataSensorMapLeftHand().get(Const.SENSOR_2).size(); i++) {
               RealmInt realmInt = realm.createObject(RealmInt.class);
-              realmInt.setValue(dataSens.getDataSensorMapRightHand().get(Const.SENSOR_8).get(i));
+              realmInt.setValue(dataSens.getDataSensorMapLeftHand().get(Const.SENSOR_2).get(i));
               realmInts.add(realmInt);
             }
-            rightHandDataSensor.setDataSens8(realmInts);
+            leftHandDataSensor.setDataSens2(realmInts);
           }
-      }
-
-      if(!dataSens.getDataSensorMapLeftHand().isEmpty()){
-        if (!dataSens.getDataSensorMapLeftHand().get(Const.SENSOR_1).isEmpty()) {
-          RealmList<RealmInt> realmInts = new RealmList<>();
-          for (int i = 0; i < dataSens.getDataSensorMapLeftHand().get(Const.SENSOR_1).size(); i++) {
-            RealmInt realmInt = realm.createObject(RealmInt.class);
-            realmInt.setValue(dataSens.getDataSensorMapLeftHand().get(Const.SENSOR_1).get(i));
-            realmInts.add(realmInt);
+        }
+        if(dataSens.getDataSensorMapLeftHand().get(Const.SENSOR_3) != null){
+          if (!dataSens.getDataSensorMapLeftHand().get(Const.SENSOR_3).isEmpty()) {
+            RealmList<RealmInt> realmInts = new RealmList<>();
+            for (int i = 0; i < dataSens.getDataSensorMapLeftHand().get(Const.SENSOR_3).size(); i++) {
+              RealmInt realmInt = realm.createObject(RealmInt.class);
+              realmInt.setValue(dataSens.getDataSensorMapLeftHand().get(Const.SENSOR_3).get(i));
+              realmInts.add(realmInt);
+            }
+            leftHandDataSensor.setDataSens3(realmInts);
           }
-          leftHandDataSensor.setDataSens1(realmInts);
+        }
+        if(dataSens.getDataSensorMapLeftHand().get(Const.SENSOR_4) != null){
+          if (!dataSens.getDataSensorMapLeftHand().get(Const.SENSOR_4).isEmpty()) {
+            RealmList<RealmInt> realmInts = new RealmList<>();
+            for (int i = 0; i < dataSens.getDataSensorMapLeftHand().get(Const.SENSOR_4).size(); i++) {
+              RealmInt realmInt = realm.createObject(RealmInt.class);
+              realmInt.setValue(dataSens.getDataSensorMapLeftHand().get(Const.SENSOR_4).get(i));
+              realmInts.add(realmInt);
+            }
+            leftHandDataSensor.setDataSens4(realmInts);
+          }
+        }
+        if(dataSens.getDataSensorMapLeftHand().get(Const.SENSOR_5) != null){
+          if (!dataSens.getDataSensorMapLeftHand().get(Const.SENSOR_5).isEmpty()) {
+            RealmList<RealmInt> realmInts = new RealmList<>();
+            for (int i = 0; i < dataSens.getDataSensorMapLeftHand().get(Const.SENSOR_5).size(); i++) {
+              RealmInt realmInt = realm.createObject(RealmInt.class);
+              realmInt.setValue(dataSens.getDataSensorMapLeftHand().get(Const.SENSOR_5).get(i));
+              realmInts.add(realmInt);
+            }
+            leftHandDataSensor.setDataSens5(realmInts);
+          }
+        }
+        if(dataSens.getDataSensorMapLeftHand().get(Const.SENSOR_6) != null){
+          if (!dataSens.getDataSensorMapLeftHand().get(Const.SENSOR_6).isEmpty()) {
+            RealmList<RealmInt> realmInts = new RealmList<>();
+            for (int i = 0; i < dataSens.getDataSensorMapLeftHand().get(Const.SENSOR_6).size(); i++) {
+              RealmInt realmInt = realm.createObject(RealmInt.class);
+              realmInt.setValue(dataSens.getDataSensorMapLeftHand().get(Const.SENSOR_6).get(i));
+              realmInts.add(realmInt);
+            }
+            leftHandDataSensor.setDataSens6(realmInts);
+          }
         }
 
-        if (!dataSens.getDataSensorMapLeftHand().get(Const.SENSOR_2).isEmpty()) {
-          RealmList<RealmInt> realmInts = new RealmList<>();
-          for (int i = 0; i < dataSens.getDataSensorMapLeftHand().get(Const.SENSOR_2).size(); i++) {
-            RealmInt realmInt = realm.createObject(RealmInt.class);
-            realmInt.setValue(dataSens.getDataSensorMapLeftHand().get(Const.SENSOR_2).get(i));
-            realmInts.add(realmInt);
+        if(dataSens.getDataSensorMapLeftHand().get(Const.SENSOR_7) != null){
+          if (!dataSens.getDataSensorMapLeftHand().get(Const.SENSOR_7).isEmpty()) {
+            RealmList<RealmInt> realmInts = new RealmList<>();
+            for (int i = 0; i < dataSens.getDataSensorMapLeftHand().get(Const.SENSOR_7).size(); i++) {
+              RealmInt realmInt = realm.createObject(RealmInt.class);
+              realmInt.setValue(dataSens.getDataSensorMapLeftHand().get(Const.SENSOR_7).get(i));
+              realmInts.add(realmInt);
+            }
+            leftHandDataSensor.setDataSens7(realmInts);
           }
-          leftHandDataSensor.setDataSens2(realmInts);
         }
-        if (!dataSens.getDataSensorMapLeftHand().get(Const.SENSOR_3).isEmpty()) {
-          RealmList<RealmInt> realmInts = new RealmList<>();
-          for (int i = 0; i < dataSens.getDataSensorMapLeftHand().get(Const.SENSOR_3).size(); i++) {
-            RealmInt realmInt = realm.createObject(RealmInt.class);
-            realmInt.setValue(dataSens.getDataSensorMapLeftHand().get(Const.SENSOR_3).get(i));
-            realmInts.add(realmInt);
+        if(dataSens.getDataSensorMapLeftHand().get(Const.SENSOR_8) != null){
+          if (!dataSens.getDataSensorMapLeftHand().get(Const.SENSOR_8).isEmpty() ) {
+            RealmList<RealmInt> realmInts = new RealmList<>();
+            for (int i = 0; i < dataSens.getDataSensorMapLeftHand().get(Const.SENSOR_8).size(); i++) {
+              RealmInt realmInt = realm.createObject(RealmInt.class);
+              realmInt.setValue(dataSens.getDataSensorMapLeftHand().get(Const.SENSOR_8).get(i));
+              realmInts.add(realmInt);
+            }
+            leftHandDataSensor.setDataSens8(realmInts);
           }
-          leftHandDataSensor.setDataSens3(realmInts);
-        }
-        if (!dataSens.getDataSensorMapLeftHand().get(Const.SENSOR_4).isEmpty()) {
-          RealmList<RealmInt> realmInts = new RealmList<>();
-          for (int i = 0; i < dataSens.getDataSensorMapLeftHand().get(Const.SENSOR_4).size(); i++) {
-            RealmInt realmInt = realm.createObject(RealmInt.class);
-            realmInt.setValue(dataSens.getDataSensorMapLeftHand().get(Const.SENSOR_4).get(i));
-            realmInts.add(realmInt);
-          }
-          leftHandDataSensor.setDataSens4(realmInts);
-        }
-        if (!dataSens.getDataSensorMapLeftHand().get(Const.SENSOR_5).isEmpty()) {
-          RealmList<RealmInt> realmInts = new RealmList<>();
-          for (int i = 0; i < dataSens.getDataSensorMapLeftHand().get(Const.SENSOR_5).size(); i++) {
-            RealmInt realmInt = realm.createObject(RealmInt.class);
-            realmInt.setValue(dataSens.getDataSensorMapLeftHand().get(Const.SENSOR_5).get(i));
-            realmInts.add(realmInt);
-          }
-          leftHandDataSensor.setDataSens5(realmInts);
-        }
-        if (!dataSens.getDataSensorMapLeftHand().get(Const.SENSOR_6).isEmpty()) {
-          RealmList<RealmInt> realmInts = new RealmList<>();
-          for (int i = 0; i < dataSens.getDataSensorMapLeftHand().get(Const.SENSOR_6).size(); i++) {
-            RealmInt realmInt = realm.createObject(RealmInt.class);
-            realmInt.setValue(dataSens.getDataSensorMapLeftHand().get(Const.SENSOR_6).get(i));
-            realmInts.add(realmInt);
-          }
-          leftHandDataSensor.setDataSens6(realmInts);
-        }
-        if (!dataSens.getDataSensorMapLeftHand().get(Const.SENSOR_7).isEmpty()) {
-          RealmList<RealmInt> realmInts = new RealmList<>();
-          for (int i = 0; i < dataSens.getDataSensorMapLeftHand().get(Const.SENSOR_7).size(); i++) {
-            RealmInt realmInt = realm.createObject(RealmInt.class);
-            realmInt.setValue(dataSens.getDataSensorMapLeftHand().get(Const.SENSOR_7).get(i));
-            realmInts.add(realmInt);
-          }
-          leftHandDataSensor.setDataSens7(realmInts);
-        }
-        if (!dataSens.getDataSensorMapLeftHand().get(Const.SENSOR_8).isEmpty()) {
-          RealmList<RealmInt> realmInts = new RealmList<>();
-          for (int i = 0; i < dataSens.getDataSensorMapLeftHand().get(Const.SENSOR_8).size(); i++) {
-            RealmInt realmInt = realm.createObject(RealmInt.class);
-            realmInt.setValue(dataSens.getDataSensorMapLeftHand().get(Const.SENSOR_8).get(i));
-            realmInts.add(realmInt);
-          }
-          leftHandDataSensor.setDataSens8(realmInts);
         }
       }
 
@@ -237,7 +263,7 @@ public class RealmController {
         rightHandDataSensor.setDataSens3(sens3);
 
         RealmInt sensorInt4 = realm.createObject(RealmInt.class);
-        sensorInt4.setValue(dataSens.getRightHandDataSensor().get(3));
+        sensorInt4.setValue(Objects.requireNonNull(dataSens.getRightHandDataSensor().get(3)));
         RealmList<RealmInt> sens4 = new RealmList<>();
         sens4.add(sensorInt4);
         rightHandDataSensor.setDataSens4(sens4);
@@ -324,11 +350,6 @@ public class RealmController {
     });
   }
 
-  public Boolean updateLeftHandDataById(long id){
-
-
-    return true;
-  }
 
   public RealmList<Integer> createRealmList(ArrayList<Integer> sens) {
 

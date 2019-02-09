@@ -35,7 +35,8 @@ import com.murik.enose.model.dto.DataByMaxParcelable;
 import com.murik.enose.model.dto.SensorDataFullParcelable;
 import com.murik.enose.presentation.presenter.start.StartPresenter;
 import com.murik.enose.presentation.view.start.StartView;
-import com.murik.enose.service.BluetoothService;
+import com.murik.enose.service.Impl.BluetoothImplService;
+import com.murik.enose.ui.activity.ProgressDisplay;
 import com.murik.enose.ui.fragment.LiveBluetoothChart.LiveBluetoothChartFragment;
 import com.murik.enose.ui.fragment.bluetooth.BluetoothConnectionFragment;
 import com.murik.enose.ui.fragment.dimension.BluetoothDimensionFragment;
@@ -47,7 +48,8 @@ import com.murik.enose.ui.fragment.resultRadarChart.RadarTabContentFragment;
 import ru.terrakok.cicerone.Navigator;
 import ru.terrakok.cicerone.android.SupportFragmentNavigator;
 
-public class StartActivity extends MvpAppCompatActivity implements StartView, OnNavigationItemSelectedListener, ProgressDisplay{
+public class StartActivity extends MvpAppCompatActivity implements StartView, OnNavigationItemSelectedListener,
+    ProgressDisplay {
     public static final String TAG = "StartActivity";
 
   @InjectPresenter
@@ -279,7 +281,7 @@ public class StartActivity extends MvpAppCompatActivity implements StartView, On
   protected void onDestroy() {
     super.onDestroy();
     App.INSTANCE.getNavigatorHolder().removeNavigator();
-    Intent intent = new Intent(this,BluetoothService.class);
+    Intent intent = new Intent(this, BluetoothImplService.class);
     stopService(intent);
 
   }
