@@ -29,7 +29,7 @@ import com.murik.enose.Const;
 import com.murik.enose.R;
 import com.murik.enose.presentation.presenter.dimension.BluetoothDimensionPresenter;
 import com.murik.enose.presentation.view.dimension.BluetoothDimensionView;
-import com.murik.enose.service.BluetoothService;
+import com.murik.enose.service.Impl.BluetoothImplService;
 import com.murik.enose.ui.dialog.StartDimensionDialogFragment;
 import java.util.List;
 
@@ -57,8 +57,8 @@ public class BluetoothDimensionFragment extends MvpAppCompatFragment implements 
     public void onReceive(Context context, Intent intent) {
       String action = intent.getAction();
 
-      if (BluetoothService.ACTION_CHARACTERISTIC_CHANGE.equals(action)) {
-        String str = intent.getStringExtra(BluetoothService.EXTRA_DATA);
+      if (BluetoothImplService.ACTION_CHARACTERISTIC_CHANGE.equals(action)) {
+        String str = intent.getStringExtra(BluetoothImplService.EXTRA_DATA);
         for (int i = 0; i < str.length(); i = i + 8) {
           Log.d("MyLog", "sens_count =  " + Integer.decode(str.substring(i, i + 1)) + " value =  "
               + Integer.parseInt(str.substring(i + 1, i + 8), 16));
@@ -123,7 +123,7 @@ public class BluetoothDimensionFragment extends MvpAppCompatFragment implements 
     super.onResume();
     //getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
     IntentFilter filter = new IntentFilter();
-    filter.addAction(BluetoothService.ACTION_CHARACTERISTIC_CHANGE);
+    filter.addAction(BluetoothImplService.ACTION_CHARACTERISTIC_CHANGE);
     getActivity().registerReceiver(mBroadcastReceiver, filter);
 
   }

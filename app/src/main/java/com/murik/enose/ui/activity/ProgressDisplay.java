@@ -1,4 +1,4 @@
-package com.murik.enose.ui.activity.start;
+package com.murik.enose.ui.activity;
 
 public interface ProgressDisplay {
   void showProgress();

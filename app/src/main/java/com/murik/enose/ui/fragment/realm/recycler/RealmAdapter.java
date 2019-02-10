@@ -6,7 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import com.murik.enose.R;
-import com.murik.enose.model.dto.DataSensorRealm;
+import com.murik.enose.model.Entity.DataSensorRealm;
 import com.murik.enose.presentation.presenter.realm.RealmPresenter;
 import io.realm.OrderedRealmCollection;
 import io.realm.Realm;

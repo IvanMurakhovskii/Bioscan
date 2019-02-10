@@ -38,9 +38,9 @@ public  class RadarTabContentFragment extends MvpAppCompatFragment {
   private LinearLayout ll_k_4;
   private LinearLayout ll_k_5;
 
-  private float k3 = 0;
-  private float k4 = 0;
-  private float k5 = 0;
+  private float left_k3 = 0;
+  private float left_k4 = 0;
+  private float left_k5 = 0;
 
 
   public static Fragment newInstance(SensorDataFullParcelable resultBySens) {
@@ -78,9 +78,9 @@ public  class RadarTabContentFragment extends MvpAppCompatFragment {
     ll_k_5 = view.findViewById(R.id.ll_k_5);
 
     calculate_k();
-    tv_k_3.setText(String.valueOf( new BigDecimal(k3).setScale(1, RoundingMode.DOWN).floatValue()));
-    tv_k_4.setText(String.valueOf( new BigDecimal(k4).setScale(1, RoundingMode.DOWN).floatValue()));
-    tv_k_5.setText(String.valueOf( new BigDecimal(k5).setScale(1, RoundingMode.DOWN).floatValue()));
+    tv_k_3.setText(String.valueOf( new BigDecimal(left_k3).setScale(1, RoundingMode.DOWN).floatValue()));
+    tv_k_4.setText(String.valueOf( new BigDecimal(left_k4).setScale(1, RoundingMode.DOWN).floatValue()));
+    tv_k_5.setText(String.valueOf( new BigDecimal(left_k5).setScale(1, RoundingMode.DOWN).floatValue()));
 
     btnResult = view.findViewById(R.id.btnResult_by_max);
 
@@ -96,37 +96,72 @@ public  class RadarTabContentFragment extends MvpAppCompatFragment {
 
   }
 
-  public void calculate_k() {
-    if (!inputDataParcelable.getDataSensorMapLeftHand().isEmpty()) {
-      if(inputDataParcelable.getDataSensorMapLeftHand().get(Const.SENSOR_3).size() > 60){
-        k3 = (float)inputDataParcelable.getDataSensorMapLeftHand().get(Const.SENSOR_3).get(60)
+  public float leftHand_k3() {
+    if (inputDataParcelable.getDataSensorMapLeftHand().get(Const.SENSOR_3) != null) {
+      if (inputDataParcelable.getDataSensorMapLeftHand().get(Const.SENSOR_3).size() > 60) {
+        return (float) inputDataParcelable.getDataSensorMapLeftHand().get(Const.SENSOR_3).get(60)
             / inputDataParcelable.getDataSensorMapLeftHand().get(Const.SENSOR_3).get(20);
       }
-      if (inputDataParcelable.getDataSensorMapLeftHand().get(Const.SENSOR_4).size() > 60){
-        k4 = (float)inputDataParcelable.getDataSensorMapLeftHand().get(Const.SENSOR_4).get(60)
-            / inputDataParcelable.getDataSensorMapLeftHand().get(Const.SENSOR_4).get(20);
-      }
-      if(inputDataParcelable.getDataSensorMapLeftHand().get(Const.SENSOR_5).size() > 60){
-        k5 = (float)inputDataParcelable.getDataSensorMapLeftHand().get(Const.SENSOR_5).get(60)
-             /inputDataParcelable.getDataSensorMapLeftHand().get(Const.SENSOR_5).get(30);
-      }
+    }
+    return 0;
+  }
 
-    } else if (!inputDataParcelable.getDataSensorMapRightHand().isEmpty()) {
-      if(inputDataParcelable.getDataSensorMapRightHand().get(Const.SENSOR_3).size() > 60){
-        k3 = (float)inputDataParcelable.getDataSensorMapRightHand().get(Const.SENSOR_3).get(60)
+  public float rightHand_k3() {
+    if (inputDataParcelable.getDataSensorMapRightHand().get(Const.SENSOR_3) != null) {
+      if (inputDataParcelable.getDataSensorMapRightHand().get(Const.SENSOR_3).size() > 60) {
+        return (float) inputDataParcelable.getDataSensorMapRightHand().get(Const.SENSOR_3).get(60)
             / inputDataParcelable.getDataSensorMapRightHand().get(Const.SENSOR_3).get(20);
       }
-      if(inputDataParcelable.getDataSensorMapRightHand().get(Const.SENSOR_4).size() > 60){
-        k4 = (float)inputDataParcelable.getDataSensorMapRightHand().get(Const.SENSOR_4).get(60)
-            / inputDataParcelable.getDataSensorMapRightHand().get(Const.SENSOR_4).get(20);
-      }
-      if(inputDataParcelable.getDataSensorMapRightHand().get(Const.SENSOR_7).size() > 60){
-        k5 = (float)inputDataParcelable.getDataSensorMapRightHand().get(Const.SENSOR_7).get(60)
-            / inputDataParcelable.getDataSensorMapRightHand().get(Const.SENSOR_7).get(30);
+    }
+    return 0;
+  }
+
+  public float leftHand_k4() {
+    if(inputDataParcelable.getDataSensorMapLeftHand().get(Const.SENSOR_4) != null){
+      if (inputDataParcelable.getDataSensorMapLeftHand().get(Const.SENSOR_4).size() > 60){
+        return  (float)inputDataParcelable.getDataSensorMapLeftHand().get(Const.SENSOR_4).get(60)
+            / inputDataParcelable.getDataSensorMapLeftHand().get(Const.SENSOR_4).get(20);
       }
     }
+    return 0;
+  }
 
-    if(k4 < 2.0){
+  public float rightHand_k4() {
+    if(inputDataParcelable.getDataSensorMapRightHand().get(Const.SENSOR_4) != null){
+      if (inputDataParcelable.getDataSensorMapRightHand().get(Const.SENSOR_4).size() > 60){
+        return  (float)inputDataParcelable.getDataSensorMapRightHand().get(Const.SENSOR_4).get(60)
+            / inputDataParcelable.getDataSensorMapRightHand().get(Const.SENSOR_4).get(20);
+      }
+    }
+    return 0;
+  }
+
+  public float leftHand_k5() {
+    if(inputDataParcelable.getDataSensorMapLeftHand().get(Const.SENSOR_5) != null){
+      if(inputDataParcelable.getDataSensorMapLeftHand().get(Const.SENSOR_5).size() > 60){
+        return (float)inputDataParcelable.getDataSensorMapLeftHand().get(Const.SENSOR_5).get(60)
+            /inputDataParcelable.getDataSensorMapLeftHand().get(Const.SENSOR_5).get(30);
+      }
+    }
+    return 0;
+  }
+
+  public float rightHand_k5() {
+    if(inputDataParcelable.getDataSensorMapRightHand().get(Const.SENSOR_5) != null){
+      if(inputDataParcelable.getDataSensorMapRightHand().get(Const.SENSOR_5).size() > 60){
+        return (float)inputDataParcelable.getDataSensorMapRightHand().get(Const.SENSOR_5).get(60)
+            /inputDataParcelable.getDataSensorMapRightHand().get(Const.SENSOR_5).get(30);
+      }
+    }
+    return 0;
+  }
+
+  public void calculate_k() {
+
+    left_k3 = leftHand_k3();
+    left_k4 = leftHand_k4();
+    left_k5 = leftHand_k5();
+    if(left_k4 < 2.0){
       ll_k_4.setBackgroundColor(Color.RED);
     }
   }
@@ -140,14 +175,44 @@ public  class RadarTabContentFragment extends MvpAppCompatFragment {
 
     ArrayList<Integer> leftHand = new ArrayList<>();
     if(!inputDataParcelable.getDataSensorMapLeftHand().isEmpty()){
-      leftHand.add(max(inputDataParcelable.getDataSensorMapLeftHand().get(Const.SENSOR_1)));
-      leftHand.add(max(inputDataParcelable.getDataSensorMapLeftHand().get(Const.SENSOR_2)));
-      leftHand.add(max(inputDataParcelable.getDataSensorMapLeftHand().get(Const.SENSOR_3)));
-      leftHand.add(max(inputDataParcelable.getDataSensorMapLeftHand().get(Const.SENSOR_4)));
-      leftHand.add(max(inputDataParcelable.getDataSensorMapLeftHand().get(Const.SENSOR_5)));
-      leftHand.add(max(inputDataParcelable.getDataSensorMapLeftHand().get(Const.SENSOR_6)));
-      leftHand.add(max(inputDataParcelable.getDataSensorMapLeftHand().get(Const.SENSOR_7)));
-      leftHand.add(max(inputDataParcelable.getDataSensorMapLeftHand().get(Const.SENSOR_8)));
+      if(inputDataParcelable.getDataSensorMapLeftHand().get(Const.SENSOR_1) != null){
+        leftHand.add(max(inputDataParcelable.getDataSensorMapLeftHand().get(Const.SENSOR_1)));
+      } else {
+        leftHand.add(0);
+      }
+      if(inputDataParcelable.getDataSensorMapLeftHand().get(Const.SENSOR_2) != null){
+        leftHand.add(max(inputDataParcelable.getDataSensorMapLeftHand().get(Const.SENSOR_2)));
+      }else {
+        leftHand.add(0);
+      }
+      if(inputDataParcelable.getDataSensorMapLeftHand().get(Const.SENSOR_3) != null){
+        leftHand.add(max(inputDataParcelable.getDataSensorMapLeftHand().get(Const.SENSOR_3)));
+      }
+      if(inputDataParcelable.getDataSensorMapLeftHand().get(Const.SENSOR_4) != null){
+        leftHand.add(max(inputDataParcelable.getDataSensorMapLeftHand().get(Const.SENSOR_4)));
+      }else {
+        leftHand.add(0);
+      }
+      if(inputDataParcelable.getDataSensorMapLeftHand().get(Const.SENSOR_5) != null){
+        leftHand.add(max(inputDataParcelable.getDataSensorMapLeftHand().get(Const.SENSOR_5)));
+      }else {
+        leftHand.add(0);
+      }
+      if(inputDataParcelable.getDataSensorMapLeftHand().get(Const.SENSOR_6) != null){
+        leftHand.add(max(inputDataParcelable.getDataSensorMapLeftHand().get(Const.SENSOR_6)));
+      }else {
+        leftHand.add(0);
+      }
+      if(inputDataParcelable.getDataSensorMapLeftHand().get(Const.SENSOR_7) != null){
+        leftHand.add(max(inputDataParcelable.getDataSensorMapLeftHand().get(Const.SENSOR_7)));
+      }else {
+        leftHand.add(0);
+      }
+      if(inputDataParcelable.getDataSensorMapLeftHand().get(Const.SENSOR_8) != null){
+        leftHand.add(max(inputDataParcelable.getDataSensorMapLeftHand().get(Const.SENSOR_8)));
+      }else {
+        leftHand.add(0);
+      }
     } else {
       leftHand.add(0);
       leftHand.add(0);
@@ -162,14 +227,46 @@ public  class RadarTabContentFragment extends MvpAppCompatFragment {
 
     ArrayList<Integer> rightHand = new ArrayList<>();
     if(!inputDataParcelable.getDataSensorMapRightHand().isEmpty()){
-      rightHand.add(max(inputDataParcelable.getDataSensorMapRightHand().get(Const.SENSOR_1)));
-      rightHand.add(max(inputDataParcelable.getDataSensorMapRightHand().get(Const.SENSOR_2)));
-      rightHand.add(max(inputDataParcelable.getDataSensorMapRightHand().get(Const.SENSOR_3)));
-      rightHand.add(max(inputDataParcelable.getDataSensorMapRightHand().get(Const.SENSOR_4)));
-      rightHand.add(max(inputDataParcelable.getDataSensorMapRightHand().get(Const.SENSOR_5)));
-      rightHand.add(max(inputDataParcelable.getDataSensorMapRightHand().get(Const.SENSOR_6)));
-      rightHand.add(max(inputDataParcelable.getDataSensorMapRightHand().get(Const.SENSOR_7)));
-      rightHand.add(max(inputDataParcelable.getDataSensorMapRightHand().get(Const.SENSOR_8)));
+      if(inputDataParcelable.getDataSensorMapRightHand().get(Const.SENSOR_1) != null){
+        rightHand.add(max(inputDataParcelable.getDataSensorMapRightHand().get(Const.SENSOR_1)));
+      }else {
+        leftHand.add(0);
+      }
+      if(inputDataParcelable.getDataSensorMapRightHand().get(Const.SENSOR_2) != null){
+        rightHand.add(max(inputDataParcelable.getDataSensorMapRightHand().get(Const.SENSOR_2)));
+      }else {
+        leftHand.add(0);
+      }
+      if(inputDataParcelable.getDataSensorMapRightHand().get(Const.SENSOR_3) != null){
+        rightHand.add(max(inputDataParcelable.getDataSensorMapRightHand().get(Const.SENSOR_3)));
+      }else {
+        leftHand.add(0);
+      }
+      if(inputDataParcelable.getDataSensorMapRightHand().get(Const.SENSOR_4) != null){
+        rightHand.add(max(inputDataParcelable.getDataSensorMapRightHand().get(Const.SENSOR_4)));
+      }else {
+        leftHand.add(0);
+      }
+      if(inputDataParcelable.getDataSensorMapRightHand().get(Const.SENSOR_5) != null){
+        rightHand.add(max(inputDataParcelable.getDataSensorMapRightHand().get(Const.SENSOR_5)));
+      }else {
+        leftHand.add(0);
+      }
+      if(inputDataParcelable.getDataSensorMapRightHand().get(Const.SENSOR_6) != null){
+        rightHand.add(max(inputDataParcelable.getDataSensorMapRightHand().get(Const.SENSOR_6)));
+      }else {
+        leftHand.add(0);
+      }
+      if(inputDataParcelable.getDataSensorMapRightHand().get(Const.SENSOR_7) != null){
+        rightHand.add(max(inputDataParcelable.getDataSensorMapRightHand().get(Const.SENSOR_7)));
+      }else {
+        leftHand.add(0);
+      }
+      if(inputDataParcelable.getDataSensorMapRightHand().get(Const.SENSOR_8) != null){
+        rightHand.add(max(inputDataParcelable.getDataSensorMapRightHand().get(Const.SENSOR_8)));
+      }else {
+        leftHand.add(0);
+      }
     }else {
       rightHand.add(0);
       rightHand.add(0);

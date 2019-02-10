@@ -30,8 +30,8 @@ import com.murik.enose.R;
 import com.murik.enose.Screens;
 import com.murik.enose.presentation.presenter.bluetooth.BluetoothConnectionPresenter;
 import com.murik.enose.presentation.view.bluetooth.BluetoothConnectionView;
-import com.murik.enose.service.BluetoothService;
-import com.murik.enose.ui.activity.start.ProgressDisplay;
+import com.murik.enose.service.Impl.BluetoothImplService;
+import com.murik.enose.ui.activity.ProgressDisplay;
 import com.murik.enose.ui.fragment.bluetooth.recycler.BluetoothRecyclerAdapter;
 import java.util.Objects;
 
@@ -50,7 +50,7 @@ public class BluetoothConnectionFragment extends MvpAppCompatFragment implements
   private static final int STATE_CONNECTING = 1;
   private static final int STATE_CONNECTED = 2;
 
-  private int REQUEST_ENABLE_BT = 0;
+  private int REQUEST_ENABLE_BT = 100;
 
   private FloatingActionButton btnSearch;
   private TextView tvInfo;
@@ -76,7 +76,7 @@ public class BluetoothConnectionFragment extends MvpAppCompatFragment implements
 
     filter.addAction(BluetoothAdapter.ACTION_DISCOVERY_STARTED);
     filter.addAction(BluetoothDevice.ACTION_FOUND);
-    filter.addAction(BluetoothService.ACTION_GATT_CONNECTED);
+    filter.addAction(BluetoothImplService.ACTION_GATT_CONNECTED);
     filter.addAction(BluetoothAdapter.ACTION_DISCOVERY_FINISHED);
     getActivity().registerReceiver(mReceiver, filter);
   }
@@ -138,6 +138,11 @@ public class BluetoothConnectionFragment extends MvpAppCompatFragment implements
 
   }
 
+  @Override
+  public void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+  }
+
   public void searchBluetoothDevices(){
     setTextViewInfo("Поиск...");
     requestAppPermissions();
@@ -163,10 +168,10 @@ public class BluetoothConnectionFragment extends MvpAppCompatFragment implements
         BluetoothDevice device =  intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);
         mBluetoothConnectionPresenter.findingDevice(device);
         Log.d("MyLog", "Name: " + device.getName() + "  Address: " + device.getAddress());
-      } else if(action.equals(BluetoothService.ACTION_GATT_CONNECTED)){
+      } else if(action.equals(BluetoothImplService.ACTION_GATT_CONNECTED)){
           App.INSTANCE.getRouter().replaceScreen(Screens.BLUETOOTH_LIVE_CHART_FRAGMENT);
           showProgress();
-      } else if(BluetoothService.ACTION_GATT_DISCONNECTED.equals(action)){
+      } else if(BluetoothImplService.ACTION_GATT_DISCONNECTED.equals(action)){
         Toast.makeText(getContext(), "Disconnct from GATT", Toast.LENGTH_SHORT).show();
         hideProgress();
       }
@@ -175,8 +180,8 @@ public class BluetoothConnectionFragment extends MvpAppCompatFragment implements
 
 
   public void connect(BluetoothDevice device){
-    Intent intent = new Intent(getActivity(), BluetoothService.class);
-    intent.setAction(BluetoothService.ACTION_SEND_DEVICE);
+    Intent intent = new Intent(getActivity(), BluetoothImplService.class);
+    intent.setAction(BluetoothImplService.ACTION_SEND_DEVICE);
     intent.putExtra("DEVICE", device);
     Objects.requireNonNull(getActivity()).startService(intent);
 
