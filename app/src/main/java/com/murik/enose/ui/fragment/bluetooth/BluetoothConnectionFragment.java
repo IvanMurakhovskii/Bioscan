@@ -50,7 +50,7 @@ public class BluetoothConnectionFragment extends MvpAppCompatFragment implements
   private static final int STATE_CONNECTING = 1;
   private static final int STATE_CONNECTED = 2;
 
-  private int REQUEST_ENABLE_BT = 0;
+  private int REQUEST_ENABLE_BT = 100;
 
   private FloatingActionButton btnSearch;
   private TextView tvInfo;
@@ -135,6 +135,11 @@ public class BluetoothConnectionFragment extends MvpAppCompatFragment implements
     if (bluetooth.isEnabled()){
       searchBluetoothDevices();
     }
+
+  }
+
+  @Override
+  public void onActivityResult(int requestCode, int resultCode, Intent data) {
 
   }
 

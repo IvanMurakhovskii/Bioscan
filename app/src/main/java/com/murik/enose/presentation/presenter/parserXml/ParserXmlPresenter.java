@@ -1,9 +1,7 @@
  package com.murik.enose.presentation.presenter.parserXml;
 
 
- import android.os.Environment;
-import android.support.annotation.NonNull;
-import android.util.Log;
+ import android.support.annotation.NonNull;
 import android.view.View;
 import com.arellomobile.mvp.InjectViewState;
 import com.arellomobile.mvp.MvpPresenter;
@@ -14,10 +12,6 @@ import com.murik.enose.model.dto.SensorDataFullParcelable;
 import com.murik.enose.presentation.view.parserXML.ParserXmlView;
 import com.murik.enose.ui.fragment.parserXml.recycler.ParserXmlAdapter;
 import com.murik.enose.ui.fragment.parserXml.recycler.ParserXmlViewHolder;
-import io.reactivex.Observer;
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.disposables.Disposable;
-import io.reactivex.schedulers.Schedulers;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -47,21 +41,23 @@ public class ParserXmlPresenter extends MvpPresenter<ParserXmlView> {
    private String descriptions = "";
    private String key = "";
    private int initial = 0;
-   private File file = null;
+
+   private File fileLeftHand = null;
+   private File fileRightHand = null;
 
    @Override
    protected void onFirstViewAttach() {
      super.onFirstViewAttach();
-     searchFile();
+     //searchFile();
    }
 
    @Override
    public void attachView(ParserXmlView view) {
      super.attachView(view);
-     getViewState().initRecyclerView(adapter);
+//     getViewState().initRecyclerView(adapter);
      }
 
-public void searchFile(){
+/*public void searchFile(){
   getViewState().showProgress();
   getListFiles(Environment.getExternalStorageDirectory())
       .subscribeOn(Schedulers.io())
@@ -91,7 +87,7 @@ public void searchFile(){
           getViewState().hideProgress();
         }
       });
-}
+}*/
 
    public void OnBindViewHolder(@NonNull ParserXmlViewHolder parserXmlViewHolder, int i){
     parserXmlViewHolder.setTvFileName(arrayList.get(i));
@@ -101,39 +97,62 @@ public void searchFile(){
     return arrayList.size();
    }
 
-   public void onItemRecyclerClickListener(@NonNull ParserXmlViewHolder parserXmlViewHolder){
+  /* public void onItemRecyclerClickListener(@NonNull ParserXmlViewHolder parserXmlViewHolder){
      file = parserXmlViewHolder.getTvFile();
      getViewState().setVisibilitySaveButton(View.VISIBLE);
 
-   }
+   }*/
 
-    public void onSaveButtonClick(int gender, boolean isLeftHand, boolean isPractice) {
+    public void onSaveButtonClick(String descriptions, int gender, boolean isPractice) {
 
-     Map<String, ArrayList<Integer>> map = new HashMap<>();
+     Map<String, ArrayList<Integer>> mapLeftHand = new HashMap<>();
+     Map<String, ArrayList<Integer>> mapRightHand = new HashMap<>();
+     sensorDataFullParcelable.setDescriptions(descriptions);
      sensorDataFullParcelable.setGender(gender);
      sensorDataFullParcelable.setPractice(isPractice);
 
       try {
-        map = passeXML(file);
+        if(getFileLeftHand() != null){
+          mapLeftHand = passeXML(getFileLeftHand());
+        }
+        if(getFileRightHand() != null){
+          mapRightHand = passeXML(getFileRightHand());
+        }
       } catch (XmlPullParserException e) {
         e.printStackTrace();
       }
 
 
-      if(map != null){
-        if(isLeftHand){
-          sensorDataFullParcelable.setDataSensorMapLeftHand(map);
-        } else {
-          sensorDataFullParcelable.setDataSensorMapRightHand(map);
+      if(mapLeftHand != null){
+          sensorDataFullParcelable.setDataSensorMapLeftHand(mapLeftHand);
+        }
+      if(mapRightHand != null){
+          sensorDataFullParcelable.setDataSensorMapRightHand(mapRightHand);
         }
         RealmController controller = new RealmController();
         controller.addInfoFull(sensorDataFullParcelable);
         App.INSTANCE.getRouter().replaceScreen(Screens.REALM_FRAGMENT);
-      } else {
-        //todo error loading data
-      }
+
     }
 
+   public void setFileLeftHand(File fileLeftHand) {
+     this.fileLeftHand = fileLeftHand;
+     getViewState().setVisibilitySaveButton(View.VISIBLE);
+
+   }
+
+   public void setFileRightHand(File fileRightHand) {
+     this.fileRightHand = fileRightHand;
+     getViewState().setVisibilitySaveButton(View.VISIBLE);
+   }
+
+   public File getFileLeftHand() {
+     return fileLeftHand;
+   }
+
+   public File getFileRightHand() {
+     return fileRightHand;
+   }
 
    public  Map<String, ArrayList<Integer>> passeXML(File file) throws XmlPullParserException {
 
@@ -201,12 +220,10 @@ public void searchFile(){
      }
      sensprMap.put(key, sensor);
 
-     sensorDataFullParcelable.setDescriptions(descriptions);
+     //sensorDataFullParcelable.setDescriptions(descriptions);
 
      return sensprMap;
    }
-
-
 
    public io.reactivex.Observable<File> getListFiles(File parentDir) {
 
@@ -232,4 +249,6 @@ public void searchFile(){
        //emmiter.onNext(inFiles);
      });
    }
+
+
 }

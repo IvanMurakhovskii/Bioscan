@@ -28,4 +28,7 @@ public class Const {
   public static final int PAGE_HEALTH = 3;
   public static final int PAGE_BAD = 4;
 
+  public static final int SELECT_LEFT_FILE = 111;
+  public static final int SELECT_RIGHT_FILE = 112;
+
 }

@@ -34,11 +34,11 @@ public class ParserXmlAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
   @Override
   public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int i) {
 
-    if(holder instanceof ParserXmlViewHolder){
+   /* if(holder instanceof ParserXmlViewHolder){
       presenter.OnBindViewHolder((ParserXmlViewHolder) holder, i);
       holder.itemView
           .setOnClickListener(event -> presenter.onItemRecyclerClickListener((ParserXmlViewHolder) holder));
-    }
+    }*/
 
   }
 
