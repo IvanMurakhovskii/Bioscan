@@ -56,7 +56,6 @@ public class ResultRadarChartFragment extends MvpAppCompatFragment implements Re
       final Bundle savedInstanceState) {
       Bundle bundle = getArguments();
       if(bundle != null){
-        //sensorDataFullParcelable =  bundle.getParcelable(DATA);
         mPage = bundle.getInt(PAGE);
         mResultRadarChartPresenter.setData(bundle.getParcelable(DATA));
       }
@@ -75,12 +74,6 @@ public class ResultRadarChartFragment extends MvpAppCompatFragment implements Re
       String description, int color){
     List<IRadarDataSet> DATA_SET = new ArrayList<>();
 
-    //int defaultSquare = SquareChart(entries);
-    //int sensSquare = SquareChart(entries1);
-    //difference = (1 - ((float)defaultSquare/(float)sensSquare))*100;
-    //tvInfo.setText(String.valueOf(difference));
-    //setProgressBar
-
     ArrayList<String> lable = new ArrayList<>();
 
    lable.add("15");
@@ -88,18 +81,19 @@ public class ResultRadarChartFragment extends MvpAppCompatFragment implements Re
    lable.add("45");
 
    if(!entryLeftHand.isEmpty()){
-     RadarDataSet dataSet_leftHand = new RadarDataSet(entryLeftHand, "");
+     RadarDataSet dataSet_leftHand = new RadarDataSet(entryLeftHand, "Левая");
       dataSet_leftHand.setDrawFilled(true);
       dataSet_leftHand.setFillColor(color);
       dataSet_leftHand.setColor(Color.BLACK);
+     dataSet_leftHand.setHighlightCircleFillColor(Color.YELLOW);
       dataSet_leftHand.setValueTextSize(40);
       DATA_SET.add(dataSet_leftHand);
     }
     if(!entryRightHand.isEmpty()){
-      RadarDataSet dataSet_rightHand = new RadarDataSet(entryRightHand,"");
+      RadarDataSet dataSet_rightHand = new RadarDataSet(entryRightHand,"Правая");
       dataSet_rightHand.setDrawFilled(true);
       dataSet_rightHand.setFillColor(color);
-      dataSet_rightHand.setColor(Color.BLUE);
+      dataSet_rightHand.setColor(Color.RED);
       dataSet_rightHand.setValueTextSize(40);
       DATA_SET.add(dataSet_rightHand);
     }
@@ -119,16 +113,6 @@ public class ResultRadarChartFragment extends MvpAppCompatFragment implements Re
     YAxis y = radarChart.getYAxis();
     y.setTextSize(testChartSize);
 
-
-
-    //int count = (entryLeftHand.size()/entryLeftHand.size()) - 1 ;
-
-    /*int tmp = 0;
-    for(int i = 0; i < maskArr.length; i++){
-      lable.set(tmp, String.valueOf(maskArr[i]));
-      tmp+=count + 1;
-    }*/
-
     int count = 0;
     if(mPage == Const.PAGE_TOTAL){
 
@@ -143,18 +127,15 @@ public class ResultRadarChartFragment extends MvpAppCompatFragment implements Re
       count = (int) x.getAxisMaximum()/Const.ENDOKRIN.length- 1;
     }
 
-    //x.setLabelCount(count, true);
     x.setEnabled(false);
-    //x.setLabelCount(count);
-    //y.setGranularityEnabled(true);
-
     y.setGranularity(count);
     y.setAxisMinimum(0f);
-    //x.setGranularityEnabled(true);
     y.setDrawTopYLabelEntry(false);
 
     radarChart.setTouchEnabled(false);
     radarChart.setSkipWebLineCount(count);
     radarChart.invalidate();
+
   }
+
 }

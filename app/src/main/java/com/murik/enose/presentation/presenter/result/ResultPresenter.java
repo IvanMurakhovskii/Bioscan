@@ -36,7 +36,11 @@ public class ResultPresenter extends MvpPresenter<ResultView> {
 
   @Override
   protected void onFirstViewAttach() {
-    getViewState().calculateResult();
+    try{
+      getViewState().calculateResult();
+    } catch (Exception e){
+        return;
+    }
   }
 
   public void calculateResult(DataByMaxParcelable data, int hand){

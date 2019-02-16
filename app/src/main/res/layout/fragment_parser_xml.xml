@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView
+  xmlns:android="http://schemas.android.com/apk/res/android"
   xmlns:app="http://schemas.android.com/apk/res-auto"
   xmlns:tools="http://schemas.android.com/tools"
   android:layout_width="match_parent"
@@ -30,12 +31,14 @@
        <TextView
          android:layout_width="wrap_content"
          android:layout_height="wrap_content"
+         android:textSize="18sp"
          android:text="@string/left_hand"/>
 
       <TextView
         android:id="@+id/tv_file_name_left_hand"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textSize="18sp"
         android:text="@string/no_choice_select"/>
 
       <android.support.v7.widget.AppCompatButton
@@ -47,11 +50,13 @@
       <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textSize="18sp"
         android:text="@string/right_hand"/>
 
       <TextView
         android:id="@+id/tv_file_name_right_hand"
         android:layout_width="wrap_content"
+        android:textSize="18sp"
         android:layout_height="wrap_content"
         android:text="@string/no_choice_select"/>
 

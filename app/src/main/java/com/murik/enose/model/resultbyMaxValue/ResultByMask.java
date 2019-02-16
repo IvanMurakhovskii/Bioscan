@@ -14,7 +14,6 @@ public class ResultByMask {
 
   public ResultByMask(ArrayList<Integer> dataSensorMax) {
     this.dataSensorMax = dataSensorMax;
-    //calculateResult();
   }
   
   public void setDataSensorMax(ArrayList<Integer> dataSensorMax){
@@ -39,10 +38,7 @@ public class ResultByMask {
           }
 
           tmpA.add(tmp);
-
-
       }
-
     A.add(tmpA);
     }
   }

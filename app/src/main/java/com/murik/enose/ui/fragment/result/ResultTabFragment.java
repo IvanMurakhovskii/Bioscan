@@ -32,15 +32,6 @@ public class ResultTabFragment  extends Fragment {
     return fragment;
   }
 
-  /*public static Fragment newInstance(SensorDataFullParcelable resultBySens) {
-    ResultTabFragment fragment = new ResultTabFragment();
-
-    Bundle args = new Bundle();
-    args.putParcelable(CALCULATE_A_KEY, resultBySens);
-    fragment.setArguments(args);
-
-    return fragment;
-  }*/
   @NonNull
   @Override
   public View onCreateView(final LayoutInflater inflater, final ViewGroup container,
@@ -62,7 +53,6 @@ public class ResultTabFragment  extends Fragment {
     ResultTabPageAdapter adapter = new ResultTabPageAdapter(getChildFragmentManager(), getActivity().getApplicationContext(), inputDataParcelable);
     viewPager.setAdapter(adapter);
 
-    //viewPager.setOffscreenPageLimit(3);
     tabLayout.setupWithViewPager(viewPager);
   }
 }

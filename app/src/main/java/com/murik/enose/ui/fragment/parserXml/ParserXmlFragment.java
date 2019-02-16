@@ -29,9 +29,6 @@ public class ParserXmlFragment extends MvpAppCompatFragment implements ParserXml
   @InjectPresenter
   ParserXmlPresenter mParserXmlPresenter;
 
-
-
-  //private RecyclerView mRecycler;
   private TextView tvLeftHandFileName;
   private TextView tvRightHandFileName;
   private Button btnLeftFile;
@@ -43,8 +40,6 @@ public class ParserXmlFragment extends MvpAppCompatFragment implements ParserXml
   private EditText etDescriptions;
 
   private int gender = Const.GENDER_MALE;
-  private boolean isLeftHand = true;
-
 
   public static ParserXmlFragment newInstance() {
     ParserXmlFragment fragment = new ParserXmlFragment();
@@ -66,16 +61,12 @@ public class ParserXmlFragment extends MvpAppCompatFragment implements ParserXml
   public void onViewCreated(final View view, final Bundle savedInstanceState) {
     super.onViewCreated(view, savedInstanceState);
 
-
-
-   // mRecycler = view.findViewById(R.id.xmlFileRecycler);
     etDescriptions = view.findViewById(R.id.etDescription_xml);
     tvLeftHandFileName = view.findViewById(R.id.tv_file_name_left_hand);
     tvRightHandFileName = view.findViewById(R.id.tv_file_name_right_hand);
     btnLeftFile = view.findViewById(R.id.btn_add_left_hand_file);
     btnRightFile = view.findViewById(R.id.btn_add_right_hand_file);
     grGender = view.findViewById(R.id.rg_gender_xml);
-    /*rgHand = view.findViewById(R.id.rg_hand);*/
     btnSave =  view.findViewById(R.id.btnSaveFromXml);
     scPractice = view.findViewById(R.id.sc_practice_xml);
     btnSave.setVisibility(View.INVISIBLE);
@@ -89,19 +80,6 @@ public class ParserXmlFragment extends MvpAppCompatFragment implements ParserXml
           break;
       }
     });
-    /*rgHand.setOnCheckedChangeListener((group, checkId) -> {
-      switch (checkId){
-        case R.id.rb_lefr_hand_xml:
-          isLeftHand = true;
-          break;
-        case R.id.rb_right_hand_xml:
-          isLeftHand = false;
-          break;
-          default:
-            isLeftHand = true;
-            break;
-      }
-    });*/
 
     btnLeftFile.setOnClickListener(event -> {
       Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
@@ -126,15 +104,18 @@ public class ParserXmlFragment extends MvpAppCompatFragment implements ParserXml
 
   @Override
   public void onActivityResult(int requestCode, int resultCode, Intent data) {
-    Uri uri = data.getData();
-   String path =  RealPathUtils.getPath(getContext(), uri);
-   if(requestCode == Const.SELECT_LEFT_FILE){
-      mParserXmlPresenter.setFileLeftHand(new File(path));
-      tvLeftHandFileName.setText(getRealPathFromURI(getContext(), uri));
-   } else if(requestCode == Const.SELECT_RIGHT_FILE) {
-      mParserXmlPresenter.setFileRightHand(new File(path));
-      tvRightHandFileName.setText(getRealPathFromURI(getContext(), uri));
-   }
+    if(data != null){
+      Uri uri = data.getData();
+
+      String path =  RealPathUtils.getPath(getContext(), uri);
+      if(requestCode == Const.SELECT_LEFT_FILE){
+        mParserXmlPresenter.setFileLeftHand(new File(path));
+        tvLeftHandFileName.setText(getRealPathFromURI(getContext(), uri));
+      } else if(requestCode == Const.SELECT_RIGHT_FILE) {
+        mParserXmlPresenter.setFileRightHand(new File(path));
+        tvRightHandFileName.setText(getRealPathFromURI(getContext(), uri));
+      }
+    }
   }
 
 
@@ -147,12 +128,6 @@ public class ParserXmlFragment extends MvpAppCompatFragment implements ParserXml
 
     return returnCursor.getString(nameIndex);
   }
-
-  /*public void initRecyclerView(ParserXmlAdapter adapter){
-    mRecycler.setLayoutManager(new LinearLayoutManager(getContext()));
-
-    mRecycler.setAdapter(adapter);
-  }*/
 
   public void setVisibilitySaveButton(int visibility){
     btnSave.setVisibility(visibility);

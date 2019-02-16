@@ -31,16 +31,32 @@ public  class RadarTabContentFragment extends MvpAppCompatFragment {
   private TabLayout tabLayout;
   private ViewPager viewPager;
   private Button btnResult;
-  private TextView tv_k_3;
-  private TextView tv_k_4;
-  private TextView tv_k_5;
-  private LinearLayout ll_k_3;
-  private LinearLayout ll_k_4;
-  private LinearLayout ll_k_5;
+  private TextView tv_k_3_left;
+  private TextView tv_k_4_left;
+  private TextView tv_k_5_left;
+  private TextView tv_k_7_left;
+  private LinearLayout ll_k_3_left;
+  private LinearLayout ll_k_4_left;
+  private LinearLayout ll_k_5_left;
+  private LinearLayout ll_k_7_left;
+
+  private TextView tv_k_3_right;
+  private TextView tv_k_4_right;
+  private TextView tv_k_5_right;
+  private TextView tv_k_7_right;
+  private LinearLayout ll_k_3_right;
+  private LinearLayout ll_k_4_right;
+  private LinearLayout ll_k_5_right;
+  private LinearLayout ll_k_7_right;
 
   private float left_k3 = 0;
   private float left_k4 = 0;
   private float left_k5 = 0;
+  private float left_k7 = 0;
+  private float right_k3 = 0;
+  private float right_k4 = 0;
+  private float right_k5 = 0;
+  private float right_k7 = 0;
 
 
   public static Fragment newInstance(SensorDataFullParcelable resultBySens) {
@@ -69,18 +85,25 @@ public  class RadarTabContentFragment extends MvpAppCompatFragment {
     super.onViewCreated(view, savedInstanceState);
     tabLayout = view.findViewById(R.id.sliding_tabs_result);
     viewPager = view.findViewById(R.id.viewpager_result);
-    tv_k_3 = view.findViewById(R.id.tv_k3);
-    tv_k_4 = view.findViewById(R.id.tv_k4);
-    tv_k_5 = view.findViewById(R.id.tv_k6);
+    tv_k_3_left = view.findViewById(R.id.tv_k3_left);
+    tv_k_4_left = view.findViewById(R.id.tv_k4_left);
+    tv_k_5_left = view.findViewById(R.id.tv_k5_left);
+    tv_k_7_left = view.findViewById(R.id.tv_k7_left);
+    tv_k_3_right = view.findViewById(R.id.tv_k3_right);
+    tv_k_4_right = view.findViewById(R.id.tv_k4_right);
+    tv_k_5_right = view.findViewById(R.id.tv_k5_right);
+    tv_k_7_right = view.findViewById(R.id.tv_k7_right);
 
-    ll_k_3 = view.findViewById(R.id.ll_k_3);
-    ll_k_4 = view.findViewById(R.id.ll_k_4);
-    ll_k_5 = view.findViewById(R.id.ll_k_5);
+    ll_k_3_left = view.findViewById(R.id.ll_k_3);
+    ll_k_4_left = view.findViewById(R.id.ll_k_4);
+    ll_k_5_left = view.findViewById(R.id.ll_k_5);
+    ll_k_7_left = view.findViewById(R.id.ll_k_7);
+    ll_k_3_right = view.findViewById(R.id.ll_k_3_right);
+    ll_k_4_right = view.findViewById(R.id.ll_k_4_right);
+    ll_k_5_right= view.findViewById(R.id.ll_k_5_right);
+    ll_k_7_right = view.findViewById(R.id.ll_k_7_right);
 
     calculate_k();
-    tv_k_3.setText(String.valueOf( new BigDecimal(left_k3).setScale(1, RoundingMode.DOWN).floatValue()));
-    tv_k_4.setText(String.valueOf( new BigDecimal(left_k4).setScale(1, RoundingMode.DOWN).floatValue()));
-    tv_k_5.setText(String.valueOf( new BigDecimal(left_k5).setScale(1, RoundingMode.DOWN).floatValue()));
 
     btnResult = view.findViewById(R.id.btnResult_by_max);
 
@@ -156,13 +179,52 @@ public  class RadarTabContentFragment extends MvpAppCompatFragment {
     return 0;
   }
 
-  public void calculate_k() {
+  public float leftHand_k7() {
+    if(inputDataParcelable.getDataSensorMapLeftHand().get(Const.SENSOR_7) != null){
+      if(inputDataParcelable.getDataSensorMapLeftHand().get(Const.SENSOR_7).size() > 60){
+        return (float)inputDataParcelable.getDataSensorMapLeftHand().get(Const.SENSOR_7).get(60)
+            /inputDataParcelable.getDataSensorMapLeftHand().get(Const.SENSOR_7).get(30);
+      }
+    }
+    return 0;
+  }
 
+  public float rightHand_k7() {
+    if(inputDataParcelable.getDataSensorMapRightHand().get(Const.SENSOR_7) != null){
+      if(inputDataParcelable.getDataSensorMapRightHand().get(Const.SENSOR_7).size() > 60){
+        return (float)inputDataParcelable.getDataSensorMapRightHand().get(Const.SENSOR_7).get(60)
+            /inputDataParcelable.getDataSensorMapRightHand().get(Const.SENSOR_7).get(30);
+      }
+    }
+    return 0;
+  }
+
+  public void calculate_k() {
     left_k3 = leftHand_k3();
     left_k4 = leftHand_k4();
     left_k5 = leftHand_k5();
+    left_k7 = leftHand_k7();
+
+    right_k3 = rightHand_k3();
+    right_k4 = rightHand_k4();
+    right_k5 = rightHand_k5();
+    right_k7 = rightHand_k7();
+
+    tv_k_3_left.setText(String.valueOf( new BigDecimal(left_k3).setScale(1, RoundingMode.DOWN).floatValue()));
+    tv_k_4_left.setText(String.valueOf( new BigDecimal(left_k4).setScale(1, RoundingMode.DOWN).floatValue()));
+    tv_k_5_left.setText(String.valueOf( new BigDecimal(left_k5).setScale(1, RoundingMode.DOWN).floatValue()));
+    tv_k_7_left.setText(String.valueOf( new BigDecimal(left_k7).setScale(1, RoundingMode.DOWN).floatValue()));
+
+    tv_k_3_right.setText(String.valueOf( new BigDecimal(right_k3).setScale(1, RoundingMode.DOWN).floatValue()));
+    tv_k_4_right.setText(String.valueOf( new BigDecimal(right_k4).setScale(1, RoundingMode.DOWN).floatValue()));
+    tv_k_5_right.setText(String.valueOf( new BigDecimal(right_k5).setScale(1, RoundingMode.DOWN).floatValue()));
+    tv_k_7_right.setText(String.valueOf( new BigDecimal(right_k7).setScale(1, RoundingMode.DOWN).floatValue()));
+
     if(left_k4 < 2.0){
-      ll_k_4.setBackgroundColor(Color.RED);
+      ll_k_4_left.setBackgroundColor(Color.RED);
+    }
+    if(right_k4 < 2.0){
+      ll_k_4_right.setBackgroundColor(Color.RED);
     }
   }
 
