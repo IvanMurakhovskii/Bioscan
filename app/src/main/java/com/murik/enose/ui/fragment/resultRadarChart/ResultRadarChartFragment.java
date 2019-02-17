@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 import com.arellomobile.mvp.MvpAppCompatFragment;
 import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.github.mikephil.charting.charts.RadarChart;
@@ -38,6 +39,8 @@ public class ResultRadarChartFragment extends MvpAppCompatFragment implements Re
   private int mPage = 2;
   final private float testChartSize = 18;
   private RadarChart radarChart;
+  private TextView tvRadarAreaLeft;
+  private TextView tvRadarAreaRight;
   private Button btnResult;
 
   public static Fragment newInstance(int mPage, SensorDataFullParcelable sensorDataFullParcelable) {
@@ -65,7 +68,8 @@ public class ResultRadarChartFragment extends MvpAppCompatFragment implements Re
   @Override
   public void onViewCreated(final View view, final Bundle savedInstanceState) {
     super.onViewCreated(view, savedInstanceState);
-
+    tvRadarAreaLeft = view.findViewById(R.id.tv_radar_area_left);
+    tvRadarAreaRight = view.findViewById(R.id.tv_radar_area_right);
     radarChart = view.findViewById(R.id.radarChart);
     mResultRadarChartPresenter.createRadarChart(mPage);
   }
@@ -137,5 +141,13 @@ public class ResultRadarChartFragment extends MvpAppCompatFragment implements Re
     radarChart.invalidate();
 
   }
+  @Override
+  public void setTvRadarAreaLeft(String areaLeft) {
+    this.tvRadarAreaLeft.setText(areaLeft);
+  }
 
+  @Override
+  public void setTvRadarAreaRight(String areaRight) {
+    this.tvRadarAreaRight.setText(areaRight);
+  }
 }

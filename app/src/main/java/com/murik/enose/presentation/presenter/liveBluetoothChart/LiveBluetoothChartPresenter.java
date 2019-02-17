@@ -1,6 +1,7 @@
 package com.murik.enose.presentation.presenter.liveBluetoothChart;
 
 
+import android.graphics.Color;
 import com.arellomobile.mvp.InjectViewState;
 import com.arellomobile.mvp.MvpPresenter;
 import com.github.mikephil.charting.data.Entry;
@@ -111,20 +112,28 @@ public class LiveBluetoothChartPresenter extends MvpPresenter<LiveBluetoothChart
   public void initLineChart(){
     entrySens1.add(new Entry(0,0));
     dataSets.add(dataSet1);
+    dataSet1.setColor(Color.BLACK);
     entrySens2.add(new Entry(0,0));
     dataSets.add(dataSet2);
+    dataSet2.setColor(Color.BLACK);
     entrySens3.add(new Entry(0,0));
     dataSets.add(dataSet3);
+    dataSet3.setColor(Color.BLACK);
     entrySens4.add(new Entry(0,0));
     dataSets.add(dataSet4);
+    dataSet4.setColor(Color.BLACK);
     entrySens5.add(new Entry(0,0));
     dataSets.add(dataSet5);
+    dataSet5.setColor(Color.BLACK);
     entrySens6.add(new Entry(0,0));
     dataSets.add(dataSet6);
+    dataSet6.setColor(Color.BLACK);
     entrySens7.add(new Entry(0,0));
     dataSets.add(dataSet7);
+    dataSet7.setColor(Color.BLACK);
     entrySens8.add(new Entry(0,0));
     dataSets.add(dataSet8);
+    dataSet8.setColor(Color.BLACK);
 
     getViewState().setLineChart(dataSets);
   }

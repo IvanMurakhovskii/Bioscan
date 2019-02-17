@@ -116,7 +116,6 @@ public class LiveBluetoothChartFragment extends MvpAppCompatFragment implements 
   @Override
   public void onResume() {
     super.onResume();
-    //getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
     IntentFilter filter = new IntentFilter();
     filter.addAction(BluetoothImplService.ACTION_CHARACTERISTIC_CHANGE);
     getActivity().registerReceiver(broadcastReceiver, filter);
@@ -127,7 +126,6 @@ public class LiveBluetoothChartFragment extends MvpAppCompatFragment implements 
   public void onStop() {
     super.onStop();
     getActivity().unregisterReceiver(broadcastReceiver);
-    //getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
   }
 
 
@@ -142,6 +140,7 @@ public class LiveBluetoothChartFragment extends MvpAppCompatFragment implements 
   //chart sensor_1
     YAxis y_right = lineChart1.getAxisRight();
     YAxis y_left = lineChart1.getAxisLeft();
+    lineChart1.getDescription().setText("");
     y_right.setDrawLabels(false);
     y_left.setValueFormatter(new LargeValueFormatter());
     LineData data = new LineData(dataSets.get(0));
@@ -150,6 +149,7 @@ public class LiveBluetoothChartFragment extends MvpAppCompatFragment implements 
     //chart sensor_2
     y_right = lineChart2.getAxisRight();
     y_left = lineChart2.getAxisLeft();
+    lineChart2.getDescription().setText("");
     y_right.setDrawLabels(false);
     y_left.setValueFormatter(new LargeValueFormatter());
     LineData data1 = new LineData(dataSets.get(1));
@@ -158,6 +158,7 @@ public class LiveBluetoothChartFragment extends MvpAppCompatFragment implements 
     //chart sensor_3
     y_right = lineChart3.getAxisRight();
     y_left = lineChart3.getAxisLeft();
+    lineChart3.getDescription().setText("");
     y_right.setDrawLabels(false);
     y_left.setValueFormatter(new LargeValueFormatter());
     LineData data2 = new LineData(dataSets.get(2));
@@ -165,6 +166,7 @@ public class LiveBluetoothChartFragment extends MvpAppCompatFragment implements 
     //chart sensor_4
     y_right = lineChart4.getAxisRight();
     y_left = lineChart4.getAxisLeft();
+    lineChart4.getDescription().setText("");
     y_right.setDrawLabels(false);
     y_left.setValueFormatter(new LargeValueFormatter());
     LineData data3 = new LineData(dataSets.get(3));
@@ -173,6 +175,7 @@ public class LiveBluetoothChartFragment extends MvpAppCompatFragment implements 
     //chart sensor_5
     y_right = lineChart5.getAxisRight();
     y_left = lineChart5.getAxisLeft();
+    lineChart5.getDescription().setText("");
     y_right.setDrawLabels(false);
     y_left.setValueFormatter(new LargeValueFormatter());
     LineData data4 = new LineData(dataSets.get(4));
@@ -181,6 +184,7 @@ public class LiveBluetoothChartFragment extends MvpAppCompatFragment implements 
     //chart sensor_6
     y_right = lineChart6.getAxisRight();
     y_left = lineChart6.getAxisLeft();
+    lineChart6.getDescription().setText("");
     y_right.setDrawLabels(false);
     y_left.setValueFormatter(new LargeValueFormatter());
     LineData data5 = new LineData(dataSets.get(5));
@@ -189,6 +193,7 @@ public class LiveBluetoothChartFragment extends MvpAppCompatFragment implements 
     //chart sensor_7
     y_right = lineChart7.getAxisRight();
     y_left = lineChart7.getAxisLeft();
+    lineChart7.getDescription().setText("");
     y_right.setDrawLabels(false);
     y_left.setValueFormatter(new LargeValueFormatter());
     LineData data6 = new LineData(dataSets.get(6));
@@ -197,6 +202,7 @@ public class LiveBluetoothChartFragment extends MvpAppCompatFragment implements 
     //chart sensor_8
     y_right = lineChart8.getAxisRight();
     y_left = lineChart8.getAxisLeft();
+    lineChart8.getDescription().setText("");
     y_right.setDrawLabels(false);
     y_left.setValueFormatter(new LargeValueFormatter());
     LineData data7 = new LineData(dataSets.get(7));

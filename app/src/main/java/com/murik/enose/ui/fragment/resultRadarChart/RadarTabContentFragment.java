@@ -120,7 +120,7 @@ public  class RadarTabContentFragment extends MvpAppCompatFragment {
   }
 
   public float leftHand_k3() {
-    if (inputDataParcelable.getDataSensorMapLeftHand().get(Const.SENSOR_3) != null) {
+    if (inputDataParcelable.getDataSensorMapLeftHand().get(Const.SENSOR_3) != null && inputDataParcelable.getDataSensorMapLeftHand().get(Const.SENSOR_3).get(20) != 0) {
       if (inputDataParcelable.getDataSensorMapLeftHand().get(Const.SENSOR_3).size() > 60) {
         return (float) inputDataParcelable.getDataSensorMapLeftHand().get(Const.SENSOR_3).get(60)
             / inputDataParcelable.getDataSensorMapLeftHand().get(Const.SENSOR_3).get(20);
@@ -130,7 +130,7 @@ public  class RadarTabContentFragment extends MvpAppCompatFragment {
   }
 
   public float rightHand_k3() {
-    if (inputDataParcelable.getDataSensorMapRightHand().get(Const.SENSOR_3) != null) {
+    if (inputDataParcelable.getDataSensorMapRightHand().get(Const.SENSOR_3) != null && inputDataParcelable.getDataSensorMapRightHand().get(Const.SENSOR_3).get(20) != 0) {
       if (inputDataParcelable.getDataSensorMapRightHand().get(Const.SENSOR_3).size() > 60) {
         return (float) inputDataParcelable.getDataSensorMapRightHand().get(Const.SENSOR_3).get(60)
             / inputDataParcelable.getDataSensorMapRightHand().get(Const.SENSOR_3).get(20);
@@ -140,7 +140,7 @@ public  class RadarTabContentFragment extends MvpAppCompatFragment {
   }
 
   public float leftHand_k4() {
-    if(inputDataParcelable.getDataSensorMapLeftHand().get(Const.SENSOR_4) != null){
+    if(inputDataParcelable.getDataSensorMapLeftHand().get(Const.SENSOR_4) != null && inputDataParcelable.getDataSensorMapLeftHand().get(Const.SENSOR_4).get(20) != 0){
       if (inputDataParcelable.getDataSensorMapLeftHand().get(Const.SENSOR_4).size() > 60){
         return  (float)inputDataParcelable.getDataSensorMapLeftHand().get(Const.SENSOR_4).get(60)
             / inputDataParcelable.getDataSensorMapLeftHand().get(Const.SENSOR_4).get(20);
@@ -150,7 +150,7 @@ public  class RadarTabContentFragment extends MvpAppCompatFragment {
   }
 
   public float rightHand_k4() {
-    if(inputDataParcelable.getDataSensorMapRightHand().get(Const.SENSOR_4) != null){
+    if(inputDataParcelable.getDataSensorMapRightHand().get(Const.SENSOR_4) != null && inputDataParcelable.getDataSensorMapRightHand().get(Const.SENSOR_4).get(20) != 0){
       if (inputDataParcelable.getDataSensorMapRightHand().get(Const.SENSOR_4).size() > 60){
         return  (float)inputDataParcelable.getDataSensorMapRightHand().get(Const.SENSOR_4).get(60)
             / inputDataParcelable.getDataSensorMapRightHand().get(Const.SENSOR_4).get(20);
@@ -160,7 +160,7 @@ public  class RadarTabContentFragment extends MvpAppCompatFragment {
   }
 
   public float leftHand_k5() {
-    if(inputDataParcelable.getDataSensorMapLeftHand().get(Const.SENSOR_5) != null){
+    if(inputDataParcelable.getDataSensorMapLeftHand().get(Const.SENSOR_5) != null && inputDataParcelable.getDataSensorMapLeftHand().get(Const.SENSOR_5).get(30) != 0){
       if(inputDataParcelable.getDataSensorMapLeftHand().get(Const.SENSOR_5).size() > 60){
         return (float)inputDataParcelable.getDataSensorMapLeftHand().get(Const.SENSOR_5).get(60)
             /inputDataParcelable.getDataSensorMapLeftHand().get(Const.SENSOR_5).get(30);
@@ -170,7 +170,7 @@ public  class RadarTabContentFragment extends MvpAppCompatFragment {
   }
 
   public float rightHand_k5() {
-    if(inputDataParcelable.getDataSensorMapRightHand().get(Const.SENSOR_5) != null){
+    if(inputDataParcelable.getDataSensorMapRightHand().get(Const.SENSOR_5) != null && inputDataParcelable.getDataSensorMapRightHand().get(Const.SENSOR_5).get(30) != 0){
       if(inputDataParcelable.getDataSensorMapRightHand().get(Const.SENSOR_5).size() > 60){
         return (float)inputDataParcelable.getDataSensorMapRightHand().get(Const.SENSOR_5).get(60)
             /inputDataParcelable.getDataSensorMapRightHand().get(Const.SENSOR_5).get(30);
@@ -180,8 +180,9 @@ public  class RadarTabContentFragment extends MvpAppCompatFragment {
   }
 
   public float leftHand_k7() {
-    if(inputDataParcelable.getDataSensorMapLeftHand().get(Const.SENSOR_7) != null){
+    if(inputDataParcelable.getDataSensorMapLeftHand().get(Const.SENSOR_7) != null && inputDataParcelable.getDataSensorMapLeftHand().get(Const.SENSOR_7).get(30) != 0){
       if(inputDataParcelable.getDataSensorMapLeftHand().get(Const.SENSOR_7).size() > 60){
+
         return (float)inputDataParcelable.getDataSensorMapLeftHand().get(Const.SENSOR_7).get(60)
             /inputDataParcelable.getDataSensorMapLeftHand().get(Const.SENSOR_7).get(30);
       }
@@ -190,7 +191,7 @@ public  class RadarTabContentFragment extends MvpAppCompatFragment {
   }
 
   public float rightHand_k7() {
-    if(inputDataParcelable.getDataSensorMapRightHand().get(Const.SENSOR_7) != null){
+    if(inputDataParcelable.getDataSensorMapRightHand().get(Const.SENSOR_7) != null && inputDataParcelable.getDataSensorMapRightHand().get(Const.SENSOR_7).get(30) != 0){
       if(inputDataParcelable.getDataSensorMapRightHand().get(Const.SENSOR_7).size() > 60){
         return (float)inputDataParcelable.getDataSensorMapRightHand().get(Const.SENSOR_7).get(60)
             /inputDataParcelable.getDataSensorMapRightHand().get(Const.SENSOR_7).get(30);
