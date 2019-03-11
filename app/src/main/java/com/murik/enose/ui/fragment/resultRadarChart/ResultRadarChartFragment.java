@@ -41,6 +41,8 @@ public class ResultRadarChartFragment extends MvpAppCompatFragment implements Re
   private RadarChart radarChart;
   private TextView tvRadarAreaLeft;
   private TextView tvRadarAreaRight;
+  private TextView tvDeltaLeft;
+  private TextView tvDeltaRight;
   private Button btnResult;
 
   public static Fragment newInstance(int mPage, SensorDataFullParcelable sensorDataFullParcelable) {
@@ -65,30 +67,27 @@ public class ResultRadarChartFragment extends MvpAppCompatFragment implements Re
     return inflater.inflate(R.layout.fragment_result_radar_chart, container, false);
   }
 
+
   @Override
   public void onViewCreated(final View view, final Bundle savedInstanceState) {
     super.onViewCreated(view, savedInstanceState);
     tvRadarAreaLeft = view.findViewById(R.id.tv_radar_area_left);
     tvRadarAreaRight = view.findViewById(R.id.tv_radar_area_right);
+    tvDeltaLeft = view.findViewById(R.id.tv_radar_delta_left);
+    tvDeltaRight = view.findViewById(R.id.tv_radar_delta_right);
     radarChart = view.findViewById(R.id.radarChart);
     mResultRadarChartPresenter.createRadarChart(mPage);
   }
 
   public void initRadarChart(ArrayList<RadarEntry> entryLeftHand,  ArrayList<RadarEntry> entryRightHand,
-      String description, int color){
+      String description, int colorLeft, int colorRight){
     List<IRadarDataSet> DATA_SET = new ArrayList<>();
-
-    ArrayList<String> lable = new ArrayList<>();
-
-   lable.add("15");
-   lable.add("30");
-   lable.add("45");
 
    if(!entryLeftHand.isEmpty()){
      RadarDataSet dataSet_leftHand = new RadarDataSet(entryLeftHand, "Левая");
       dataSet_leftHand.setDrawFilled(true);
-      dataSet_leftHand.setFillColor(color);
-      dataSet_leftHand.setColor(Color.BLACK);
+      dataSet_leftHand.setFillColor(colorLeft);
+      dataSet_leftHand.setColor(colorLeft);
      dataSet_leftHand.setHighlightCircleFillColor(Color.YELLOW);
       dataSet_leftHand.setValueTextSize(40);
       DATA_SET.add(dataSet_leftHand);
@@ -96,8 +95,8 @@ public class ResultRadarChartFragment extends MvpAppCompatFragment implements Re
     if(!entryRightHand.isEmpty()){
       RadarDataSet dataSet_rightHand = new RadarDataSet(entryRightHand,"Правая");
       dataSet_rightHand.setDrawFilled(true);
-      dataSet_rightHand.setFillColor(color);
-      dataSet_rightHand.setColor(Color.RED);
+      dataSet_rightHand.setFillColor(colorRight);
+      dataSet_rightHand.setColor(colorRight);
       dataSet_rightHand.setValueTextSize(40);
       DATA_SET.add(dataSet_rightHand);
     }
@@ -106,7 +105,6 @@ public class ResultRadarChartFragment extends MvpAppCompatFragment implements Re
     RadarData radarData;
     if(!DATA_SET.isEmpty()){
       radarData = new RadarData(DATA_SET);
-      radarData.setLabels(lable);
       radarChart.setData(radarData);
       radarData.setDrawValues(false);
     }
@@ -119,7 +117,6 @@ public class ResultRadarChartFragment extends MvpAppCompatFragment implements Re
 
     int count = 0;
     if(mPage == Const.PAGE_TOTAL){
-
       count = (int) x.getAxisMaximum()/Const.TOTAL.length - 1;
     } else if(mPage == Const.PAGE_HEALTH){
       count = (int) x.getAxisMaximum()/Const.HEALTH.length- 1;
@@ -149,5 +146,15 @@ public class ResultRadarChartFragment extends MvpAppCompatFragment implements Re
   @Override
   public void setTvRadarAreaRight(String areaRight) {
     this.tvRadarAreaRight.setText(areaRight);
+  }
+
+  @Override
+  public void setTvDeltaLeft(String deltaLeft) {
+    this.tvDeltaLeft.setText(deltaLeft);
+  }
+
+  @Override
+  public void setTvDeltaRight(String deltaRight) {
+    this.tvDeltaRight.setText(deltaRight);
   }
 }

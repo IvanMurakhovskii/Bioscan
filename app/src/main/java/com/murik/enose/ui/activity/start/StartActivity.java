@@ -7,8 +7,10 @@ import android.bluetooth.BluetoothAdapter;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.NavigationView;
@@ -21,6 +23,7 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AlertDialog.Builder;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -45,6 +48,9 @@ import com.murik.enose.ui.fragment.parserXml.ParserXmlFragment;
 import com.murik.enose.ui.fragment.realm.RealmFragment;
 import com.murik.enose.ui.fragment.result.ResultTabFragment;
 import com.murik.enose.ui.fragment.resultRadarChart.RadarTabContentFragment;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.util.Date;
 import ru.terrakok.cicerone.Navigator;
 import ru.terrakok.cicerone.android.SupportFragmentNavigator;
 
@@ -157,19 +163,57 @@ public class StartActivity extends MvpAppCompatActivity implements StartView, On
     MenuInflater inflater = getMenuInflater();
     inflater.inflate(R.menu.menu_start, menu);
     MenuItem disconnectGattItem =  menu.findItem(R.id.app_bar_disconnect_bluetooth);
-   /* if(App.INSTANCE.getmBluetoothGatt() == null){
-      disconnectGattItem.setVisible(false);
-    } else {
-      disconnectGattItem.setVisible(true);
-    }*/
+
     return true;
+  }
+
+  public void onScreenshotButtonClick(){
+    Date now = new Date();
+    android.text.format.DateFormat.format("yyyy-MM-dd_hh:mm:ss", now);
+    int check = ActivityCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE);
+    if (check == PackageManager.PERMISSION_GRANTED) {
+      try {
+
+        File directory = new File(
+            Environment.getExternalStorageDirectory().toString() +File.separator + "Enose");
+        directory.mkdirs();
+        String mPath = Environment.getExternalStorageDirectory().toString()  + "/Enose/" + now + ".jpg";
+
+        View v1 = this.getWindow().getDecorView().getRootView();
+        v1.setDrawingCacheEnabled(true);
+        Bitmap bitmap = Bitmap.createBitmap(v1.getDrawingCache());
+        v1.setDrawingCacheEnabled(false);
+
+        File imageFile = new File(mPath);
+
+        FileOutputStream outputStream = new FileOutputStream(imageFile);
+        int quality = 100;
+        bitmap.compress(Bitmap.CompressFormat.JPEG, quality, outputStream);
+        Toast.makeText(this, "Screenshot saved..!", Toast.LENGTH_LONG).show();
+        outputStream.flush();
+        outputStream.close();
+
+
+      } catch (Throwable e) {
+        Log.d("ScreenShotActivity", "Failed to capture screenshot because:" + e.getMessage());
+        e.printStackTrace();
+      }
+    } else {
+      requestAppPermissions();
+    }
+
   }
 
   @Override
   public boolean onOptionsItemSelected(MenuItem item) {
      switch (item.getItemId()){
        case R.id.app_bar_disconnect_bluetooth:
+       case R.id.app_bar_screen:{
+         onScreenshotButtonClick();
+         return true;
+       }
      }
+
 
     return false;
   }

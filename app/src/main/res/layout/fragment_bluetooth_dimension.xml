@@ -6,6 +6,17 @@
   android:layout_width="match_parent"
   android:layout_height="match_parent">
 
+  <WebView 
+    android:id="@+id/web_view_bluetooth_dimension"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent">
+
+  </WebView>
+
   <com.anychart.AnyChartView
     android:id="@+id/line_dimension_chart"
     android:layout_width="match_parent"

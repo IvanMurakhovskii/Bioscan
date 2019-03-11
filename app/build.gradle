@@ -38,7 +38,6 @@ dependencies {
     // https://mvnrepository.com/artifact/commons-io/commons-io
     implementation group: 'commons-io', name: 'commons-io', version: '2.6'
 
-
     //moxy
     implementation 'com.arello-mobile:moxy-app-compat:1.5.5'
     implementation 'com.arello-mobile:moxy-android:1.5.5'
@@ -74,7 +73,4 @@ dependencies {
     implementation 'co.dift.ui.swipetoaction:library:1.1'
 
     implementation "com.polidea.rxandroidble2:rxandroidble:1.7.1"
-
-
-
 }

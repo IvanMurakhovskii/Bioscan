@@ -1,5 +1,8 @@
 package com.murik.enose;
 
+import java.util.Arrays;
+import java.util.List;
+
 public class Const {
   public static final int GENDER_FEMININE = 0;
   public static final int GENDER_MALE = 1;
@@ -21,6 +24,11 @@ public class Const {
   public static final int[] ENERGY = {110, 120, 130, 140, 150};
   public static final int[] BAD = {20, 30, 180};
   public static final int[] ENDOKRIN = {10, 20, 30, 60};
+
+  public static final List<String> energySens = Arrays.asList(Const.SENSOR_1, Const.SENSOR_3, Const.SENSOR_7);
+  public static final List<String> endocrinSens = Arrays.asList(Const.SENSOR_3, Const.SENSOR_4, Const.SENSOR_5, Const.SENSOR_7);
+  public static final List<String> allSens = Arrays.asList(Const.SENSOR_1, Const.SENSOR_2, Const.SENSOR_3, Const.SENSOR_4, Const.SENSOR_5, Const.SENSOR_6, Const.SENSOR_7, Const.SENSOR_8);
+
 
   public static final int PAGE_TOTAL = 0;
   public static final int PAGE_ENDOKRIN = 1;

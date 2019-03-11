@@ -1,26 +1,19 @@
 package com.murik.enose.ui.fragment.result;
 
-import android.Manifest;
-import android.content.pm.PackageManager;
-import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.os.Environment;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog.Builder;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 import com.arellomobile.mvp.MvpAppCompatFragment;
 import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.github.mikephil.charting.charts.PieChart;
@@ -34,10 +27,7 @@ import com.murik.enose.model.dto.DataByMaxParcelable;
 import com.murik.enose.presentation.presenter.result.ResultPresenter;
 import com.murik.enose.presentation.view.result.ResultView;
 import com.murik.enose.ui.fragment.result.recycler.ResultAdapter;
-import java.io.File;
-import java.io.FileOutputStream;
 import java.util.ArrayList;
-import java.util.Date;
 
 public class ResultFragment extends MvpAppCompatFragment implements ResultView {
 
@@ -160,42 +150,6 @@ public class ResultFragment extends MvpAppCompatFragment implements ResultView {
     mResultPresenter.calculateResult(inputDataParcelable, mPage);
   }
 
-  public void onScreenshotButtonClick(){
-    Date now = new Date();
-    android.text.format.DateFormat.format("yyyy-MM-dd_hh:mm:ss", now);
-    int check = ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.WRITE_EXTERNAL_STORAGE);
-    if (check == PackageManager.PERMISSION_GRANTED) {
-      try {
-
-        File directory = new File(Environment.getExternalStorageDirectory().toString() +File.separator + "Enose");
-        directory.mkdirs();
-        String mPath = Environment.getExternalStorageDirectory().toString()  + "/Enose/" + now + ".jpg";
-
-        View v1 = getActivity().getWindow().getDecorView().getRootView();
-        v1.setDrawingCacheEnabled(true);
-        Bitmap bitmap = Bitmap.createBitmap(v1.getDrawingCache());
-        v1.setDrawingCacheEnabled(false);
-
-        File imageFile = new File(mPath);
-
-        FileOutputStream outputStream = new FileOutputStream(imageFile);
-        int quality = 100;
-        bitmap.compress(Bitmap.CompressFormat.JPEG, quality, outputStream);
-        Toast.makeText(getContext(), "Screenshot saved..!", Toast.LENGTH_LONG).show();
-        outputStream.flush();
-        outputStream.close();
-
-
-      } catch (Throwable e) {
-        Log.d("ScreenShotActivity", "Failed to capture screenshot because:" + e.getMessage());
-        e.printStackTrace();
-      }
-    } else {
-      requestPermissions(new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},1024);
-    }
-
-  }
-
   @Override
   public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
     inflater.inflate(R.menu.menu_result_fragment, menu);
@@ -206,10 +160,6 @@ public class ResultFragment extends MvpAppCompatFragment implements ResultView {
   public boolean onOptionsItemSelected(MenuItem item) {
 
     switch (item.getItemId()){
-      case R.id.app_bar_screen:{
-        onScreenshotButtonClick();
-        return true;
-      }
       case R.id.app_bar_save: {
         mResultPresenter.onSaveButtonClick();
         return true;

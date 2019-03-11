@@ -1,24 +1,27 @@
  package com.murik.enose.presentation.presenter.parserXml;
 
 
+ import android.content.Context;
+ import android.net.Uri;
  import android.view.View;
-import com.arellomobile.mvp.InjectViewState;
-import com.arellomobile.mvp.MvpPresenter;
-import com.murik.enose.App;
-import com.murik.enose.Screens;
-import com.murik.enose.model.RealmController;
-import com.murik.enose.model.dto.SensorDataFullParcelable;
-import com.murik.enose.presentation.view.parserXML.ParserXmlView;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
-import org.xmlpull.v1.XmlPullParser;
-import org.xmlpull.v1.XmlPullParserException;
-import org.xmlpull.v1.XmlPullParserFactory;
+ import com.arellomobile.mvp.InjectViewState;
+ import com.arellomobile.mvp.MvpPresenter;
+ import com.murik.enose.App;
+ import com.murik.enose.Screens;
+ import com.murik.enose.model.RealmController;
+ import com.murik.enose.model.dto.SensorDataFullParcelable;
+ import com.murik.enose.presentation.view.parserXML.ParserXmlView;
+ import java.io.File;
+ import java.io.FileInputStream;
+ import java.io.FileNotFoundException;
+ import java.io.IOException;
+ import java.io.InputStream;
+ import java.util.ArrayList;
+ import java.util.HashMap;
+ import java.util.Map;
+ import org.xmlpull.v1.XmlPullParser;
+ import org.xmlpull.v1.XmlPullParserException;
+ import org.xmlpull.v1.XmlPullParserFactory;
 
  @InjectViewState
 public class ParserXmlPresenter extends MvpPresenter<ParserXmlView> {
@@ -33,8 +36,8 @@ public class ParserXmlPresenter extends MvpPresenter<ParserXmlView> {
    private SensorDataFullParcelable sensorDataFullParcelable = new SensorDataFullParcelable();
    private ArrayList<File> arrayList = new ArrayList<>();
 
-   private File fileLeftHand = null;
-   private File fileRightHand = null;
+   private Uri fileLeftHand = null;
+   private Uri fileRightHand = null;
 
    @Override
    protected void onFirstViewAttach() {
@@ -52,7 +55,7 @@ public class ParserXmlPresenter extends MvpPresenter<ParserXmlView> {
    }
 
 
-    public void onSaveButtonClick(String descriptions, int gender, boolean isPractice) {
+    public void onSaveButtonClick(String descriptions, int gender, boolean isPractice, Context context) {
      Map<String, ArrayList<Integer>> mapLeftHand = new HashMap<>();
      Map<String, ArrayList<Integer>> mapRightHand = new HashMap<>();
      sensorDataFullParcelable.setDescriptions(descriptions);
@@ -61,10 +64,10 @@ public class ParserXmlPresenter extends MvpPresenter<ParserXmlView> {
 
       try {
         if(getFileLeftHand() != null){
-          mapLeftHand = passeXML(getFileLeftHand());
+          mapLeftHand = passeXML(getFileLeftHand(), context);
         }
         if(getFileRightHand() != null){
-          mapRightHand = passeXML(getFileRightHand());
+          mapRightHand = passeXML(getFileRightHand(), context);
         }
       } catch (XmlPullParserException e) {
         e.printStackTrace();
@@ -83,26 +86,26 @@ public class ParserXmlPresenter extends MvpPresenter<ParserXmlView> {
 
     }
 
-   public void setFileLeftHand(File fileLeftHand) {
+   public void setFileLeftHand(Uri fileLeftHand) {
      this.fileLeftHand = fileLeftHand;
      getViewState().setVisibilitySaveButton(View.VISIBLE);
 
    }
 
-   public void setFileRightHand(File fileRightHand) {
+   public void setFileRightHand(Uri fileRightHand) {
      this.fileRightHand = fileRightHand;
      getViewState().setVisibilitySaveButton(View.VISIBLE);
    }
 
-   public File getFileLeftHand() {
+   public Uri getFileLeftHand() {
      return fileLeftHand;
    }
 
-   public File getFileRightHand() {
+   public Uri getFileRightHand() {
      return fileRightHand;
    }
 
-   public  Map<String, ArrayList<Integer>> passeXML(File file) throws XmlPullParserException {
+   public  Map<String, ArrayList<Integer>> passeXML(Uri file, Context context) throws XmlPullParserException {
 
      String key = "";
      String descriptions = "";
@@ -116,12 +119,17 @@ public class ParserXmlPresenter extends MvpPresenter<ParserXmlView> {
      XmlPullParserFactory factory = XmlPullParserFactory.newInstance();
      XmlPullParser parser = factory.newPullParser();
      FileInputStream fis = null;
+     InputStream is = null;
      try {
+       is = context.getContentResolver().openInputStream(file);
+     } catch (FileNotFoundException e) {
+       e.printStackTrace();
+     }
+   /*  try {
        fis = new FileInputStream(file);
      } catch (FileNotFoundException e) {
-
-     }
-     parser.setInput(fis, null);
+     }*/
+     parser.setInput(is, null);
 
      while (parser.getEventType() != XmlPullParser.END_DOCUMENT) {
 

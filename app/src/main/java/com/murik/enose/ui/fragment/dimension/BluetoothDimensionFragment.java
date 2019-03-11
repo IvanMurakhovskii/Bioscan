@@ -10,6 +10,9 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebChromeClient;
+import android.webkit.WebSettings;
+import android.webkit.WebView;
 import com.anychart.APIlib;
 import com.anychart.AnyChart;
 import com.anychart.AnyChartView;
@@ -24,13 +27,17 @@ import com.anychart.enums.TooltipPositionMode;
 import com.anychart.graphics.vector.Stroke;
 import com.arellomobile.mvp.MvpAppCompatFragment;
 import com.arellomobile.mvp.presenter.InjectPresenter;
-import com.github.mikephil.charting.utils.Utils;
 import com.murik.enose.Const;
 import com.murik.enose.R;
 import com.murik.enose.presentation.presenter.dimension.BluetoothDimensionPresenter;
 import com.murik.enose.presentation.view.dimension.BluetoothDimensionView;
 import com.murik.enose.service.Impl.BluetoothImplService;
 import com.murik.enose.ui.dialog.StartDimensionDialogFragment;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.List;
 
 public class BluetoothDimensionFragment extends MvpAppCompatFragment implements BluetoothDimensionView,
@@ -48,6 +55,8 @@ public class BluetoothDimensionFragment extends MvpAppCompatFragment implements 
   private boolean isPractice;
   private int gender = Const.GENDER_MALE;
   private boolean isDimensoinStart = false;
+
+  private WebView webView;
 
 
 
@@ -91,11 +100,19 @@ public class BluetoothDimensionFragment extends MvpAppCompatFragment implements 
     @Override
     public void onViewCreated(final View view, final Bundle savedInstanceState) {
       super.onViewCreated(view, savedInstanceState);
-      Utils.init(getContext());
+      /*Utils.init(getContext());
       lineChart = view.findViewById(R.id.line_dimension_chart);
       startDimensionDialogFragment = new StartDimensionDialogFragment();
       startDimensionDialogFragment.show(getFragmentManager(), "dialog");
-      startDimensionDialogFragment.setDialogListener(this);
+      startDimensionDialogFragment.setDialogListener(this);*/
+      webView = view.findViewById(R.id.web_view_bluetooth_dimension);
+      WebSettings webSettings = webView.getSettings();
+      webSettings.setAllowFileAccess(true);
+      webSettings.setAllowFileAccessFromFileURLs(true);
+      webView.setWebChromeClient(new WebChromeClient());
+      webSettings.setJavaScriptEnabled(true);
+      webView.loadUrl("file:android_asset/test.html");
+      //webView.loadUrl("javascript:increment()");
     }
 
     /*public void initLineChart(List<ILineDataSet> dataSets){
@@ -117,6 +134,30 @@ public class BluetoothDimensionFragment extends MvpAppCompatFragment implements 
     lineChart.notifyDataSetChanged();
     lineChart.invalidate();
   }*/
+
+  private String readHtml(String remoteUrl) {
+    String out = "";
+    BufferedReader in = null;
+    try {
+      URL url = new URL(remoteUrl);
+      in = new BufferedReader(new InputStreamReader(url.openStream()));
+      String str;
+      while ((str = in.readLine()) != null) {
+        out += str;
+      }
+    } catch (MalformedURLException e) {
+    } catch (IOException e) {
+    } finally {
+      if (in != null) {
+        try {
+          in.close();
+        } catch (IOException e) {
+          e.printStackTrace();
+        }
+      }
+    }
+    return out;
+  }
 
   @Override
   public void onResume() {

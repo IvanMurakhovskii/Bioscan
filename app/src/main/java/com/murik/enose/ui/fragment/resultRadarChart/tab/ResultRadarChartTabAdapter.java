@@ -1,6 +1,5 @@
 package com.murik.enose.ui.fragment.resultRadarChart.tab;
 
-import android.content.Context;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -14,7 +13,6 @@ public class ResultRadarChartTabAdapter  extends FragmentPagerAdapter {
     private SensorDataFullParcelable sensorDataFullParcelable;
     private final int PAGE_COUNT = 5;
     private String tabTitle[] = new String[] {"Total","Endokrin", "Energy", "Health", "Bad"};
-    private Context context;
 
     public ResultRadarChartTabAdapter(FragmentManager fm, SensorDataFullParcelable sensorDataFullParcelable) {
       super(fm);

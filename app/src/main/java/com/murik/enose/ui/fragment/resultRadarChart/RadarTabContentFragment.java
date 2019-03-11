@@ -287,7 +287,6 @@ public  class RadarTabContentFragment extends MvpAppCompatFragment {
       leftHand.add(0);
     }
 
-
     ArrayList<Integer> rightHand = new ArrayList<>();
     if(!inputDataParcelable.getDataSensorMapRightHand().isEmpty()){
       if(inputDataParcelable.getDataSensorMapRightHand().get(Const.SENSOR_1) != null){
@@ -340,7 +339,6 @@ public  class RadarTabContentFragment extends MvpAppCompatFragment {
       rightHand.add(0);
       rightHand.add(0);
     }
-
 
     dataByMaxParcelable.setLeftHandDataSensor(leftHand);
     dataByMaxParcelable.setRightHandDataSensor(rightHand);

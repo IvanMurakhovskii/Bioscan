@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent">
+<android.support.constraint.ConstraintLayout
+  android:layout_width="match_parent"
+  android:layout_height="match_parent">
+
+  <FrameLayout
+    android:id="@+id/frameLayout"
+    android:layout_width="match_parent"
+    android:layout_height="729dp"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent">
+
+    <android.support.v4.view.ViewPager
+      android:id="@+id/viewpager_result"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content">
+      <android.support.design.widget.TabLayout
+        android:id="@+id/sliding_tabs_result"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:tabMode="fixed"
+        />
+    </android.support.v4.view.ViewPager>
+  </FrameLayout>
+
+  <LinearLayout
+    android:id="@+id/ll_k"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="8dp"
+    android:orientation="horizontal"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintHorizontal_bias="0.0"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@+id/frameLayout">
+
+    <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_marginLeft="8dp"
+      android:layout_weight="1"
+      android:orientation="vertical">
+      <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/left_hand"
+        android:textSize="18sp"/>
+      <LinearLayout
+        android:id="@+id/ll_k_4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp">
+        <TextView
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text="K(4) = "
+          android:textSize="18sp"/>
+        <TextView
+          android:id="@+id/tv_k4_left"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:textSize="18sp"/>
+      </LinearLayout>
+      <LinearLayout
+        android:id="@+id/ll_k_3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp">
+        <TextView
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text="K(3) = "
+          android:textSize="18sp"/>
+        <TextView
+          android:id="@+id/tv_k3_left"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:textSize="18sp"/>
+      </LinearLayout>
+      <LinearLayout
+        android:id="@+id/ll_k_5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp">
+
+
+        <TextView
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text="K(5) = "
+          android:textSize="18sp"/>
+        <TextView
+          android:id="@+id/tv_k5_left"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:textSize="18sp"/>
+      </LinearLayout>
+      <LinearLayout
+        android:id="@+id/ll_k_7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp">
+
+
+        <TextView
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text="K(7) = "
+          android:textSize="18sp"/>
+        <TextView
+          android:id="@+id/tv_k7_left"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:textSize="18sp"/>
+      </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:orientation="vertical"
+      android:layout_weight="1">
+      <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/right_hand"
+        android:textSize="18sp"/>
+      <LinearLayout
+        android:id="@+id/ll_k_4_right"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp">
+        <TextView
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text="K(4) = "
+          android:textSize="18sp"/>
+        <TextView
+          android:id="@+id/tv_k4_right"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:textSize="18sp"/>
+      </LinearLayout>
+      <LinearLayout
+        android:id="@+id/ll_k_3_right"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp">
+        <TextView
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text="K(3) = "
+          android:textSize="18sp"/>
+        <TextView
+          android:id="@+id/tv_k3_right"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:textSize="18sp"/>
+      </LinearLayout>
+      <LinearLayout
+        android:id="@+id/ll_k_5_right"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp">
+
+
+        <TextView
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text="K(5) = "
+          android:textSize="18sp"/>
+        <TextView
+          android:id="@+id/tv_k5_right"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:textSize="18sp"/>
+      </LinearLayout>
+      <LinearLayout
+        android:id="@+id/ll_k_7_right"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp">
+
+
+        <TextView
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text="K(7) = "
+          android:textSize="18sp"/>
+        <TextView
+          android:id="@+id/tv_k7_right"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:textSize="18sp"/>
+      </LinearLayout>
+
+    </LinearLayout>
+
+  </LinearLayout>
+
+  <Button
+    android:id="@+id/btnResult_by_max"
+    android:layout_width="0dp"
+    android:layout_height="54dp"
+    android:layout_marginTop="8dp"
+    android:layout_marginStart="8dp"
+    android:layout_marginEnd="8dp"
+    android:backgroundTint="@color/colorAccent"
+    android:text="@string/result"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintHorizontal_bias="0.0"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@+id/ll_k"/>
+</android.support.constraint.ConstraintLayout>
+</ScrollView>

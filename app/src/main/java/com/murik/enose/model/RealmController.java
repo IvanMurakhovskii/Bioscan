@@ -350,7 +350,6 @@ public class RealmController {
     });
   }
 
-
   public RealmList<Integer> createRealmList(ArrayList<Integer> sens) {
 
     RealmList<Integer> sensorRealmList = new RealmList<>();
@@ -362,13 +361,13 @@ public class RealmController {
 
   }
 
-
   public DataSensorRealm findById(int id){
    return realm.where(DataSensorRealm.class).equalTo("id", id).findFirst();
   }
 
   public RealmResults<DataSensorRealm> getInfo() {
     return realm.where(DataSensorRealm.class).findAllAsync();
+
 
   }
 
@@ -378,5 +377,9 @@ public class RealmController {
     } else {
       return realm.where(DataSensorRealm.class).max("id").intValue() + 1;
     }
+  }
+
+  boolean isSensorDataZero(){
+    return true;
   }
 }

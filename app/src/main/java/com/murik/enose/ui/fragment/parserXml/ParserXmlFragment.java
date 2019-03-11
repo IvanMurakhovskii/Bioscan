@@ -3,10 +3,13 @@ package com.murik.enose.ui.fragment.parserXml;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.provider.OpenableColumns;
 import android.support.v7.widget.SwitchCompat;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,10 +21,8 @@ import com.arellomobile.mvp.MvpAppCompatFragment;
 import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.murik.enose.Const;
 import com.murik.enose.R;
-import com.murik.enose.RealPathUtils;
 import com.murik.enose.presentation.presenter.parserXml.ParserXmlPresenter;
 import com.murik.enose.presentation.view.parserXML.ParserXmlView;
-import java.io.File;
 
 public class ParserXmlFragment extends MvpAppCompatFragment implements ParserXmlView {
 
@@ -97,27 +98,10 @@ public class ParserXmlFragment extends MvpAppCompatFragment implements ParserXml
     });
 
     btnSave.setOnClickListener(event -> {
-      mParserXmlPresenter.onSaveButtonClick(etDescriptions.getText().toString(), gender, scPractice.isChecked());
+      mParserXmlPresenter.onSaveButtonClick(etDescriptions.getText().toString(), gender, scPractice.isChecked(), getContext());
     });
 
   }
-
-  @Override
-  public void onActivityResult(int requestCode, int resultCode, Intent data) {
-    if(data != null){
-      Uri uri = data.getData();
-
-      String path =  RealPathUtils.getPath(getContext(), uri);
-      if(requestCode == Const.SELECT_LEFT_FILE){
-        mParserXmlPresenter.setFileLeftHand(new File(path));
-        tvLeftHandFileName.setText(getRealPathFromURI(getContext(), uri));
-      } else if(requestCode == Const.SELECT_RIGHT_FILE) {
-        mParserXmlPresenter.setFileRightHand(new File(path));
-        tvRightHandFileName.setText(getRealPathFromURI(getContext(), uri));
-      }
-    }
-  }
-
 
   private String getRealPathFromURI(Context context, Uri contentUri) {
 
@@ -129,8 +113,47 @@ public class ParserXmlFragment extends MvpAppCompatFragment implements ParserXml
     return returnCursor.getString(nameIndex);
   }
 
+  @Override
+  public void onActivityResult(int requestCode, int resultCode, Intent data) {
+    if(data != null){
+      Uri uri = data.getData();
+      data.getAction();
+
+      if(requestCode == Const.SELECT_LEFT_FILE){
+        mParserXmlPresenter.setFileLeftHand(uri);
+        tvLeftHandFileName.setText(getRealPathFromURI(getContext(),uri));
+        tvLeftHandFileName.setTextColor(Color.RED);
+
+      } else if(requestCode == Const.SELECT_RIGHT_FILE) {
+        mParserXmlPresenter.setFileRightHand(uri);
+        tvRightHandFileName.setText(getRealPathFromURI(getContext(),uri));
+        tvRightHandFileName.setTextColor(Color.RED);
+      }
+    }
+  }
+
+
   public void setVisibilitySaveButton(int visibility){
     btnSave.setVisibility(visibility);
   }
 
+  private String getRealPathFromURI_1(Context context, Uri contentUri) {
+    Cursor cursor = null;
+    try {
+      String[] proj = { };
+      cursor = context.getContentResolver().query(contentUri,  proj, null, null, null);
+      int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
+      cursor.moveToFirst();
+      return cursor.getString(column_index);
+    } catch (Exception e) {
+      Log.e(TAG, "getRealPathFromURI Exception : " + e.toString());
+      return "";
+    } finally {
+      if (cursor != null) {
+        cursor.close();
+      }
+    }
+  }
+
 }
+
