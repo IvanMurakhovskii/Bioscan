@@ -13,10 +13,10 @@ public class ResultA2_3 extends BaseResult{
     super(A, inputData, context);
     setLegend("2_3");
   }
-//todo проверить условие
+
   @Override
   public void setResult() {
-    if(getA() > 0.5){
+    if(getA() > 0.5 && getA() < 1.3){
       setColorGREEN();
     } else if (getA() == 0.5) {
       if(getInputData().getGender() == Const.GENDER_MALE) {
@@ -26,6 +26,12 @@ public class ResultA2_3 extends BaseResult{
         setColorYELLOW();
         setPossibleReasons(getResources(R.string.A2_3_YELLOW) + "\n" + getResources(R.string.FEMININE));
       }
+    } else if(getA() > 1.3 && getA() < 1.9){
+      setColorGRAY();
+      setPossibleReasons(getResources(R.string.A2_3_RED));
+    }else if(getA() >= 2){
+      setColorGRAY();
+      setPossibleReasons(getResources(R.string.A2_3_GRAY));
     }
   }
 }

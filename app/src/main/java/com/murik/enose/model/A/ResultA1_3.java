@@ -18,7 +18,7 @@ public class ResultA1_3 extends BaseResult {
     if (getA() >= 0.7 && getA() < 0.85) {
       setColorBLUE();
       setPossibleReasons(getResources(R.string.voter));
-    } else if (getA() >= 0.85 && getA() <= 1.4 || getA() >= 0.65 && getA() <= 0.7) {
+    } else if (getA() >= 0.85 && getA() <= 1.4) {
 
       setColorGREEN();
     } /*else if (getA() >= 0.65 && getA() <= 0.7) {

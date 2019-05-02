@@ -126,7 +126,7 @@ public class ResultFragment extends MvpAppCompatFragment implements ResultView {
 
   @Override
   public void initRecyclerView(){
-      mResultRecycler.setLayoutManager(new LinearLayoutManager(getContext()));
+    mResultRecycler.setLayoutManager(new LinearLayoutManager(getContext()));
     ResultAdapter adapter = new ResultAdapter(mResultPresenter);
     mResultRecycler.setAdapter(adapter);
   }

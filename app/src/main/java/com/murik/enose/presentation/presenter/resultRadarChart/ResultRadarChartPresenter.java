@@ -23,7 +23,10 @@ public class ResultRadarChartPresenter extends MvpPresenter<ResultRadarChartView
   public final static String TAG = "resultRadarPresenter";
   private SensorDataFullParcelable sensorDataFullParcelable;
   private MeasureService measureService;
-  private List<Integer> x = new ArrayList<>();
+
+  private List<Float> area = new ArrayList<>();
+  private List<Float> delta = new ArrayList<>();
+  private List<Float> delta180 = new ArrayList<>();
 
 
 
@@ -47,25 +50,41 @@ public class ResultRadarChartPresenter extends MvpPresenter<ResultRadarChartView
     switch (mPage){
       case Const.PAGE_TOTAL:
         initRadarChart(Const.TOTAL, Color.RED, Color.BLUE);
-        createDataForArea(Const.TOTAL);
+        area = measureService.getAreaTotal();
+        delta.add(100f);
+        delta.add(100f);
         break;
       case Const.PAGE_HEALTH:
         initRadarChart(Const.HEALTH, Color.RED, Color.BLUE);
-        createDataForArea(Const.HEALTH);
+        area = measureService.getAreaHealth();
+        delta = measureService.getDeltaHealth();
         break;
       case Const.PAGE_ENERGY:
         initRadarChart(Const.ENERGY, Color.RED, Color.BLUE);
-        createDataForArea(Const.ENERGY);
+        area = measureService.getAreaEnergy();
+        delta = measureService.getDeltaEnergy();
         break;
       case Const.PAGE_BAD:
         initRadarChart(Const.BAD, Color.RED, Color.BLUE);
-        createDataForArea(Const.BAD);
+        area = measureService.getAreaBad();
+        delta = measureService.getDeltaBad();
+        delta180 = measureService.getDeltaBad180();
+        getViewState().setTvDeltaLeft180(Float.toString(new BigDecimal(delta180.get(0)).setScale(1, RoundingMode.DOWN).floatValue()) + " %");
+        getViewState().setTvDeltaRight180(Float.toString(new BigDecimal(delta180.get(1)).setScale(1, RoundingMode.DOWN).floatValue()) + " %");
         break;
       case Const.PAGE_ENDOKRIN:
         initRadarChart(Const.ENDOKRIN, Color.RED, Color.BLUE);
-        createDataForArea(Const.ENDOKRIN);
+        area = measureService.getAreaEndokrin();
+        delta = measureService.getDeltaEndokrin();
         break;
     }
+    getViewState().setTvRadarAreaLeft(Float.toString(area.get(0)));
+    getViewState().setTvRadarAreaRight(Float.toString(area.get(1)));
+    if(measureService.getDifferenceArea() != null) {
+      getViewState().setTvDifference(Float.toString(measureService.getDifferenceArea()));
+    }
+    getViewState().setTvDeltaLeft(Float.toString(new BigDecimal(delta.get(0)).setScale(1, RoundingMode.DOWN).floatValue()) + " %");
+    getViewState().setTvDeltaRight(Float.toString(new BigDecimal(delta.get(1)).setScale(1, RoundingMode.DOWN).floatValue())+ " %");
   }
   public void initRadarChart(int[] mask, int colorLeft, int colorRight){
 
@@ -193,7 +212,6 @@ public class ResultRadarChartPresenter extends MvpPresenter<ResultRadarChartView
     }
     }
 
-
     for(int i = 0; i < leftHandData.size(); i++){
       if(leftHandData.get(i) < 0){
         leftHandData.set(i, 0);
@@ -218,30 +236,19 @@ public class ResultRadarChartPresenter extends MvpPresenter<ResultRadarChartView
     /*getViewState().setTvRadarAreaLeft(Float.toString(createDataForArea(leftHandData)));
     getViewState().setTvRadarAreaRight(Float.toString(createDataForArea(rightHandData)));*/
 
-    getViewState().initRadarChart(entryLeftHand
+    getViewState().initRadarChart(
+         entryLeftHand
         ,entryRightHand
         ,getSensorDataFullParcelable().getDescriptions()
         ,colorLeft
-        ,colorRight);
+        ,colorRight
+    );
   }
 
-  public void createDataForArea(int[] mask){
-
-    List<Float> area;
-
-    if(mask.equals(Const.ENERGY)) {
-      area = measureService.calculateArea(mask, Const.energySens);
-    } else if(mask.equals(Const.ENDOKRIN)){
-      area = measureService.calculateArea(mask, Const.endocrinSens);
-    } else {
-      area = measureService.calculateArea(mask, Const.allSens);
-    }
+  public void showAreaDelta(List<Float> area, List<Float> delta){
 
     getViewState().setTvRadarAreaLeft(Float.toString(area.get(0)));
     getViewState().setTvRadarAreaRight(Float.toString(area.get(1)));
-
-
-    List<Float> delta = measureService.calculateDelta(area, mask.equals(Const.BAD));
 
     getViewState().setTvDeltaLeft(Float.toString(new BigDecimal(delta.get(0)).setScale(1, RoundingMode.DOWN).floatValue()) + " %");
     getViewState().setTvDeltaRight(Float.toString(new BigDecimal(delta.get(1)).setScale(1, RoundingMode.DOWN).floatValue())+ " %");

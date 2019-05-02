@@ -15,9 +15,17 @@ public class DataByMaxParcelable implements Parcelable {
   private ArrayList<Integer> leftHandDataSensor;
   private int gender = Const.GENDER_MALE;
   private boolean isPractice;
+  private Float differenceArea;
 
   public DataByMaxParcelable(){
 
+  }
+  public void setDifferenceArea(Float differenceArea) {
+    this.differenceArea = differenceArea;
+  }
+
+  public Float getDifferenceArea() {
+    return differenceArea;
   }
 
   public void setGender(int gender) {
@@ -69,6 +77,7 @@ public class DataByMaxParcelable implements Parcelable {
   public void writeToParcel(Parcel dest, int flags) {
     dest.writeString(descriptions);
     dest.writeInt(gender);
+    dest.writeFloat(differenceArea);
     dest.writeList(rightHandDataSensor);
     dest.writeList(leftHandDataSensor);
     dest.writeByte((byte) (isPractice ? 1 : 0));
@@ -94,7 +103,7 @@ public class DataByMaxParcelable implements Parcelable {
     parcel.readList(leftHandDataSensor, Integer.class.getClassLoader());
     descriptions = parcel.readString();
     gender = parcel.readInt();
-
+    differenceArea = parcel.readFloat();
   }
 
 }

@@ -12,7 +12,7 @@
   <FrameLayout
     android:id="@+id/frameLayout"
     android:layout_width="match_parent"
-    android:layout_height="380dp"
+    android:layout_height="504dp"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toTopOf="parent">
@@ -53,24 +53,6 @@
         android:text="@string/left_hand"
         android:textSize="18sp"/>
       <LinearLayout
-        android:id="@+id/ll_k_4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp">
-        <TextView
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:text="K(4) = "
-          android:textSize="18sp"/>
-        <TextView
-          android:id="@+id/tv_k4_left"
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:textSize="18sp"/>
-      </LinearLayout>
-      <LinearLayout
         android:id="@+id/ll_k_3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -84,6 +66,24 @@
           android:textSize="18sp"/>
         <TextView
           android:id="@+id/tv_k3_left"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:textSize="18sp"/>
+      </LinearLayout>
+      <LinearLayout
+        android:id="@+id/ll_k_4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp">
+        <TextView
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text="K(4) = "
+          android:textSize="18sp"/>
+        <TextView
+          android:id="@+id/tv_k4_left"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
           android:textSize="18sp"/>
@@ -142,24 +142,6 @@
         android:text="@string/right_hand"
         android:textSize="18sp"/>
       <LinearLayout
-        android:id="@+id/ll_k_4_right"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp">
-        <TextView
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:text="K(4) = "
-          android:textSize="18sp"/>
-        <TextView
-          android:id="@+id/tv_k4_right"
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:textSize="18sp"/>
-      </LinearLayout>
-      <LinearLayout
         android:id="@+id/ll_k_3_right"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -173,6 +155,24 @@
           android:textSize="18sp"/>
         <TextView
           android:id="@+id/tv_k3_right"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:textSize="18sp"/>
+      </LinearLayout>
+      <LinearLayout
+        android:id="@+id/ll_k_4_right"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp">
+        <TextView
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text="K(4) = "
+          android:textSize="18sp"/>
+        <TextView
+          android:id="@+id/tv_k4_right"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
           android:textSize="18sp"/>

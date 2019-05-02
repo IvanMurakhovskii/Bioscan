@@ -7,6 +7,7 @@
  import com.arellomobile.mvp.InjectViewState;
  import com.arellomobile.mvp.MvpPresenter;
  import com.murik.enose.App;
+ import com.murik.enose.Const;
  import com.murik.enose.Screens;
  import com.murik.enose.model.RealmController;
  import com.murik.enose.model.dto.SensorDataFullParcelable;
@@ -130,7 +131,7 @@ public class ParserXmlPresenter extends MvpPresenter<ParserXmlView> {
      } catch (FileNotFoundException e) {
      }*/
      parser.setInput(is, null);
-
+int count = 0;
      while (parser.getEventType() != XmlPullParser.END_DOCUMENT) {
 
        if (parser.getEventType() == XmlPullParser.START_TAG) {
@@ -148,7 +149,10 @@ public class ParserXmlPresenter extends MvpPresenter<ParserXmlView> {
                    .substring(0, parser.getAttributeValue(i).length() - 3);
                initial = Integer.parseInt(str);
              } else if (parser.getAttributeName(i).equals("sid")) {
-               key  = parser.getAttributeValue(i);
+
+               //key  = parser.getAttributeValue(i);
+               key = Const.allSens.get(count);
+               count++;
              }
            }
          } else if (parser.getName().equals(POINT_TAG)) {
@@ -163,7 +167,6 @@ public class ParserXmlPresenter extends MvpPresenter<ParserXmlView> {
        }
        if(parser.getEventType() == XmlPullParser.TEXT){
          if(flag){
-
            flag = false;
          }
        }

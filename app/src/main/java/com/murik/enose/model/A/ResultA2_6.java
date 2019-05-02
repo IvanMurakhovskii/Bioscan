@@ -19,7 +19,7 @@ public class ResultA2_6 extends BaseResult {
       setColorGREEN();
     } else if(getA() == 1.4){
       setColorYELLOW();
-      setPossibleReasons(getResources(R.string.YELLOW) + "\n" + getResources(R.string.A2_6_RED));
+      setPossibleReasons(getResources(R.string.A2_6_YELLOW));
     } else if(getA() > 1.4 && getA() <= 1.7){
       setColorRED();
       setPossibleReasons(getResources(R.string.A2_6_RED));
@@ -32,6 +32,14 @@ public class ResultA2_6 extends BaseResult {
         setPossibleReasons(getResources(R.string.A2_6_BURGUNDY));
       }
 
+    } else if(getA() > 2 && getA() < 3.5){
+      if(getInputData().isPractice()){
+        setColorCRIMSON();
+        setPossibleReasons(getResources(R.string.Practice));
+      } else {
+        setColorBURGUNDY();
+        setPossibleReasons(getResources(R.string.A2_6_CRIMSON));
+      }
     }
   }
 }

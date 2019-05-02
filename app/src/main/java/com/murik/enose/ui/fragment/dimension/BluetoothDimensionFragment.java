@@ -1,67 +1,71 @@
 package com.murik.enose.ui.fragment.dimension;
 
+import android.annotation.SuppressLint;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
-import android.support.v4.app.DialogFragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.JavascriptInterface;
 import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
-import com.anychart.APIlib;
-import com.anychart.AnyChart;
+import android.widget.Toast;
 import com.anychart.AnyChartView;
-import com.anychart.chart.common.dataentry.DataEntry;
-import com.anychart.charts.Cartesian;
-import com.anychart.core.cartesian.series.Line;
-import com.anychart.data.Mapping;
-import com.anychart.data.Set;
-import com.anychart.enums.Anchor;
-import com.anychart.enums.MarkerType;
-import com.anychart.enums.TooltipPositionMode;
-import com.anychart.graphics.vector.Stroke;
 import com.arellomobile.mvp.MvpAppCompatFragment;
 import com.arellomobile.mvp.presenter.InjectPresenter;
+import com.murik.enose.App;
 import com.murik.enose.Const;
 import com.murik.enose.R;
+import com.murik.enose.Screens;
 import com.murik.enose.presentation.presenter.dimension.BluetoothDimensionPresenter;
 import com.murik.enose.presentation.view.dimension.BluetoothDimensionView;
 import com.murik.enose.service.Impl.BluetoothImplService;
+import com.murik.enose.ui.dialog.ContinueDimensionDialogFragment;
+import com.murik.enose.ui.dialog.DialogListener;
 import com.murik.enose.ui.dialog.StartDimensionDialogFragment;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.List;
 
 public class BluetoothDimensionFragment extends MvpAppCompatFragment implements BluetoothDimensionView,
-    StartDimensionDialogFragment.NoticeDialogListener{
+    DialogListener {
 
+
+  private static final int ID_DIALOG_START = 1;
+  private static final int ID_DIALOG_CONTINUE = 2;
+  public static final String DIALOG_CONTINUE_TAG = "DIALOG_CONTINUE";
+  public static final String DIALOG_START_TAG = "DIALOG_START";
   public static final String TAG = "BluetoothDimensionFragment";
+  public static final int DIMENSION_TIME = 200;
 
   @InjectPresenter
   BluetoothDimensionPresenter mBluetoothDimensionPresenter;
 
   private StartDimensionDialogFragment startDimensionDialogFragment;
+  private ContinueDimensionDialogFragment continueDimensionDialogFragment;
 
   private AnyChartView lineChart;
   private String description;
   private boolean isPractice;
   private int gender = Const.GENDER_MALE;
   private boolean isDimensoinStart = false;
+  private boolean isLeftHand = false;
 
   private WebView webView;
 
-
+  public boolean isFirstDimension = true;
+  private int count = 0;
 
 
   BroadcastReceiver mBroadcastReceiver = new BroadcastReceiver() {
+    @SuppressLint("CheckResult")
     @Override
     public void onReceive(Context context, Intent intent) {
       String action = intent.getAction();
@@ -73,10 +77,38 @@ public class BluetoothDimensionFragment extends MvpAppCompatFragment implements 
               + Integer.parseInt(str.substring(i + 1, i + 8), 16));
 
         }
-        if(isDimensoinStart){
-          mBluetoothDimensionPresenter.startDimension(str);
-        }
+        /*timerDisposable =  Observable.interval(1, TimeUnit.SECONDS, Schedulers.io())
+            .take(12)
+            .map(v -> 12 - v)
+            .subscribe(
+                onNext -> {
+                  if(isDimensoinStart) {
+                     mBluetoothDimensionPresenter.getDimensionData(str);
+                    }
+                  },
+                omError -> {},
+                () -> {},
+                onSubscribe -> {
 
+                }
+            );*/
+
+        if(isDimensoinStart){
+          if(count < DIMENSION_TIME*2){
+            mBluetoothDimensionPresenter.getDimensionData(str);
+            count++;
+          } else {
+            if(isFirstDimension){
+              isDimensoinStart = false;
+              stopChartRender();
+              showContinueDialog();
+            } else {
+              mBluetoothDimensionPresenter.saveData(isLeftHand);
+              mBluetoothDimensionPresenter.save(description, isPractice, gender);
+              isDimensoinStart = false;
+            }
+          }
+        }
       }
     }
   };
@@ -100,40 +132,17 @@ public class BluetoothDimensionFragment extends MvpAppCompatFragment implements 
     @Override
     public void onViewCreated(final View view, final Bundle savedInstanceState) {
       super.onViewCreated(view, savedInstanceState);
-      /*Utils.init(getContext());
-      lineChart = view.findViewById(R.id.line_dimension_chart);
-      startDimensionDialogFragment = new StartDimensionDialogFragment();
-      startDimensionDialogFragment.show(getFragmentManager(), "dialog");
-      startDimensionDialogFragment.setDialogListener(this);*/
       webView = view.findViewById(R.id.web_view_bluetooth_dimension);
       WebSettings webSettings = webView.getSettings();
       webSettings.setAllowFileAccess(true);
       webSettings.setAllowFileAccessFromFileURLs(true);
       webView.setWebChromeClient(new WebChromeClient());
       webSettings.setJavaScriptEnabled(true);
-      webView.loadUrl("file:android_asset/test.html");
-      //webView.loadUrl("javascript:increment()");
+      startDimensionDialogFragment = new StartDimensionDialogFragment();
+      startDimensionDialogFragment.show(getFragmentManager(), DIALOG_START_TAG);
+      startDimensionDialogFragment.setDialogListener(this);
+      webView.addJavascriptInterface(new WebAppInterface(getContext()), "Android");
     }
-
-    /*public void initLineChart(List<ILineDataSet> dataSets){
-      YAxis y_right = lineChart.getAxisRight();
-      YAxis y_left = lineChart.getAxisLeft();
-      Legend legend = lineChart.getLegend();
-      Description des = lineChart.getDescription();
-      des.setText("");
-      //legend.setVerticalAlignment(LegendVerticalAlignment.BOTTOM);
-      y_right.setDrawLabels(false);
-      y_left.setValueFormatter(new LargeValueFormatter());
-      LineData data = new LineData(dataSets);
-      lineChart.setData(data);
-      lineChart.invalidate();
-    }
-
-  @Override
-  public void notifyLineChart() {
-    lineChart.notifyDataSetChanged();
-    lineChart.invalidate();
-  }*/
 
   private String readHtml(String remoteUrl) {
     String out = "";
@@ -162,7 +171,6 @@ public class BluetoothDimensionFragment extends MvpAppCompatFragment implements 
   @Override
   public void onResume() {
     super.onResume();
-    //getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
     IntentFilter filter = new IntentFilter();
     filter.addAction(BluetoothImplService.ACTION_CHARACTERISTIC_CHANGE);
     getActivity().registerReceiver(mBroadcastReceiver, filter);
@@ -173,163 +181,109 @@ public class BluetoothDimensionFragment extends MvpAppCompatFragment implements 
   public void onStop() {
     super.onStop();
     getActivity().unregisterReceiver(mBroadcastReceiver);
-    //getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
   }
 
   @Override
-  public void onDialogPositiveClick() {
-    description = startDimensionDialogFragment.getDescriptions();
-    isPractice = startDimensionDialogFragment.isPractice();
-    gender = startDimensionDialogFragment.getGender();
-    String selectedItem = startDimensionDialogFragment.getSpinnerDimensionMode();
-    isDimensoinStart = true;
+  public void onDialogPositiveClick(int id) {
+      if(id == ID_DIALOG_START){
+        description = startDimensionDialogFragment.getDescriptions();
+        isPractice = startDimensionDialogFragment.isPractice();
+        gender = startDimensionDialogFragment.getGender();
+        String selectedItem = startDimensionDialogFragment.getSpinnerDimensionMode();
+        isLeftHand = startDimensionDialogFragment.isLeftHand();
+        isDimensoinStart = true;
+        webView.loadUrl("file:android_asset/test.html");
+      }
+      else if(id == ID_DIALOG_CONTINUE){
+        mBluetoothDimensionPresenter.saveData(isLeftHand);
+        isLeftHand = !isLeftHand;
+        isFirstDimension = false;
+        count = 0;
+        mBluetoothDimensionPresenter.clearData();
+        isDimensoinStart = true;
+        webView.loadUrl("file:android_asset/test.html");
+
+      }
+  }
+
+
+
+  @Override
+  public void onDialogNegativeClick(int id) {
+      if(id == ID_DIALOG_CONTINUE){
+        mBluetoothDimensionPresenter.saveData(isLeftHand);
+        mBluetoothDimensionPresenter.save(description, isPractice, gender);
+      } else if(id == ID_DIALOG_START){
+        App.INSTANCE.getRouter().replaceScreen(Screens.REALM_FRAGMENT);
+      }
+
   }
 
   @Override
-  public void onDialogNegativeClick(DialogFragment dialog) {
-
+  public void stopChartRender() {
+    if(webView != null){
+      webView.loadUrl("javascript:stop()");
+      //webView.loadUrl("file:android_asset/test.html");
+    }
   }
 
   @Override
-  public void initLineChart(List<DataEntry> seriesData) {
-    Cartesian cartesian = AnyChart.line();
-
-    cartesian.animation(true);
-
-    cartesian.padding(10d, 20d, 5d, 20d);
-
-    cartesian.crosshair().enabled(true);
-    cartesian.crosshair()
-        .yLabel(true)
-        // TODO ystroke
-        .yStroke((Stroke) null, null, null, (String) null, (String) null);
-
-    cartesian.tooltip().positionMode(TooltipPositionMode.POINT);
-
-    cartesian.title("Trend of Sales of the Most Popular Products of ACME Corp.");
-
-    cartesian.yAxis(0).title("Number of Bottles Sold (thousands)");
-    cartesian.xAxis(0).labels().padding(5d, 5d, 5d, 5d);
-
-    Set set = Set.instantiate();
-    set.data(seriesData);
-    Mapping series1Mapping = set.mapAs("{ x: 'x', value: 'value' }");
-    Mapping series2Mapping = set.mapAs("{ x: 'x', value: 'value2' }");
-    Mapping series3Mapping = set.mapAs("{ x: 'x', value: 'value3' }");
-    Mapping series4Mapping = set.mapAs("{ x: 'x', value: 'value4' }");
-    Mapping series5Mapping = set.mapAs("{ x: 'x', value: 'value5' }");
-    Mapping series6Mapping = set.mapAs("{ x: 'x', value: 'value6' }");
-    Mapping series7Mapping = set.mapAs("{ x: 'x', value: 'value7' }");
-    Mapping series8Mapping = set.mapAs("{ x: 'x', value: 'value8' }");
-
-    Line series1 = cartesian.line(series1Mapping);
-    series1.name("Sensor1");
-    series1.hovered().markers().enabled(true);
-    series1.hovered().markers()
-        .type(MarkerType.CIRCLE)
-        .size(4d);
-    series1.tooltip()
-        .position("right")
-        .anchor(Anchor.LEFT_CENTER)
-        .offsetX(5d)
-        .offsetY(5d);
-
-    /*Line series2 = cartesian.line(series2Mapping);
-    series2.name("Sensor2");
-    series2.hovered().markers().enabled(true);
-    series2.hovered().markers()
-        .type(MarkerType.CIRCLE)
-        .size(4d);
-    series2.tooltip()
-        .position("right")
-        .anchor(Anchor.LEFT_CENTER)
-        .offsetX(5d)
-        .offsetY(5d);
-
-    Line series3 = cartesian.line(series3Mapping);
-    series3.name("Sensor3");
-    series3.hovered().markers().enabled(true);
-    series3.hovered().markers()
-        .type(MarkerType.CIRCLE)
-        .size(4d);
-    series3.tooltip()
-        .position("right")
-        .anchor(Anchor.LEFT_CENTER)
-        .offsetX(5d)
-        .offsetY(5d);
-
-    Line series4 = cartesian.line(series4Mapping);
-    series4.name("Sensor4");
-    series4.hovered().markers().enabled(true);
-    series4.hovered().markers()
-        .type(MarkerType.CIRCLE)
-        .size(4d);
-    series4.tooltip()
-        .position("right")
-        .anchor(Anchor.LEFT_CENTER)
-        .offsetX(5d)
-        .offsetY(5d);
-
-    Line series5 = cartesian.line(series5Mapping);
-    series5.name("Sensor3");
-    series5.hovered().markers().enabled(true);
-    series5.hovered().markers()
-        .type(MarkerType.CIRCLE)
-        .size(4d);
-    series5.tooltip()
-        .position("right")
-        .anchor(Anchor.LEFT_CENTER)
-        .offsetX(5d)
-        .offsetY(5d);
-
-    Line series6 = cartesian.line(series6Mapping);
-    series6.name("Sensor3");
-    series6.hovered().markers().enabled(true);
-    series6.hovered().markers()
-        .type(MarkerType.CIRCLE)
-        .size(4d);
-    series6.tooltip()
-        .position("right")
-        .anchor(Anchor.LEFT_CENTER)
-        .offsetX(5d)
-        .offsetY(5d);
-
-    Line series7 = cartesian.line(series7Mapping);
-    series7.name("Sensor3");
-    series7.hovered().markers().enabled(true);
-    series7.hovered().markers()
-        .type(MarkerType.CIRCLE)
-        .size(4d);
-    series7.tooltip()
-        .position("right")
-        .anchor(Anchor.LEFT_CENTER)
-        .offsetX(5d)
-        .offsetY(5d);
-
-    Line series8 = cartesian.line(series8Mapping);
-    series8.name("Sensor3");
-    series8.hovered().markers().enabled(true);
-    series8.hovered().markers()
-        .type(MarkerType.CIRCLE)
-        .size(4d);
-    series8.tooltip()
-        .position("right")
-        .anchor(Anchor.LEFT_CENTER)
-        .offsetX(5d)
-        .offsetY(5d);*/
-
-    cartesian.legend().enabled(true);
-    cartesian.legend().fontSize(13d);
-    cartesian.legend().padding(0d, 0d, 10d, 0d);
-    APIlib.getInstance().setActiveAnyChartView(lineChart);
-
-    lineChart.setChart(cartesian);
+  public void showContinueDialog() {
+    if(continueDimensionDialogFragment  == null){
+      continueDimensionDialogFragment = new ContinueDimensionDialogFragment();
+      continueDimensionDialogFragment.setDialogListener(this);
+      continueDimensionDialogFragment.show(getFragmentManager(), DIALOG_CONTINUE_TAG);
+    }
   }
 
-  @Override
-  public void notifyLineChart() {
-    lineChart.notify();
 
+  public class WebAppInterface {
+    Context mContext;
 
+    /** Instantiate the interface and set the context */
+    WebAppInterface(Context c) {
+      mContext = c;
+    }
+
+    /** Show a toast from the web page */
+    @JavascriptInterface
+    public void showToast(String toast) {
+      Toast.makeText(mContext, toast, Toast.LENGTH_SHORT).show();
+    }
+
+    @JavascriptInterface
+    public int getDataSens1() {
+      return mBluetoothDimensionPresenter.getLastDataSens1();
+    }
+    @JavascriptInterface
+    public int getDataSens2() {
+      return mBluetoothDimensionPresenter.getLastDataSens2();
+    }
+    @JavascriptInterface
+    public int getDataSens3() {
+      return mBluetoothDimensionPresenter.getLastDataSens3();
+    }
+    @JavascriptInterface
+    public int getDataSens4() {
+      return mBluetoothDimensionPresenter.getLastDataSens4();
+    }
+    @JavascriptInterface
+    public int getDataSens5() {
+      return mBluetoothDimensionPresenter.getLastDataSens5();
+    }
+    @JavascriptInterface
+    public int getDataSens6() {
+      return mBluetoothDimensionPresenter.getLastDataSens6();
+    }
+    @JavascriptInterface
+    public int getDataSens7() {
+      return mBluetoothDimensionPresenter.getLastDataSens7();
+    }
+    @JavascriptInterface
+    public int getDataSens8() {
+      return mBluetoothDimensionPresenter.getLastDataSens8();
+    }
   }
 }
+
+

@@ -15,14 +15,17 @@ public class ResultA2_5 extends BaseResult {
 
   @Override
   public void setResult() {
-    if(getA() > 0.52){
+    if(getA() > 0.52 && getA() < 1.3){
       setColorGREEN();
     } else if(getA() <= 0.52 && getA() >= 0.48){
       setColorYELLOW();
-      setPossibleReasons(getResources(R.string.YELLOW) + "\n" + getResources(R.string.A2_5_YELLOW));
+      setPossibleReasons(getResources(R.string.A2_5_YELLOW));
     }else if(getA() < 0.48){
       setColorRED();
       setPossibleReasons(getResources(R.string.A2_5_RED));
+    } else if(getA() > 1.3 && getA() < 2.5){
+      setColorGRAY();
+      setPossibleReasons(getResources(R.string.A2_5_GRAY));
     }
   }
 }

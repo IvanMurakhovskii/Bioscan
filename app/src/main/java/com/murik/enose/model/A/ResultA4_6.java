@@ -15,7 +15,7 @@ public class  ResultA4_6 extends BaseResult {
 
   @Override
   public void setResult() {
-    if(getA() <= 4){
+    if(getA() <= 4 && getA() > 1.2){
       setColorGREEN();
     } else if(getA() > 4 && getA() <= 4.8){
       setColorYELLOW();
@@ -31,6 +31,9 @@ public class  ResultA4_6 extends BaseResult {
     } else if(getA() >= 6) {
       setColorBURGUNDY();
       setPossibleReasons(getResources(R.string.A4_6_BURGUNDY));
+    } else if(getA() <= 1.2){
+      setColorGRAY();
+      setPossibleReasons(getResources(R.string.A2_4_GRAY));
     }
   }
 

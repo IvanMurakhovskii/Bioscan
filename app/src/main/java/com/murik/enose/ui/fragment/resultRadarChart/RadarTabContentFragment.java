@@ -20,6 +20,8 @@ import com.murik.enose.R;
 import com.murik.enose.Screens;
 import com.murik.enose.model.dto.DataByMaxParcelable;
 import com.murik.enose.model.dto.SensorDataFullParcelable;
+import com.murik.enose.service.Impl.MeasureServiceImpl;
+import com.murik.enose.service.MeasureService;
 import com.murik.enose.ui.fragment.resultRadarChart.tab.ResultRadarChartTabAdapter;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
@@ -35,6 +37,7 @@ public  class RadarTabContentFragment extends MvpAppCompatFragment {
   private TextView tv_k_4_left;
   private TextView tv_k_5_left;
   private TextView tv_k_7_left;
+  private TextView tv_difference;
   private LinearLayout ll_k_3_left;
   private LinearLayout ll_k_4_left;
   private LinearLayout ll_k_5_left;
@@ -57,6 +60,8 @@ public  class RadarTabContentFragment extends MvpAppCompatFragment {
   private float right_k4 = 0;
   private float right_k5 = 0;
   private float right_k7 = 0;
+
+  private MeasureService measureService;
 
 
   public static Fragment newInstance(SensorDataFullParcelable resultBySens) {
@@ -227,14 +232,23 @@ public  class RadarTabContentFragment extends MvpAppCompatFragment {
     if(right_k4 < 2.0){
       ll_k_4_right.setBackgroundColor(Color.RED);
     }
+
+    if(left_k5 >= 2.5){
+      ll_k_5_left.setBackgroundColor(Color.RED);
+    }
+    if(right_k5 >= 2.5){
+      ll_k_5_right.setBackgroundColor(Color.RED);
+    }
   }
 
 
   public DataByMaxParcelable createDate(){
+    measureService = new MeasureServiceImpl(inputDataParcelable);
     DataByMaxParcelable dataByMaxParcelable = new DataByMaxParcelable();
     dataByMaxParcelable.setDescriptions(inputDataParcelable.getDescriptions());
     dataByMaxParcelable.setGender(inputDataParcelable.getGender());
     dataByMaxParcelable.setPractice(inputDataParcelable.isPractice());
+    dataByMaxParcelable.setDifferenceArea(measureService.getDifferenceArea());
 
     ArrayList<Integer> leftHand = new ArrayList<>();
     if(!inputDataParcelable.getDataSensorMapLeftHand().isEmpty()){

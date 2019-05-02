@@ -36,6 +36,9 @@ public class ResultA4_5 extends BaseResult {
           } else {
             setPossibleReasons(getResources(R.string.A4_5_RED));
           }
+        } else if(getA() <= 1.3){
+          setColorGRAY();
+          setPossibleReasons(getResources(R.string.A4_5_GRAY));
         }
       }
     }

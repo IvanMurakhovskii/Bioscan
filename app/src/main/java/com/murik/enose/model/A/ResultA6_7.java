@@ -16,14 +16,13 @@ public class ResultA6_7 extends BaseResult {
 
   @Override
   public void setResult() {
-    if(getA() < 0.85){
+    if(getA() < 0.85 && getA() >= 0.6){
       setColorGREEN();
     } else if(getA() >= 0.85 && getA() < 0.9){
       setColorYELLOW();
       setPossibleReasons(getResources(R.string.YELLOW) + "\n" + getResources(R.string.A6_7_YELLOW));
     } else if(getA() >= 0.9){
       setColorRED();
-
       if(getInputData().getGender() == Const.GENDER_FEMININE){
         setPossibleReasons(getResources(R.string.FEMININE) +"\n"+ getResources(R.string.A6_7_RED));
       } else {

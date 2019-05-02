@@ -1,5 +1,6 @@
 package com.murik.enose.service.Impl;
 
+import com.murik.enose.Const;
 import com.murik.enose.service.ParserXmlService;
 import java.io.File;
 import java.io.FileInputStream;
@@ -18,9 +19,6 @@ public class ParserXmlImplService implements ParserXmlService {
   public static final String SENSOR_TAG = "sensor";
   public static final String POINT_TAG = "point";
   public static final String LOG_TAG = "MyLogs";
-
-
-
   public static Map<String, ArrayList<Integer>> passeXML(File file) throws XmlPullParserException {
 
     String key = "";
@@ -41,6 +39,7 @@ public class ParserXmlImplService implements ParserXmlService {
       //Log.d(LOG_TAG, e.getMessage().toString());
     }
     parser.setInput(fis, null);
+    int count = 0;
 
     while (parser.getEventType() != XmlPullParser.END_DOCUMENT) {
 
@@ -59,7 +58,10 @@ public class ParserXmlImplService implements ParserXmlService {
                   .substring(0, parser.getAttributeValue(i).length() - 3);
               initial = Integer.parseInt(str);
             } else if (parser.getAttributeName(i).equals("sid")) {
-              key  = parser.getAttributeValue(i);
+
+              //key  = parser.getAttributeValue(i);
+              key = Const.allSens.get(count);
+              count++;
             }
           }
         } else if (parser.getName().equals(POINT_TAG)) {

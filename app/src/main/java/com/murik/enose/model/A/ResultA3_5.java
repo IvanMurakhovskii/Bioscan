@@ -24,11 +24,14 @@ public class ResultA3_5 extends BaseResult {
       setColorYELLOW();
       setPossibleReasons(getResources(R.string.A3_5_YELLOW));
     } else if( getA() >= 1.5 && getA() <= 1.6){
-      setColorRED();
-      setPossibleReasons(getResources(R.string.A3_5_RED));
+      setColorGRAY();
+      setPossibleReasons(getResources(R.string.A3_5_GRAY));
     } else  if(getA() > 2){
       setColorPRIMARY_DARK();
-      setPossibleReasons(getResources(R.string.GIGROPAT));
+      setPossibleReasons(getResources(R.string.A3_5_PRIMARY_DARK));
+    } else if(getA() <= 0.6){
+      setColorRED();
+      setPossibleReasons(getResources(R.string.A3_5_RED_EXTRA));
     }
   }
 

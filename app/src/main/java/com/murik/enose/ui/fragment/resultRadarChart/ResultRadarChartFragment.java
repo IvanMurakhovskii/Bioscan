@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import com.arellomobile.mvp.MvpAppCompatFragment;
 import com.arellomobile.mvp.presenter.InjectPresenter;
@@ -43,6 +44,12 @@ public class ResultRadarChartFragment extends MvpAppCompatFragment implements Re
   private TextView tvRadarAreaRight;
   private TextView tvDeltaLeft;
   private TextView tvDeltaRight;
+  private TextView tvDeltaLeft180;
+  private TextView tvDeltaRight180;
+  private TextView tv_difference;
+  private LinearLayout llDeltaLeft180;
+  private LinearLayout llDeltalRight180;
+  private LinearLayout ll_Difference;
   private Button btnResult;
 
   public static Fragment newInstance(int mPage, SensorDataFullParcelable sensorDataFullParcelable) {
@@ -76,6 +83,13 @@ public class ResultRadarChartFragment extends MvpAppCompatFragment implements Re
     tvDeltaLeft = view.findViewById(R.id.tv_radar_delta_left);
     tvDeltaRight = view.findViewById(R.id.tv_radar_delta_right);
     radarChart = view.findViewById(R.id.radarChart);
+    tvDeltaLeft180 = view.findViewById(R.id.tv_radar_delta_left_180);
+    tvDeltaRight180 = view.findViewById(R.id.tv_radar_delta_right_180);
+    llDeltaLeft180 = view.findViewById(R.id.ll_delta_180_left_id);
+    llDeltalRight180 = view.findViewById(R.id.ll_delta_180_right_id);
+    tv_difference = view.findViewById(R.id.tv_difference);
+    ll_Difference = view.findViewById(R.id.ll_difference);
+
     mResultRadarChartPresenter.createRadarChart(mPage);
   }
 
@@ -156,5 +170,23 @@ public class ResultRadarChartFragment extends MvpAppCompatFragment implements Re
   @Override
   public void setTvDeltaRight(String deltaRight) {
     this.tvDeltaRight.setText(deltaRight);
+  }
+
+  @Override
+  public void setTvDeltaLeft180(String deltaLeft180) {
+    llDeltaLeft180.setVisibility(View.VISIBLE);
+    tvDeltaLeft180.setText(deltaLeft180);
+  }
+
+  @Override
+  public void setTvDeltaRight180(String deltaRight180) {
+    llDeltalRight180.setVisibility(View.VISIBLE);
+    tvDeltaRight180.setText(deltaRight180);
+  }
+
+  @Override
+  public void setTvDifference(String difference) {
+    ll_Difference.setVisibility(View.VISIBLE);
+    tv_difference.setText(difference);
   }
 }

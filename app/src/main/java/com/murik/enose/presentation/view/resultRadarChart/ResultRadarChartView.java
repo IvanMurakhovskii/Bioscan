@@ -12,4 +12,7 @@ public interface ResultRadarChartView extends MvpView {
     void setTvRadarAreaRight(String areaRight);
     void setTvDeltaLeft(String deltaLeft);
     void setTvDeltaRight(String deltaRight);
+    void setTvDeltaLeft180(String deltaLeft180);
+    void setTvDeltaRight180(String deltaRight180);
+    void setTvDifference(String difference);
 }

@@ -40,10 +40,10 @@ public class ResultAFactory {
        this.maxSensResult = inputData.getLeftHandDataSensor();
      } else if(hand == Const.RIGHT_HAND){
        this.maxSensResult = inputData.getRightHandDataSensor();
-     } else if(hand == Const.MEAN_HAND) {
-       for(int i = 0; i < inputData.getRightHandDataSensor().size(); i++){
-         this.maxSensResult.add(inputData.getRightHandDataSensor().get(i)
-             + inputData.getLeftHandDataSensor().get(i));
+     } else if(hand == Const.MEAN_HAND && inputData.getDifferenceArea() < 15.4) {
+         for(int i = 0; i < inputData.getRightHandDataSensor().size(); i++){
+           this.maxSensResult.add((inputData.getRightHandDataSensor().get(i)
+               + inputData.getLeftHandDataSensor().get(i))/2);
        }
      }
      this.inputData = inputData;
@@ -72,7 +72,6 @@ public class ResultAFactory {
         A.add(new ResultA4_5(resultByMask.getA4_5(),inputData, context));
         A.add(new ResultA4_6(resultByMask.getA4_6(),inputData, context));
         A.add(new ResultA6_8(resultByMask.getA6_8(),inputData, context));
-        A.add(new ResultA1_2(resultByMask.getA1_2(),inputData, context));
         A.add(new ResultA5_6(resultByMask.getA5_6(),inputData, context));
         A.add(new ResultA3_5(resultByMask.getA3_5(),inputData, context));
         A.add(new ResultA3_7(resultByMask.getA3_7(),inputData, context));
@@ -81,6 +80,7 @@ public class ResultAFactory {
         //A.add(new ResultA7_8(resultByMask.getA7_8(),inputData, context));
         A.add(new ResultA1_7(resultByMask.getA1_7(),inputData, context));
         A.add(new ResultA2_6(resultByMask.getA2_6(),inputData, context));
+        A.add(new ResultA1_2(resultByMask.getA1_2(),inputData, context));
         //A.add(new ResultA5_8(resultByMask.getA5_8(),inputData, context));
       }catch (Exception e){
         return false;

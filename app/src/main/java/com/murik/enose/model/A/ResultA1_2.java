@@ -12,7 +12,7 @@ public class ResultA1_2 extends BaseResult {
     super(A, inputData, context);
     setLegend("1_2");
   }
-  //todo добавить "сухая кожа". Если кожа сухая(без практик) - цвет - красный, комментарий - Воспаление
+
   public void setResult(){
    if(getA() >= 0.9 && getA() <= 1.14){
      if(getInputData().isPractice()){
@@ -28,9 +28,11 @@ public class ResultA1_2 extends BaseResult {
       setColorRED();
       setPossibleReasons(getResources(R.string.A1_2_RED));
     } else if(getA() > 2){
-     //todo если кожа не сухая цвет - белый
       setColorBURGUNDY();
       setPossibleReasons(getResources(R.string.A1_2_BURGUNDY));
-    }
+    } else if(getA() > 1.5 && getA() <=1.9){
+      setColorRED();
+      setPossibleReasons(getResources(R.string.A1_2_RED_R));
+   }
   }
 }

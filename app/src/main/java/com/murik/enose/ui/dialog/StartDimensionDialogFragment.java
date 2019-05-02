@@ -18,22 +18,21 @@ import com.murik.enose.R;
 
 public class StartDimensionDialogFragment extends DialogFragment {
 
-  public interface NoticeDialogListener {
-    void onDialogPositiveClick();
-    void onDialogNegativeClick(DialogFragment dialog);
-  }
 
-  private NoticeDialogListener mNoticeDialogListener;
+  private DialogListener mDialogListener;
   private EditText descriptions;
   private RadioGroup rgGender;
+  private RadioGroup swHand;
   private SwitchCompat swPractice;
   private Spinner spinnerDimensionMode;
 
   private int gender = Const.GENDER_MALE;
+  private boolean isLeftHand = true;
+
 
   public void setDialogListener(
-      NoticeDialogListener mNoticeDialogListener) {
-    this.mNoticeDialogListener = mNoticeDialogListener;
+      DialogListener mNoticeDialogListener) {
+    this.mDialogListener = mNoticeDialogListener;
   }
 
   AlertDialog.Builder builder;
@@ -47,11 +46,12 @@ public class StartDimensionDialogFragment extends DialogFragment {
     descriptions = view.findViewById(R.id.start_dimension_description);
     rgGender = view.findViewById(R.id.rg_gender_des);
     swPractice = view.findViewById(R.id.sc_practice_des);
+    swHand = view.findViewById(R.id.rg_hand);
     spinnerDimensionMode = view.findViewById(R.id.spinner_dimension_mode);
     builder.setView(view)
-        .setTitle("TITLE")
+        .setTitle("Измерение")
         .setPositiveButton(R.string.submit, (DialogInterface dialog, int id) -> {
-          mNoticeDialogListener.onDialogPositiveClick();
+          mDialogListener.onDialogPositiveClick(1);
         })
         .setNegativeButton(R.string.vertical_form_stepper_form_discard_cancel,
             (DialogInterface dialog, int id) ->
@@ -77,6 +77,20 @@ public class StartDimensionDialogFragment extends DialogFragment {
       }
     });
     return gender;
+  }
+
+  public boolean isLeftHand(){
+    swHand.setOnCheckedChangeListener((group,checkedId) -> {
+      switch (checkedId){
+        case R.id.rb_left_hand:
+          isLeftHand = true;
+          break;
+        case R.id.rb_right_hand:
+          isLeftHand = false;
+          break;
+      }
+    });
+    return isLeftHand;
   }
 
   public boolean isPractice() {
