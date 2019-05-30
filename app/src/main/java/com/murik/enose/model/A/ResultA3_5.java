@@ -15,23 +15,20 @@ public class ResultA3_5 extends BaseResult {
 
   @Override
   public void setResult() {
-    if(getA() > 1.3 && getA() < 1.5){
-      setColorBLUE();
-      setPossibleReasons(getResources(R.string.A3_5_BLUE));
+    if(getA() >= 0.2 && getA() <= 0.3){
+      setColorRED();
+      setPossibleReasons(getResources(R.string.A3_5_RED2));
     } else if( getA() <=  1.3 && getA() > 0.9){
       setColorGREEN();
     } else if(getA() >= 0.7 && getA() <= 0.9){
       setColorYELLOW();
       setPossibleReasons(getResources(R.string.A3_5_YELLOW));
-    } else if( getA() >= 1.5 && getA() <= 1.6){
+    } else if( getA() >= 1.3 && getA() <= 2.2){
       setColorGRAY();
-      setPossibleReasons(getResources(R.string.A3_5_GRAY));
-    } else  if(getA() > 2){
-      setColorPRIMARY_DARK();
       setPossibleReasons(getResources(R.string.A3_5_PRIMARY_DARK));
-    } else if(getA() <= 0.6){
+    }  else if(getA() <= 0.6){
       setColorRED();
-      setPossibleReasons(getResources(R.string.A3_5_RED_EXTRA));
+      setPossibleReasons(getResources(R.string.A3_5_RED));
     }
   }
 

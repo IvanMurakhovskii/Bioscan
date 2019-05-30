@@ -1,6 +1,7 @@
 package com.murik.enose.model.A;
 
 import android.content.Context;
+import android.graphics.Color;
 import com.murik.enose.R;
 import com.murik.enose.model.dto.DataByMaxParcelable;
 import com.murik.enose.model.resultbyMaxValue.BaseResult;
@@ -15,11 +16,11 @@ public class  ResultA4_6 extends BaseResult {
 
   @Override
   public void setResult() {
-    if(getA() <= 4 && getA() > 1.2){
+    if(getA() <= 4.1 && getA() > 1.2){
       setColorGREEN();
-    } else if(getA() > 4 && getA() <= 4.8){
+    } else if(getA() > 4.2 && getA() <= 4.8){
       setColorYELLOW();
-      setPossibleReasons(getResources(R.string.YELLOW) + "\n" +  getResources(R.string.A4_6_YELLOW));
+      setPossibleReasons(getResources(R.string.A4_6_YELLOW));
     } else if(getA() > 4.8 && getA() <= 5.2 ) {
       if(getInputData().isPractice()){
         setColorCRIMSON();
@@ -29,11 +30,14 @@ public class  ResultA4_6 extends BaseResult {
         setPossibleReasons(getResources(R.string.A4_6_RED));
       }
     } else if(getA() >= 6) {
-      setColorBURGUNDY();
+      setColorRED();
       setPossibleReasons(getResources(R.string.A4_6_BURGUNDY));
     } else if(getA() <= 1.2){
       setColorGRAY();
       setPossibleReasons(getResources(R.string.A2_4_GRAY));
+    } else if(getA() > 7){
+      setColor(Color.WHITE);
+      setPossibleReasons("Проверить сенсоры");
     }
   }
 

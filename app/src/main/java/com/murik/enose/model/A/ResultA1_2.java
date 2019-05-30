@@ -18,13 +18,16 @@ public class ResultA1_2 extends BaseResult {
      if(getInputData().isPractice()){
        setColorCRIMSON();
        setPossibleReasons(getResources(R.string.A1_2_CRIMSON));
-     } else {
-       setColorBLUE();
-       setPossibleReasons(getResources(R.string.A1_2_BLUE));
      }
-    } else if (getA() > 1.1 && getA() <= 2 ){
-         setColorGREEN();
-    } else if(getA() < 0.9) {
+    } else if(getA() > 1.3 && getA() < 1.5){
+     setColorBLUE();
+     setPossibleReasons(getResources(R.string.A1_2_BLUE));
+   } else if (getA() > 1.1 && getA() <= 2 ){
+     setColorGREEN();
+   } else if(getA() >= 0.9 && getA() <= 1.1){
+     setColorYELLOW();
+     setPossibleReasons(getResources(R.string.A1_2_YELLOW));
+   } else if(getA() < 0.9) {
       setColorRED();
       setPossibleReasons(getResources(R.string.A1_2_RED));
     } else if(getA() > 2){

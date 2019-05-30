@@ -17,9 +17,6 @@ public class ResultA2_6 extends BaseResult {
   public void setResult() {
     if(getA() < 1.4){
       setColorGREEN();
-    } else if(getA() == 1.4){
-      setColorYELLOW();
-      setPossibleReasons(getResources(R.string.A2_6_YELLOW));
     } else if(getA() > 1.4 && getA() <= 1.7){
       setColorRED();
       setPossibleReasons(getResources(R.string.A2_6_RED));
@@ -31,7 +28,6 @@ public class ResultA2_6 extends BaseResult {
         setColorBURGUNDY();
         setPossibleReasons(getResources(R.string.A2_6_BURGUNDY));
       }
-
     } else if(getA() > 2 && getA() < 3.5){
       if(getInputData().isPractice()){
         setColorCRIMSON();

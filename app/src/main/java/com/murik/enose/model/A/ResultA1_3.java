@@ -19,25 +19,27 @@ public class ResultA1_3 extends BaseResult {
       setColorBLUE();
       setPossibleReasons(getResources(R.string.voter));
     } else if (getA() >= 0.85 && getA() <= 1.4) {
-
       setColorGREEN();
-    } /*else if (getA() >= 0.65 && getA() <= 0.7) {
+    } else if (getA() >= 1.8 && getA() <= 3) {
       setColorYELLOW();
       setPossibleReasons(getResources(R.string.A1_3_YELLOW));
-    }*/ else if (getA() >= 0.6 && getA() < 0.65) {
+    } else if (getA() >= 0.6 && getA() < 0.73) {
       setColorRED();
       setPossibleReasons(getResources(R.string.A1_3_RED));
-    } else if (getA() > 1.4) {
+    } else if(getA() >=0.74 && getA() <=0.80){
+      setColorRED();
+      setPossibleReasons(getResources(R.string.A1_3_RED2));
+    }else if (getA() > 1.4) {
       if (getInputData().isPractice()) {
         setColorCRIMSON();
         setPossibleReasons(getResources(R.string.Practice));
       } else {
         setColorYELLOW();
         if (getInputData().getGender() == Const.GENDER_MALE) {
-          setPossibleReasons(getResources(R.string.A1_3_RED_MAN));
+          setPossibleReasons(getResources(R.string.A1_3_YELLOW_MAN));
         } else {
-          setPossibleReasons(getResources(R.string.A1_3_RED_MAN) + "\n" + getResources(
-              R.string.A1_3_CRIMSON_FEMININE));
+          setPossibleReasons(getResources(R.string.A1_3_YELLOW_FEMININE) + "\n" + getResources(
+              R.string.A1_3_YELLOW_FEMININE));
         }
       }
     } else if (getA() < 0.6) {

@@ -15,9 +15,9 @@ public class ResultA1_4 extends BaseResult {
 
   @Override
   public void setResult() {
-    if(getA() >= 0.43){
+    if(getA() >= 0.42){
       setColorGREEN();
-    } else if(getA() >= 0.38 && getA() < 0.43){
+    } else if(getA() >= 0.38 && getA() <= 0.41){
       setColorRED();
       setPossibleReasons(getResources(R.string.A1_4_RED));
     } else if(getA() <= 0.3){
@@ -25,10 +25,13 @@ public class ResultA1_4 extends BaseResult {
       setPossibleReasons(getResources(R.string.A1_4_RED_EXTRA));
     } else if(getA() >= 0.7){
       setColorBURGUNDY();
-      setPossibleReasons(getResources(R.string.A1_4_BURGUNDY) +"\n"+ getResources(R.string.A1_3_RED_MAN));
+      setPossibleReasons(getResources(R.string.A1_4_BURGUNDY));
     } else if(getA() >= 0.8 && getA() <= 1.1){
       setColorGRAY();
       setPossibleReasons(getResources(R.string.A1_4_GRAY));
+    } else if(getA() >= 0.64 && getA() <= 0.66){
+      setColorBLUE();
+      setPossibleReasons(getResources(R.string.A1_4_BLUE));
     }
   }
 }

@@ -20,22 +20,21 @@ public class ResultA5_6 extends BaseResult {
       setColor(Color.WHITE);
     } else if (getA() >= 1.5 && getA() <= 1.9) {
       setColorGREEN();
-    } else if (getA() >= 1.3 && getA() < 1.5) {
-      setColorRED();
-      setPossibleReasons(getResources(R.string.A5_6_YELLOW));
-    } else if(getA() >= 1 && getA() < 1.3){
+    } else if(getA() > 1.3 && getA() < 1.5){
       setColorRED();
       setPossibleReasons(getResources(R.string.A5_6_RED));
-    } else if (getA() > 2.3) {
-      if (!getInputData().isPractice()) {
-        setColorGREEN();
-      } else if (getA() > 2) {
-        if (getInputData().isPractice()) {
-          setColorCRIMSON();
-          setPossibleReasons(
-              getResources(R.string.Practice) + "\n" + getResources(R.string.A5_6_BURGUNDY));
-        }
-      }
+    } else if(getA() >= 1 && getA() < 1.3){
+      setColorRED();
+      setPossibleReasons(getResources(R.string.A5_6_RED2));
+    } else if (getA() > 2.8) {
+      setColorRED();
+      setPossibleReasons(getResources(R.string.A5_6_RED3));
+    } else if(getA() > 0.8 && getA() < 1){
+      setColorGRAY();
+      setPossibleReasons(getResources(R.string.A5_6_GRAY));
+    } else if(getA() >= 0.5 && getA() <= 0.7){
+      setColorGRAY();
+      setPossibleReasons(getResources(R.string.A5_6_GRAY2));
     }
   }
 }
