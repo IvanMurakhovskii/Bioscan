@@ -1,7 +1,13 @@
 package com.murik.enose.model.resultbyMaxValue;
 
+import android.annotation.TargetApi;
 import android.content.Context;
+import android.graphics.Color;
+import android.os.Build;
+import android.support.v4.content.ContextCompat;
+
 import com.murik.enose.Const;
+import com.murik.enose.R;
 import com.murik.enose.model.A.ResultA1_2;
 import com.murik.enose.model.A.ResultA1_3;
 import com.murik.enose.model.A.ResultA1_4;
@@ -24,7 +30,10 @@ import com.murik.enose.model.A.ResultA6_7;
 import com.murik.enose.model.A.ResultA6_8;
 import com.murik.enose.model.ResultBySens;
 import com.murik.enose.model.dto.DataByMaxParcelable;
+
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 public class ResultAFactory {
 
@@ -94,7 +103,38 @@ public class ResultAFactory {
       return false;
     }
   }
+  @TargetApi(Build.VERSION_CODES.N)
   public ArrayList<ResultBySens> getA() {
-    return A;
+      return sortA();
+  }
+
+
+
+
+  private ArrayList<ResultBySens> sortA(){
+    ArrayList<ResultBySens> newAArr = new ArrayList<>();
+
+    int[] seqColorsToSotr = new int[]{
+            ContextCompat.getColor(context, R.color.colorResultBurgundy),
+            ContextCompat.getColor(context, R.color.colorResultRed),
+            ContextCompat.getColor(context, R.color.colorResultYellow),
+            ContextCompat.getColor(context, R.color.colorPrimaryDark),
+            ContextCompat.getColor(context, R.color.colorResultBlue),
+            ContextCompat.getColor(context, R.color.colorResultCrimson),
+            ContextCompat.getColor(context, R.color.colorResultGreen),
+            Color.GRAY,
+            Color.WHITE
+    };
+
+    for(int color: seqColorsToSotr){
+      for(ResultBySens a : A){
+        if(a.getViewColor() == color){
+          newAArr.add(a);
+        }
+      }
+
+    }
+
+    return  newAArr;
   }
 }

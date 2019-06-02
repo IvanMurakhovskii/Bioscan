@@ -181,6 +181,7 @@ public class InputFragment extends MvpAppCompatFragment implements InputView, Ve
       input.setPractice(swPractice.isChecked());
       input.setRightHandDataSensor(getEditTextData(rightHandSensorData));
       input.setLeftHandDataSensor(getEditTextData(leftHandSensorData));
+      input.setDifferenceArea(0.0f);
     mInputPresenter.onSubmitButtonClick(input);
 
   }

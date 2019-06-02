@@ -281,6 +281,7 @@ public class RealmPresenter extends MvpPresenter<RealmView> {
       inputDataParcelable.setPractice(data.isPractice());
       inputDataParcelable.setDescriptions(data.getDescriptions());
       inputDataParcelable.setGender(data.getGender());
+      inputDataParcelable.setDifferenceArea(0.0f);
 
       App.INSTANCE.getRouter().navigateTo(Screens.RESULT_FRAGMENT, inputDataParcelable);
     }

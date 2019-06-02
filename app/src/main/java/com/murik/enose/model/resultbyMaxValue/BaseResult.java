@@ -7,7 +7,7 @@ import com.murik.enose.R;
 import com.murik.enose.model.ResultBySens;
 import com.murik.enose.model.dto.DataByMaxParcelable;
 
-public abstract class BaseResult implements ResultBySens {
+public abstract class BaseResult implements ResultBySens{
     private double A;
     private int color;
     private String possibleReasons = null;
