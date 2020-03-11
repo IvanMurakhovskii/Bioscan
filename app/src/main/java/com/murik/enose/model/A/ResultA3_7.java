@@ -2,7 +2,7 @@ package com.murik.enose.model.A;
 
 import android.content.Context;
 import com.murik.enose.R;
-import com.murik.enose.model.dto.DataByMaxParcelable;
+import com.murik.enose.dto.DataByMaxParcelable;
 import com.murik.enose.model.resultbyMaxValue.BaseResult;
 
 public class ResultA3_7 extends BaseResult {
@@ -20,15 +20,19 @@ public class ResultA3_7 extends BaseResult {
       setPossibleReasons(getResources(R.string.A3_7_GRAY));
     } else if(getA() >= 1.04 && getA() < 1.25){
       setColorGREEN();
-    } else if(getA() > 0.95 && getA() < 1.04){
+    } else if(getA() > 0.90 && getA() < 1.04){
       setColorRED();
       setPossibleReasons(getResources(R.string.A3_7_RED));
-    } else if(getA() >= 0.4 && getA() < 0.8){
-      setColorRED();
-      setPossibleReasons(getResources(R.string.A3_7_RED2));
+    } else if(getA() >= 0.5 && getA() < 0.8){
+      setColorGRAY();
+      setPossibleReasons(getResources(R.string.A3_7_GRAY2));
     } else if(getA() >= 2.5){
       setColorBURGUNDY();
       setPossibleReasons(getResources(R.string.A3_7_BURGUNDY));
+    } else if(getA() >= 1.9 && getA() <= 2.1){
+      setColorBLUE();
+      setPossibleReasons(getResources(R.string.A3_7_BLUE));
+
     }
   }
 }

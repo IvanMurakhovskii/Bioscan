@@ -1,6 +1,6 @@
 package com.murik.enose.service;
 
-import com.murik.enose.model.dto.SensorDataFullParcelable;
+import com.murik.enose.dto.SensorDataFullParcelable;
 import java.util.List;
 
 public interface MeasureService {

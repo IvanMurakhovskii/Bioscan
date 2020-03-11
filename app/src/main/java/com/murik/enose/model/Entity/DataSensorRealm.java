@@ -4,91 +4,91 @@ import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
 
 
-public class  DataSensorRealm extends RealmObject {
+public class DataSensorRealm extends RealmObject {
 
-  @PrimaryKey
-  private long id;
-  private String descriptions;
+    @PrimaryKey
+    private long id;
 
-  private boolean isPractice;
-  private boolean isFullData;
-  private long time;
+    private String descriptions;
+    private boolean isPractice;
+    private boolean isFullData;
+    private long time;
 
-  private DataSensor leftHandData;
-  private DataSensor rightHandData;
-  private int gender;
-  private int hand;
+    private DataSensor leftHandData;
+    private DataSensor rightHandData;
+    private int gender;
+    private int hand;
 
-  public void setFullData(boolean fullData) {
-    isFullData = fullData;
-  }
+    public void setFullData(boolean fullData) {
+        isFullData = fullData;
+    }
 
-  public boolean isFullData() {
-    return isFullData;
-  }
+    public boolean isFullData() {
+        return isFullData;
+    }
 
-  public void setGender(int gender) {
-    this.gender = gender;
-  }
+    public void setGender(int gender) {
+        this.gender = gender;
+    }
 
-  public int getGender() {
-    return gender;
-  }
+    public int getGender() {
+        return gender;
+    }
 
-  public void setHand(int hand) {
-    this.hand = hand;
-  }
+    public void setHand(int hand) {
+        this.hand = hand;
+    }
 
-  public int getHand() {
-    return hand;
-  }
+    public int getHand() {
+        return hand;
+    }
 
-  public void setLeftHandData(DataSensor leftHandData) {
-    this.leftHandData = leftHandData;
-  }
+    public void setLeftHandData(DataSensor leftHandData) {
+        this.leftHandData = leftHandData;
+    }
 
-  public void setRightHandData(DataSensor rightHandData) {
-    this.rightHandData = rightHandData;
-  }
+    public void setRightHandData(DataSensor rightHandData) {
+        this.rightHandData = rightHandData;
+    }
 
-  public DataSensor getLeftHandData() {
-    return leftHandData;
-  }
+    public DataSensor getLeftHandData() {
+        return leftHandData;
+    }
 
-  public DataSensor getRightHandData() {
-    return rightHandData;
-  }
+    public DataSensor getRightHandData() {
+        return rightHandData;
+    }
 
-  public void setTime(long time) {
-    this.time = time;
-  }
+    public void setTime(long time) {
+        this.time = time;
+    }
 
-  public long getTime() {
-    return time;
-  }
+    public long getTime() {
+        return time;
+    }
 
-  public void setPractice(boolean practice) {
-    isPractice = practice;
-  }
+    public void setPractice(boolean practice) {
+        isPractice = practice;
+    }
 
-  public boolean isPractice() {
-    return isPractice;
-  }
+    public boolean isPractice() {
+        return isPractice;
+    }
 
-  public void setDescriptions(String descriptions) {
-    this.descriptions = descriptions;
-  }
+    public void setDescriptions(String descriptions) {
+        this.descriptions = descriptions;
+    }
 
-  public String getDescriptions() {
-    return descriptions;
-  }
+    public String getDescriptions() {
+        return descriptions;
+    }
 
-  public void setId(long id) {
-    this.id = id;
-  }
+    public void setId(long id) {
+        this.id = id;
+    }
 
-  public long getId() {
-    return id;
-  }
+    public long getId() {
+        return id;
+    }
 
 }

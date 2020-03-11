@@ -3,7 +3,7 @@ package com.murik.enose.model.A;
 import android.content.Context;
 import com.murik.enose.Const;
 import com.murik.enose.R;
-import com.murik.enose.model.dto.DataByMaxParcelable;
+import com.murik.enose.dto.DataByMaxParcelable;
 import com.murik.enose.model.resultbyMaxValue.BaseResult;
 
 public class ResultA4_5 extends BaseResult {
@@ -32,7 +32,7 @@ public class ResultA4_5 extends BaseResult {
       } else if(getA() > 2.8 ){
           setColorRED();
           if(getInputData().getGender() == Const.GENDER_FEMININE){
-            setPossibleReasons(getResources(R.string.A4_5_RED) +"\n"+ getResources(R.string.FEMININE));
+            setPossibleReasons(getResources(R.string.FEMININE) +"\n"+ getResources(R.string.A4_5_RED));
           } else {
             setPossibleReasons(getResources(R.string.A4_5_RED));
           }

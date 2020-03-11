@@ -18,14 +18,15 @@ import com.murik.enose.App;
 import com.murik.enose.Const;
 import com.murik.enose.R;
 import com.murik.enose.Screens;
-import com.murik.enose.model.dto.DataByMaxParcelable;
-import com.murik.enose.model.dto.SensorDataFullParcelable;
+import com.murik.enose.dto.DataByMaxParcelable;
+import com.murik.enose.dto.SensorDataFullParcelable;
 import com.murik.enose.service.Impl.MeasureServiceImpl;
 import com.murik.enose.service.MeasureService;
 import com.murik.enose.ui.fragment.resultRadarChart.tab.ResultRadarChartTabAdapter;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.ArrayList;
+import java.util.Objects;
 
 public  class RadarTabContentFragment extends MvpAppCompatFragment {
 
@@ -73,6 +74,7 @@ public  class RadarTabContentFragment extends MvpAppCompatFragment {
 
     return fragment;
   }
+
   @NonNull
   @Override
   public View onCreateView(final LayoutInflater inflater, final ViewGroup container,
@@ -176,9 +178,9 @@ public  class RadarTabContentFragment extends MvpAppCompatFragment {
 
   public float rightHand_k5() {
     if(inputDataParcelable.getDataSensorMapRightHand().get(Const.SENSOR_5) != null && inputDataParcelable.getDataSensorMapRightHand().get(Const.SENSOR_5).get(30) != 0){
-      if(inputDataParcelable.getDataSensorMapRightHand().get(Const.SENSOR_5).size() > 60){
-        return (float)inputDataParcelable.getDataSensorMapRightHand().get(Const.SENSOR_5).get(60)
-            /inputDataParcelable.getDataSensorMapRightHand().get(Const.SENSOR_5).get(30);
+      if(Objects.requireNonNull(inputDataParcelable.getDataSensorMapRightHand().get(Const.SENSOR_5)).size() > 60){
+        return (float) Objects.requireNonNull(inputDataParcelable.getDataSensorMapRightHand().get(Const.SENSOR_5)).get(60)
+            / Objects.requireNonNull(inputDataParcelable.getDataSensorMapRightHand().get(Const.SENSOR_5)).get(30);
       }
     }
     return 0;
@@ -186,10 +188,10 @@ public  class RadarTabContentFragment extends MvpAppCompatFragment {
 
   public float leftHand_k7() {
     if(inputDataParcelable.getDataSensorMapLeftHand().get(Const.SENSOR_7) != null && inputDataParcelable.getDataSensorMapLeftHand().get(Const.SENSOR_7).get(30) != 0){
-      if(inputDataParcelable.getDataSensorMapLeftHand().get(Const.SENSOR_7).size() > 60){
+      if(Objects.requireNonNull(inputDataParcelable.getDataSensorMapLeftHand().get(Const.SENSOR_7)).size() > 60){
 
         return (float)inputDataParcelable.getDataSensorMapLeftHand().get(Const.SENSOR_7).get(60)
-            /inputDataParcelable.getDataSensorMapLeftHand().get(Const.SENSOR_7).get(30);
+            / Objects.requireNonNull(inputDataParcelable.getDataSensorMapLeftHand().get(Const.SENSOR_7)).get(30);
       }
     }
     return 0;

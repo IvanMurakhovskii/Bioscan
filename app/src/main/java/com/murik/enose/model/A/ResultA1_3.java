@@ -1,9 +1,11 @@
 package com.murik.enose.model.A;
 
 import android.content.Context;
+import android.graphics.Color;
+
 import com.murik.enose.Const;
 import com.murik.enose.R;
-import com.murik.enose.model.dto.DataByMaxParcelable;
+import com.murik.enose.dto.DataByMaxParcelable;
 import com.murik.enose.model.resultbyMaxValue.BaseResult;
 
 public class ResultA1_3 extends BaseResult {
@@ -20,31 +22,30 @@ public class ResultA1_3 extends BaseResult {
       setPossibleReasons(getResources(R.string.voter));
     } else if (getA() >= 0.85 && getA() <= 1.4) {
       setColorGREEN();
-    } else if (getA() >= 1.8 && getA() <= 3) {
+    } else if (getA() >= 1.8 && getA() < 3) {
       setColorYELLOW();
-      setPossibleReasons(getResources(R.string.A1_3_YELLOW));
-    } else if (getA() >= 0.6 && getA() < 0.73) {
+      if (getInputData().getGender() == Const.GENDER_MALE) {
+        setPossibleReasons(getResources(R.string.A1_3_YELLOW_MAN));
+      } else {
+        setPossibleReasons(getResources(R.string.A1_3_YELLOW_FEMININE));
+      }
+    } else if (getA() >= 0.6 && getA() <= 0.84) {
       setColorRED();
       setPossibleReasons(getResources(R.string.A1_3_RED));
-    } else if(getA() >=0.74 && getA() <=0.80){
-      setColorRED();
-      setPossibleReasons(getResources(R.string.A1_3_RED2));
-    }else if (getA() > 1.4) {
+    }else if (getA() > 1.4 && getA() < 1.8) {
       if (getInputData().isPractice()) {
         setColorCRIMSON();
         setPossibleReasons(getResources(R.string.Practice));
       } else {
         setColorYELLOW();
-        if (getInputData().getGender() == Const.GENDER_MALE) {
-          setPossibleReasons(getResources(R.string.A1_3_YELLOW_MAN));
-        } else {
-          setPossibleReasons(getResources(R.string.A1_3_YELLOW_FEMININE) + "\n" + getResources(
-              R.string.A1_3_YELLOW_FEMININE));
-        }
+        setPossibleReasons(getResources(R.string.A1_3_YELLOW));
       }
     } else if (getA() < 0.6) {
       setColorBURGUNDY();
       setPossibleReasons(getResources(R.string.A1_3_BURGUNDY));
+    } else if(getA() > 3){
+      setColor(Color.WHITE);
+      setPossibleReasons(getResources(R.string.A1_3_WHITE));
     }
   }
 

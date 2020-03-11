@@ -7,7 +7,7 @@ import com.murik.enose.App;
 import com.murik.enose.Const;
 import com.murik.enose.Screens;
 import com.murik.enose.model.RealmController;
-import com.murik.enose.model.dto.SensorDataFullParcelable;
+import com.murik.enose.dto.SensorDataFullParcelable;
 import com.murik.enose.presentation.view.dimension.BluetoothDimensionView;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -33,9 +33,6 @@ import java.util.Map;
 @InjectViewState
 public class BluetoothDimensionPresenter extends MvpPresenter<BluetoothDimensionView> {
 
-
-
-
   private Map<Integer, Integer> initial = new HashMap<>();
   private Map<String, ArrayList<Integer>> data = new HashMap<>();
   private ArrayList<Integer> arrDataSens1 = new ArrayList<>();
@@ -60,8 +57,6 @@ public class BluetoothDimensionPresenter extends MvpPresenter<BluetoothDimension
   private int count = 0;
   @Override
   protected void onFirstViewAttach() {
-
-
     super.onFirstViewAttach();
   }
 

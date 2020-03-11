@@ -3,7 +3,7 @@ package com.murik.enose.model.A;
 import android.content.Context;
 import android.graphics.Color;
 import com.murik.enose.R;
-import com.murik.enose.model.dto.DataByMaxParcelable;
+import com.murik.enose.dto.DataByMaxParcelable;
 import com.murik.enose.model.resultbyMaxValue.BaseResult;
 
 public class  ResultA4_6 extends BaseResult {
@@ -38,6 +38,9 @@ public class  ResultA4_6 extends BaseResult {
     } else if(getA() > 7){
       setColor(Color.WHITE);
       setPossibleReasons("Проверить сенсоры");
+    }  else if(getA() > 1.3 && getA() < 1.8){
+      setColorGRAY();
+      setPossibleReasons(getResources(R.string.A4_6_GRAY2));
     }
   }
 

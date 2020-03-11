@@ -1,4 +1,4 @@
-package com.murik.enose.model.dto;
+package com.murik.enose.dto;
 
 import android.os.Parcel;
 import android.os.Parcelable;
@@ -7,6 +7,14 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+@Getter
+@Setter
+@NoArgsConstructor
 public class SensorDataFullParcelable implements Parcelable {
 
   private String descriptions;
@@ -16,67 +24,10 @@ public class SensorDataFullParcelable implements Parcelable {
   private boolean isPractice;
   private boolean isFullData;
 
-  public SensorDataFullParcelable(){
-
-  }
-
-
-  public boolean isFullData() {
-    return isFullData;
-  }
-
-  public void setFullData(boolean fullData) {
-    isFullData = fullData;
-  }
-
-  public void setDescriptions(String descriptions) {
-    this.descriptions = descriptions;
-  }
-
-  public String getDescriptions() {
-    return descriptions;
-  }
-
-  public void setGender(int gender) {
-    this.gender = gender;
-  }
-
-  public int getGender() {
-    return gender;
-  }
-
-  public void setPractice(boolean practice) {
-    isPractice = practice;
-  }
-
-  public boolean isPractice() {
-    return isPractice;
-  }
-
-  public void setDataSensorMapLeftHand(
-      Map<String, ArrayList<Integer>> dataSensorMapLeftHand) {
-    this.dataSensorMapLeftHand = dataSensorMapLeftHand;
-  }
-
-  public Map<String, ArrayList<Integer>> getDataSensorMapLeftHand() {
-    return dataSensorMapLeftHand;
-  }
-
-  public void setDataSensorMapRightHand(
-      Map<String, ArrayList<Integer>> dataSensorMapRightHand) {
-    this.dataSensorMapRightHand = dataSensorMapRightHand;
-  }
-
-  public Map<String, ArrayList<Integer>> getDataSensorMapRightHand() {
-    return dataSensorMapRightHand;
-  }
-
   @Override
   public int describeContents() {
     return 0;
   }
-
-
 
   @Override
   public void writeToParcel(Parcel dest, int flags) {

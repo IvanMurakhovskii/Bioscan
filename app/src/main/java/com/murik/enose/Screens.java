@@ -9,4 +9,6 @@ public class Screens {
   public static final String BLUETOOTH_FRAGMENT = "bluetooth_fragment";
   public static final String BLUETOOTH_LIVE_CHART_FRAGMENT = "bluetooth_live_chart_fragment";
   public static final String BLUETOOTH_DIMENSION_FRAGMENT = "bluetooth_dimension_fragment";
+  public static final String ONE_SENSOR_MEASURE_FRAGMENT = "one_sensor_measure_fragment";
+  public static final String RESULT_BAR_CHART_FRAGMENT = "result_bar_chart_fragment";
 }

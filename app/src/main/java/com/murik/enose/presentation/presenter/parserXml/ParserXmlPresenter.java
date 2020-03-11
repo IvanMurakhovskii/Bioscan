@@ -10,7 +10,7 @@
  import com.murik.enose.Const;
  import com.murik.enose.Screens;
  import com.murik.enose.model.RealmController;
- import com.murik.enose.model.dto.SensorDataFullParcelable;
+ import com.murik.enose.dto.SensorDataFullParcelable;
  import com.murik.enose.presentation.view.parserXML.ParserXmlView;
  import java.io.File;
  import java.io.FileInputStream;

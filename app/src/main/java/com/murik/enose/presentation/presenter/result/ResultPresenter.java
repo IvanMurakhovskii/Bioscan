@@ -8,9 +8,12 @@ import com.murik.enose.App;
 import com.murik.enose.Const;
 import com.murik.enose.Screens;
 import com.murik.enose.model.RealmController;
+import com.murik.enose.model.ResultAFactory;
 import com.murik.enose.model.ResultBySens;
-import com.murik.enose.model.dto.DataByMaxParcelable;
-import com.murik.enose.model.resultbyMaxValue.ResultAFactory;
+import com.murik.enose.dto.DataByMaxParcelable;
+import com.murik.enose.model.resultbyMaxValue.ResultAFactoryLongMask;
+import com.murik.enose.model.resultbyMaxValue.ResultAFactoryShortMask;
+import com.murik.enose.model.resultbyMaxValue.ResultAFactoryStandard;
 import com.murik.enose.presentation.view.result.ResultView;
 import com.murik.enose.ui.fragment.result.recycler.HeaderViewHolder;
 import com.murik.enose.ui.fragment.result.recycler.ResultViewHolder;
@@ -20,7 +23,7 @@ import java.util.ArrayList;
 
 @InjectViewState
 public class ResultPresenter extends MvpPresenter<ResultView> {
-  private ArrayList<ResultBySens> resultBySens = new ArrayList<>();
+
   private ResultAFactory resultAFactory;
   private ArrayList<ResultBySens> res = new ArrayList<>();
   private Context context;
@@ -45,10 +48,19 @@ public class ResultPresenter extends MvpPresenter<ResultView> {
 
   public void calculateResult(DataByMaxParcelable data, int hand){
 
-    this.data = data;
-    resultAFactory = new ResultAFactory(data, hand, context);
+      this.data = data;
+      if (data.getMeasureType().equals(Const.STANDARD_MEASURE)) {
+          resultAFactory = new ResultAFactoryStandard(data, hand, context);
+      }
+      if (data.getMeasureType().equals(Const.FIRST_MEASURE)) {
+          resultAFactory = new ResultAFactoryShortMask(data, hand, context);
+      }
+      if (data.getMeasureType().equals(Const.SECOND_MEASURE)) {
+          resultAFactory = new ResultAFactoryLongMask(data, hand, context);
+      }
+
     if(resultAFactory.calculateResultA()){
-      resultBySens = resultAFactory.getA();
+        ArrayList<ResultBySens> resultBySens = resultAFactory.getA();
       if(!res.isEmpty()){
         res.clear();
       }
@@ -61,6 +73,7 @@ public class ResultPresenter extends MvpPresenter<ResultView> {
       getViewState().initRecyclerView();
     }
   }
+
   public void onBindHeader(HeaderViewHolder holder){
       holder.setTvDescriptions(data.getDescriptions());
   }
@@ -87,4 +100,8 @@ public class ResultPresenter extends MvpPresenter<ResultView> {
     realmController.addInfoMax(data);
     App.INSTANCE.getRouter().newScreenChain(Screens.REALM_FRAGMENT);
   }
+
+    public void showDiagram() {
+        App.INSTANCE.getRouter().navigateTo(Screens.RESULT_BAR_CHART_FRAGMENT, data);
+    }
 }

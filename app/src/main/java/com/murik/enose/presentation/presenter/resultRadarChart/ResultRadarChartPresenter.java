@@ -6,7 +6,7 @@ import com.arellomobile.mvp.InjectViewState;
 import com.arellomobile.mvp.MvpPresenter;
 import com.github.mikephil.charting.data.RadarEntry;
 import com.murik.enose.Const;
-import com.murik.enose.model.dto.SensorDataFullParcelable;
+import com.murik.enose.dto.SensorDataFullParcelable;
 import com.murik.enose.presentation.view.resultRadarChart.ResultRadarChartView;
 import com.murik.enose.service.Impl.MeasureServiceImpl;
 import com.murik.enose.service.MeasureService;
@@ -45,7 +45,6 @@ public class ResultRadarChartPresenter extends MvpPresenter<ResultRadarChartView
     return sensorDataFullParcelable;
   }
 
-
   public void createRadarChart(int mPage) {
     switch (mPage){
       case Const.PAGE_TOTAL:
@@ -69,8 +68,8 @@ public class ResultRadarChartPresenter extends MvpPresenter<ResultRadarChartView
         area = measureService.getAreaBad();
         delta = measureService.getDeltaBad();
         delta180 = measureService.getDeltaBad180();
-        getViewState().setTvDeltaLeft180(Float.toString(new BigDecimal(delta180.get(0)).setScale(1, RoundingMode.DOWN).floatValue()) + " %");
-        getViewState().setTvDeltaRight180(Float.toString(new BigDecimal(delta180.get(1)).setScale(1, RoundingMode.DOWN).floatValue()) + " %");
+        getViewState().setTvDeltaLeft180(new BigDecimal(delta180.get(0)).setScale(1, RoundingMode.DOWN).floatValue() + " %");
+        getViewState().setTvDeltaRight180(new BigDecimal(delta180.get(1)).setScale(1, RoundingMode.DOWN).floatValue() + " %");
         break;
       case Const.PAGE_ENDOKRIN:
         initRadarChart(Const.ENDOKRIN, Color.RED, Color.BLUE);
@@ -83,9 +82,10 @@ public class ResultRadarChartPresenter extends MvpPresenter<ResultRadarChartView
     if(measureService.getDifferenceArea() != null) {
       getViewState().setTvDifference(Float.toString(measureService.getDifferenceArea()));
     }
-    getViewState().setTvDeltaLeft(Float.toString(new BigDecimal(delta.get(0)).setScale(1, RoundingMode.DOWN).floatValue()) + " %");
-    getViewState().setTvDeltaRight(Float.toString(new BigDecimal(delta.get(1)).setScale(1, RoundingMode.DOWN).floatValue())+ " %");
+    getViewState().setTvDeltaLeft(new BigDecimal(delta.get(0)).setScale(1, RoundingMode.DOWN).floatValue() + " %");
+    getViewState().setTvDeltaRight(new BigDecimal(delta.get(1)).setScale(1, RoundingMode.DOWN).floatValue() + " %");
   }
+
   public void initRadarChart(int[] mask, int colorLeft, int colorRight){
 
 
@@ -228,13 +228,10 @@ public class ResultRadarChartPresenter extends MvpPresenter<ResultRadarChartView
 
     for(int i = 0; i < leftHandData.size(); i++){
       entryLeftHand.add(new RadarEntry(leftHandData.get(i), i));
-      //lable.add(String.valueOf(i));
     }
     for(int i = 0; i < rightHandData.size(); i++){
       entryRightHand.add(new RadarEntry(rightHandData.get(i), i));
     }
-    /*getViewState().setTvRadarAreaLeft(Float.toString(createDataForArea(leftHandData)));
-    getViewState().setTvRadarAreaRight(Float.toString(createDataForArea(rightHandData)));*/
 
     getViewState().initRadarChart(
          entryLeftHand
@@ -250,8 +247,8 @@ public class ResultRadarChartPresenter extends MvpPresenter<ResultRadarChartView
     getViewState().setTvRadarAreaLeft(Float.toString(area.get(0)));
     getViewState().setTvRadarAreaRight(Float.toString(area.get(1)));
 
-    getViewState().setTvDeltaLeft(Float.toString(new BigDecimal(delta.get(0)).setScale(1, RoundingMode.DOWN).floatValue()) + " %");
-    getViewState().setTvDeltaRight(Float.toString(new BigDecimal(delta.get(1)).setScale(1, RoundingMode.DOWN).floatValue())+ " %");
+    getViewState().setTvDeltaLeft(new BigDecimal(delta.get(0)).setScale(1, RoundingMode.DOWN).floatValue() + " %");
+    getViewState().setTvDeltaRight(new BigDecimal(delta.get(1)).setScale(1, RoundingMode.DOWN).floatValue() + " %");
   }
 
 }

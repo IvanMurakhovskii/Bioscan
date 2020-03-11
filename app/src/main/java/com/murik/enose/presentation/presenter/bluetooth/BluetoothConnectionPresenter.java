@@ -45,7 +45,6 @@ public class BluetoothConnectionPresenter extends MvpPresenter<BluetoothConnecti
     if(devices.isEmpty()){
       devices.add(dev);
       getAdapter().notifyItemChanged(devices.size() - 1);
-      return;
     } else {
       for(BluetoothDevice device : devices){
        if(device.equals(dev)){

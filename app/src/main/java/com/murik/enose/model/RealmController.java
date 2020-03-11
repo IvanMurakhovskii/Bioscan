@@ -1,26 +1,27 @@
 package com.murik.enose.model;
 
 import com.murik.enose.Const;
+import com.murik.enose.dto.DataByMaxParcelable;
+import com.murik.enose.dto.SensorDataFullParcelable;
 import com.murik.enose.model.Entity.DataSensor;
 import com.murik.enose.model.Entity.DataSensorRealm;
-import com.murik.enose.model.dto.DataByMaxParcelable;
 import com.murik.enose.model.Entity.RealmInt;
-import com.murik.enose.model.dto.SensorDataFullParcelable;
-import io.realm.Realm;
-import io.realm.RealmList;
-import io.realm.RealmResults;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.Objects;
 
+import io.realm.Realm;
+import io.realm.RealmList;
+import io.realm.RealmResults;
+import io.realm.Sort;
+import lombok.NoArgsConstructor;
+
+@NoArgsConstructor
 public class RealmController {
 
   private Realm realm = Realm.getDefaultInstance();
-
-  public RealmController() {
-
-  }
 
   public void addInfoFull(SensorDataFullParcelable dataSens) {
 
@@ -366,9 +367,8 @@ public class RealmController {
   }
 
   public RealmResults<DataSensorRealm> getInfo() {
-    return realm.where(DataSensorRealm.class).findAllAsync();
-
-
+    return realm.where(DataSensorRealm.class).findAllAsync()
+            .sort("time", Sort.DESCENDING);
   }
 
   private int getNextKey() {

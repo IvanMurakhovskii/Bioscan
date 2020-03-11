@@ -14,6 +14,7 @@ import android.util.Log;
 import com.murik.enose.App;
 import com.murik.enose.service.BluetoothService;
 import java.util.List;
+import java.util.Objects;
 
 public class BluetoothImplService extends Service implements BluetoothService {
   private final static String TAG = BluetoothImplService.class.getSimpleName();
@@ -29,7 +30,7 @@ public class BluetoothImplService extends Service implements BluetoothService {
 
 
   public final static String ACTION_SEND_DEVICE =
-      "com.murik.enose.ACTION_GATT_CONNECTED";
+      "com.murik.enose.ACTION_SEND_DEVICE";
   public final static String ACTION_GATT_CONNECTED =
       "com.murik.enose.ACTION_GATT_CONNECTED";
   public final static String ACTION_GATT_DISCONNECTED =
@@ -141,7 +142,7 @@ public class BluetoothImplService extends Service implements BluetoothService {
   @Override
   public IBinder onBind(Intent intent) {
     String action = intent.getAction();
-    if(action.equals(ACTION_SEND_DEVICE)){
+    if(Objects.equals(action, ACTION_SEND_DEVICE)){
       device = intent.getParcelableExtra("DEVICE");
       mBluetoothGatt = device.connectGatt(getApplicationContext(), false, mBluetoothGattCallback);
     }
@@ -152,7 +153,7 @@ public class BluetoothImplService extends Service implements BluetoothService {
   public int onStartCommand(Intent intent, int flags, int startId) {
 
     String action = intent.getAction();
-    if(action.equals(ACTION_SEND_DEVICE)){
+    if(Objects.equals(action, ACTION_SEND_DEVICE)){
       device = intent.getParcelableExtra("DEVICE");
 
       mBluetoothGatt = device.connectGatt(getApplicationContext(), false, mBluetoothGattCallback);

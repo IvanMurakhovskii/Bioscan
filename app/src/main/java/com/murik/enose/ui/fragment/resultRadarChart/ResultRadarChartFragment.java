@@ -21,7 +21,7 @@ import com.github.mikephil.charting.data.RadarEntry;
 import com.github.mikephil.charting.interfaces.datasets.IRadarDataSet;
 import com.murik.enose.Const;
 import com.murik.enose.R;
-import com.murik.enose.model.dto.SensorDataFullParcelable;
+import com.murik.enose.dto.SensorDataFullParcelable;
 import com.murik.enose.presentation.presenter.resultRadarChart.ResultRadarChartPresenter;
 import com.murik.enose.presentation.view.resultRadarChart.ResultRadarChartView;
 import java.util.ArrayList;
@@ -152,6 +152,7 @@ public class ResultRadarChartFragment extends MvpAppCompatFragment implements Re
     radarChart.invalidate();
 
   }
+
   @Override
   public void setTvRadarAreaLeft(String areaLeft) {
     this.tvRadarAreaLeft.setText(areaLeft);

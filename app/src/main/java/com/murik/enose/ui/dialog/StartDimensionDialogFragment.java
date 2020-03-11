@@ -16,6 +16,8 @@ import android.widget.Spinner;
 import com.murik.enose.Const;
 import com.murik.enose.R;
 
+import java.util.Objects;
+
 public class StartDimensionDialogFragment extends DialogFragment {
 
 
@@ -41,7 +43,7 @@ public class StartDimensionDialogFragment extends DialogFragment {
   @Override
   public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
     builder = new AlertDialog.Builder(getActivity());
-    LayoutInflater inflater = getActivity().getLayoutInflater();
+    LayoutInflater inflater = Objects.requireNonNull(getActivity()).getLayoutInflater();
     View view = inflater.inflate(R.layout.dialog_start_dimension, null);
     descriptions = view.findViewById(R.id.start_dimension_description);
     rgGender = view.findViewById(R.id.rg_gender_des);

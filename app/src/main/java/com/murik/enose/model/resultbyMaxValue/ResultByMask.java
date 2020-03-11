@@ -21,8 +21,8 @@ public class ResultByMask {
   }
   
   public void calculateA(){
-    double max = 0;
-    double tmp = 0;
+    double max;
+    double tmp;
 
     for (int i = 0; i < dataSensorMax.size() - 1; i++){
       max = dataSensorMax.get(i);
@@ -31,9 +31,9 @@ public class ResultByMask {
           tmp = max/dataSensorMax.get(j);
           if(!Double.isNaN(tmp) && !Double.isInfinite(tmp)){
             if(tmp > 1.0){
-              tmp = new BigDecimal(tmp).setScale(1, RoundingMode.CEILING).doubleValue();
+              tmp = new BigDecimal(tmp).setScale(1, RoundingMode.HALF_EVEN).doubleValue();
             } else {
-              tmp = new BigDecimal(tmp).setScale(2, RoundingMode.CEILING).doubleValue();
+              tmp = new BigDecimal(tmp).setScale(2, RoundingMode.HALF_EVEN).doubleValue();
             }
           }
 
@@ -44,7 +44,7 @@ public class ResultByMask {
   }
 
   public void calculateSignalParts() {
-      double tmpSignal = 0;
+      double tmpSignal;
       int maxSensorSum = 0;
       for (int i = 0; i < dataSensorMax.size(); i++){
         maxSensorSum += dataSensorMax.get(i);
@@ -102,18 +102,4 @@ public class ResultByMask {
   public double getA6_8(){return A.get(5).get(1);}
 
   public double getA7_8(){return A.get(6).get(0);}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 }

@@ -34,8 +34,10 @@
   <string name="disconnect_bluetooth_gatt">Отключить прибор</string>
   <string name="no_choice_select">ничего не выбрано</string>
   <string name="add_file">Добавить файл</string>
+    <string name="standard">Стандарт</string>
+    <string name="diagram">Диаграмма</string>
 
-  <string-array name="dimension_mode">
+    <string-array name="dimension_mode">
     <item>Просто</item>
     <item>Классик</item>
   </string-array>

@@ -6,6 +6,7 @@ import android.annotation.SuppressLint;
 import android.bluetooth.BluetoothAdapter;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.os.Build;
@@ -34,8 +35,8 @@ import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.murik.enose.App;
 import com.murik.enose.R;
 import com.murik.enose.Screens;
-import com.murik.enose.model.dto.DataByMaxParcelable;
-import com.murik.enose.model.dto.SensorDataFullParcelable;
+import com.murik.enose.dto.DataByMaxParcelable;
+import com.murik.enose.dto.SensorDataFullParcelable;
 import com.murik.enose.presentation.presenter.start.StartPresenter;
 import com.murik.enose.presentation.view.start.StartView;
 import com.murik.enose.service.Impl.BluetoothImplService;
@@ -44,9 +45,11 @@ import com.murik.enose.ui.fragment.LiveBluetoothChart.LiveBluetoothChartFragment
 import com.murik.enose.ui.fragment.bluetooth.BluetoothConnectionFragment;
 import com.murik.enose.ui.fragment.dimension.BluetoothDimensionFragment;
 import com.murik.enose.ui.fragment.input.InputFragment;
+import com.murik.enose.ui.fragment.oneSensorMeasure.OneSensorTabContainerFragment;
 import com.murik.enose.ui.fragment.parserXml.ParserXmlFragment;
 import com.murik.enose.ui.fragment.realm.RealmFragment;
 import com.murik.enose.ui.fragment.result.ResultTabFragment;
+import com.murik.enose.ui.fragment.bar_chart.ResultBarChartFragment;
 import com.murik.enose.ui.fragment.resultRadarChart.RadarTabContentFragment;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -77,6 +80,13 @@ public class StartActivity extends MvpAppCompatActivity implements StartView, On
     navigator = new SupportFragmentNavigator(getSupportFragmentManager(), R.id.main_container) {
       @Override
       protected Fragment createFragment(String screenKey, Object data) {
+
+        if(screenKey.equals(Screens.RESULT_BAR_CHART_FRAGMENT)){
+          setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+        } else {
+          setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+        }
+
         switch (screenKey) {
           case Screens.RESULT_FRAGMENT:
             return ResultTabFragment.newInstance((DataByMaxParcelable) data);
@@ -94,8 +104,12 @@ public class StartActivity extends MvpAppCompatActivity implements StartView, On
               return LiveBluetoothChartFragment.newInstance();
           case Screens.BLUETOOTH_DIMENSION_FRAGMENT:
             return BluetoothDimensionFragment.newInstance();
+          case Screens.ONE_SENSOR_MEASURE_FRAGMENT:
+            return OneSensorTabContainerFragment.newInstance((DataByMaxParcelable) data);
+          case Screens.RESULT_BAR_CHART_FRAGMENT:
+            return ResultBarChartFragment.newInstance((DataByMaxParcelable) data);
           default:
-            throw new RuntimeException("Unkown screen key");
+            throw new RuntimeException("Unknown screen key");
 
         }
       }

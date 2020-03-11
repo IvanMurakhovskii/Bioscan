@@ -4,13 +4,13 @@ import android.content.Context;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
-import com.murik.enose.model.dto.DataByMaxParcelable;
+import com.murik.enose.dto.DataByMaxParcelable;
 import com.murik.enose.ui.fragment.result.ResultFragment;
 
 public class ResultTabPageAdapter extends FragmentPagerAdapter {
-  final int PAGE_COUNT = 3;
-  DataByMaxParcelable inputDataParcelable;
-  private String tabTitles[] = new String[] {"ЛЕВАЯ ", "ПРАВАЯ", "СРЕДНЕЕ"};
+  private final int PAGE_COUNT = 3;
+  private DataByMaxParcelable inputDataParcelable;
+  private String[] tabTitles = new String[]{"ЛЕВАЯ ", "ПРАВАЯ", "СРЕДНЕЕ"};
   private Context context;
 
 

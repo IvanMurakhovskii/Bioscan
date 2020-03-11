@@ -1,5 +1,6 @@
 package com.murik.enose.ui.fragment.result;
 
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -10,13 +11,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import com.murik.enose.R;
-import com.murik.enose.model.dto.DataByMaxParcelable;
+import com.murik.enose.dto.DataByMaxParcelable;
 import com.murik.enose.ui.fragment.result.tab.ResultTabPageAdapter;
+
+import java.util.Objects;
 
 public class ResultTabFragment  extends Fragment {
 
   public static final String CALCULATE_A_KEY = "RESULT_A";
-
+  public static final String MEASURE_TYPE = "MEASURE_TYPE";
 
   DataByMaxParcelable inputDataParcelable;
   private TabLayout tabLayout;
@@ -50,7 +53,7 @@ public class ResultTabFragment  extends Fragment {
     tabLayout = view.findViewById(R.id.sliding_tabs);
     viewPager = view.findViewById(R.id.viewpager);
 
-    ResultTabPageAdapter adapter = new ResultTabPageAdapter(getChildFragmentManager(), getActivity().getApplicationContext(), inputDataParcelable);
+    ResultTabPageAdapter adapter = new ResultTabPageAdapter(getChildFragmentManager(), Objects.requireNonNull(getActivity()).getApplicationContext(), inputDataParcelable);
     viewPager.setAdapter(adapter);
 
     tabLayout.setupWithViewPager(viewPager);

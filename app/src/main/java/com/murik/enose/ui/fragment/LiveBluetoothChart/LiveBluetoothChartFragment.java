@@ -30,6 +30,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class LiveBluetoothChartFragment extends MvpAppCompatFragment implements LiveBluetoothChartView {
 
@@ -59,24 +60,16 @@ public class LiveBluetoothChartFragment extends MvpAppCompatFragment implements 
       if (BluetoothImplService.ACTION_CHARACTERISTIC_CHANGE.equals(action)) {
         String str = intent.getStringExtra(BluetoothImplService.EXTRA_DATA);
         mLiveBluetoothChartPresenter.addDataFromDevice(str);
-        Observable.create(emitter -> {
-
-        })
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe();
 
        for(int i = 0;i <  str.length(); i=i+8){
           Log.d("MyLog","sens_count =  " + Integer.decode(str.substring(i, i+1)) + " value =  "
-              + Integer.parseInt(str.substring(i+1, i+8),16));
+              + Integer.parseInt(str.substring(i + 1, i + 8),16));
         }
 
       } else if (BluetoothAdapter.ACTION_DISCOVERY_FINISHED.equals(action)) {
       }
     }
   };
-
-
 
   public static LiveBluetoothChartFragment newInstance() {
     LiveBluetoothChartFragment fragment = new LiveBluetoothChartFragment();
@@ -106,9 +99,7 @@ public class LiveBluetoothChartFragment extends MvpAppCompatFragment implements 
     lineChart8 = view.findViewById(R.id.line_graph8);
 
     fabStartDimension = view.findViewById(R.id.btnStartDimension);
-    fabStartDimension.setOnClickListener(event -> {
-      App.INSTANCE.getRouter().replaceScreen(Screens.BLUETOOTH_DIMENSION_FRAGMENT);
-    });
+    fabStartDimension.setOnClickListener(event -> App.INSTANCE.getRouter().replaceScreen(Screens.BLUETOOTH_DIMENSION_FRAGMENT));
 
     mLiveBluetoothChartPresenter.initLineChart();
   }
@@ -118,14 +109,14 @@ public class LiveBluetoothChartFragment extends MvpAppCompatFragment implements 
     super.onResume();
     IntentFilter filter = new IntentFilter();
     filter.addAction(BluetoothImplService.ACTION_CHARACTERISTIC_CHANGE);
-    getActivity().registerReceiver(broadcastReceiver, filter);
+    Objects.requireNonNull(getActivity()).registerReceiver(broadcastReceiver, filter);
 
   }
 
   @Override
   public void onStop() {
     super.onStop();
-    getActivity().unregisterReceiver(broadcastReceiver);
+    Objects.requireNonNull(getActivity()).unregisterReceiver(broadcastReceiver);
   }
 
 

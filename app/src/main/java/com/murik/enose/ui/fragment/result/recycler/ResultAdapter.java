@@ -55,7 +55,6 @@ public class ResultAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
     }
   }
 
-
   @Override
   public int getItemCount() {
     return presenter.getResultRowsCount();

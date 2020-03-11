@@ -3,7 +3,7 @@ package com.murik.enose.model.A;
 import android.content.Context;
 import com.murik.enose.Const;
 import com.murik.enose.R;
-import com.murik.enose.model.dto.DataByMaxParcelable;
+import com.murik.enose.dto.DataByMaxParcelable;
 import com.murik.enose.model.resultbyMaxValue.BaseResult;
 
 public class ResultA6_7 extends BaseResult {
@@ -16,20 +16,20 @@ public class ResultA6_7 extends BaseResult {
 
   @Override
   public void setResult() {
-    if(getA() < 0.85 && getA() >= 0.6){
+    if(getA() < 0.85 && getA() >= 0.45){
       setColorGREEN();
     } else if(getA() >= 0.85 && getA() < 0.9){
       setColorYELLOW();
       setPossibleReasons(getResources(R.string.A6_7_YELLOW));
     } else if(getA() >= 0.38 && getA() <= 0.44){
-      setColorRED();
-      setPossibleReasons(getResources(R.string.A6_7_RED2));
+      setColorGRAY();
+      setPossibleReasons(getResources(R.string.A6_7_GRAY));
     }else if(getA() >= 0.9){
       setColorRED();
       if(getInputData().getGender() == Const.GENDER_FEMININE){
-        setPossibleReasons(getResources(R.string.FEMININE) +"\n"+ getResources(R.string.A6_7_RED));
+        setPossibleReasons(getResources(R.string.A6_7_RED_FEMININE));
       } else {
-        setPossibleReasons(getResources(R.string.A6_7_RED));
+        setPossibleReasons(getResources(R.string.A6_7_RED_MAN));
       }
     }
   }

@@ -1,8 +1,10 @@
 package com.murik.enose.model.A;
 
 import android.content.Context;
+import android.graphics.Color;
+
 import com.murik.enose.R;
-import com.murik.enose.model.dto.DataByMaxParcelable;
+import com.murik.enose.dto.DataByMaxParcelable;
 import com.murik.enose.model.resultbyMaxValue.BaseResult;
 
 public class ResultA6_8 extends BaseResult {
@@ -15,11 +17,8 @@ public class ResultA6_8 extends BaseResult {
   @Override
   public void setResult() {
     if(getA() > 0.29 && getA() <= 0.32){
-      setColorBLUE();
-      setPossibleReasons(getResources(R.string.A6_8_BLUE));
-    } else if(getA() >0.1 && getA() <0.14){
-      setColorBLUE();
-      setPossibleReasons(getResources(R.string.A6_8_BLUE2));
+      setColorYELLOW();
+      setPossibleReasons(getResources(R.string.A6_8_YELLOW3));
     } else if(getA() > 0.2 && getA() <= 0.28){
       setColorGREEN();
     } else if(getA() >= 0.5 && getA() <= 0.6){
@@ -31,9 +30,18 @@ public class ResultA6_8 extends BaseResult {
     } else if(getA() > 0.28 && getA() < 0.294){
       setColorRED();
       setPossibleReasons(getResources(R.string.A6_8_RED));
-    } else if(getA() > 0.17 && getA() < 0.2) {
+    } else if(getA() > 0.17 && getA() < 0.21) {
       setColorGRAY();
       setPossibleReasons(getResources(R.string.A6_8_GRAY));
+    } else if(getA() > 0.11 && getA() < 0.12) {
+      setColorGRAY();
+      setPossibleReasons(getResources(R.string.A6_8_GRAY2));
+    } else if(getA() >= 0.07 && getA() <= 0.11) {
+      setColorGRAY();
+      setPossibleReasons(getResources(R.string.A6_8_GRAY3));
+    } else if(getA() > 0.15 && getA() < 0.17) {
+      setColor(Color.WHITE);
+      setPossibleReasons(getResources(R.string.A6_8_WHITE));
     }
   }
 }

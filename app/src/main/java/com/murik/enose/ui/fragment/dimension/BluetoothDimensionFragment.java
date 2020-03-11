@@ -33,6 +33,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.Objects;
 
 public class BluetoothDimensionFragment extends MvpAppCompatFragment implements BluetoothDimensionView,
     DialogListener {
@@ -77,21 +78,6 @@ public class BluetoothDimensionFragment extends MvpAppCompatFragment implements 
               + Integer.parseInt(str.substring(i + 1, i + 8), 16));
 
         }
-        /*timerDisposable =  Observable.interval(1, TimeUnit.SECONDS, Schedulers.io())
-            .take(12)
-            .map(v -> 12 - v)
-            .subscribe(
-                onNext -> {
-                  if(isDimensoinStart) {
-                     mBluetoothDimensionPresenter.getDimensionData(str);
-                    }
-                  },
-                omError -> {},
-                () -> {},
-                onSubscribe -> {
-
-                }
-            );*/
 
         if(isDimensoinStart){
           if(count < DIMENSION_TIME*2){
@@ -129,6 +115,7 @@ public class BluetoothDimensionFragment extends MvpAppCompatFragment implements 
       return inflater.inflate(R.layout.fragment_bluetooth_dimension, container, false);
     }
 
+    @SuppressLint("SetJavaScriptEnabled")
     @Override
     public void onViewCreated(final View view, final Bundle savedInstanceState) {
       super.onViewCreated(view, savedInstanceState);
@@ -139,7 +126,7 @@ public class BluetoothDimensionFragment extends MvpAppCompatFragment implements 
       webView.setWebChromeClient(new WebChromeClient());
       webSettings.setJavaScriptEnabled(true);
       startDimensionDialogFragment = new StartDimensionDialogFragment();
-      startDimensionDialogFragment.show(getFragmentManager(), DIALOG_START_TAG);
+      startDimensionDialogFragment.show(Objects.requireNonNull(getFragmentManager()), DIALOG_START_TAG);
       startDimensionDialogFragment.setDialogListener(this);
       webView.addJavascriptInterface(new WebAppInterface(getContext()), "Android");
     }

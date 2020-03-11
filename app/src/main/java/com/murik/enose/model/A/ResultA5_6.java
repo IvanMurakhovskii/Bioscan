@@ -3,7 +3,7 @@ package com.murik.enose.model.A;
 import android.content.Context;
 import android.graphics.Color;
 import com.murik.enose.R;
-import com.murik.enose.model.dto.DataByMaxParcelable;
+import com.murik.enose.dto.DataByMaxParcelable;
 import com.murik.enose.model.resultbyMaxValue.BaseResult;
 
 public class ResultA5_6 extends BaseResult {

@@ -17,7 +17,7 @@ import com.arellomobile.mvp.MvpAppCompatFragment;
 import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.murik.enose.Const;
 import com.murik.enose.R;
-import com.murik.enose.model.dto.DataByMaxParcelable;
+import com.murik.enose.dto.DataByMaxParcelable;
 import com.murik.enose.presentation.presenter.input.InputPresenter;
 import com.murik.enose.presentation.view.input.InputView;
 import ernestoyaquello.com.verticalstepperform.VerticalStepperFormLayout;
@@ -37,7 +37,7 @@ public class InputFragment extends MvpAppCompatFragment implements InputView, Ve
   @InjectPresenter
   InputPresenter mInputPresenter;
 
-  //discriptins step
+  //discriptiоns step
   private EditText etDiscriptions;
 
   //other informations step

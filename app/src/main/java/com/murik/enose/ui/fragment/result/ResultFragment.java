@@ -4,6 +4,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog.Builder;
 import android.support.v7.widget.LinearLayoutManager;
@@ -23,7 +24,7 @@ import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.data.PieEntry;
 import com.murik.enose.R;
 import com.murik.enose.model.ResultBySens;
-import com.murik.enose.model.dto.DataByMaxParcelable;
+import com.murik.enose.dto.DataByMaxParcelable;
 import com.murik.enose.presentation.presenter.result.ResultPresenter;
 import com.murik.enose.presentation.view.result.ResultView;
 import com.murik.enose.ui.fragment.result.recycler.ResultAdapter;
@@ -44,6 +45,7 @@ public class ResultFragment extends MvpAppCompatFragment implements ResultView {
 
   private RecyclerView mResultRecycler;
   private PieChart pieChart;
+  private FloatingActionButton fab_diagram;
 
   public static Fragment newInstance(DataByMaxParcelable resultBySens, int mPage) {
     ResultFragment fragment = new ResultFragment();
@@ -80,15 +82,16 @@ public class ResultFragment extends MvpAppCompatFragment implements ResultView {
     super.onViewCreated(view, savedInstanceState);
     mResultRecycler = view.findViewById(R.id.result_recycler_view);
     pieChart = view.findViewById(R.id.result_pie_chart);
+    fab_diagram = view.findViewById(R.id.fab_diagram);
     mResultPresenter.setContext(getContext());
+
+    fab_diagram.setOnClickListener((event) -> mResultPresenter.showDiagram());
   }
 
 
   @Override
   public void onStop() {
     super.onStop();
-    //mResultPresenter.detachView(this);
-    //getArguments().clear();
   }
 
   public void initPieChart(ArrayList<ResultBySens> sensResult) {
@@ -146,7 +149,6 @@ public class ResultFragment extends MvpAppCompatFragment implements ResultView {
 
   @Override
   public void calculateResult() {
-
     mResultPresenter.calculateResult(inputDataParcelable, mPage);
   }
 
