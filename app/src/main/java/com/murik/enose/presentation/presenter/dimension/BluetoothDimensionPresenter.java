@@ -37,7 +37,14 @@ public class BluetoothDimensionPresenter extends MvpPresenter<BluetoothDimension
   private Map<String, ArrayList<Integer>> data = new HashMap<>();
   private ArrayList<Integer> arrDataSens1 = new ArrayList<>();
 
-  private List<Integer> sens1 = new ArrayList<>();
+
+  private String description;
+  private boolean isPractice;
+  private int gender = Const.GENDER_MALE;
+  private boolean isLeftHand = false;
+
+  private List<Integer> sens1LeftHand = new ArrayList<>();
+  private List<Integer> sens1RightHand = new ArrayList<>();
   private List<Integer> sens2 = new ArrayList<>();
   private List<Integer> sens3 = new ArrayList<>();
   private List<Integer> sens4 = new ArrayList<>();
@@ -49,87 +56,54 @@ public class BluetoothDimensionPresenter extends MvpPresenter<BluetoothDimension
   Map<String, ArrayList<Integer>> dataLeftHand = new HashMap<>();
   Map<String, ArrayList<Integer>> dataRightHand = new HashMap<>();
 
-  private RealmController realmController = new RealmController();
 
-  public boolean isFirstDimension = true;
-  private Map<Integer, Number> value = new HashMap<>();
-
-  private int count = 0;
   @Override
   protected void onFirstViewAttach() {
     super.onFirstViewAttach();
   }
 
 
-
-  public void getDimensionData(String str) {
-    int  sensNumber = 0;
-    int sensValue = 0;
-    /*if(sens1.size() == 10){
-      if(isFirstDimension){
-        isFirstDimension = false;
-        getViewState().stopChartRender();
-        getViewState().showContinueDialog();
-      } else {
-
-        if(dataLeftHand == null){
-          saveData(true);
-        } else {
-          saveData(false);
-        }
-
-        //todo save()
-      }
-
-    }*/
-    for(int i = 0;i <  str.length(); i=i+8) {
-      sensNumber = Integer.decode(str.substring(i, i + 1));
-      sensValue = Integer.parseInt(str.substring(i + 1, i + 8), 16);
-      if (initial.size() < 8) {
-          initial.put((sensNumber), sensValue);
-        } else {
-        if(sensNumber == 1){
-          sens1.add(initial.get(sensNumber) -  sensValue);
-
-        }if(sensNumber == 2){
-          sens2.add(initial.get(sensNumber) -  sensValue);
-
-        }if(sensNumber == 3){
-          sens3.add(initial.get(sensNumber) -  sensValue);
-
-        }if(sensNumber == 4){
-          sens4.add(initial.get(sensNumber) -  sensValue);
-
-        }if(sensNumber == 5){
-          sens5.add(initial.get(sensNumber) -  sensValue);
-
-        }if(sensNumber == 6){
-          sens6.add(initial.get(sensNumber) -  sensValue);
-
-        }if(sensNumber == 7){
-          sens7.add(initial.get(sensNumber) -  sensValue);
-
-        }if(sensNumber == 8){
-          sens8.add(initial.get(sensNumber) -  sensValue);
-        }
-      }
-    }
+  public void setDimensionParametrs(final String description, final int gender, final boolean isPractice, final boolean isLeftHand) {
+    this.description = description;
+    this.gender = gender;
+    this.isPractice = isPractice;
+    this.isLeftHand = isLeftHand;
   }
 
-  public void save(String description, boolean isPractice, int gender){
+  public void save(){
     SensorDataFullParcelable sensorDataFullParcelable = new SensorDataFullParcelable();
     sensorDataFullParcelable.setDescriptions(description);
     sensorDataFullParcelable.setFullData(true);
     sensorDataFullParcelable.setGender(gender);
     sensorDataFullParcelable.setPractice(isPractice);
+
+    dataLeftHand.put(Const.SENSOR_1, new ArrayList<>(sens1LeftHand));
+    dataRightHand.put(Const.SENSOR_1, new ArrayList<>(sens1RightHand));
+
     sensorDataFullParcelable.setDataSensorMapLeftHand(dataLeftHand);
     sensorDataFullParcelable.setDataSensorMapRightHand(dataRightHand);
 
-    realmController.addInfoFull(sensorDataFullParcelable);
-    App.INSTANCE.getRouter().navigateTo(Screens.REALM_FRAGMENT);
+    RealmController controller = new RealmController();
+    controller.addInfoFull(sensorDataFullParcelable);
   }
 
-  public void saveData(boolean isLeftHand){
+  public void addSens1DataLeftHand(int value) {
+    sens1LeftHand.add(value);
+  }
+
+  public List<Integer> getSens1DataLeftHand() {
+    return sens1LeftHand;
+  }
+
+  public void addSens1DataRightHand (int value) {
+    sens1RightHand.add(value);
+  }
+
+  public List<Integer> getSens1DataRightHand () {
+    return sens1RightHand;
+  }
+
+  /*public void saveData(boolean isLeftHand){
     Map<String, ArrayList<Integer>> data = new HashMap<>();
     data.put(Const.SENSOR_1, new ArrayList<>(sens1));
     data.put(Const.SENSOR_2, new ArrayList<>(sens2));
@@ -145,26 +119,14 @@ public class BluetoothDimensionPresenter extends MvpPresenter<BluetoothDimension
     } else {
       dataRightHand = data;
     }
-  }
+  }*/
 
-  public void clearData(){
-    sens1.clear();
-    sens2.clear();
-    sens3.clear();
-    sens4.clear();
-    sens5.clear();
-    sens6.clear();
-    sens7.clear();
-    sens8.clear();
-    initial.clear();
-  }
-
-  public int getLastDataSens1() {
+ /* public int getLastDataSens1() {
     if(sens1.size() > 1){
       return sens1.get(sens1.size() - 1);
     }
     return 0;
-  }
+  }*/
 
   public int getLastDataSens2() {
     if(sens2.size() > 1){
@@ -214,5 +176,7 @@ public class BluetoothDimensionPresenter extends MvpPresenter<BluetoothDimension
     }
     return 0;
   }
+
+
 
 }

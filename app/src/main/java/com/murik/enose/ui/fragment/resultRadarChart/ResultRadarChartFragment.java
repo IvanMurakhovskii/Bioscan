@@ -48,7 +48,7 @@ public class ResultRadarChartFragment extends MvpAppCompatFragment implements Re
   private TextView tvDeltaRight180;
   private TextView tv_difference;
   private LinearLayout llDeltaLeft180;
-  private LinearLayout llDeltalRight180;
+  private LinearLayout llDeltaRight180;
   private LinearLayout ll_Difference;
   private Button btnResult;
 
@@ -86,7 +86,7 @@ public class ResultRadarChartFragment extends MvpAppCompatFragment implements Re
     tvDeltaLeft180 = view.findViewById(R.id.tv_radar_delta_left_180);
     tvDeltaRight180 = view.findViewById(R.id.tv_radar_delta_right_180);
     llDeltaLeft180 = view.findViewById(R.id.ll_delta_180_left_id);
-    llDeltalRight180 = view.findViewById(R.id.ll_delta_180_right_id);
+    llDeltaRight180 = view.findViewById(R.id.ll_delta_180_right_id);
     tv_difference = view.findViewById(R.id.tv_difference);
     ll_Difference = view.findViewById(R.id.ll_difference);
 
@@ -181,7 +181,7 @@ public class ResultRadarChartFragment extends MvpAppCompatFragment implements Re
 
   @Override
   public void setTvDeltaRight180(String deltaRight180) {
-    llDeltalRight180.setVisibility(View.VISIBLE);
+    llDeltaRight180.setVisibility(View.VISIBLE);
     tvDeltaRight180.setText(deltaRight180);
   }
 

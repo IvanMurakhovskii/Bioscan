@@ -5,48 +5,39 @@ import android.content.Context;
 import com.murik.enose.R;
 import com.murik.enose.dto.DataByMaxParcelable;
 import com.murik.enose.model.resultbyMaxValue.BaseResult;
+import com.murik.enose.model.resultbyMaxValue.BaseResultFirst;
 
-public class ResultA_First2_5_Gray extends BaseResult {
+public class ResultA_First2_5_Gray extends BaseResultFirst {
 
 
-    public ResultA_First2_5_Gray(double A, DataByMaxParcelable inputData, Context context) {
-        super(A, inputData, context);
-        setLegend("2_5G");
+    public ResultA_First2_5_Gray(double A, DataByMaxParcelable inputData, Context context, float coefficient) {
+        super(A, inputData, context, coefficient);
+        setLegend("VII_G");
     }
 
     public void setResult() {
-        setColorYELLOW();
-        setPossibleReasons("result");
-       if (getA() >=2.7 && getA() <= 4.9) {
-            setColorGRAY();
-            setPossibleReasons(getResources(R.string.A_SHORT_2_5_RED_2));
-        } else if (getA() <= 0) {
+        setColorGRAY();
+      if (getA() >= 0) {
             setColorGRAY();
             setPossibleReasons(getResources(R.string.A_SHORT_2_5_GRAY_1));
         } else if (getA() <= 1 && getA() >= 0) {
             setColorGRAY();
             setPossibleReasons(getResources(R.string.A_SHORT_2_5_GRAY_0));
-        } else if (getA() >= 0.7 && getA() <= 0.9) {
+        } else if (getA() >= 1.1 && getA() <= 1.4) {
             setColorGRAY();
             setPossibleReasons(getResources(R.string.A_SHORT_2_5_GRAY_2));
-        } else if (getA() >= 1.0 && getA() <= 1.4) {
+        } else if (getA() >= 0.66 && getA() <= 1.0) {
             setColorGRAY();
             setPossibleReasons(getResources(R.string.A_SHORT_2_5_GRAY_7));
-        } else if (getA() == 1) {
-            setColorGRAY();
-            setPossibleReasons(getResources(R.string.A_SHORT_2_5_GRAY_3));
-        } else if (getA() == 1.2) {
-            setColorGRAY();
-            setPossibleReasons(getResources(R.string.A_SHORT_2_5_GRAY_4));
-        } else if (getA() >=1.5 && getA() <= 2) {
-            setColorGRAY();
-            setPossibleReasons(getResources(R.string.A_SHORT_2_5_GRAY_5));
-        }else if (getA() >= 2.1 && getA() <= 2.7) {
+        } else if (getA() >= 0.5 && getA() <= 0.65) {
             setColorGRAY();
             setPossibleReasons(getResources(R.string.A_SHORT_2_5_GRAY_8));
-        } else if (getA() >= 2.8 && getA() <= 12) {
-            setColorGRAY();
-            setPossibleReasons(getResources(R.string.A_SHORT_2_5_GRAY_6));
-        }
+        } else if (getA() >= 0.08 && getA() <= 0.36) {
+           setColorGRAY();
+           setPossibleReasons(getResources(R.string.A_SHORT_2_5_GRAY_10));
+       } else if (getA() >= 0.37 && getA() <= 0.49) {
+           setColorGRAY();
+           setPossibleReasons(getResources(R.string.A_SHORT_2_5_GRAY_11));
+       }
     }
 }

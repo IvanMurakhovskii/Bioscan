@@ -11,6 +11,7 @@ import com.murik.enose.Screens;
 import com.murik.enose.dto.DataByMaxParcelable;
 import com.murik.enose.presentation.view.oneSensorMeasure.OneSensorMeasureView;
 import com.murik.enose.service.Impl.BaseMeasureService;
+import com.murik.enose.utils.ListUtils;
 
 import java.util.ArrayList;
 
@@ -26,15 +27,14 @@ public class OneSensorMeasurePresenter extends MvpPresenter<OneSensorMeasureView
 
         for (int key : mask) {
 
-            if (dataByMaxParcelable.getLeftHandDataSensor() != null) {
-                if (dataByMaxParcelable.getLeftHandDataSensor().size() >= mask.length - 1) {
-                    leftHandData.add(dataByMaxParcelable.getLeftHandDataSensor().get((key)));
-                }
+            val sensorDataLeft = dataByMaxParcelable.getLeftHandDataSensor();
+            if (ListUtils.listSizeCondition(sensorDataLeft, key)) {
+                leftHandData.add(sensorDataLeft.get(key));
             }
-            if (dataByMaxParcelable.getRightHandDataSensor() != null) {
-                if (dataByMaxParcelable.getRightHandDataSensor().size() >= mask.length - 1) {
-                    rightHandData.add(dataByMaxParcelable.getRightHandDataSensor().get((key)));
-                }
+
+            val sensorDataRight = dataByMaxParcelable.getRightHandDataSensor();
+            if (ListUtils.listSizeCondition(sensorDataRight, key)) {
+                rightHandData.add(sensorDataRight.get(key));
             }
         }
 
@@ -43,7 +43,8 @@ public class OneSensorMeasurePresenter extends MvpPresenter<OneSensorMeasureView
                 leftHandData.set(i, 0);
             }
         }
-        for (int i = 0; i < rightHandData.size(); i++) {
+        for (
+                int i = 0; i < rightHandData.size(); i++) {
             if (rightHandData.get(i) < 0) {
                 rightHandData.set(i, 0);
             }
@@ -52,96 +53,68 @@ public class OneSensorMeasurePresenter extends MvpPresenter<OneSensorMeasureView
         ArrayList<RadarEntry> entryLeftHand = new ArrayList<>();
         ArrayList<RadarEntry> entryRightHand = new ArrayList<>();
 
-        for (int i = 0; i < leftHandData.size(); i++) {
+        for (
+                int i = 0; i < leftHandData.size(); i++) {
             entryLeftHand.add(new RadarEntry(leftHandData.get(i), i));
         }
-        for (int i = 0; i < rightHandData.size(); i++) {
+        for (
+                int i = 0; i < rightHandData.size(); i++) {
             entryRightHand.add(new RadarEntry(rightHandData.get(i), i));
         }
 
-        getViewState().initRadarChart(
-                entryLeftHand
-                , entryRightHand
-                , dataByMaxParcelable.getDescriptions()
-                , colorLeft
-                , colorRight
-        );
+        getViewState().
+                initRadarChart(
+                        entryLeftHand,
+                        entryRightHand,
+                        dataByMaxParcelable.getDescriptions(),
+                        colorLeft,
+                        colorRight
+                );
     }
 
     public void createRadarChart(int mPage, final DataByMaxParcelable dataByMaxParcelable, final BaseMeasureService measureService) {
         float areaLeft = 0;
         float areaRight = 0;
-        float deltaLeft = 0;
-        float deltaRight = 0;
 
         float areaBodyLeft = measureService.getAreaByMask(Const.BODY, dataByMaxParcelable.getLeftHandDataSensor());
         float areaBodyRight = measureService.getAreaByMask(Const.BODY, dataByMaxParcelable.getRightHandDataSensor());
 
-        float areaLeftDanger = measureService.getAreaByMask(Const.DANGER, dataByMaxParcelable.getLeftHandDataSensor());
-        float areaRightDanger = measureService.getAreaByMask(Const.DANGER, dataByMaxParcelable.getRightHandDataSensor());
-
-        float areaLeftLungs = measureService.getAreaByMask(Const.LUNGS, dataByMaxParcelable.getLeftHandDataSensor());
-        float areaRightLungs = measureService.getAreaByMask(Const.LUNGS, dataByMaxParcelable.getRightHandDataSensor());
-
-        getViewState().setDeltaDangerOnLungsLeft(measureService.calculateDifference(areaLeftDanger, areaLeftLungs));
-        getViewState().setDeltaDangerOnLungsRight(measureService.calculateDifference(areaRightDanger, areaRightLungs));
-
-
         switch (mPage) {
-            case Const.PAGE_SHORT:
-                initRadarChart(Const.SHORT, Color.RED, Color.BLUE, dataByMaxParcelable);
-                areaLeft = measureService.getAreaByMask(Const.SHORT, dataByMaxParcelable.getLeftHandDataSensor());
-                areaRight = measureService.getAreaByMask(Const.SHORT, dataByMaxParcelable.getRightHandDataSensor());
-
-                getViewState().setLeftPs_3425(measureService.getPS3425(dataByMaxParcelable.getLeftHandDataSensor(), Const.SHORT));
-                getViewState().setLeftPs_2435(measureService.getPS2435(dataByMaxParcelable.getLeftHandDataSensor(), Const.SHORT));
-
-                getViewState().setRightPs_3425(measureService.getPS3425(dataByMaxParcelable.getRightHandDataSensor(), Const.SHORT));
-                getViewState().setRightPs_2435(measureService.getPS2435(dataByMaxParcelable.getRightHandDataSensor(), Const.SHORT));
-
-                break;
-            case Const.PAGE_LONG:
-                initRadarChart(Const.LONG, Color.RED, Color.BLUE, dataByMaxParcelable);
-                areaLeft = measureService.getAreaByMask(Const.LONG, dataByMaxParcelable.getLeftHandDataSensor());
-                areaRight = measureService.getAreaByMask(Const.LONG, dataByMaxParcelable.getRightHandDataSensor());
-
-                getViewState().setLeftPs_3425(measureService.getPS3425(dataByMaxParcelable.getLeftHandDataSensor(), Const.LONG));
-                getViewState().setLeftPs_2435(measureService.getPS2435(dataByMaxParcelable.getLeftHandDataSensor(), Const.LONG));
-
-                getViewState().setRightPs_3425(measureService.getPS3425(dataByMaxParcelable.getRightHandDataSensor(), Const.LONG));
-                getViewState().setRightPs_2435(measureService.getPS2435(dataByMaxParcelable.getRightHandDataSensor(), Const.LONG));
-
-                break;
             case Const.PAGE_BODY:
                 initRadarChart(Const.BODY, Color.RED, Color.BLUE, dataByMaxParcelable);
                 areaLeft = areaBodyLeft;
                 areaRight = areaBodyRight;
                 break;
-            case Const.PAGE_LUNGS:
-                initRadarChart(Const.LUNGS, Color.RED, Color.BLUE, dataByMaxParcelable);
-                areaLeft = areaLeftLungs;
-                areaRight = areaRightLungs;
-
-                deltaLeft = measureService.calculateDelta(areaBodyLeft, areaLeft);
-                deltaRight = measureService.calculateDelta(areaBodyRight, areaRight);
-
-                getViewState().setLeftDelta(deltaLeft);
-                getViewState().setRightDelta(deltaRight);
+            case Const.PAGE_DISCRETE:
+                if (dataByMaxParcelable.getTimeRegistrationMaxSignal() == 80) {
+                    initRadarChart(Const.DISCRETE, Color.RED, Color.BLUE, dataByMaxParcelable);
+                    areaLeft = measureService.getAreaByMask(Const.DISCRETE, dataByMaxParcelable.getLeftHandDataSensor());
+                    areaRight = measureService.getAreaByMask(Const.DISCRETE, dataByMaxParcelable.getRightHandDataSensor());
+                } else {
+                    initRadarChart(Const.DISCRETE_60, Color.RED, Color.BLUE, dataByMaxParcelable);
+                    areaLeft = measureService.getAreaByMask(Const.DISCRETE_60, dataByMaxParcelable.getLeftHandDataSensor());
+                    areaRight = measureService.getAreaByMask(Const.DISCRETE_60, dataByMaxParcelable.getRightHandDataSensor());
+                }
+//                areaLeft = areaLeftDanger;
+//                areaRight = areaRightDanger;
                 break;
-            case Const.PAGE_DANGER:
-                initRadarChart(Const.DANGER, Color.RED, Color.BLUE, dataByMaxParcelable);
-                areaLeft = areaLeftDanger;
-                areaRight = areaRightDanger;
+            case Const.PAGE_ENERGY_ONE_SENSOR:
+                if (dataByMaxParcelable.getTimeRegistrationMaxSignal() == 80) {
+                    initRadarChart(Const.ENERGY, Color.RED, Color.BLUE, dataByMaxParcelable);
+                    areaLeft = measureService.getAreaByMask(Const.ENERGY, dataByMaxParcelable.getLeftHandDataSensor());
+                    areaRight = measureService.getAreaByMask(Const.ENERGY, dataByMaxParcelable.getRightHandDataSensor());
+                    break;
+                } else {
+                    initRadarChart(Const.ENERGY_60, Color.RED, Color.BLUE, dataByMaxParcelable);
+                    areaLeft = measureService.getAreaByMask(Const.ENERGY_60, dataByMaxParcelable.getLeftHandDataSensor());
+                    areaRight = measureService.getAreaByMask(Const.ENERGY_60, dataByMaxParcelable.getRightHandDataSensor());
+                    break;
+                }
 
-                deltaLeft = measureService.calculateDelta(areaBodyLeft, areaLeft);
-                deltaRight = measureService.calculateDelta(areaBodyRight, areaRight);
 
-                getViewState().setLeftDelta(deltaLeft);
-                getViewState().setRightDelta(deltaRight);
-                break;
         }
 
-        if(areaLeft != 0 && areaRight != 0) {
+        if (areaLeft != 0 && areaRight != 0) {
             getViewState().setAreaDifference(measureService.calculateDifference(areaLeft, areaRight));
         }
 
@@ -149,14 +122,8 @@ public class OneSensorMeasurePresenter extends MvpPresenter<OneSensorMeasureView
         getViewState().setRightArea(areaRight);
     }
 
-    public void btnResultClickListener(int page, DataByMaxParcelable dataByMaxParcelable) {
-        if (page == 0) {
-            dataByMaxParcelable.setMeasureType(Const.FIRST_MEASURE);
-        }
-        if (page == 1) {
-            dataByMaxParcelable.setMeasureType(Const.SECOND_MEASURE);
-        }
-
+    public void btnResultClickListener(DataByMaxParcelable dataByMaxParcelable) {
+        dataByMaxParcelable.setMeasureType(Const.ONE_SENSOR_MEASURE);
         App.INSTANCE.getRouter().navigateTo(Screens.RESULT_FRAGMENT, dataByMaxParcelable);
     }
 }

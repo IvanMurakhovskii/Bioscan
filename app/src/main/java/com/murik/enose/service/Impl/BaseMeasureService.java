@@ -1,5 +1,9 @@
 package com.murik.enose.service.Impl;
 
+import com.murik.enose.utils.ListUtils;
+
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.List;
 
 public class BaseMeasureService {
@@ -10,11 +14,14 @@ public class BaseMeasureService {
         int y2;
         if (data != null) {
             for (int key = 0; key < mask.length - 1; key++) {
-                if (data.size() >= mask[key]) {
+                 if (data.size() >= mask[key]) {
                     dx = mask[key] - mask[key + 1];
                     if (!data.isEmpty()) {
-                        y1 = data.get(mask[key]);
-                        y2 = data.get(mask[key + 1]);
+//                        y1 = data.get(mask[key]);
+//                        y2 = data.get(mask[key + 1]);
+
+                        y1 = ListUtils.listSizeCondition(data, mask[key]) ? data.get(mask[key]) : 0;
+                        y2 = ListUtils.listSizeCondition(data, mask[key + 1]) ? data.get(mask[key + 1]) : 0;
                         if (y1 * y2 > 0) {
                             area += Math.abs((y1 + y2) / 2f * dx);
                         } else {
@@ -67,5 +74,15 @@ public class BaseMeasureService {
             return ((float) (data.get(mask[1]) * data.get(mask[3])) / (float) (data.get(mask[2]) * data.get(mask[4])));
         }
         return 0f;
+    }
+
+    public Float getAreaDifference(final Float areaLeft, final Float areaRight) {
+        if(areaLeft != 0 && areaRight != 0){
+            Float areaTotalAverage = (areaLeft + areaRight) / 2;
+            Float areaTotalDifference = 2*((areaLeft - areaTotalAverage)/areaTotalAverage)*100;
+            BigDecimal bd = new BigDecimal(areaTotalDifference).setScale(1, RoundingMode.FLOOR);
+            return Math.abs(bd.floatValue());
+        }
+        return 0F;
     }
 }

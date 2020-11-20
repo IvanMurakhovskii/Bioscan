@@ -73,7 +73,13 @@ public class RealmFragment extends MvpAppCompatFragment implements RealmView, Di
 
   @Override
   public void onDialogPositiveClick(int id) {
-    mRealmPresenter.createMeasureByType(chooseTypeMeasureDialogFragment.getMeasureType(), chooseTypeMeasureDialogFragment.getChoosenSensor());
+    mRealmPresenter.createMeasureByType(
+            chooseTypeMeasureDialogFragment.getMeasureType(),
+            chooseTypeMeasureDialogFragment.getSelectedSensor(),
+            chooseTypeMeasureDialogFragment.getTimeRegistrationMaxSignal(),
+            chooseTypeMeasureDialogFragment.getSensorType(),
+            chooseTypeMeasureDialogFragment.getExpertType()
+    );
   }
 
   @Override

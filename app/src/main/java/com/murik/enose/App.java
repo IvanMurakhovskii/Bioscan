@@ -16,6 +16,7 @@ public class App extends Application {
     private Cicerone<Router> cicirone;
     private BluetoothAdapter mBluetoothAdapter;
     private BluetoothGatt mBluetoothGatt;
+
   @Override
   public void onCreate() {
     super.onCreate();

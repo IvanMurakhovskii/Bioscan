@@ -38,13 +38,13 @@
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
           android:text="Левая S = "
-          android:textSize="18sp"/>
+         />
         <TextView
           android:id="@+id/tv_radar_area_left"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
           android:layout_marginRight="8dp"
-          android:textSize="18sp"/>
+         />
       </LinearLayout>
 
       <LinearLayout
@@ -55,12 +55,12 @@
           android:layout_width="wrap_content"
           android:layout_height="match_parent"
           android:text="Левая Δ = "
-          android:textSize="18sp"/>
+         />
         <TextView
           android:id="@+id/tv_radar_delta_left"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
-          android:textSize="18sp"/>
+         />
       </LinearLayout>
 
       <LinearLayout
@@ -73,12 +73,12 @@
           android:layout_width="wrap_content"
           android:layout_height="match_parent"
           android:text="Δ_180 = "
-          android:textSize="18sp"/>
+         />
         <TextView
           android:id="@+id/tv_radar_delta_left_180"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
-          android:textSize="18sp"/>
+         />
       </LinearLayout>
     </LinearLayout>
     <LinearLayout
@@ -95,13 +95,13 @@
           android:layout_width="wrap_content"
           android:layout_height="match_parent"
           android:text="Правая S = "
-          android:textSize="18sp"/>
+         />
         <TextView
           android:id="@+id/tv_radar_area_right"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
           android:layout_marginRight="8dp"
-          android:textSize="18sp"/>
+         />
 
       </LinearLayout>
 
@@ -114,12 +114,12 @@
           android:layout_width="wrap_content"
           android:layout_height="match_parent"
           android:text="Правая Δ = "
-          android:textSize="18sp"/>
+         />
         <TextView
           android:id="@+id/tv_radar_delta_right"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
-          android:textSize="18sp"/>
+         />
       </LinearLayout>
 
       <LinearLayout
@@ -132,12 +132,12 @@
           android:layout_width="wrap_content"
           android:layout_height="match_parent"
           android:text="Δ_180 = "
-          android:textSize="18sp"/>
+         />
         <TextView
           android:id="@+id/tv_radar_delta_right_180"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
-          android:textSize="18sp"/>
+         />
       </LinearLayout>
     </LinearLayout>
   </LinearLayout>
@@ -152,12 +152,12 @@
       android:layout_height="wrap_content"
       android:textStyle="bold"
       android:text="Δ(ЛxП) = "
-      android:textSize="18sp"/>
+     />
     <TextView
       android:id="@+id/tv_difference"
       android:layout_width="wrap_content"
       android:textStyle="bold"
       android:layout_height="wrap_content"
-      android:textSize="18sp"/>
+     />
   </LinearLayout>
 </LinearLayout>

@@ -47,30 +47,106 @@ public class OneSensorShortMeasure {
     }
 
     public float getFirstA1_2() {
-        return A.get(0).get(1);
+        try {
+            return A.get(0).get(1);
+        } catch (Exception e) {
+            return -9999;
+        }
     }
 
     public float getFirstA2_3() {
-        return A.get(1).get(2);
+        try {
+            return A.get(1).get(2);
+        } catch (Exception e) {
+            return -9999;
+        }
     }
 
     public float getFirstA2_4() {
-        return A.get(1).get(3);
+        try {
+            return A.get(1).get(3);
+        } catch (Exception e) {
+            return -9999;
+        }
     }
 
     public float getFirstA2_5() {
-        return A.get(1).get(4);
+        try {
+            return A.get(1).get(4);
+        } catch (Exception e) {
+            return -9999;
+        }
+    }
+
+    public float getFirstA5_2() {
+        try {
+            return A.get(4).get(1);
+        } catch (Exception e) {
+            return -9999;
+        }
     }
 
     public float getFirstA1_5() {
-        return A.get(0).get(4);
+        try {
+            return A.get(0).get(4);
+        } catch (Exception e) {
+            return -9999;
+        }
     }
 
     public float getFirstA4_5() {
-        return A.get(3).get(4);
+        try {
+            return A.get(3).get(4);
+        } catch (Exception e) {
+            return -9999;
+        }
     }
 
     public float getFirstA5_4() {
-        return A.get(4).get(3);
+        try {
+            return A.get(4).get(3);
+        } catch (Exception e) {
+            return -9999;
+        }
+    }
+
+    public float getFirstA3_6() {
+        try {
+            return A.get(2).get(5);
+        } catch (Exception e) {
+            return -9999;
+        }
+    }
+
+    public float getFirstA3_2() {
+        try {
+            return A.get(2).get(1);
+        } catch (Exception e) {
+            return -9999;
+        }
+    }
+
+    public float getFirstA6_9() {
+        try {
+            return A.get(5).get(8);
+        } catch (Exception e) {
+            return -9999;
+        }
+    }
+
+    public float getFirstA4_7() {
+        try {
+            return A.get(3).get(6);
+        } catch (Exception e) {
+            return -9999;
+        }
+    }
+
+    public float getFirstA12_6() {
+        try {
+            return A.get(11).get(5);
+        } catch (Exception e) {
+            return -9999;
+        }
     }
 }

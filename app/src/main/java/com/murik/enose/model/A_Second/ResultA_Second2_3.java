@@ -2,43 +2,25 @@ package com.murik.enose.model.A_Second;
 
 import android.content.Context;
 
+import com.murik.enose.R;
 import com.murik.enose.dto.DataByMaxParcelable;
 import com.murik.enose.model.resultbyMaxValue.BaseResult;
+import com.murik.enose.model.resultbyMaxValue.BaseResultSecond;
 
-public class ResultA_Second2_3 extends BaseResult {
+public class ResultA_Second2_3 extends BaseResultSecond {
 
 
-  public ResultA_Second2_3(double A, DataByMaxParcelable inputData, Context context) {
-    super(A, inputData, context);
-    setLegend("2_3");
-  }
+    public ResultA_Second2_3(double A, DataByMaxParcelable inputData, Context context, float coefficient) {
+        super(A, inputData, context, coefficient);
+        setLegend("III");
+    }
 
     public void setResult() {
-    setColorYELLOW();
-    setPossibleReasons("result");
-       /* if (getA() >= 0.9 && getA() <= 1.14 && getInputData().isPractice()) {
-                setColorCRIMSON();
-                setPossibleReasons("Измерениееее");
-        } else if (getA() >= 0.9 && getA() <= 1.14) {
+        if ( getA() >= 0.73 && getA() <= 0.77) {
             setColorYELLOW();
-            setPossibleReasons("Измерениееее");
-        } else if (getA() > 1.3 && getA() < 1.7) {
-            setColorBLUE();
-            setPossibleReasons("");
-        } else if (getA() > 1.1 && getA() <= 2) {
-            setColorGREEN();
-        } else if (getA() < 0.9) {
+            setPossibleReasons(getResources(R.string.A_LONG_2_3_YELLOW));
+        } else if (getA() >=0.78 && getA() <= 0.85) {
             setColorRED();
-            setPossibleReasons("");
-        } else if (getA() > 2) {
-            setColorBURGUNDY();
-            setPossibleReasons("");
-        } else if (getA() > 1.5 && getA() <= 1.9) {
-            setColorRED();
-            setPossibleReasons("");
-        } else if (getA() > 0.30 && getA() <= 0.40) {
-            setColorGRAY();
-            setPossibleReasons("");
-        }*/
+        }
     }
 }

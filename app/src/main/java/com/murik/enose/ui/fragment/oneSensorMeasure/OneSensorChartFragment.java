@@ -4,6 +4,8 @@ import android.annotation.SuppressLint;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
+import android.support.v7.widget.CardView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -31,6 +33,7 @@ import com.murik.enose.ui.fragment.resultRadarChart.ResultRadarChartFragment;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class OneSensorChartFragment extends MvpAppCompatFragment implements OneSensorMeasureView {
 
@@ -46,12 +49,13 @@ public class OneSensorChartFragment extends MvpAppCompatFragment implements OneS
     private TextView tvLeftPs_2435;
     private TextView tvRightPs_3425;
     private TextView tvRightPs_2435;
+    private TextView tvDifferenceComment;
     private TextView tvAreaDifference;
     private TextView tvAreaDangerOnLungsLeft;
     private TextView tvAreaDangerOnLungsRight;
     private LinearLayout llLeftDelta;
     private LinearLayout llRightDelta;
-    private LinearLayout llAreaDifference;
+    private CardView llAreaDifference;
     private LinearLayout llRightPs_3425;
     private LinearLayout llRightPs_2435;
     private LinearLayout llLeftPs_3425;
@@ -123,9 +127,9 @@ public class OneSensorChartFragment extends MvpAppCompatFragment implements OneS
         tvAreaDifference = view.findViewById(R.id.tv_one_sensor_difference);
         llAreaDifference = view.findViewById(R.id.ll_one_sensor_difference);
 
-        hideButtonResult();
+        tvDifferenceComment = view.findViewById(R.id.tv_difference_comment);
 
-        btnResult.setOnClickListener(event -> oneSensorMeasurePresenter.btnResultClickListener(mPage, dataByMaxParcelable));
+        btnResult.setOnClickListener(event -> oneSensorMeasurePresenter.btnResultClickListener(dataByMaxParcelable));
 
         oneSensorMeasurePresenter.createRadarChart(mPage, dataByMaxParcelable, new BaseMeasureService());
     }
@@ -211,6 +215,31 @@ public class OneSensorChartFragment extends MvpAppCompatFragment implements OneS
     public void setAreaDifference(final float difference) {
         llAreaDifference.setVisibility(View.VISIBLE);
         tvAreaDifference.setText(String.format("%.2f", difference) + "%");
+
+        int color = ContextCompat.getColor(Objects.requireNonNull(getContext()), R.color.colorResultGreen);
+
+        if(difference <= 5.5) {
+           color = ContextCompat.getColor(Objects.requireNonNull(getContext()), R.color.colorResultGreen);
+        }
+
+        if(difference > 5.5 && difference <= 16.5) {
+            color = ContextCompat.getColor(Objects.requireNonNull(getContext()), R.color.colorResultYellow);
+        }
+
+        if(difference > 16.5 && difference <= 50) {
+            color = ContextCompat.getColor(Objects.requireNonNull(getContext()), R.color.colorResultRed);
+            tvDifferenceComment.setVisibility(View.VISIBLE);
+            tvDifferenceComment.setText("ОБРАТИТЕ ВНИМАНИЕ!");
+        }
+
+        if(difference > 50) {
+            color = ContextCompat.getColor(Objects.requireNonNull(getContext()), R.color.colorResultBurgundy);
+            tvDifferenceComment.setVisibility(View.VISIBLE);
+            tvDifferenceComment.setText("ОПАСНОЕ РАЗЛИЧИЕ!");
+        }
+
+
+        llAreaDifference.setBackgroundColor(color);
     }
 
     @Override
@@ -247,9 +276,5 @@ public class OneSensorChartFragment extends MvpAppCompatFragment implements OneS
     public void setDeltaDangerOnLungsRight(final float delta) {
         llDangerOnLungsAreaRight.setVisibility(View.VISIBLE);
         tvAreaDangerOnLungsRight.setText(String.format("%.2f", delta));
-    }
-
-    public void hideButtonResult() {
-        if (mPage > 1) btnResult.setVisibility(View.INVISIBLE);
     }
 }

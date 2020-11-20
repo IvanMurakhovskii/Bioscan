@@ -25,8 +25,6 @@ import java.util.Objects;
 public class RealmAdapter extends RealmRecyclerViewAdapter<DataSensorRealm, RealmViewHolder> {
 
   private RealmPresenter presenter;
-  private DataSensorRealm data;
-
 
   public RealmAdapter(@Nullable OrderedRealmCollection<DataSensorRealm> data, boolean autoUpdate, @NonNull RealmPresenter presenter, @NonNull FragmentManager fragmentManager) {
     super(data, autoUpdate);
@@ -54,7 +52,7 @@ public class RealmAdapter extends RealmRecyclerViewAdapter<DataSensorRealm, Real
       realmViewHolder.setTvTime(date);
 
       realmViewHolder.btnDelete.setOnClickListener(event -> realm.executeTransaction(r ->  {
-      RealmResults<DataSensorRealm> result = r.where(DataSensorRealm.class).equalTo("id",data.getId()).findAll();
+      RealmResults<DataSensorRealm> result = r.where  (DataSensorRealm.class).equalTo("id",data.getId()).findAll();
 
       result.deleteAllFromRealm();
     }));

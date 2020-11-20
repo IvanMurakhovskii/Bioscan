@@ -112,28 +112,28 @@ public class LiveBluetoothChartPresenter extends MvpPresenter<LiveBluetoothChart
   public void initLineChart(){
     entrySens1.add(new Entry(0,0));
     dataSets.add(dataSet1);
-    dataSet1.setColor(Color.BLACK);
+    dataSet1.setColor(Color.RED);
     entrySens2.add(new Entry(0,0));
     dataSets.add(dataSet2);
-    dataSet2.setColor(Color.BLACK);
+    dataSet2.setColor(Color.RED);
     entrySens3.add(new Entry(0,0));
     dataSets.add(dataSet3);
-    dataSet3.setColor(Color.BLACK);
+    dataSet3.setColor(Color.RED);
     entrySens4.add(new Entry(0,0));
     dataSets.add(dataSet4);
-    dataSet4.setColor(Color.BLACK);
+    dataSet4.setColor(Color.RED);
     entrySens5.add(new Entry(0,0));
     dataSets.add(dataSet5);
-    dataSet5.setColor(Color.BLACK);
+    dataSet5.setColor(Color.RED);
     entrySens6.add(new Entry(0,0));
     dataSets.add(dataSet6);
-    dataSet6.setColor(Color.BLACK);
+    dataSet6.setColor(Color.RED);
     entrySens7.add(new Entry(0,0));
     dataSets.add(dataSet7);
-    dataSet7.setColor(Color.BLACK);
+    dataSet7.setColor(Color.RED);
     entrySens8.add(new Entry(0,0));
     dataSets.add(dataSet8);
-    dataSet8.setColor(Color.BLACK);
+    dataSet8.setColor(Color.RED);
 
     getViewState().setLineChart(dataSets);
   }

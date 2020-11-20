@@ -85,23 +85,23 @@ public class ResultAFactoryShortMask extends ResultAFactory {
             }
 
             try{
-                getA().add(new ResultA_First1_2(oneSensorShortMeasure.getFirstA1_2(), getInputData(), getContext()));
-                getA().add(new ResultA_First2_3(oneSensorShortMeasure.getFirstA2_3(), getInputData(), getContext()));
-                getA().add(new ResultA_First2_4(oneSensorShortMeasure.getFirstA2_4(), getInputData(), getContext()));
-                getA().add(new ResultA_First2_5(oneSensorShortMeasure.getFirstA2_5(), getInputData(), getContext()));
-                getA().add(new ResultA_First1_5(oneSensorShortMeasure.getFirstA1_5(), getInputData(), getContext()));
-                getA().add(new ResultA_First4_5(oneSensorShortMeasure.getFirstA4_5(), getInputData(), getContext()));
-                getA().add(new ResultA_First5_4(oneSensorShortMeasure.getFirstA5_4(), getInputData(), getContext()));
-                getA().add(new ResultA_First1_2_Gray(oneSensorShortMeasure.getFirstA1_2(), getInputData(), getContext()));
-                getA().add(new ResultA_First2_3_Gray(oneSensorShortMeasure.getFirstA2_3(), getInputData(), getContext()));
-                getA().add(new ResultA_First2_4_Gray(oneSensorShortMeasure.getFirstA2_4(), getInputData(), getContext()));
-                getA().add(new ResultA_First2_5_Gray(oneSensorShortMeasure.getFirstA2_5(), getInputData(), getContext()));
-                getA().add(new ResultA_First1_5_Gray(oneSensorShortMeasure.getFirstA1_5(), getInputData(), getContext()));
+                getA().add(new ResultA_First1_2(oneSensorShortMeasure.getFirstA1_2(), getInputData(), getContext(), 1));
+                getA().add(new ResultA_First2_3(oneSensorShortMeasure.getFirstA2_3(), getInputData(), getContext(), 1));
+                getA().add(new ResultA_First2_4(oneSensorShortMeasure.getFirstA2_4(), getInputData(), getContext(), 1));
+                getA().add(new ResultA_First2_5(oneSensorShortMeasure.getFirstA2_5(), getInputData(), getContext(), 1));
+                getA().add(new ResultA_First1_5(oneSensorShortMeasure.getFirstA1_5(), getInputData(), getContext(), 1));
+                getA().add(new ResultA_First4_5(oneSensorShortMeasure.getFirstA4_5(), getInputData(), getContext(), 1));
+                getA().add(new ResultA_First5_4(oneSensorShortMeasure.getFirstA5_4(), getInputData(), getContext(), 1));
+                getA().add(new ResultA_First1_2_Gray(oneSensorShortMeasure.getFirstA1_2(), getInputData(), getContext(), 1));
+                getA().add(new ResultA_First2_3_Gray(oneSensorShortMeasure.getFirstA2_3(), getInputData(), getContext(), 1));
+                getA().add(new ResultA_First2_4_Gray(oneSensorShortMeasure.getFirstA2_4(), getInputData(), getContext(), 1));
+                getA().add(new ResultA_First2_5_Gray(oneSensorShortMeasure.getFirstA2_5(), getInputData(), getContext(), 1));
+                getA().add(new ResultA_First1_5_Gray(oneSensorShortMeasure.getFirstA1_5(), getInputData(), getContext(), 1));
                 getA().add(new SI_Gray(SI, getInputData(), getContext()));
 
 //                getA().add(new K(K, getInputData(), getContext()));
                 getA().add(new SI(SI, getInputData(), getContext()));
-                getA().add(new B(dangerToLungsArea, getInputData(), getContext()));
+//                getA().add(new B(dangerToLungsArea, getInputData(), getContext()));
             }catch (Exception e){
                 return false;
             }

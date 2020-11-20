@@ -18,14 +18,6 @@ public class ContinueDimensionDialogFragment extends DialogFragment{
 
 
   private DialogListener mNoticeContinueDialogListener;
-  private EditText descriptions;
-  private RadioGroup rgGender;
-  private RadioGroup swHand;
-  private SwitchCompat swPractice;
-  private Spinner spinnerDimensionMode;
-
-  private int gender = Const.GENDER_MALE;
-  private boolean isLeftHand = true;
 
   public void setDialogListener(
       DialogListener mNoticeContinueDialogListener) {
@@ -40,10 +32,9 @@ public class ContinueDimensionDialogFragment extends DialogFragment{
     builder = new AlertDialog.Builder(getActivity());
     builder
         .setTitle("Хотите продолжить измерение другой руки?")
-        .setPositiveButton(R.string.submit, (DialogInterface dialog, int id) -> {
-          mNoticeContinueDialogListener.onDialogPositiveClick(2);
-        })
-        .setNegativeButton(R.string.vertical_form_stepper_form_discard_cancel,
+        .setPositiveButton("Да", (DialogInterface dialog, int id) ->
+                mNoticeContinueDialogListener.onDialogPositiveClick(2))
+        .setNegativeButton("Нет",
             (DialogInterface dialog, int id) ->
                 mNoticeContinueDialogListener.onDialogNegativeClick(2)
         );

@@ -6,14 +6,12 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 
-import com.anychart.AnyChart;
-import com.anychart.charts.Cartesian;
-import com.anychart.core.cartesian.series.Line;
-import com.anychart.core.utils.OrdinalZoom;
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.components.Description;
 import com.github.mikephil.charting.components.XAxis;
@@ -26,7 +24,6 @@ import com.murik.enose.R;
 import com.murik.enose.dto.DataByMaxParcelable;
 import com.murik.enose.model.ResultAFactory;
 import com.murik.enose.model.ResultBySens;
-import com.murik.enose.model.resultbyMaxValue.ResultAFactoryLongMask;
 import com.murik.enose.model.resultbyMaxValue.ResultAFactoryShortMask;
 import com.murik.enose.model.resultbyMaxValue.ResultAFactoryStandard;
 
@@ -58,7 +55,12 @@ public class ResultBarChartFragment extends Fragment {
         if (bundle != null) {
             inputDataParcelable = bundle.getParcelable(CALCULATE_A_KEY);
         }
-        setHasOptionsMenu(true);
+
+        getActivity().getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
+        ((AppCompatActivity) getActivity()).getSupportActionBar().hide();
+
         return inflater.inflate(R.layout.fragment_one_sensor_tab_content, container, false);
     }
 
@@ -117,11 +119,9 @@ public class ResultBarChartFragment extends Fragment {
         if (data.getMeasureType().equals(Const.STANDARD_MEASURE)) {
             resultAFactory = new ResultAFactoryStandard(data, hand, getContext());
         }
-        if (data.getMeasureType().equals(Const.FIRST_MEASURE)) {
+
+        if (data.getMeasureType().equals(Const.ONE_SENSOR_MEASURE)) {
             resultAFactory = new ResultAFactoryShortMask(data, hand, getContext());
-        }
-        if (data.getMeasureType().equals(Const.SECOND_MEASURE)) {
-            resultAFactory = new ResultAFactoryLongMask(data, hand, getContext());
         }
 
         if (resultAFactory != null && resultAFactory.calculateResultA()) {

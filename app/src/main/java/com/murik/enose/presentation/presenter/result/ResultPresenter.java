@@ -2,21 +2,23 @@ package com.murik.enose.presentation.presenter.result;
 
 
 import android.content.Context;
+import android.util.Log;
+
 import com.arellomobile.mvp.InjectViewState;
 import com.arellomobile.mvp.MvpPresenter;
 import com.murik.enose.App;
 import com.murik.enose.Const;
 import com.murik.enose.Screens;
+import com.murik.enose.dto.DataByMaxParcelable;
 import com.murik.enose.model.RealmController;
 import com.murik.enose.model.ResultAFactory;
 import com.murik.enose.model.ResultBySens;
-import com.murik.enose.dto.DataByMaxParcelable;
-import com.murik.enose.model.resultbyMaxValue.ResultAFactoryLongMask;
-import com.murik.enose.model.resultbyMaxValue.ResultAFactoryShortMask;
+import com.murik.enose.model.resultbyMaxValue.ResultAFactoryOneSensor;
 import com.murik.enose.model.resultbyMaxValue.ResultAFactoryStandard;
 import com.murik.enose.presentation.view.result.ResultView;
 import com.murik.enose.ui.fragment.result.recycler.HeaderViewHolder;
 import com.murik.enose.ui.fragment.result.recycler.ResultViewHolder;
+
 import java.math.RoundingMode;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
@@ -42,7 +44,7 @@ public class ResultPresenter extends MvpPresenter<ResultView> {
     try{
       getViewState().calculateResult();
     } catch (Exception e){
-        return;
+      Log.e("ResultPresenter", e.getMessage());
     }
   }
 
@@ -52,11 +54,8 @@ public class ResultPresenter extends MvpPresenter<ResultView> {
       if (data.getMeasureType().equals(Const.STANDARD_MEASURE)) {
           resultAFactory = new ResultAFactoryStandard(data, hand, context);
       }
-      if (data.getMeasureType().equals(Const.FIRST_MEASURE)) {
-          resultAFactory = new ResultAFactoryShortMask(data, hand, context);
-      }
-      if (data.getMeasureType().equals(Const.SECOND_MEASURE)) {
-          resultAFactory = new ResultAFactoryLongMask(data, hand, context);
+      if (data.getMeasureType().equals(Const.ONE_SENSOR_MEASURE)) {
+          resultAFactory = new ResultAFactoryOneSensor(data, hand, context);
       }
 
     if(resultAFactory.calculateResultA()){

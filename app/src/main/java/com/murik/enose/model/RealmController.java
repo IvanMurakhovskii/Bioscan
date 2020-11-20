@@ -1,5 +1,7 @@
 package com.murik.enose.model;
 
+import android.util.Log;
+
 import com.murik.enose.Const;
 import com.murik.enose.dto.DataByMaxParcelable;
 import com.murik.enose.dto.SensorDataFullParcelable;
@@ -130,7 +132,6 @@ public class RealmController {
          }
          }
 
-
       if(!dataSens.getDataSensorMapLeftHand().isEmpty() && dataSens.getDataSensorMapLeftHand() != null){
         if(dataSens.getDataSensorMapLeftHand().get(Const.SENSOR_1) != null){
           if (!dataSens.getDataSensorMapLeftHand().get(Const.SENSOR_1).isEmpty()) {
@@ -225,8 +226,12 @@ public class RealmController {
 
       data.setLeftHandData(leftHandDataSensor);
       data.setRightHandData(rightHandDataSensor);
-      realm.close();
+      realm.insert(data);
     });
+
+    if (!realm.isClosed()) {
+      realm.close();
+    }
   }
 
   public void addInfoMax(DataByMaxParcelable dataSens) {

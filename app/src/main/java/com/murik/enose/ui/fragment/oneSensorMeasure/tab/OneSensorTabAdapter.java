@@ -12,8 +12,8 @@ public class OneSensorTabAdapter extends FragmentPagerAdapter {
 
     private DataByMaxParcelable dataByMaxParcelable;
 
-    private final int PAGE_COUNT = 5;
-    private String tabTitle[] = new String[]{"Короткая", "Длинная", "Тело", "Легкие", "Опасно"};
+    private final int PAGE_COUNT = 3;
+    private String tabTitle[] = new String[]{"Дискретное", "Полное", "Энергия"};
 
     public OneSensorTabAdapter(FragmentManager fm, DataByMaxParcelable dataByMaxParcelable) {
         super(fm);

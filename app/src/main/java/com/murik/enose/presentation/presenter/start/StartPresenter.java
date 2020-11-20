@@ -15,5 +15,4 @@ public class StartPresenter extends MvpPresenter<StartView> {
     App.INSTANCE.getRouter().navigateTo(Screens.REALM_FRAGMENT);
   }
 
-
 }

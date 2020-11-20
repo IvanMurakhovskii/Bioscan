@@ -22,8 +22,13 @@
       android:icon="@android:drawable/stat_sys_data_bluetooth"/>
     <item
       android:id="@+id/app_bar_live_chart"
-      android:title="Live Chart"
+      android:title="Измерение"
       android:icon="@android:drawable/stat_sys_data_bluetooth"/>
+
+    <!--<item
+        android:id="@+id/app_bar_usb"
+        android:title="USB"
+        android:icon="@android:drawable/stat_notify_sdcard_usb"/>-->
   </group>
 
 </menu>

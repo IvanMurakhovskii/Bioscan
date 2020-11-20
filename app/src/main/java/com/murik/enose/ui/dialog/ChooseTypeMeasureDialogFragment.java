@@ -9,6 +9,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.RadioGroup;
 
 import com.murik.enose.Const;
@@ -22,8 +23,10 @@ public class ChooseTypeMeasureDialogFragment extends DialogFragment {
 
     private RadioGroup rgChooseMeasureType;
     private RadioGroup rgChooseSensor;
-
-    private int choosenSensor = 0;
+    private RadioGroup rgAlgorithm;
+    private RadioGroup rgSensorType;
+    private RadioGroup rgExpert;
+    private LinearLayout llOneSensorSettings;
 
     public void setDialogListener(
             DialogListener mNoticeDialogListener) {
@@ -40,6 +43,23 @@ public class ChooseTypeMeasureDialogFragment extends DialogFragment {
         View view = inflater.inflate(R.layout.dialog_choose_type_measure, null);
         rgChooseMeasureType = view.findViewById(R.id.rg_choose_type_measure);
         rgChooseSensor = view.findViewById(R.id.rg_sensors);
+        rgAlgorithm = view.findViewById(R.id.rg_registration_max_signal);
+        rgSensorType = view.findViewById(R.id.rg_sensor_type);
+        rgExpert = view.findViewById(R.id.rg_expert_type);
+        llOneSensorSettings = view.findViewById(R.id.ll_one_sensor_settings);
+
+        rgChooseMeasureType.setOnCheckedChangeListener((group, checkedId) -> {
+
+            switch (checkedId) {
+                case R.id.rb_standard_type:
+                    llOneSensorSettings.setVisibility(View.GONE);
+                    break;
+                case R.id.rb_one_sensor_type:
+                    llOneSensorSettings.setVisibility(View.VISIBLE);
+                    break;
+            }
+        });
+
         builder.setView(view)
                 .setTitle("Выбор алгоритма")
                 .setPositiveButton(R.string.submit, (DialogInterface dialog, int id) -> mDialogListener.onDialogPositiveClick(1))
@@ -50,7 +70,7 @@ public class ChooseTypeMeasureDialogFragment extends DialogFragment {
         return builder.create();
     }
 
-    public String getChoosenSensor() {
+    public String getSelectedSensor() {
         int checkedId = rgChooseSensor.getCheckedRadioButtonId();
         switch (checkedId) {
             case R.id.rb_sens1:
@@ -73,6 +93,43 @@ public class ChooseTypeMeasureDialogFragment extends DialogFragment {
                 return Const.SENSOR_1;
         }
     }
+
+    public int getTimeRegistrationMaxSignal() {
+        int checkedId = rgAlgorithm.getCheckedRadioButtonId();
+        switch (checkedId) {
+            case R.id.rb_max_80:
+                return 80;
+            case R.id.rb_max_60:
+                return 60;
+            default:
+                return 80;
+        }
+    }
+
+    public int getSensorType() {
+        int checkedId = rgSensorType.getCheckedRadioButtonId();
+        switch (checkedId) {
+           /* case R.id.rb_sensor_5_sm:
+                return Const.SENSOR_5_SM;*/
+            case R.id.rb_sensor_7_sm:
+                return Const.SENSOR_7_SM;
+            default:
+                return Const.SENSOR_7_SM;
+        }
+    }
+
+    public boolean getExpertType() {
+        int checkedId = rgExpert.getCheckedRadioButtonId();
+        switch (checkedId) {
+            case R.id.rb_expert:
+                return true;
+            case R.id.rb_user:
+                return false;
+            default:
+                return true;
+        }
+    }
+
 
     public int getMeasureType() {
         if (rgChooseMeasureType.getCheckedRadioButtonId() == R.id.rb_one_sensor_type) {

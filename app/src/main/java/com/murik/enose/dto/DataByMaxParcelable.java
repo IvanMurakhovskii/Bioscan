@@ -21,8 +21,13 @@ public class DataByMaxParcelable implements Parcelable {
     private ArrayList<Integer> leftHandDataSensor;
     private int gender = Const.GENDER_MALE;
     private boolean isPractice;
+    private boolean isExpert;
     private String measureType = Const.STANDARD_MEASURE;
     private Float differenceArea = 0.0f;
+    private int timeRegistrationMaxSignal = 80;
+
+    private int sensorType = Const.SENSOR_7_SM;
+
 
     @Override
     public int describeContents() {
@@ -33,6 +38,7 @@ public class DataByMaxParcelable implements Parcelable {
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(descriptions);
         dest.writeInt(gender);
+        dest.writeInt(timeRegistrationMaxSignal);
         if (differenceArea != null) {
             dest.writeFloat(differenceArea);
         }
@@ -40,6 +46,8 @@ public class DataByMaxParcelable implements Parcelable {
         dest.writeList(rightHandDataSensor);
         dest.writeList(leftHandDataSensor);
         dest.writeByte((byte) (isPractice ? 1 : 0));
+        dest.writeByte((byte) (isExpert ? 1 : 0));
+        dest.writeInt(sensorType);
     }
 
     public static final Parcelable.Creator<DataByMaxParcelable> CREATOR = new Parcelable.Creator<DataByMaxParcelable>() {
@@ -59,12 +67,15 @@ public class DataByMaxParcelable implements Parcelable {
         rightHandDataSensor = new ArrayList<>();
         leftHandDataSensor = new ArrayList<>();
         isPractice = parcel.readByte() != 0;
+        isExpert = parcel.readByte() != 0;
         parcel.readList(rightHandDataSensor, Integer.class.getClassLoader());
         parcel.readList(leftHandDataSensor, Integer.class.getClassLoader());
         descriptions = parcel.readString();
         gender = parcel.readInt();
+        timeRegistrationMaxSignal = parcel.readInt();
         differenceArea = parcel.readFloat();
         measureType = parcel.readString();
+        sensorType = parcel.readInt();
     }
 
 }

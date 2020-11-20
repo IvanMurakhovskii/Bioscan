@@ -18,6 +18,8 @@ import com.murik.enose.R;
 
 import java.util.Objects;
 
+import lombok.val;
+
 public class StartDimensionDialogFragment extends DialogFragment {
 
 
@@ -26,7 +28,8 @@ public class StartDimensionDialogFragment extends DialogFragment {
   private RadioGroup rgGender;
   private RadioGroup swHand;
   private SwitchCompat swPractice;
-  private Spinner spinnerDimensionMode;
+  private EditText dimensionTime;
+  private EditText substanceDimensionTime;
 
   private int gender = Const.GENDER_MALE;
   private boolean isLeftHand = true;
@@ -49,7 +52,8 @@ public class StartDimensionDialogFragment extends DialogFragment {
     rgGender = view.findViewById(R.id.rg_gender_des);
     swPractice = view.findViewById(R.id.sc_practice_des);
     swHand = view.findViewById(R.id.rg_hand);
-    spinnerDimensionMode = view.findViewById(R.id.spinner_dimension_mode);
+    dimensionTime = view.findViewById(R.id.all_dimension_time);
+    substanceDimensionTime = view.findViewById(R.id.substance_dimension_time);
     builder.setView(view)
         .setTitle("Измерение")
         .setPositiveButton(R.string.submit, (DialogInterface dialog, int id) -> {
@@ -99,7 +103,11 @@ public class StartDimensionDialogFragment extends DialogFragment {
     return swPractice.isChecked();
   }
 
-  public String getSpinnerDimensionMode() {
-    return spinnerDimensionMode.getSelectedItem().toString();
+  public Integer getDimensionTime() {
+    return Integer.valueOf(dimensionTime.getText().toString());
+  }
+
+  public Integer getSubstanceDimensionTime() {
+    return Integer.valueOf(substanceDimensionTime.getText().toString());
   }
 }

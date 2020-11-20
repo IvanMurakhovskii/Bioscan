@@ -4,12 +4,13 @@ import android.content.Context;
 
 import com.murik.enose.dto.DataByMaxParcelable;
 import com.murik.enose.model.resultbyMaxValue.BaseResult;
+import com.murik.enose.model.resultbyMaxValue.BaseResultSecond;
 
-public class ResultA_Second2_5 extends BaseResult {
+public class ResultA_Second2_5 extends BaseResultSecond {
 
 
-  public ResultA_Second2_5(double A, DataByMaxParcelable inputData, Context context) {
-    super(A, inputData, context);
+  public ResultA_Second2_5(double A, DataByMaxParcelable inputData, Context context, float coefficient) {
+    super(A, inputData, context, coefficient);
     setLegend("2_5");
   }
 

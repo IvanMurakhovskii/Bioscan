@@ -66,8 +66,6 @@ public class BluetoothConnectionFragment extends MvpAppCompatFragment implements
     return fragment;
   }
 
-
-
   @Override
   public void onResume() {
     super.onResume();
@@ -108,13 +106,6 @@ public class BluetoothConnectionFragment extends MvpAppCompatFragment implements
     mBluetoothConnectionPresenter.initRecyclerView();
 
     progressBar = view.findViewById(R.id.progressBar_bluetooth);
-
-//    progressBar = new ProgressBar(getContext(),null,android.R.attr.progressBarStyleLarge);
-//    RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(100,100);
-//    params.addRule(RelativeLayout.CENTER_IN_PARENT);
-//   // layout.addView(progressBar,params);
-//    progressBar.setVisibility(View.VISIBLE);  //To show ProgressBar
-//    //progressBar.setVisibility(View.GONE);
 
   }
 
@@ -172,7 +163,7 @@ public class BluetoothConnectionFragment extends MvpAppCompatFragment implements
           App.INSTANCE.getRouter().replaceScreen(Screens.BLUETOOTH_LIVE_CHART_FRAGMENT);
           showProgress();
       } else if(BluetoothImplService.ACTION_GATT_DISCONNECTED.equals(action)){
-        Toast.makeText(getContext(), "Disconnct from GATT", Toast.LENGTH_SHORT).show();
+        Toast.makeText(getContext(), "Disconnect from GATT", Toast.LENGTH_SHORT).show();
         hideProgress();
       }
     }

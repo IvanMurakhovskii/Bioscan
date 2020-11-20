@@ -49,6 +49,8 @@ public class SI extends BaseResult {
         } else if (result > 2) {
             setColorCRIMSON();
             setPossibleReasons(getResources(R.string.A_SHORT_SI_CRIMSON_2));
+        } else if (getA() >= 1.21 && getA() < 1.59) {
+            setColorBLUE();
         }
     }
 }

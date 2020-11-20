@@ -2,43 +2,29 @@ package com.murik.enose.model.A_Second;
 
 import android.content.Context;
 
+import com.murik.enose.R;
 import com.murik.enose.dto.DataByMaxParcelable;
 import com.murik.enose.model.resultbyMaxValue.BaseResult;
+import com.murik.enose.model.resultbyMaxValue.BaseResultSecond;
 
-public class ResultA_Second3_4 extends BaseResult {
+public class ResultA_Second3_4 extends BaseResultSecond {
 
 
-  public ResultA_Second3_4(double A, DataByMaxParcelable inputData, Context context) {
-    super(A, inputData, context);
-    setLegend("3_4");
+  public ResultA_Second3_4(double A, DataByMaxParcelable inputData, Context context, float coefficient) {
+    super(A, inputData, context, coefficient);
+    setLegend("XI");
   }
 
     public void setResult() {
-    setColorYELLOW();
-    setPossibleReasons("result");
-       /* if (getA() >= 0.9 && getA() <= 1.14 && getInputData().isPractice()) {
-                setColorCRIMSON();
-                setPossibleReasons("Измерениееее");
-        } else if (getA() >= 0.9 && getA() <= 1.14) {
-            setColorYELLOW();
-            setPossibleReasons("Измерениееее");
-        } else if (getA() > 1.3 && getA() < 1.7) {
-            setColorBLUE();
-            setPossibleReasons("");
-        } else if (getA() > 1.1 && getA() <= 2) {
-            setColorGREEN();
-        } else if (getA() < 0.9) {
-            setColorRED();
-            setPossibleReasons("");
-        } else if (getA() > 2) {
-            setColorBURGUNDY();
-            setPossibleReasons("");
-        } else if (getA() > 1.5 && getA() <= 1.9) {
-            setColorRED();
-            setPossibleReasons("");
-        } else if (getA() > 0.30 && getA() <= 0.40) {
-            setColorGRAY();
-            setPossibleReasons("");
-        }*/
+      if (getA() >= 0.35 && getA() <= 0.40) {
+        setColorYELLOW();
+        setPossibleReasons(getResources(R.string.A_LONG1_1_3_YELLOW_1));
+      } else if (getA() >= 0.15 && getA() <= 0.22) {
+        setColorYELLOW();
+        setPossibleReasons(getResources(R.string.A_LONG1_1_3_YELLOW_2));
+      } else if (getA() <= 0.15) {
+        setColorRED();
+        setPossibleReasons(getResources(R.string.A_LONG1_1_3_RED));
+      }
     }
 }

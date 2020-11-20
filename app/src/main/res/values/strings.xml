@@ -4,7 +4,7 @@
   <string name="navigation_drawer_close">Close navigation drawer</string>
 
 
-  <string name="app_name">ENose</string>
+  <string name="app_name">Диагност и гаджет здоровья</string>
   <string name="action_settings">Settings</string>
   <string name="save">Сохранить</string>
   <string name="input_description">Введите описание</string>
@@ -36,6 +36,8 @@
   <string name="add_file">Добавить файл</string>
     <string name="standard">Стандарт</string>
     <string name="diagram">Диаграмма</string>
+  <string name="dimensionTime">Время измерения</string>
+    <string name="substanceDimensionTime">Время нагрузки</string>
 
     <string-array name="dimension_mode">
     <item>Просто</item>

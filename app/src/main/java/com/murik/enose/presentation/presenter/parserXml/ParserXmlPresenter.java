@@ -150,7 +150,6 @@ int count = 0;
                initial = Integer.parseInt(str);
              } else if (parser.getAttributeName(i).equals("sid")) {
 
-               //key  = parser.getAttributeValue(i);
                key = Const.allSens.get(count);
                count++;
              }
