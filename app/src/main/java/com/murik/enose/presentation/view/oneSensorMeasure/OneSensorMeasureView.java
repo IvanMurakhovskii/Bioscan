@@ -2,6 +2,7 @@ package com.murik.enose.presentation.view.oneSensorMeasure;
 
 import com.arellomobile.mvp.MvpView;
 import com.github.mikephil.charting.data.RadarEntry;
+import com.murik.enose.model.resultbyMaxValue.AreaDifference;
 
 import java.util.ArrayList;
 
@@ -16,7 +17,7 @@ public interface OneSensorMeasureView extends MvpView {
 
     void setRightDelta(float delta);
 
-    void setAreaDifference(float difference);
+    void setAreaDifference(AreaDifference difference);
 
     void setLeftPs_3425(float ps);
 

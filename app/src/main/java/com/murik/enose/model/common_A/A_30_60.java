@@ -15,30 +15,25 @@ public class A_30_60 extends BaseResultWithCoefficient {
         setLegend("S(30/60)");
     }
 
-    public A_30_60(double A, DataByMaxParcelable inputData, Context context, String legend) {
-        super(A, inputData, context, 0);
-        setLegend(legend);
-    }
-
     public void setResult() {
         if (getA() >= 0.27 && getA() <= 0.28) {
+            setColorGREEN();
+            setPossibleReasons(getResources(R.string.A_30_60_GREEN_1));
+        } else if (getA() >= 0.16 && getA() <= 0.20) {
             setColorYELLOW();
             setPossibleReasons(getResources(R.string.A_30_60_YELLOW_1));
-        } else if (getA() >= 0.12 && getA() <= 0.234) {
-            setColorYELLOW();
-            setPossibleReasons(getResources(R.string.A_30_60_YELLOW_2));
-        } else if (getA() >= 0.266 && getA() <= 0.430) {
+        } else if (getA() >= 0.31 && getA() <= 0.43) {
             setColorRED();
             setPossibleReasons(getResources(R.string.A_30_60_RED));
-        } else if (getA() >= 0.100 && getA() <= 0.17) {
+        } else if (getA() >= 0.44 && getA() <= 0.55) {
             setColorBURGUNDY();
-            setPossibleReasons(getResources(R.string.A_30_60_BURGUNDY));
-        } else if (getA() <= 0.100) {
+            setPossibleReasons(getResources(R.string.A_30_60_WHITE));
+        } else if (getA() <= 0.14) {
             setColorBURGUNDY();
-            setPossibleReasons(getResources(R.string.A_30_60_BURGUNDY_2));
-        } else if (getA() > 0.310) {
-            setColorCRIMSON();
-            setPossibleReasons(getResources(R.string.A_30_60_CRIMSON));
+            setPossibleReasons(getResources(R.string.A_30_60_WHITE_2));
+        } else if (getA() > 0.14 && getA() <= 0.15) {
+            setColorBLUE();
+            setPossibleReasons(getResources(R.string.A_30_60_BLUE));
         }
     }
 }

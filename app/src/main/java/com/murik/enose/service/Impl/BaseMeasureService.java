@@ -14,7 +14,7 @@ public class BaseMeasureService {
         int y2;
         if (data != null) {
             for (int key = 0; key < mask.length - 1; key++) {
-                 if (data.size() >= mask[key]) {
+                if (data.size() >= mask[key]) {
                     dx = mask[key] - mask[key + 1];
                     if (!data.isEmpty()) {
 //                        y1 = data.get(mask[key]);
@@ -62,6 +62,16 @@ public class BaseMeasureService {
         return result;
     }
 
+    public Float calculateDifferenceLeftRight(final float left, final float right) {
+        float result = ((left - right) / ((left + right) / 2)) * 100;
+
+        if (Float.isInfinite(result) || Float.isNaN(result)) {
+            result = 0;
+        }
+
+        return result;
+    }
+
     public Float getPS3425(final List<Integer> data, final int[] mask) {
         if (data != null && !data.isEmpty() && mask.length >= 4 && data.size() > mask[mask.length - 1]) {
             return ((float) (data.get(mask[2]) * data.get(mask[3])) / (float) (data.get(mask[1]) * data.get(mask[4])));
@@ -77,9 +87,9 @@ public class BaseMeasureService {
     }
 
     public Float getAreaDifference(final Float areaLeft, final Float areaRight) {
-        if(areaLeft != 0 && areaRight != 0){
+        if (areaLeft != 0 && areaRight != 0) {
             Float areaTotalAverage = (areaLeft + areaRight) / 2;
-            Float areaTotalDifference = 2*((areaLeft - areaTotalAverage)/areaTotalAverage)*100;
+            Float areaTotalDifference = 2 * ((areaLeft - areaTotalAverage) / areaTotalAverage) * 100;
             BigDecimal bd = new BigDecimal(areaTotalDifference).setScale(1, RoundingMode.FLOOR);
             return Math.abs(bd.floatValue());
         }

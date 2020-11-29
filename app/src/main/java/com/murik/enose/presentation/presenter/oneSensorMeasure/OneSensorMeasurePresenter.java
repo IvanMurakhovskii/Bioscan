@@ -1,5 +1,6 @@
 package com.murik.enose.presentation.presenter.oneSensorMeasure;
 
+import android.content.Context;
 import android.graphics.Color;
 
 import com.arellomobile.mvp.InjectViewState;
@@ -9,6 +10,10 @@ import com.murik.enose.App;
 import com.murik.enose.Const;
 import com.murik.enose.Screens;
 import com.murik.enose.dto.DataByMaxParcelable;
+import com.murik.enose.model.AreaDifferenceDiscrete;
+import com.murik.enose.model.AreaDifferenceEnergy;
+import com.murik.enose.model.AreaDifferenceTotal;
+import com.murik.enose.model.resultbyMaxValue.AreaDifference;
 import com.murik.enose.presentation.view.oneSensorMeasure.OneSensorMeasureView;
 import com.murik.enose.service.Impl.BaseMeasureService;
 import com.murik.enose.utils.ListUtils;
@@ -72,18 +77,25 @@ public class OneSensorMeasurePresenter extends MvpPresenter<OneSensorMeasureView
                 );
     }
 
-    public void createRadarChart(int mPage, final DataByMaxParcelable dataByMaxParcelable, final BaseMeasureService measureService) {
+    public void createRadarChart(int mPage, final DataByMaxParcelable dataByMaxParcelable, final BaseMeasureService measureService, final Context context) {
         float areaLeft = 0;
         float areaRight = 0;
 
+        float difference = 0;
+
         float areaBodyLeft = measureService.getAreaByMask(Const.BODY, dataByMaxParcelable.getLeftHandDataSensor());
         float areaBodyRight = measureService.getAreaByMask(Const.BODY, dataByMaxParcelable.getRightHandDataSensor());
+
+        AreaDifference areaDifference = null;
 
         switch (mPage) {
             case Const.PAGE_BODY:
                 initRadarChart(Const.BODY, Color.RED, Color.BLUE, dataByMaxParcelable);
                 areaLeft = areaBodyLeft;
                 areaRight = areaBodyRight;
+
+                difference = measureService.calculateDifferenceLeftRight(areaLeft, areaRight);
+                areaDifference = new AreaDifferenceTotal(difference, dataByMaxParcelable.getGender(), context);
                 break;
             case Const.PAGE_DISCRETE:
                 if (dataByMaxParcelable.getTimeRegistrationMaxSignal() == 80) {
@@ -95,6 +107,9 @@ public class OneSensorMeasurePresenter extends MvpPresenter<OneSensorMeasureView
                     areaLeft = measureService.getAreaByMask(Const.DISCRETE_60, dataByMaxParcelable.getLeftHandDataSensor());
                     areaRight = measureService.getAreaByMask(Const.DISCRETE_60, dataByMaxParcelable.getRightHandDataSensor());
                 }
+
+                difference = measureService.calculateDifferenceLeftRight(areaLeft, areaRight);
+                areaDifference = new AreaDifferenceDiscrete(difference, dataByMaxParcelable.getGender(), context);
 //                areaLeft = areaLeftDanger;
 //                areaRight = areaRightDanger;
                 break;
@@ -103,19 +118,21 @@ public class OneSensorMeasurePresenter extends MvpPresenter<OneSensorMeasureView
                     initRadarChart(Const.ENERGY, Color.RED, Color.BLUE, dataByMaxParcelable);
                     areaLeft = measureService.getAreaByMask(Const.ENERGY, dataByMaxParcelable.getLeftHandDataSensor());
                     areaRight = measureService.getAreaByMask(Const.ENERGY, dataByMaxParcelable.getRightHandDataSensor());
-                    break;
                 } else {
                     initRadarChart(Const.ENERGY_60, Color.RED, Color.BLUE, dataByMaxParcelable);
                     areaLeft = measureService.getAreaByMask(Const.ENERGY_60, dataByMaxParcelable.getLeftHandDataSensor());
                     areaRight = measureService.getAreaByMask(Const.ENERGY_60, dataByMaxParcelable.getRightHandDataSensor());
-                    break;
+
                 }
-
-
+                difference = measureService.calculateDifferenceLeftRight(areaLeft, areaRight);
+                areaDifference = new AreaDifferenceEnergy(difference, dataByMaxParcelable.getGender(), context);
+                break;
         }
 
         if (areaLeft != 0 && areaRight != 0) {
-            getViewState().setAreaDifference(measureService.calculateDifference(areaLeft, areaRight));
+            getViewState().setAreaDifference(areaDifference);
+
+
         }
 
         getViewState().setLeftArea(areaLeft);

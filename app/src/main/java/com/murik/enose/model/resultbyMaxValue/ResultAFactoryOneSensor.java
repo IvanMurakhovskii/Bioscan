@@ -126,8 +126,6 @@ public class ResultAFactoryOneSensor extends ResultAFactory {
 
             En = (S_ENERGY / s60) * 5;
 
-            float Sn = 0;
-
             try {
 
                 if (getInputData().getTimeRegistrationMaxSignal() == 80) {
@@ -169,9 +167,8 @@ public class ResultAFactoryOneSensor extends ResultAFactory {
                     getA().add(new ResultA_Second1_3_4_60(oneSensorShortMeasure.getFirstA3_2(), getInputData(), getContext(), 0.39F));
                     getA().add(new A_30_60((s30 / s60), getInputData(), getContext(), 1));
 
-
                     if(getInputData().isExpert()) {
-                        getA().add(new ResultA_First2_3_Gray(oneSensorShortMeasure.getFirstA2_3(), getInputData(), getContext(), 1));
+                        getA().add(new ResultA_First2_3_Gray(a_40_70, getInputData(), getContext(), 1));
                         getA().add(new ResultA_First1_2_Gray(oneSensorShortMeasure.getFirstA1_2(), getInputData(), getContext(), "II_G"));
                         getA().add(new A_20_30_GRAY((s20 / s30), getInputData(), getContext(), "IV"));
                         getA().add(new A_20_60_GRAY((s20 / s60), getInputData(), getContext(), 1.24F));

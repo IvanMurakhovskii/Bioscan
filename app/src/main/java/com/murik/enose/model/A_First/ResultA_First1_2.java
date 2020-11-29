@@ -22,7 +22,7 @@ public class ResultA_First1_2 extends BaseResultFirst {
     }
 
     public void setResult() {
-         if(getA() >= 0.41 && getA() <= 0.46) {
+         if(getA() >= 0.426 && getA() <= 0.47) {
             setColorYELLOW();
             setPossibleReasons(getResources(R.string.A_SHORT_1_2_YELLOW_1));
         } else if(getA() >= 0.3 && getA() <= 0.33) {
@@ -31,7 +31,7 @@ public class ResultA_First1_2 extends BaseResultFirst {
         } else if (getA() >= 0.2 && getA() <= 0.29) {
             setColorRED();
             setPossibleReasons(getResources(R.string.A_SHORT_1_2_RED_1));
-        } else if (getA() >= 0.47 && getA() <= 0.54) {
+        } else if (getA() >= 0.48 && getA() <= 0.55) {
             setColorRED();
             setPossibleReasons(getResources(R.string.A_SHORT_1_2_RED_2));
         } else if (getA() >= 0.100 && getA() <= 0.200) {
@@ -40,6 +40,9 @@ public class ResultA_First1_2 extends BaseResultFirst {
         } else if (getA() >= 0.56 && getA() <= 0.700) {
             setColorBURGUNDY();
             setPossibleReasons(getResources(R.string.A_SHORT_1_2_BURGUNDY_2));
+        } else if (getA() >= 0.7) {
+            setColorBURGUNDY();
+            setPossibleReasons(getResources(R.string.A_SHORT_1_2_BURGUNDY_3));
         } else if (getA() >= 0.600 && getA() <= 0.63) {
             setColorCRIMSON();
             setPossibleReasons(getResources(R.string.A_SHORT_1_2_WHITE_2));

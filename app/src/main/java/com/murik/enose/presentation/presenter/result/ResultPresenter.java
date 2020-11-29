@@ -30,7 +30,6 @@ public class ResultPresenter extends MvpPresenter<ResultView> {
   private ArrayList<ResultBySens> res = new ArrayList<>();
   private Context context;
   private DataByMaxParcelable data;
-  private int hand = Const.LEFT_HAND;
 
   public ResultPresenter() {
   }
