@@ -28,7 +28,7 @@ public class Const {
   public static final int[] HEALTH = {150, 160, 170};
 
   public static final int[] ENERGY = {110, 120, 130, 140, 150};
-  public static final int[] ENERGY_60 = {90, 95, 100, 110, 120};
+  public static final int[] ENERGY_60 = {85, 90, 100, 105, 110};
   public static final int[] BAD = {20, 30, 180};
   public static final int[] ENDOKRIN = {10, 20, 30, 60};
 
@@ -90,12 +90,3 @@ public class Const {
     return range;
   }
 }
-
-/* todo
-* Испарвить цвет гании графика измерения (темно-синяя)
-* добавить кнопку после завершения измерения
-* сделать цифры графика больше
-* Добвить время нагрузки при выборе измерения (время для того, чтоб убрать руку)
-* \звуквовой сигнал или какой то оповещение
-* убрать умножение(скрыть кнопку где умножается)
-* */

@@ -48,8 +48,7 @@ public class OneSensorMeasurePresenter extends MvpPresenter<OneSensorMeasureView
                 leftHandData.set(i, 0);
             }
         }
-        for (
-                int i = 0; i < rightHandData.size(); i++) {
+        for (int i = 0; i < rightHandData.size(); i++) {
             if (rightHandData.get(i) < 0) {
                 rightHandData.set(i, 0);
             }
@@ -58,17 +57,14 @@ public class OneSensorMeasurePresenter extends MvpPresenter<OneSensorMeasureView
         ArrayList<RadarEntry> entryLeftHand = new ArrayList<>();
         ArrayList<RadarEntry> entryRightHand = new ArrayList<>();
 
-        for (
-                int i = 0; i < leftHandData.size(); i++) {
+        for (int i = 0; i < leftHandData.size(); i++) {
             entryLeftHand.add(new RadarEntry(leftHandData.get(i), i));
         }
-        for (
-                int i = 0; i < rightHandData.size(); i++) {
+        for (int i = 0; i < rightHandData.size(); i++) {
             entryRightHand.add(new RadarEntry(rightHandData.get(i), i));
         }
 
-        getViewState().
-                initRadarChart(
+        getViewState().initRadarChart(
                         entryLeftHand,
                         entryRightHand,
                         dataByMaxParcelable.getDescriptions(),

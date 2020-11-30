@@ -99,9 +99,7 @@ public class ResultAFactoryShortMask extends ResultAFactory {
                 getA().add(new ResultA_First1_5_Gray(oneSensorShortMeasure.getFirstA1_5(), getInputData(), getContext(), 1));
                 getA().add(new SI_Gray(SI, getInputData(), getContext()));
 
-//                getA().add(new K(K, getInputData(), getContext()));
                 getA().add(new SI(SI, getInputData(), getContext()));
-//                getA().add(new B(dangerToLungsArea, getInputData(), getContext()));
             }catch (Exception e){
                 return false;
             }

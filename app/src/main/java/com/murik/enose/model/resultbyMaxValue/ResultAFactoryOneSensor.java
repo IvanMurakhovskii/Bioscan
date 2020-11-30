@@ -161,10 +161,11 @@ public class ResultAFactoryOneSensor extends ResultAFactory {
 //                    getA().add(new SI(si, getInputData(), getContext()));
                     getA().add(new ResultA_First40_70(a_40_70, getInputData(), getContext(), 1.81F));
                     getA().add(new ResultA_Second1_2(oneSensorLongMeasure.getSecondA1_2(), getInputData(), getContext(), 1.19F));
-                    getA().add(new ResultA_First1_2(oneSensorShortMeasure.getFirstA1_2(), getInputData(), getContext(), "III"));
                     getA().add(new A_20_30((s20 / s30), getInputData(), getContext(), "IV"));
                     getA().add(new A_20_60((s20 / s60), getInputData(), getContext(), "V"));
+                    getA().add(new ResultA_First1_2(oneSensorShortMeasure.getFirstA1_2(), getInputData(), getContext(), "III"));
                     getA().add(new ResultA_Second1_3_4_60(oneSensorShortMeasure.getFirstA3_2(), getInputData(), getContext(), 0.39F));
+                    getA().add(new Result_E(En, getInputData(), getContext()));
                     getA().add(new A_30_60((s30 / s60), getInputData(), getContext(), 1));
 
                     if(getInputData().isExpert()) {
@@ -175,7 +176,6 @@ public class ResultAFactoryOneSensor extends ResultAFactory {
                         getA().add(new A_30_60_GRAY((s30 / s60), getInputData(), getContext(), 1.63F));
                     }
 
-                    getA().add(new Result_E(En, getInputData(), getContext()));
 //                    getA().add(new Result_L(L, getInputData(), getContext()));
                 }
 
