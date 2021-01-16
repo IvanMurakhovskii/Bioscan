@@ -285,8 +285,9 @@ public class BluetoothDimensionFragment extends MvpAppCompatFragment implements 
         isLeftHand = startDimensionDialogFragment.isLeftHand();
 
         try {
-            dimensionTime = startDimensionDialogFragment.getDimensionTime();
-            substanceDimensionTime = startDimensionDialogFragment.getSubstanceDimensionTime();
+            val dimensionEnum = startDimensionDialogFragment.getDimensionTime();
+            dimensionTime = dimensionEnum.getDimensionTime();
+            substanceDimensionTime = dimensionEnum.getMaxSignalTime();
         } catch (NumberFormatException e) {
             Toast.makeText(
                     getContext(),

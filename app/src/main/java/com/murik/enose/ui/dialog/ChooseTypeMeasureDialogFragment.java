@@ -101,6 +101,8 @@ public class ChooseTypeMeasureDialogFragment extends DialogFragment {
                 return 80;
             case R.id.rb_max_60:
                 return 60;
+            case R.id.rb_max_30:
+                return 30;
             default:
                 return 80;
         }

@@ -22,12 +22,15 @@ public class ResultA_First40_70 extends BaseResultFirst {
         if (getA() >= 0.4 && getA() <= 0.77) {
             setColorYELLOW();
             setPossibleReasons(getResources(R.string.A_SHORT_2_3_YELLOW));
-        } else if (getA() >= 0.86 && getA() <= 1.3) {
+        } else if (getA() >= 0.84 && getA() <= 1.3) {
             setColorYELLOW();
             setPossibleReasons(getResources(R.string.A_SHORT_2_3_YELLOW_2));
         } else if (getA() >= 1.4 && getA() <= 3) {
             setColorRED();
             setPossibleReasons(getResources(R.string.A_SHORT_2_3_RED));
+        } else if(getA() > 3) {
+            setColorBURGUNDY();
+            setPossibleReasons(getResources(R.string.A_SHORT_2_3_BURGUNDY));
         }
     }
 }

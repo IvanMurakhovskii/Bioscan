@@ -16,18 +16,5 @@ public class ResultA_Second1_4 extends BaseResultSecond {
     }
 
     public void setResult() {
-        if (getA() >= 0.25 && getA() <= 0.48) {
-            setColorRED();
-            setPossibleReasons(getResources(R.string.A_LONG_1_4_RED));
-        } else if (getA() >= 0.49 && getA() <= 0.55) {
-            setColorYELLOW();
-            setPossibleReasons(getResources(R.string.A_LONG_1_4_YELLOW));
-        } else if (getA() >= 0.84 && getA() <= 1.1) {
-            setColorYELLOW();
-            setPossibleReasons(getResources(R.string.A_LONG_1_4_YELLOW_2));
-        } else if (getA() <= 0.25) {
-            setColorBURGUNDY();
-            setPossibleReasons(getResources(R.string.A_LONG_1_4_BURGUNDY));
-        }
     }
 }

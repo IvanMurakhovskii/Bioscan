@@ -43,9 +43,6 @@ public class ResultA_First1_2 extends BaseResultFirst {
         } else if (getA() >= 0.7) {
             setColorBURGUNDY();
             setPossibleReasons(getResources(R.string.A_SHORT_1_2_BURGUNDY_3));
-        } else if (getA() >= 0.600 && getA() <= 0.63) {
-            setColorCRIMSON();
-            setPossibleReasons(getResources(R.string.A_SHORT_1_2_WHITE_2));
         } else if (getA() <= 0.100) {
             setColor(Color.WHITE);
             setPossibleReasons(getResources(R.string.A_SHORT_1_2_WHITE));

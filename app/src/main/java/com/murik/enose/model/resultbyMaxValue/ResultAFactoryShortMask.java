@@ -37,6 +37,11 @@ public class ResultAFactoryShortMask extends ResultAFactory {
     }
 
     @Override
+    public Float calculateAndGetAreaDifference() {
+        return 0F;
+    }
+
+    @Override
     public boolean calculateResultA() {
         if(!getMaxSensResult().isEmpty()){
             OneSensorShortMeasure oneSensorShortMeasure = new OneSensorShortMeasure(getMaxSensResult());

@@ -11,7 +11,7 @@ public class OneSensorLongMeasure {
 
     private List<Integer> secondData = new ArrayList<>();
 
-    private ArrayList<ArrayList<Float>> A = new ArrayList<>();
+    private ArrayList<ArrayList<Double>> A = new ArrayList<>();
 
     public OneSensorLongMeasure(List<Integer> resultData) {
         if (resultData != null && resultData.size() > Const.LONG[Const.LONG.length - 1]) {
@@ -24,19 +24,19 @@ public class OneSensorLongMeasure {
     }
 
     public void calculateA() {
-        float max;
-        float tmp;
+        double max;
+        Double tmp;
 
         for (int i = 0; i < secondData.size(); i++) {
             max = secondData.get(i);
-            ArrayList<Float> tmpA = new ArrayList<>();
+            ArrayList<Double> tmpA = new ArrayList<>();
             for (int j = 0; j < secondData.size(); j++) {
                 tmp = max / secondData.get(j);
                 if (!Double.isNaN(tmp) && !Double.isInfinite(tmp)) {
                     if (tmp > 1.0) {
-                        tmp = new BigDecimal(tmp).setScale(1, RoundingMode.HALF_EVEN).floatValue();
+                        tmp = new BigDecimal(tmp).setScale(1, RoundingMode.HALF_EVEN).doubleValue();
                     } else {
-                        tmp = new BigDecimal(tmp).setScale(2, RoundingMode.HALF_EVEN).floatValue();
+                        tmp = new BigDecimal(tmp).setScale(2, RoundingMode.HALF_EVEN).doubleValue();
                     }
                 }
 
@@ -46,7 +46,7 @@ public class OneSensorLongMeasure {
         }
     }
 
-    public float getSecondA1_2() {
+    public double getSecondA1_2() {
         try {
             return A.get(0).get(1);
         } catch (Exception e) {
@@ -54,7 +54,7 @@ public class OneSensorLongMeasure {
         }
     }
 
-    public float getSecondA1_3() {
+    public double getSecondA1_3() {
         try {
             return A.get(0).get(2);
         } catch (Exception e) {
@@ -62,7 +62,7 @@ public class OneSensorLongMeasure {
         }
     }
 
-    public float getSecondA3_1() {
+    public double getSecondA3_1() {
         try {
             return A.get(2).get(0);
         } catch (Exception e) {
@@ -70,7 +70,7 @@ public class OneSensorLongMeasure {
         }
     }
 
-    public float getSecondA2_3() {
+    public double getSecondA2_3() {
         try {
             return A.get(1).get(2);
         } catch (Exception e) {
@@ -78,7 +78,7 @@ public class OneSensorLongMeasure {
         }
     }
 
-    public float getSecondA3_4() {
+    public double getSecondA3_4() {
         try {
             return A.get(2).get(3);
         } catch (Exception e) {
@@ -86,7 +86,7 @@ public class OneSensorLongMeasure {
         }
     }
 
-    public float getSecondA3_5() {
+    public double getSecondA3_5() {
         try {
             return A.get(2).get(4);
         } catch (Exception e) {
@@ -94,7 +94,7 @@ public class OneSensorLongMeasure {
         }
     }
 
-    public float getSecondA5_4() {
+    public double getSecondA5_4() {
         try {
             return A.get(4).get(3);
         } catch (Exception e) {
@@ -102,7 +102,7 @@ public class OneSensorLongMeasure {
         }
     }
 
-    public float getSecondA1_4() {
+    public double getSecondA1_4() {
         try {
             return A.get(0).get(3);
         } catch (Exception e) {
@@ -110,7 +110,7 @@ public class OneSensorLongMeasure {
         }
     }
 
-    public float getSecondA2_4() {
+    public double getSecondA2_4() {
         try {
             return A.get(1).get(3);
         } catch (Exception e) {
@@ -118,7 +118,7 @@ public class OneSensorLongMeasure {
         }
     }
 
-    public float getSecondA1_5() {
+    public double getSecondA1_5() {
         try {
             return A.get(0).get(4);
         } catch (Exception e) {
@@ -126,7 +126,7 @@ public class OneSensorLongMeasure {
         }
     }
 
-    public float getSecondA2_5() {
+    public double getSecondA2_5() {
         try {
             return A.get(1).get(4);
         } catch (Exception e) {
@@ -134,7 +134,7 @@ public class OneSensorLongMeasure {
         }
     }
 
-    public float getSecondA4_6() {
+    public double getSecondA4_6() {
         try {
             return A.get(3).get(5);
         } catch (Exception e) {
@@ -142,7 +142,7 @@ public class OneSensorLongMeasure {
         }
     }
 
-    public float getSecondA4_8() {
+    public double getSecondA4_8() {
         try {
             return A.get(3).get(7);
         } catch (Exception e) {
@@ -150,7 +150,7 @@ public class OneSensorLongMeasure {
         }
     }
 
-    public float getSecondA6_8() {
+    public double getSecondA6_8() {
         try {
             return A.get(5).get(7);
         } catch (Exception e) {
@@ -158,7 +158,7 @@ public class OneSensorLongMeasure {
         }
     }
 
-    public float getSecondA9_6() {
+    public double getSecondA9_6() {
         try {
             return A.get(8).get(5);
         } catch (Exception e) {

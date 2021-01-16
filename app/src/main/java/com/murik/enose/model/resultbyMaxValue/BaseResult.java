@@ -50,7 +50,7 @@ public abstract class BaseResult implements ResultBySens {
         return A;
     }
 
-    public void setA(double A) {
+    public void setA(float A) {
         this.A = A;
     }
 

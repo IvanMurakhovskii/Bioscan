@@ -16,24 +16,23 @@ public class A_30_60 extends BaseResultWithCoefficient {
     }
 
     public void setResult() {
-        if (getA() >= 0.27 && getA() <= 0.28) {
+        if (getA() >= 0.22 && getA() <= 0.26) {
             setColorGREEN();
-            setPossibleReasons(getResources(R.string.A_30_60_GREEN_1));
-        } else if (getA() >= 0.16 && getA() <= 0.20) {
+        } else if (getA() >= 0.17 && getA() <= 0.21) {
             setColorYELLOW();
             setPossibleReasons(getResources(R.string.A_30_60_YELLOW_1));
+        } else if (getA() >= 0.27 && getA() <= 0.30) {
+            setColorYELLOW();
+            setPossibleReasons(getResources(R.string.A_30_60_YELLOW_2));
         } else if (getA() >= 0.31 && getA() <= 0.43) {
             setColorRED();
             setPossibleReasons(getResources(R.string.A_30_60_RED));
         } else if (getA() >= 0.44 && getA() <= 0.55) {
             setColorBURGUNDY();
-            setPossibleReasons(getResources(R.string.A_30_60_WHITE));
-        } else if (getA() <= 0.14) {
+            setPossibleReasons(getResources(R.string.A_30_60_BURGUNDY_2));
+        } else if (getA() >= 0.10 && getA() <= 0.16) {
             setColorBURGUNDY();
-            setPossibleReasons(getResources(R.string.A_30_60_WHITE_2));
-        } else if (getA() > 0.14 && getA() <= 0.15) {
-            setColorBLUE();
-            setPossibleReasons(getResources(R.string.A_30_60_BLUE));
+            setPossibleReasons(getResources(R.string.A_30_60_BURGUNDY_1));
         }
     }
 }

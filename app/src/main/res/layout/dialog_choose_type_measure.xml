@@ -108,6 +108,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 />
+
+            <RadioButton
+                android:id="@+id/rb_max_30"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="30" />
         </RadioGroup>
 
             <TextView
