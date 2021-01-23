@@ -48,7 +48,6 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Timer;
 import java.util.TimerTask;
-import java.util.function.Function;
 
 import lombok.val;
 
@@ -86,7 +85,7 @@ public class BluetoothDimensionFragment extends MvpAppCompatFragment implements 
 
     private TextView maxSignal;
     private LinearLayout llMaxSignal;
-    private LinearLayout lldimensionTimer;
+    private LinearLayout llDimensionTimer;
     private TextView dimensionTimer;
 //    private TextView initial;
 //    private TextView signal;
@@ -141,21 +140,12 @@ public class BluetoothDimensionFragment extends MvpAppCompatFragment implements 
                                         "Уберите руку от прибора!",
                                         Toast.LENGTH_LONG
                                 ).show();
-                            //                                   takeAwayHandDialog();
 
+                                findAndShowMaxSignal();
                             }
 
                             if (isDimensionTimeOver(count)) {
-                                List<Integer> data;
-                                if (isLeftHand) {
-                                    data = mBluetoothDimensionPresenter.getSens1DataLeftHand();
-                                } else {
-                                    data = mBluetoothDimensionPresenter.getSens1DataRightHand();
-                                }
 
-                                final Integer max = max(data);
-                                maxSignal.getHandler().post(() -> maxSignal.setText(max.toString()));
-                                llMaxSignal.getHandler().post(() -> llMaxSignal.setVisibility(View.VISIBLE));
                                 stopDimension();
                                 makeNotificationSound();
                                 Toast.makeText(
@@ -170,6 +160,19 @@ public class BluetoothDimensionFragment extends MvpAppCompatFragment implements 
             }
         }
     };
+
+    private void findAndShowMaxSignal() {
+        List<Integer> data;
+        if (isLeftHand) {
+            data = mBluetoothDimensionPresenter.getSens1DataLeftHand();
+        } else {
+            data = mBluetoothDimensionPresenter.getSens1DataRightHand();
+        }
+
+        final Integer max = max(data);
+        maxSignal.getHandler().post(() -> maxSignal.setText(max.toString()));
+        llMaxSignal.getHandler().post(() -> llMaxSignal.setVisibility(View.VISIBLE));
+    }
 
     private Integer max(List<Integer> data) {
         int max = data.get(0);
@@ -208,7 +211,7 @@ public class BluetoothDimensionFragment extends MvpAppCompatFragment implements 
         btnStart = view.findViewById(R.id.btn_start_dimension);
         maxSignal = view.findViewById(R.id.max_signal);
         llMaxSignal = view.findViewById(R.id.ll_max_signal);
-        lldimensionTimer = view.findViewById(R.id.ll_dimensionTimer);
+        llDimensionTimer = view.findViewById(R.id.ll_dimensionTimer);
         dimensionTimer = view.findViewById(R.id.dimensionTimer);
 //        initial = view.findViewById(R.id.initial);
 //        signal = view.findViewById(R.id.signal);
@@ -301,6 +304,7 @@ public class BluetoothDimensionFragment extends MvpAppCompatFragment implements 
         mBluetoothDimensionPresenter.setDimensionParametrs(description, gender, isPractice, isLeftHand);
 
         lineChart.getLineData().clearValues();
+        makeNotificationSound();
     }
 
     CountDownTimer countDownTimer = new CountDownTimer(5000, 1000) {
@@ -311,7 +315,7 @@ public class BluetoothDimensionFragment extends MvpAppCompatFragment implements 
 
         @Override
         public void onFinish() {
-            lldimensionTimer.setVisibility(View.GONE);
+            llDimensionTimer.setVisibility(View.GONE);
             if (isFirstDimension) {
                 startDimension();
             } else {
@@ -321,7 +325,7 @@ public class BluetoothDimensionFragment extends MvpAppCompatFragment implements 
     };
 
     private void waitBeforeDimension() {
-        lldimensionTimer.setVisibility(View.VISIBLE);
+        llDimensionTimer.setVisibility(View.VISIBLE);
         countDownTimer.start();
     }
 

@@ -12,7 +12,7 @@ public class A_20_40 extends BaseResultFirst {
 
     public A_20_40(double A, DataByMaxParcelable inputData, Context context, float coefficient) {
         super(A, inputData, context, coefficient);
-        setLegend("IV");
+        setLegend("V");
     }
 
     public void setResult() {

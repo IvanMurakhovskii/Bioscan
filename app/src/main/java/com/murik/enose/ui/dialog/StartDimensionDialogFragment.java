@@ -6,7 +6,7 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v4.app.DialogFragment;
+import android.support.v7.app.AppCompatDialogFragment;
 import android.support.v7.widget.SwitchCompat;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,12 +19,9 @@ import com.murik.enose.Const;
 import com.murik.enose.R;
 import com.murik.enose.enums.BluetoothDimensionTimeEnum;
 
-import java.util.Arrays;
 import java.util.Objects;
 
-import lombok.val;
-
-public class StartDimensionDialogFragment extends DialogFragment {
+public class StartDimensionDialogFragment extends AppCompatDialogFragment {
 
     private DialogListener mDialogListener;
     private EditText descriptions;
@@ -57,19 +54,20 @@ public class StartDimensionDialogFragment extends DialogFragment {
         swPractice = view.findViewById(R.id.sc_practice_des);
         swHand = view.findViewById(R.id.rg_hand);
         dimensionTimeSpinner = view.findViewById(R.id.spinner_dimension_time);
-        dimensionTimeSpinner.setAdapter(new ArrayAdapter<BluetoothDimensionTimeEnum>(
-                this.getContext(),
-                android.R.layout.simple_dropdown_item_1line,
+
+        dimensionTimeSpinner.setAdapter(new ArrayAdapter<>(
+                Objects.requireNonNull(this.getContext()),
+                android.R.layout.simple_spinner_dropdown_item,
                 BluetoothDimensionTimeEnum.values())
         );
 //    dimensionTime = view.findViewById(R.id.all_dimension_time);
 //    substanceDimensionTime = view.findViewById(R.id.substance_dimension_time);
         builder.setView(view)
                 .setTitle("Измерение")
-                .setPositiveButton(R.string.submit, (DialogInterface dialog, int id) -> {
+                .setPositiveButton("Начать", (DialogInterface dialog, int id) -> {
                     mDialogListener.onDialogPositiveClick(1);
                 })
-                .setNegativeButton(R.string.vertical_form_stepper_form_discard_cancel,
+                .setNegativeButton("Отмена",
                         (DialogInterface dialog, int id) ->
                                 StartDimensionDialogFragment.this.getDialog().cancel());
 

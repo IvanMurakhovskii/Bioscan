@@ -11,12 +11,6 @@ import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
-import android.hardware.usb.UsbDevice;
-import android.hardware.usb.UsbManager;
-import android.media.MediaPlayer;
-import android.media.Ringtone;
-import android.media.RingtoneManager;
-import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
@@ -41,7 +35,6 @@ import android.widget.Toast;
 
 import com.arellomobile.mvp.MvpAppCompatActivity;
 import com.arellomobile.mvp.presenter.InjectPresenter;
-import com.google.android.things.pio.PeripheralManager;
 import com.murik.enose.App;
 import com.murik.enose.R;
 import com.murik.enose.Screens;
@@ -52,6 +45,7 @@ import com.murik.enose.presentation.view.start.StartView;
 import com.murik.enose.service.Impl.BluetoothImplService;
 import com.murik.enose.ui.activity.ProgressDisplay;
 import com.murik.enose.ui.fragment.LiveBluetoothChart.LiveBluetoothChartFragment;
+import com.murik.enose.ui.fragment.bar_chart.ResultBarChartFragment;
 import com.murik.enose.ui.fragment.bluetooth.BluetoothConnectionFragment;
 import com.murik.enose.ui.fragment.dimension.BluetoothDimensionFragment;
 import com.murik.enose.ui.fragment.input.InputFragment;
@@ -59,15 +53,12 @@ import com.murik.enose.ui.fragment.oneSensorMeasure.OneSensorTabContainerFragmen
 import com.murik.enose.ui.fragment.parserXml.ParserXmlFragment;
 import com.murik.enose.ui.fragment.realm.RealmFragment;
 import com.murik.enose.ui.fragment.result.ResultTabFragment;
-import com.murik.enose.ui.fragment.bar_chart.ResultBarChartFragment;
 import com.murik.enose.ui.fragment.resultRadarChart.RadarTabContentFragment;
 import com.murik.enose.ui.fragment.usbdevice.UsbFragment;
 
 import java.io.File;
 import java.io.FileOutputStream;
-import java.io.IOException;
 import java.util.Date;
-import java.util.Map;
 
 import lombok.val;
 import ru.terrakok.cicerone.Navigator;

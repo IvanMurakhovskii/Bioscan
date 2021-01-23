@@ -85,7 +85,6 @@ public class ResultFragment extends MvpAppCompatFragment implements ResultView {
     fab_diagram = view.findViewById(R.id.fab_diagram);
     mResultPresenter.setContext(getContext());
 
-    fab_diagram.setOnClickListener((event) -> mResultPresenter.showDiagram());
   }
 
 

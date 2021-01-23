@@ -11,7 +11,7 @@ import com.murik.enose.dto.DataByMaxParcelable;
 public abstract class BaseResult implements ResultBySens {
     private double A;
     private int color;
-    private String possibleReasons = null;
+    private String possibleReasons = "result";
     private Context context;
     private String legend;
     private DataByMaxParcelable inputData;

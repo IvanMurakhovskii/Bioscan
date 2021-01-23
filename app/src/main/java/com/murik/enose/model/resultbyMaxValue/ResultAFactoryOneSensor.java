@@ -148,7 +148,7 @@ public class ResultAFactoryOneSensor extends ResultAFactory {
                 } else if (maxSignalTime == 60) {
                     createParametersFor_60(a_40_70, s20_30, s20_60, s30_60, En, tau);
                 } else if (maxSignalTime == 30) {
-                    createParametersFor_30(tau, En);
+                    createParametersFor_30(tau, En, s20_30);
                 }
 
             } catch (Exception e) {
@@ -161,12 +161,12 @@ public class ResultAFactoryOneSensor extends ResultAFactory {
         }
     }
 
-    private void createParametersFor_30(final int tau, final Float En) {
+    private void createParametersFor_30(final int tau, final Float En, final Float s20_30) {
         getA().add(new A_10_20(sensorValueAttitudeFor30.getA10_20(), getInputData(), getContext(), 1.81F));
-        getA().add(new A_15_45(sensorValueAttitudeFor30.calculateA(15,45), getInputData(), getContext(), 1.81F));
         getA().add(new A_15_30(sensorValueAttitudeFor30.getA15_30(), getInputData(), getContext(), 1.81F));
-        getA().add(new com.murik.enose.model.A_30.A_20_30(sensorValueAttitudeFor30.getA20_30(), getInputData(), getContext(), 1.81F));
+        getA().add(new A_20_30(s20_30, getInputData(), getContext(), "IV"));
         getA().add(new A_20_40(sensorValueAttitudeFor30.getA20_40(), getInputData(), getContext(), 1.81F));
+        getA().add(new A_15_45(sensorValueAttitudeFor30.calculateA(15,45), getInputData(), getContext(), 1.81F));
         getA().add(new A_50_30(sensorValueAttitudeFor30.getA50_30(), getInputData(), getContext(), 1.81F));
         getA().add(new TAU_30(tau, getInputData(), getContext()));
         getA().add(new E_30(En, getInputData(), getContext()));
@@ -180,13 +180,13 @@ public class ResultAFactoryOneSensor extends ResultAFactory {
     private void createParametersFor_60(float a_40_70, Float s20_30, Float s20_60, Float s30_60, Float en, final int tau) {
         getA().add(new ResultA_First40_70(a_40_70, getInputData(), getContext(), 1.81F));
         getA().add(new ResultA_Second1_2(oneSensorLongMeasure.getSecondA1_2(), getInputData(), getContext(), 1.19F));
-        getA().add(new A_20_30((s20_30), getInputData(), getContext(), "IV"));
+        getA().add(new A_20_30(s20_30, getInputData(), getContext(), "IV"));
         getA().add(new A_20_60((s20_60), getInputData(), getContext(), "V"));
         getA().add(new ResultA_First1_2(oneSensorShortMeasure.getFirstA1_2(), getInputData(), getContext(), "III"));
         getA().add(new ResultA_Second1_3_4_60(oneSensorShortMeasure.getFirstA3_2(), getInputData(), getContext(), 0.39F));
+        getA().add(new TAU_60(tau, getInputData(), getContext()));
         getA().add(new E_60(en, getInputData(), getContext()));
         getA().add(new A_30_60((s30_60), getInputData(), getContext(), 1));
-        getA().add(new TAU_60(tau, getInputData(), getContext()));
 
 
         if (getInputData().isExpert()) {
@@ -202,17 +202,18 @@ public class ResultAFactoryOneSensor extends ResultAFactory {
         getA().add(new SI(si, getInputData(), getContext()));
         getA().add(new ResultA_First2_3(oneSensorShortMeasure.getFirstA2_3(), getInputData(), getContext(), 1.81F));
         getA().add(new ResultA_Second1_2(oneSensorLongMeasure.getSecondA1_2(), getInputData(), getContext(), 1.19F));
-        getA().add(new ResultA_Second2_3(oneSensorLongMeasure.getSecondA2_3(), getInputData(), getContext(), 1.1F));
         getA().add(new ResultA_First1_2(oneSensorShortMeasure.getFirstA1_2(), getInputData(), getContext(), 1.35F));
-        getA().add(new A_20_30((s20_30), getInputData(), getContext(), 1.24F));
+        getA().add(new A_20_30(s20_30, getInputData(), getContext(), 1.24F));
+        getA().add(new ResultA_Second2_3(oneSensorLongMeasure.getSecondA2_3(), getInputData(), getContext(), 1.1F));
         getA().add(new ResultA_Second1_3(oneSensorLongMeasure.getSecondA1_3(), getInputData(), getContext(), 1.3F));
         getA().add(new ResultA_First2_5(1 / oneSensorShortMeasure.getFirstA5_2(), getInputData(), getContext(), 0.47F));
         getA().add(new ResultA_First2_4(1 / oneSensorShortMeasure.getFirstA2_4(), getInputData(), getContext(), 0.53F));
         getA().add(new A_20_60((s20_60), getInputData(), getContext(), 1.63F));
 //        getA().add(new ResultA_Second1_4(1 / oneSensorLongMeasure.getSecondA1_4(), getInputData(), getContext(), 0.39F));
         getA().add(new ResultA_Second3_4(1 / oneSensorLongMeasure.getSecondA3_4(), getInputData(), getContext(), 0.39F));
-        getA().add(new A_30_60((s30_60), getInputData(), getContext(), 1.63F));
         getA().add(new TAU_80(tau, getInputData(), getContext()));
+        getA().add(new E_80(en, getInputData(), getContext()));
+        getA().add(new A_30_60((s30_60), getInputData(), getContext(), 1.63F));
 
         if (getInputData().isExpert()) {
             getA().add(new ResultA_First2_3_Gray(oneSensorShortMeasure.getFirstA2_3(), getInputData(), getContext(), 1));
@@ -224,7 +225,6 @@ public class ResultAFactoryOneSensor extends ResultAFactory {
             getA().add(new A_30_60_GRAY((s30_60), getInputData(), getContext(), 1.63F));
         }
 
-        getA().add(new E_80(en, getInputData(), getContext()));
         getA().add(new Result_L(l, getInputData(), getContext()));
     }
 }
