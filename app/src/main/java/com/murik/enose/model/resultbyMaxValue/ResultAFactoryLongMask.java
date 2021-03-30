@@ -23,6 +23,11 @@ public class ResultAFactoryLongMask extends ResultAFactory {
     }
 
     @Override
+    public Float calculateAndGetAreaDifference() {
+        return 0F;
+    }
+
+    @Override
     public boolean calculateResultA() {
         if(!getMaxSensResult().isEmpty()){
             OneSensorLongMeasure oneSensorShortMeasure = new OneSensorLongMeasure(getMaxSensResult());

@@ -26,7 +26,7 @@ public class DataByMaxParcelable implements Parcelable {
     private Float differenceArea = 0.0f;
     private int timeRegistrationMaxSignal = 80;
 
-    private int sensorType = Const.SENSOR_7_SM;
+    private String sensorType = Const.DIAGNOST;
 
 
     @Override
@@ -47,7 +47,7 @@ public class DataByMaxParcelable implements Parcelable {
         dest.writeList(leftHandDataSensor);
         dest.writeByte((byte) (isPractice ? 1 : 0));
         dest.writeByte((byte) (isExpert ? 1 : 0));
-        dest.writeInt(sensorType);
+        dest.writeString(sensorType);
     }
 
     public static final Parcelable.Creator<DataByMaxParcelable> CREATOR = new Parcelable.Creator<DataByMaxParcelable>() {
@@ -75,7 +75,7 @@ public class DataByMaxParcelable implements Parcelable {
         timeRegistrationMaxSignal = parcel.readInt();
         differenceArea = parcel.readFloat();
         measureType = parcel.readString();
-        sensorType = parcel.readInt();
+        sensorType = parcel.readString();
     }
 
 }

@@ -6,10 +6,10 @@ import com.murik.enose.R;
 import com.murik.enose.dto.DataByMaxParcelable;
 import com.murik.enose.model.resultbyMaxValue.BaseResultWithCoefficient;
 
-public class A_30_60_GRAY extends BaseResultWithCoefficient {
+public class S_30_60_GRAY extends BaseResultWithCoefficient {
 
 
-    public A_30_60_GRAY(double A, DataByMaxParcelable inputData, Context context, float coefficicent) {
+    public S_30_60_GRAY(double A, DataByMaxParcelable inputData, Context context, float coefficicent) {
         super(A, inputData, context, coefficicent);
         setLegend("S(30/60)G");
     }

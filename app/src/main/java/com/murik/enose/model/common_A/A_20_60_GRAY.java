@@ -13,6 +13,11 @@ public class A_20_60_GRAY extends BaseResultWithCoefficient {
         setLegend("IX_G");
     }
 
+    public A_20_60_GRAY(double A, DataByMaxParcelable inputData, Context context, String legend) {
+        super(A, inputData, context, 0);
+        setLegend(legend);
+    }
+
     public void setResult() {
         setColorGRAY();
         if (getA() == 0.025) {

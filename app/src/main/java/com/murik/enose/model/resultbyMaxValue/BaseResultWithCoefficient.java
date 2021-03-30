@@ -16,9 +16,9 @@ public abstract class BaseResultWithCoefficient extends BaseResult{
 
     @Override
     public double getA() {
-        if (getInputData().getSensorType() == Const.SENSOR_5_SM) {
-            return super.getA() * coefficient;
-        }
+//        if (getInputData().getSensorType() == Const.BIOSCANER) {
+//            return super.getA() * coefficient;
+//        }
         return super.getA();
     }
 

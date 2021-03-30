@@ -28,7 +28,8 @@ public class Const {
   public static final int[] HEALTH = {150, 160, 170};
 
   public static final int[] ENERGY = {110, 120, 130, 140, 150};
-  public static final int[] ENERGY_60 = {90, 95, 100, 110, 120};
+  public static final int[] ENERGY_60 = {85, 90, 100, 105, 110};
+  public static final int[] ENERGY_30 = {40, 45, 50, 55, 60};
   public static final int[] BAD = {20, 30, 180};
   public static final int[] ENDOKRIN = {10, 20, 30, 60};
 
@@ -36,14 +37,17 @@ public class Const {
   public static final int[] SHORT = {30, 60, 90, 110, 120}; //короткая
   public static final int[] LONG = {40, 60, 80, 120, 140};  //длинная
   public static final int[] BODY = range(10, 60);
+  public static final int[] BODY_30 = range(4, 30);
   public static final int[] LUNGS = range(10, 20);
   public static final int[] DANGER = range(140, 160);
   public static final int[] DISCRETE = {30, 40, 60, 80, 90, 110, 120, 140};
   public static final int[] DISCRETE_60 = {30, 40, 60, 80, 90, 110, 120};
+  public static final int[] DISCRETE_30 = { 15, 20, 25, 30, 40, 50, 55};
 
   public static final int[] MASK_60 = range(0, 60);
   public static final int[] MASK_30 = range(0, 30);
   public static final int[] MASK_20 = range(0, 20);
+  public static final int[] MASK_15 = range(0, 15);
 
   public static final int PAGE_SHORT = 0;
   public static final int PAGE_LONG = 1;
@@ -79,8 +83,8 @@ public class Const {
   public static final String SECOND_MEASURE = "SECOND_MEASURE";
 
 
-  public static final int SENSOR_7_SM = 7; // НД
-  public static final int SENSOR_5_SM = 5; // OPS
+  public static final String DIAGNOST = "DIAGNOSE"; // НД
+  public static final String BIOSCANER = "BIOSCANER"; // OPS
 
   private static int[] range(int start, int length) {
     int[] range = new int[length - start + 1];
@@ -90,12 +94,3 @@ public class Const {
     return range;
   }
 }
-
-/* todo
-* Испарвить цвет гании графика измерения (темно-синяя)
-* добавить кнопку после завершения измерения
-* сделать цифры графика больше
-* Добвить время нагрузки при выборе измерения (время для того, чтоб убрать руку)
-* \звуквовой сигнал или какой то оповещение
-* убрать умножение(скрыть кнопку где умножается)
-* */
