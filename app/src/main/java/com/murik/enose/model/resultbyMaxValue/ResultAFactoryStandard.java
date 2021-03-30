@@ -2,6 +2,8 @@ package com.murik.enose.model.resultbyMaxValue;
 
 import android.content.Context;
 
+import com.murik.enose.Const;
+import com.murik.enose.dto.DataByMaxParcelable;
 import com.murik.enose.model.A.ResultA1_2;
 import com.murik.enose.model.A.ResultA1_3;
 import com.murik.enose.model.A.ResultA1_4;
@@ -25,14 +27,24 @@ import com.murik.enose.model.A.ResultA6_7;
 import com.murik.enose.model.A.ResultA6_8;
 import com.murik.enose.model.ResultAFactory;
 import com.murik.enose.model.ResultBySens;
-import com.murik.enose.dto.DataByMaxParcelable;
 
 import java.util.ArrayList;
+
+import static com.murik.enose.service.Impl.BaseMeasureService.calculateDifferenceLeftRight;
+import static com.murik.enose.service.Impl.BaseMeasureService.getAreaByMask;
 
 public class ResultAFactoryStandard extends ResultAFactory {
 
   public ResultAFactoryStandard(DataByMaxParcelable inputData, int hand, Context context) {
       super(inputData, hand, context);
+  }
+
+  @Override
+  public Float calculateAndGetAreaDifference() {
+    float areaBodyLeft = getAreaByMask(Const.BODY, getInputData().getLeftHandDataSensor());
+    float areaBodyRight = getAreaByMask(Const.BODY, getInputData().getRightHandDataSensor());
+
+    return calculateDifferenceLeftRight(areaBodyLeft, areaBodyRight);
   }
 
   public boolean calculateResultA(){

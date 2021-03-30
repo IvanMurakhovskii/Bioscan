@@ -26,6 +26,7 @@ import com.github.mikephil.charting.interfaces.datasets.IRadarDataSet;
 import com.murik.enose.Const;
 import com.murik.enose.R;
 import com.murik.enose.dto.DataByMaxParcelable;
+import com.murik.enose.model.resultbyMaxValue.AreaDifference;
 import com.murik.enose.presentation.presenter.oneSensorMeasure.OneSensorMeasurePresenter;
 import com.murik.enose.presentation.view.oneSensorMeasure.OneSensorMeasureView;
 import com.murik.enose.service.Impl.BaseMeasureService;
@@ -131,7 +132,7 @@ public class OneSensorChartFragment extends MvpAppCompatFragment implements OneS
 
         btnResult.setOnClickListener(event -> oneSensorMeasurePresenter.btnResultClickListener(dataByMaxParcelable));
 
-        oneSensorMeasurePresenter.createRadarChart(mPage, dataByMaxParcelable, new BaseMeasureService());
+        oneSensorMeasurePresenter.createRadarChart(mPage, dataByMaxParcelable, new BaseMeasureService(), this.getContext());
     }
 
     public void initRadarChart(ArrayList<RadarEntry> entryLeftHand, ArrayList<RadarEntry> entryRightHand,
@@ -212,34 +213,19 @@ public class OneSensorChartFragment extends MvpAppCompatFragment implements OneS
     }
 
     @Override
-    public void setAreaDifference(final float difference) {
+    public void setAreaDifference(final AreaDifference areaDifference) {
+        double difference = Math.abs(areaDifference.getAreaDifference());
         llAreaDifference.setVisibility(View.VISIBLE);
         tvAreaDifference.setText(String.format("%.2f", difference) + "%");
 
-        int color = ContextCompat.getColor(Objects.requireNonNull(getContext()), R.color.colorResultGreen);
+        String comment = areaDifference.getResultComment();
 
-        if(difference <= 5.5) {
-           color = ContextCompat.getColor(Objects.requireNonNull(getContext()), R.color.colorResultGreen);
-        }
+        llAreaDifference.setBackgroundColor(areaDifference.getViewColor());
 
-        if(difference > 5.5 && difference <= 16.5) {
-            color = ContextCompat.getColor(Objects.requireNonNull(getContext()), R.color.colorResultYellow);
-        }
-
-        if(difference > 16.5 && difference <= 50) {
-            color = ContextCompat.getColor(Objects.requireNonNull(getContext()), R.color.colorResultRed);
+        if(comment != null) {
             tvDifferenceComment.setVisibility(View.VISIBLE);
-            tvDifferenceComment.setText("ОБРАТИТЕ ВНИМАНИЕ!");
+            tvDifferenceComment.setText(areaDifference.getResultComment());
         }
-
-        if(difference > 50) {
-            color = ContextCompat.getColor(Objects.requireNonNull(getContext()), R.color.colorResultBurgundy);
-            tvDifferenceComment.setVisibility(View.VISIBLE);
-            tvDifferenceComment.setText("ОПАСНОЕ РАЗЛИЧИЕ!");
-        }
-
-
-        llAreaDifference.setBackgroundColor(color);
     }
 
     @Override

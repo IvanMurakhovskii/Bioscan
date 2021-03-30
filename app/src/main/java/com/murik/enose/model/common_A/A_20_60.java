@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Color;
 
 import com.murik.enose.Const;
+import com.murik.enose.R;
 import com.murik.enose.dto.DataByMaxParcelable;
 import com.murik.enose.model.resultbyMaxValue.BaseResult;
 import com.murik.enose.model.resultbyMaxValue.BaseResultWithCoefficient;
@@ -22,9 +23,16 @@ public class A_20_60 extends BaseResultWithCoefficient {
     }
 
     public void setResult() {
-        if (getA() >= 0.3 && getA() <= 0.35) {
+        if (getA() >= 0.24 && getA() <= 0.29) {
+            setColorGREEN();
+        } else if(getA() >= 0.040 && getA() <= 0.055) {
+            setColorBLUE();
+        } else if (getA() >= 0.30 && getA() <= 0.35) {
             setColorYELLOW();
-            setPossibleReasons("легкая усталость, голод (справа)");
+            setPossibleReasons(getResources(R.string.A_20_60_YELLOW));
+        } else if(getA() >= 0.40 && getA() <= 0.50) {
+            setColorRED();
+            setPossibleReasons(getResources(R.string.A_20_60_RED));
         }
     }
 }

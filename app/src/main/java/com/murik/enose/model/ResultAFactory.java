@@ -11,6 +11,8 @@ import com.murik.enose.model.resultbyMaxValue.ResultByMask;
 
 import java.util.ArrayList;
 
+import lombok.val;
+
 public abstract class ResultAFactory {
 
     private ArrayList<ResultBySens> A = new ArrayList<>();
@@ -22,25 +24,33 @@ public abstract class ResultAFactory {
 
     public ResultAFactory(DataByMaxParcelable inputData, int hand, Context context) {
 
+        this.inputData = inputData;
+
+        this.context = context;
+
         try {
             if (hand == Const.LEFT_HAND) {
                 this.maxSensResult = inputData.getLeftHandDataSensor();
-            } else if(hand == Const.RIGHT_HAND){
+            } else if (hand == Const.RIGHT_HAND) {
                 this.maxSensResult = inputData.getRightHandDataSensor();
-            } else if(hand == Const.MEAN_HAND && inputData.getDifferenceArea() < 15.4) {
-                for(int i = 0; i < inputData.getRightHandDataSensor().size(); i++){
-                    this.maxSensResult.add((inputData.getRightHandDataSensor().get(i)
-                            + inputData.getLeftHandDataSensor().get(i))/2);
+            } else if (hand == Const.MEAN_HAND && calculateAndGetAreaDifference() < 15.4) {
+                val size = inputData.getRightHandDataSensor().size();
+                for (int i = 0; i < size; i++) {
+                    val rightValue = inputData.getRightHandDataSensor().get(i);
+                    val leftValue = inputData.getLeftHandDataSensor().get(i);
+                    val meanValue = (rightValue + leftValue) / 2;
+
+                    this.maxSensResult.add(meanValue);
                 }
             }
-            this.inputData = inputData;
-            this.resultByMask = new ResultByMask(maxSensResult);
 
-            this.context = context;
-        } catch (Exception e){
+            this.resultByMask = new ResultByMask(maxSensResult);
+        } catch (Exception e) {
             return;
         }
     }
+
+    public abstract Float calculateAndGetAreaDifference();
 
     public abstract boolean calculateResultA();
 
@@ -48,7 +58,7 @@ public abstract class ResultAFactory {
         return A;
     }
 
-    private ArrayList<ResultBySens> sortA(){
+    private ArrayList<ResultBySens> sortA() {
         ArrayList<ResultBySens> newAArr = new ArrayList<>();
 
         int[] seqColorsToSort = new int[]{
@@ -63,15 +73,15 @@ public abstract class ResultAFactory {
                 Color.WHITE
         };
 
-        for(int color: seqColorsToSort){
-            for(ResultBySens a : A){
-                if(a.getViewColor() == color){
+        for (int color : seqColorsToSort) {
+            for (ResultBySens a : A) {
+                if (a.getViewColor() == color) {
                     newAArr.add(a);
                 }
             }
 
         }
-        return  newAArr;
+        return newAArr;
     }
 
     protected ArrayList<Integer> getMaxSensResult() {
