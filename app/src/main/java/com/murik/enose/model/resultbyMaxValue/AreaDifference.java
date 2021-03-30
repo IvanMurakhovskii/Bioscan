@@ -46,10 +46,6 @@ public abstract class AreaDifference {
         return possibleReasons;
     }
 
-    public void setColorPRIMARY_DARK() {
-        color = ContextCompat.getColor(context, R.color.colorPrimaryDark);
-    }
-
     public void setColorGRAY() {
         color = Color.GRAY;
     }
@@ -68,10 +64,6 @@ public abstract class AreaDifference {
 
     public void setColorCRIMSON() {
         color = ContextCompat.getColor(context, R.color.colorResultCrimson);
-    }
-
-    public void setColorPINK() {
-        color = ContextCompat.getColor(context, R.color.fabColor);
     }
 
     public void setColorYELLOW() {

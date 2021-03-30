@@ -1,61 +1,62 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
-    android:layout_width="wrap_content"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content">
+
     <RadioGroup
         android:id="@+id/rg_choose_type_measure"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:visibility="gone"
-        android:paddingBottom="16dp">
+        android:paddingBottom="16dp"
+        android:visibility="visible">
+
         <RadioButton
             android:id="@+id/rb_standard_type"
-            android:text="@string/standard"
-            android:checked="true"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:checked="true"
+            android:text="@string/standard"
 
             />
+
         <RadioButton
             android:id="@+id/rb_one_sensor_type"
-            android:text="По сенсору"
-            android:checked="true"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            />
+            android:checked="true"
+            android:text="По сенсору" />
     </RadioGroup>
 
     <LinearLayout
         android:id="@+id/ll_one_sensor_settings"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
 
         android:orientation="vertical">
 
-        <!--<TextView-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:padding="4dp"-->
-            <!--android:text="Тип прибора: "/>-->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="4dp"
+            android:text="Тип прибора: "/>
 
         <RadioGroup
             android:id="@+id/rg_sensor_type"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:visibility="gone"
             android:orientation="vertical"
             android:paddingBottom="16dp">
-            <!--<RadioButton
-                android:id="@+id/rb_sensor_5_sm"
-                android:text="OPS"
+            <RadioButton
+                android:id="@+id/rb_bioscaner"
+                android:text="Биосканер"
                 android:checked="true"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                />-->
+                />
             <RadioButton
-                android:id="@+id/rb_sensor_7_sm"
+                android:id="@+id/rb_diagnost"
                 android:text="НД"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -83,107 +84,115 @@
                 />
         </RadioGroup>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:padding="4dp"
-            android:text="Время регистрации max сигнала: "/>
-
-        <RadioGroup
-            android:id="@+id/rg_registration_max_signal"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:paddingBottom="16dp">
-            <RadioButton
-                android:id="@+id/rb_max_80"
-                android:text="80"
-                android:checked="true"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                />
-            <RadioButton
-                android:id="@+id/rb_max_60"
-                android:text="60"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                />
-
-            <RadioButton
-                android:id="@+id/rb_max_30"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="30" />
-        </RadioGroup>
-
+        <LinearLayout
+            android:id="@+id/ll_max_signal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="4dp"
-                android:visibility="gone"
-                android:text="Выберите сенсор: "/>
+                android:text="Время регистрации max сигнала: "/>
+
+            <RadioGroup
+                android:id="@+id/rg_registration_max_signal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingBottom="16dp">
+                <RadioButton
+                    android:id="@+id/rb_max_80"
+                    android:text="80"
+                    android:checked="true"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    />
+                <RadioButton
+                    android:id="@+id/rb_max_60"
+                    android:text="60"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    />
+
+                <RadioButton
+                    android:id="@+id/rb_max_30"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="30" />
+            </RadioGroup>
+        </LinearLayout>
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="4dp"
+            android:text="Выберите сенсор: "
+            android:visibility="visible" />
 
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
+
             <RadioGroup
                 android:id="@+id/rg_sensors"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
                 android:clickable="false"
-                android:visibility="gone"
-                android:padding="16dp">
+                android:orientation="vertical"
+                android:padding="16dp"
+                android:visibility="visible">
+
                 <RadioButton
                     android:id="@+id/rb_sens1"
-                    android:text="1 сенсор"
-                    android:checked="true"
-
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    />
+
+                    android:checked="true"
+                    android:text="1 сенсор" />
+
                 <RadioButton
                     android:id="@+id/rb_sens2"
-                    android:text="2 сенсор"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    />
+                    android:text="2 сенсор" />
+
                 <RadioButton
                     android:id="@+id/rb_sens3"
-                    android:text="3 сенсор"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    />
+                    android:text="3 сенсор" />
+
                 <RadioButton
                     android:id="@+id/rb_sens4"
-                    android:text="4 сенсор"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    />
+                    android:text="4 сенсор" />
+
                 <RadioButton
                     android:id="@+id/rb_sens5"
-                    android:text="5 сенсор"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    />
+                    android:text="5 сенсор" />
+
                 <RadioButton
                     android:id="@+id/rb_sens6"
-                    android:text="6 сенсор"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    />
+                    android:text="6 сенсор" />
+
                 <RadioButton
                     android:id="@+id/rb_sens7"
-                    android:text="7 сенсор"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    />
+                    android:text="7 сенсор" />
+
                 <RadioButton
                     android:id="@+id/rb_sens8"
-                    android:text="8 сенсор"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    />
+                    android:text="8 сенсор" />
             </RadioGroup>
         </ScrollView>
 

@@ -60,8 +60,6 @@ public class StartDimensionDialogFragment extends AppCompatDialogFragment {
                 android.R.layout.simple_spinner_dropdown_item,
                 BluetoothDimensionTimeEnum.values())
         );
-//    dimensionTime = view.findViewById(R.id.all_dimension_time);
-//    substanceDimensionTime = view.findViewById(R.id.substance_dimension_time);
         builder.setView(view)
                 .setTitle("Измерение")
                 .setPositiveButton("Начать", (DialogInterface dialog, int id) -> {
@@ -114,11 +112,4 @@ public class StartDimensionDialogFragment extends AppCompatDialogFragment {
         return swPractice.isChecked();
     }
 
-//    public Integer getDimensionTime() {
-//        return Integer.valueOf(dimensionTime.getText().toString());
-//    }
-
-//    public Integer getSubstanceDimensionTime() {
-//        return Integer.valueOf(substanceDimensionTime.getText().toString());
-//    }
 }

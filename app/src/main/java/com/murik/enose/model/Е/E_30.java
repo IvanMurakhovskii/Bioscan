@@ -16,7 +16,7 @@ public class E_30 extends BaseResult {
     }
 
     public void setResult() {
-        if (getA() >= 0.4 && getA() <= 0.8) {
+        if (getA() >= 0.50 && getA() <= 0.80) {
             setColorGREEN();
         } else if (getA() >= 0.41 && getA() <= 0.49) {
             setColorYELLOW();

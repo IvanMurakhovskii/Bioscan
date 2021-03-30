@@ -7,11 +7,11 @@ import com.murik.enose.R;
 import com.murik.enose.dto.DataByMaxParcelable;
 import com.murik.enose.model.resultbyMaxValue.BaseResultWithCoefficient;
 
-public class A_30_60 extends BaseResultWithCoefficient {
+public class S_30_60 extends BaseResultWithCoefficient {
 
 
-    public A_30_60(double A, DataByMaxParcelable inputData, Context context, float coefficicent) {
-        super(A, inputData, context, coefficicent);
+    public S_30_60(double A, DataByMaxParcelable inputData, Context context, float coefficient) {
+        super(A, inputData, context, coefficient);
         setLegend("S(30/60)");
     }
 
@@ -30,7 +30,7 @@ public class A_30_60 extends BaseResultWithCoefficient {
         } else if (getA() >= 0.44 && getA() <= 0.55) {
             setColorBURGUNDY();
             setPossibleReasons(getResources(R.string.A_30_60_BURGUNDY_2));
-        } else if (getA() >= 0.10 && getA() <= 0.16) {
+        } else if (getA() >= 0.10 && getA() <= 0.17) {
             setColorBURGUNDY();
             setPossibleReasons(getResources(R.string.A_30_60_BURGUNDY_1));
         }

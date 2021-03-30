@@ -19,7 +19,9 @@ public class ResultA_First40_70 extends BaseResultFirst {
             setColorRED();
             setPossibleReasons(getResources(R.string.A_SHORT_2_3_RED_2));
         } else */
-        if (getA() >= 0.4 && getA() <= 0.77) {
+        if (getA() >= 0.76 && getA() <= 0.83) {
+            setColorGREEN();
+        } else if (getA() >= 0.40 && getA() <= 0.75) {
             setColorYELLOW();
             setPossibleReasons(getResources(R.string.A_SHORT_2_3_YELLOW));
         } else if (getA() >= 0.84 && getA() <= 1.3) {

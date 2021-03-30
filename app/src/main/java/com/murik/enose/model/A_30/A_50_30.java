@@ -21,12 +21,15 @@ public class A_50_30 extends BaseResultFirst {
         } else if (getA() >= 0.51 && getA() <= 0.55) {
             setColorYELLOW();
             setPossibleReasons(getResources(R.string.A_50_30_YELLOW));
-        } else if (getA() >= 0.1 && getA() <= 0.15) {
+        } else if (getA() >= 0.10 && getA() <= 0.15) {
             setColorRED();
-            setPossibleReasons(getResources(R.string.A_50_30_RED));
+//            setPossibleReasons(getResources(R.string.A_50_30_RED));
         } else if(getA() < 0) {
             setColor(Color.WHITE);
             setPossibleReasons(getResources(R.string.A_50_30_WHITE));
+        } else if (getA() > 1) {
+            setColor(Color.WHITE);
+            setPossibleReasons("Нарушен алгоритм измерения!");
         }
     }
 }

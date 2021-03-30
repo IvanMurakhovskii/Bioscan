@@ -23,10 +23,12 @@ public class ChooseTypeMeasureDialogFragment extends DialogFragment {
 
     private RadioGroup rgChooseMeasureType;
     private RadioGroup rgChooseSensor;
+    private RadioGroup rgRgSensorType;
     private RadioGroup rgAlgorithm;
     private RadioGroup rgSensorType;
     private RadioGroup rgExpert;
     private LinearLayout llOneSensorSettings;
+    private LinearLayout llMaxSignal;
 
     public void setDialogListener(
             DialogListener mNoticeDialogListener) {
@@ -44,12 +46,13 @@ public class ChooseTypeMeasureDialogFragment extends DialogFragment {
         rgChooseMeasureType = view.findViewById(R.id.rg_choose_type_measure);
         rgChooseSensor = view.findViewById(R.id.rg_sensors);
         rgAlgorithm = view.findViewById(R.id.rg_registration_max_signal);
+        rgSensorType= view.findViewById(R.id.rg_sensor_type);
         rgSensorType = view.findViewById(R.id.rg_sensor_type);
         rgExpert = view.findViewById(R.id.rg_expert_type);
         llOneSensorSettings = view.findViewById(R.id.ll_one_sensor_settings);
+        llMaxSignal = view.findViewById(R.id.ll_max_signal);
 
         rgChooseMeasureType.setOnCheckedChangeListener((group, checkedId) -> {
-
             switch (checkedId) {
                 case R.id.rb_standard_type:
                     llOneSensorSettings.setVisibility(View.GONE);
@@ -60,6 +63,8 @@ public class ChooseTypeMeasureDialogFragment extends DialogFragment {
             }
         });
 
+        rgSensorType.setOnCheckedChangeListener(this::onSensorTypeChanged);
+
         builder.setView(view)
                 .setTitle("Выбор алгоритма")
                 .setPositiveButton(R.string.submit, (DialogInterface dialog, int id) -> mDialogListener.onDialogPositiveClick(1))
@@ -68,6 +73,17 @@ public class ChooseTypeMeasureDialogFragment extends DialogFragment {
                                 ChooseTypeMeasureDialogFragment.this.getDialog().cancel());
 
         return builder.create();
+    }
+
+    private void onSensorTypeChanged(RadioGroup group, int checkedId) {
+        switch (checkedId) {
+            case R.id.rb_bioscaner:
+                llMaxSignal.setVisibility(View.VISIBLE);
+                break;
+            case R.id.rb_diagnost:
+                llMaxSignal.setVisibility(View.GONE);
+                break;
+        }
     }
 
     public String getSelectedSensor() {
@@ -108,15 +124,15 @@ public class ChooseTypeMeasureDialogFragment extends DialogFragment {
         }
     }
 
-    public int getSensorType() {
+    public String getSensorType() {
         int checkedId = rgSensorType.getCheckedRadioButtonId();
         switch (checkedId) {
-           /* case R.id.rb_sensor_5_sm:
-                return Const.SENSOR_5_SM;*/
-            case R.id.rb_sensor_7_sm:
-                return Const.SENSOR_7_SM;
+            case R.id.rb_diagnost:
+                return Const.DIAGNOST;
+            case R.id.rb_bioscaner:
+                return Const.BIOSCANER;
             default:
-                return Const.SENSOR_7_SM;
+                return Const.DIAGNOST;
         }
     }
 

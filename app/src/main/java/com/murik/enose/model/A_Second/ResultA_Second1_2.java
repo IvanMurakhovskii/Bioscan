@@ -10,18 +10,20 @@ import com.murik.enose.model.resultbyMaxValue.BaseResultSecond;
 public class ResultA_Second1_2 extends BaseResultSecond {
 
 
-  public ResultA_Second1_2(double A, DataByMaxParcelable inputData, Context context, float coefficient) {
-    super(A, inputData, context, coefficient);
-    setLegend("II");
-  }
+    public ResultA_Second1_2(double A, DataByMaxParcelable inputData, Context context, float coefficient) {
+        super(A, inputData, context, coefficient);
+        setLegend("II");
+    }
 
-  public void setResult() {
-     if(getA() >= 0.68 && getA() <= 0.7) {
-      setColorYELLOW();
-      setPossibleReasons(getResources(R.string.A_LONG_1_2_YELLOW_1));
-    } else if(getA() >=0.56 && getA() <= 0.58) {
-       setColorYELLOW();
-       setPossibleReasons(getResources(R.string.A_LONG_1_2_RED_1));
-     }
-  }
+    public void setResult() {
+        if (getA() >= 0.59 && getA() <= 0.67) {
+            setColorGREEN();
+        } else if (getA() >= 0.68 && getA() <= 0.72) {
+            setColorYELLOW();
+            setPossibleReasons(getResources(R.string.A_LONG_1_2_YELLOW_1));
+        } else if (getA() >= 0.56 && getA() <= 0.58) {
+            setColorYELLOW();
+            setPossibleReasons(getResources(R.string.A_LONG_1_2_RED_1));
+        }
+    }
 }

@@ -26,12 +26,12 @@ public class S_15_30 extends BaseResultFirst {
         } else if (getA() >= 0.31 && getA() <= 0.43) {
             setColorRED();
             setPossibleReasons(getResources(R.string.S30_15_30_RED));
-        } else if (getA() >= 0.10 && getA() <= 0.15) {
-            setColorCRIMSON();
-            setPossibleReasons(getResources(R.string.S30_15_30_CRIMSON));
+        } else if (getA() >= 0.10 && getA() <= 0.16) {
+            setColorRED();
+            setPossibleReasons(getResources(R.string.S30_15_30_RED_1));
         } else if (getA() >= 0.44 && getA() <= 0.55) {
-            setColorCRIMSON();
-            setPossibleReasons(getResources(R.string.S30_15_30_CRIMSON_1));
+            setColorBURGUNDY();
+            setPossibleReasons(getResources(R.string.S30_15_30_BURGUNDY));
         }
     }
 }

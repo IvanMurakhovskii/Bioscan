@@ -16,7 +16,9 @@ public class ResultA_First2_4 extends BaseResultFirst {
     }
 
     public void setResult() {
-        if (getA() < 0.20) {
+        if (getA() >= 0.55 && getA() <= 0.66) {
+           setColorGREEN();
+        } else if (getA() < 0.25) {
             setColorBLUE();
             setPossibleReasons(getResources(R.string.A_SHORT_2_4_BLUE));
         } else if(getA() >= 0.49 && getA() <= 0.54) {

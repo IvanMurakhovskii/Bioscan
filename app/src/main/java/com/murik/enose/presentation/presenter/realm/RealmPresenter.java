@@ -298,7 +298,7 @@ public class RealmPresenter extends MvpPresenter<RealmView> {
         }
     }
 
-    private void createOneSensorMeasure(final String selectedSensor, final int timeRegistrationMaxSignal, int sensorType, boolean isExpert) {
+    private void createOneSensorMeasure(final String selectedSensor, final int timeRegistrationMaxSignal, String sensorType, boolean isExpert) {
         DataByMaxParcelable dataByMaxParcelable = new DataByMaxParcelable();
 
         dataByMaxParcelable.setDescriptions(data.getDescriptions());
@@ -588,7 +588,7 @@ public class RealmPresenter extends MvpPresenter<RealmView> {
 
     }
 
-    public void createMeasureByType(final int measureType, final String selectedSensor, final int timeRegistrationMaxSignal, int sensorType, boolean isExpert) {
+    public void createMeasureByType(final int measureType, final String selectedSensor, final int timeRegistrationMaxSignal, String sensorType, boolean isExpert) {
         if (measureType == Const.STANDARD_MEASURE_TYPE) {
             createStandardMeasure();
         }

@@ -17,7 +17,6 @@ public class A_15_30_GRAY extends BaseResultFirst {
     public void setResult() {
         setColorGRAY();
         if (getA() >= 0.11 && getA() <= 0.24) {
-        } else if (getA() >= 0.45 && getA() <= 0.47) {
             setPossibleReasons(getResources(R.string.A_15_30_GRAY_1));
         } else if (getA() >= 0.26 && getA() <= 0.38) {
             setPossibleReasons(getResources(R.string.A_15_30_GRAY_2));

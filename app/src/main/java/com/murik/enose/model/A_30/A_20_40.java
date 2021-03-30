@@ -30,6 +30,9 @@ public class A_20_40 extends BaseResultFirst {
         } else if (getA() > 1) {
             setColor(Color.WHITE);
             setPossibleReasons(getResources(R.string.A_20_40_WHITE_1));
+        } else if (getA() >= 1) {
+            setColor(Color.WHITE);
+            setPossibleReasons("Сенсор не готов, нарушен алгоритм измерения!");
         }
     }
 }

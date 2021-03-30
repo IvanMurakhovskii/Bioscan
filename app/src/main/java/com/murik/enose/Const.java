@@ -83,8 +83,8 @@ public class Const {
   public static final String SECOND_MEASURE = "SECOND_MEASURE";
 
 
-  public static final int SENSOR_7_SM = 7; // НД
-  public static final int SENSOR_5_SM = 5; // OPS
+  public static final String DIAGNOST = "DIAGNOSE"; // НД
+  public static final String BIOSCANER = "BIOSCANER"; // OPS
 
   private static int[] range(int start, int length) {
     int[] range = new int[length - start + 1];

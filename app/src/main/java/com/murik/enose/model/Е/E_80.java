@@ -16,21 +16,21 @@ public class E_80 extends BaseResult {
     }
 
     public void setResult() {
-        if (getA() >= 0.195 && getA() <= 0.40) {
+        if (getA() >= 0.19 && getA() <= 0.40) {
             setColorGREEN();
-        } else if (getA() >= 0.145 && getA() <= 0.194) {
+        } else if (getA() >= 0.15 && getA() <= 0.18) {
             setColorYELLOW();
             setPossibleReasons(getResources(R.string.E_YELLOW));
-        } else if (getA() >= 0.105 && getA() <= 0.144) {
+        } else if (getA() >= 0.10 && getA() <= 0.14) {
             setColorRED();
             setPossibleReasons(getResources(R.string.E_RED));
-        } else if (getA() >= 0.0390 && getA() <= 0.104) {
+        } else if (getA() >= 0.04 && getA() <= 0.09) {
             setColorBURGUNDY();
             setPossibleReasons(getResources(R.string.E_BURGUNDY_1));
         } else if (getA() >= 0.4) {
             setColorBURGUNDY();
             setPossibleReasons(getResources(R.string.E_BURGUNDY_2));
-        } else if (getA() <= 0.0389) {
+        } else if (getA() <= 0.03) {
             setColor(Color.WHITE);
             setPossibleReasons(getResources(R.string.E_WHITE));
         }

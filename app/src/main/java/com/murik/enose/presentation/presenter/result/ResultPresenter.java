@@ -1,6 +1,5 @@
 package com.murik.enose.presentation.presenter.result;
 
-
 import android.content.Context;
 import android.util.Log;
 
@@ -26,78 +25,82 @@ import java.util.ArrayList;
 @InjectViewState
 public class ResultPresenter extends MvpPresenter<ResultView> {
 
-  private ResultAFactory resultAFactory;
-  private ArrayList<ResultBySens> res = new ArrayList<>();
-  private Context context;
-  private DataByMaxParcelable data;
+    private ResultAFactory resultAFactory;
+    private ArrayList<ResultBySens> res = new ArrayList<>();
+    private Context context;
+    private DataByMaxParcelable data;
 
-  public ResultPresenter() {
-  }
-
-  public void setContext(Context context) {
-    this.context = context;
-  }
-
-  @Override
-  protected void onFirstViewAttach() {
-    try{
-      getViewState().calculateResult();
-    } catch (Exception e){
-      Log.e("ResultPresenter", e.getMessage());
+    public ResultPresenter() {
     }
-  }
 
-  public void calculateResult(DataByMaxParcelable data, int hand){
-
-      this.data = data;
-      if (data.getMeasureType().equals(Const.STANDARD_MEASURE)) {
-          resultAFactory = new ResultAFactoryStandard(data, hand, context);
-      }
-      if (data.getMeasureType().equals(Const.ONE_SENSOR_MEASURE)) {
-          resultAFactory = new ResultAFactoryOneSensor(data, hand, context);
-      }
-
-    if(resultAFactory.calculateResultA()){
-        ArrayList<ResultBySens> resultBySens = resultAFactory.getA();
-      if(!res.isEmpty()){
-        res.clear();
-      }
-      for(int i = 0; i < resultBySens.size(); i++){
-        if(resultBySens.get(i).getResultComment() != null)
-          res.add(resultBySens.get(i));
-      }
-
-      getViewState().initPieChart(resultAFactory.getA());
-      getViewState().initRecyclerView();
+    public void setContext(Context context) {
+        this.context = context;
     }
-  }
 
-  public void onBindHeader(HeaderViewHolder holder){
-      holder.setTvDescriptions(data.getDescriptions());
-  }
-  public void onBindPlacesViewPosition(int pos,ResultViewHolder holder){
-    int position = pos - 1;
-    DecimalFormat df = new DecimalFormat("#.##");
-    df.setRoundingMode(RoundingMode.HALF_UP);
+    @Override
+    protected void onFirstViewAttach() {
+        try {
+            getViewState().calculateResult();
+        } catch (Exception e) {
+            Log.e("ResultPresenter", e.getMessage());
+        }
+    }
 
-    holder.setDivider(res.get(position).getViewColor());
-    holder.setTvComment(res.get(position).getLegend() +" =" + df.format(res.get(position).getA()) +"\n" + res.get(position).getResultComment());
+    public void calculateResult(DataByMaxParcelable data, int hand) {
 
-  }
+        this.data = data;
 
-  public int getResultRowsCount() {
-    return res.size() + 1;
-  }
+        if (data.getMeasureType().equals(Const.STANDARD_MEASURE)) {
+            resultAFactory = new ResultAFactoryStandard(data, hand, context);
+        }
 
-  public void onSaveButtonClick(){
-    getViewState().showDialog();
-  }
-  public void onSave(DataByMaxParcelable data){
+        if (data.getMeasureType().equals(Const.ONE_SENSOR_MEASURE)) {
+            resultAFactory = new ResultAFactoryOneSensor(data, hand, context);
+        }
 
-    RealmController realmController = new RealmController();
-    realmController.addInfoMax(data);
-    App.INSTANCE.getRouter().newScreenChain(Screens.REALM_FRAGMENT);
-  }
+        if (resultAFactory.calculateResultA()) {
+            ArrayList<ResultBySens> resultBySens = resultAFactory.getA();
+            if (!res.isEmpty()) {
+                res.clear();
+            }
+            for (int i = 0; i < resultBySens.size(); i++) {
+                if (resultBySens.get(i).getResultComment() != null)
+                    res.add(resultBySens.get(i));
+            }
+
+            getViewState().initPieChart(resultAFactory.getA());
+            getViewState().initRecyclerView();
+        }
+    }
+
+    public void onBindHeader(HeaderViewHolder holder) {
+        holder.setTvDescriptions(data.getDescriptions());
+    }
+
+    public void onBindPlacesViewPosition(int pos, ResultViewHolder holder) {
+        int position = pos - 1;
+        DecimalFormat df = new DecimalFormat("#.##");
+        df.setRoundingMode(RoundingMode.HALF_UP);
+
+        holder.setDivider(res.get(position).getViewColor());
+        holder.setTvComment(res.get(position).getLegend() + " =" + df.format(res.get(position).getA()) + "\n" + res.get(position).getResultComment());
+
+    }
+
+    public int getResultRowsCount() {
+        return res.size() + 1;
+    }
+
+    public void onSaveButtonClick() {
+        getViewState().showDialog();
+    }
+
+    public void onSave(DataByMaxParcelable data) {
+
+        RealmController realmController = new RealmController();
+        realmController.addInfoMax(data);
+        App.INSTANCE.getRouter().newScreenChain(Screens.REALM_FRAGMENT);
+    }
 
     public void showDiagram() {
         App.INSTANCE.getRouter().navigateTo(Screens.RESULT_BAR_CHART_FRAGMENT, data);

@@ -23,8 +23,12 @@ public class TAU_80 extends BaseResult {
         } else if (getA() >= 85 && getA() <= 90) {
             setColorRED();
             setPossibleReasons(getResources(R.string.TAU_80_RED));
-        } else {
+        } else if (getA() <= 70 && getA() > 40) {
+            setColorBURGUNDY();
+            setPossibleReasons(getResources(R.string.TAU_80_BURGUNDY));
+        } else if (getA() <= 40) {
             setColor(Color.WHITE);
+            setPossibleReasons(getResources(R.string.TAU_80_WHITE));
         }
     }
 }

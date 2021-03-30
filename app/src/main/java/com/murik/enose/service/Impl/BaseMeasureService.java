@@ -126,21 +126,24 @@ public class BaseMeasureService {
             val s20 = getAreaByMask(Const.MASK_20, sensorData);
             Float S_ENERGY = 0F;
             Float S_DISCRETE = 0F;
-
-        val L = s30 / s60;
-
+            Float S_BODY = 0F;
 
         if(maxSignalTime == 30) {
+            S_BODY = getAreaByMask(Const.BODY_30, sensorData);
             S_ENERGY = getAreaByMask(Const.ENERGY_30, sensorData);
             S_DISCRETE = getAreaByMask(Const.DISCRETE_30, sensorData);
         } else if(maxSignalTime == 60) {
             S_ENERGY = getAreaByMask(Const.ENERGY_60, sensorData);
             S_DISCRETE = getAreaByMask(Const.DISCRETE_60, sensorData);
+            S_BODY = getAreaByMask(Const.BODY, sensorData);
         } else if(maxSignalTime == 80) {
             S_ENERGY = getAreaByMask(Const.ENERGY, sensorData);
             S_DISCRETE = getAreaByMask(Const.DISCRETE, sensorData);
+            S_BODY = getAreaByMask(Const.BODY, sensorData);
         }
         val En = (S_ENERGY / S_DISCRETE);
+
+        val L = (S_BODY / S_DISCRETE);
 
         return new OneSensorResultParametersDto()
                 .setS20_30(s20/s30)
