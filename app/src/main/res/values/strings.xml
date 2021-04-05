@@ -38,6 +38,8 @@
     <string name="diagram">Диаграмма</string>
     <string name="dimensionTime">Время измерения</string>
     <string name="substanceDimensionTime">Время нагрузки</string>
+    <string name="chart">График</string>
+    <string name="by_sensor">По сенсору</string>
 
     <string-array name="dimension_mode">
         <item>30</item>

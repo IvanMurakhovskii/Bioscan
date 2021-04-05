@@ -17,16 +17,20 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:checked="true"
-            android:text="@string/standard"
-
-            />
+            android:text="@string/standard" />
 
         <RadioButton
             android:id="@+id/rb_one_sensor_type"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
             android:checked="true"
-            android:text="По сенсору" />
+            android:layout_height="wrap_content"
+            android:text="@string/by_sensor" />
+
+        <RadioButton
+            android:id="@+id/rb_chart"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/chart"/>
     </RadioGroup>
 
     <LinearLayout

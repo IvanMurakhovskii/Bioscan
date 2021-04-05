@@ -1,5 +1,7 @@
 package com.murik.enose;
 
+import android.graphics.Color;
+
 import java.util.Arrays;
 import java.util.List;
 
@@ -22,6 +24,7 @@ public class Const {
   public static final String[] SENSORS_SID = {"SID0001", "SID0002", "SID0003", "SID0004", "SID0005", "SID0006", "SID0007", "SID0008"};
   public static final String[] SENSORS_SID_ENDOKRIN = { "SID0003", "SID0004", "SID0005", "SID0007"};
   public static final String[] SENSORS_SID_ENERGY = {"SID0001", "SID0003","SID0007"};
+
 
   //all sensors
   public static final int[] TOTAL = {30, 45, 60, 80, 100, 120, 180};
@@ -76,6 +79,7 @@ public class Const {
 
   public static final int STANDARD_MEASURE_TYPE = 0;
   public static final int ONE_SENSOR_MEASURE_TYPE = 1;
+  public static final int CHART = 2;
 
   public static final String STANDARD_MEASURE = "STANDARD_MEASURE";
   public static final String ONE_SENSOR_MEASURE = "ONE_SENSOR_MEASURE";

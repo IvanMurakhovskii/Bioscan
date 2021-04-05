@@ -49,12 +49,12 @@ import com.murik.enose.ui.fragment.bar_chart.ResultBarChartFragment;
 import com.murik.enose.ui.fragment.bluetooth.BluetoothConnectionFragment;
 import com.murik.enose.ui.fragment.dimension.BluetoothDimensionFragment;
 import com.murik.enose.ui.fragment.input.InputFragment;
+import com.murik.enose.ui.fragment.measurementLineChart.MeasurementLineChart;
 import com.murik.enose.ui.fragment.oneSensorMeasure.OneSensorTabContainerFragment;
 import com.murik.enose.ui.fragment.parserXml.ParserXmlFragment;
 import com.murik.enose.ui.fragment.realm.RealmFragment;
 import com.murik.enose.ui.fragment.result.ResultTabFragment;
 import com.murik.enose.ui.fragment.resultRadarChart.RadarTabContentFragment;
-import com.murik.enose.ui.fragment.usbdevice.UsbFragment;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -115,10 +115,10 @@ public class StartActivity extends MvpAppCompatActivity implements StartView, On
                         return OneSensorTabContainerFragment.newInstance((DataByMaxParcelable) data);
                     case Screens.RESULT_BAR_CHART_FRAGMENT:
                         return ResultBarChartFragment.newInstance((DataByMaxParcelable) data);
-                    case Screens.USB_FRAGMENT:
-                        return UsbFragment.newInstance();
                     case Screens.TEST_DIMENSION:
                         return BluetoothDimensionFragment.newInstance();
+                    case Screens.MEASUREMENT_LINE_CHART:
+                        return MeasurementLineChart.newInstance((SensorDataFullParcelable) data);
                     default:
                         throw new RuntimeException("Unknown screen key");
 
@@ -365,10 +365,10 @@ public class StartActivity extends MvpAppCompatActivity implements StartView, On
 
     }
 
-    public boolean isConnected(){
+    public boolean isConnected() {
 
         val mGatt = App.INSTANCE.getmBluetoothGatt();
-        if(mGatt != null){
+        if (mGatt != null) {
 
             BluetoothManager btm =
                     (BluetoothManager)

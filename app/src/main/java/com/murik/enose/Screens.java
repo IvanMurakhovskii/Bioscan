@@ -13,4 +13,5 @@ public class Screens {
   public static final String RESULT_BAR_CHART_FRAGMENT = "result_bar_chart_fragment";
   public static final String USB_FRAGMENT = "usb_fragment";
   public static final String TEST_DIMENSION = "TEST";
+  public static final String MEASUREMENT_LINE_CHART = "MEASUREMENT_LINE_CHART";
 }
