@@ -17,6 +17,9 @@ import com.murik.enose.R;
 
 import java.util.Objects;
 
+import static com.murik.enose.R.id.rb_bioscaner;
+import static com.murik.enose.R.id.rb_diagnost;
+
 public class ChooseTypeMeasureDialogFragment extends DialogFragment {
 
     private DialogListener mDialogListener;
@@ -55,6 +58,7 @@ public class ChooseTypeMeasureDialogFragment extends DialogFragment {
         rgChooseMeasureType.setOnCheckedChangeListener((group, checkedId) -> {
             switch (checkedId) {
                 case R.id.rb_standard_type:
+                case R.id.rb_chart:
                     llOneSensorSettings.setVisibility(View.GONE);
                     break;
                 case R.id.rb_one_sensor_type:
@@ -77,10 +81,10 @@ public class ChooseTypeMeasureDialogFragment extends DialogFragment {
 
     private void onSensorTypeChanged(RadioGroup group, int checkedId) {
         switch (checkedId) {
-            case R.id.rb_bioscaner:
+            case rb_bioscaner:
                 llMaxSignal.setVisibility(View.VISIBLE);
                 break;
-            case R.id.rb_diagnost:
+            case rb_diagnost:
                 llMaxSignal.setVisibility(View.GONE);
                 break;
         }
@@ -150,9 +154,11 @@ public class ChooseTypeMeasureDialogFragment extends DialogFragment {
 
 
     public int getMeasureType() {
-        if (rgChooseMeasureType.getCheckedRadioButtonId() == R.id.rb_one_sensor_type) {
-            return Const.ONE_SENSOR_MEASURE_TYPE;
+        int checkedId = rgChooseMeasureType.getCheckedRadioButtonId() ;
+        switch (checkedId) {
+            case R.id.rb_one_sensor_type: return Const.ONE_SENSOR_MEASURE_TYPE;
+            case R.id.rb_standard_type: return Const.STANDARD_MEASURE_TYPE;
+            default: return Const.CHART;
         }
-        return Const.STANDARD_MEASURE_TYPE;
     }
 }

@@ -17,6 +17,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
+import lombok.val;
+
 @InjectViewState
 public class RealmPresenter extends MvpPresenter<RealmView> {
 
@@ -33,269 +35,279 @@ public class RealmPresenter extends MvpPresenter<RealmView> {
 
     private void createStandardMeasure() {
         if (data.isFullData()) {
-            SensorDataFullParcelable sensorDataFullParcelable = new SensorDataFullParcelable();
-            Map<String, ArrayList<Integer>> leftHandDataSens = new HashMap<>();
-            Map<String, ArrayList<Integer>> rightHandDataSens = new HashMap<>();
-
-            if (data.getLeftHandData() != null) {
-                if (data.getLeftHandData().getDataSens1() != null) {
-                    if (!data.getLeftHandData().getDataSens1().isEmpty()) {
-                        ArrayList<Integer> arrayList = new ArrayList<>();
-                        for (int i = 0; i < data.getLeftHandData().getDataSens1().size(); i++) {
-                            arrayList.add(data.getLeftHandData().getDataSens1().get(i).getValue());
-                        }
-                        if (!isDataSensorAllZero(arrayList)) {
-                            leftHandDataSens.put(Const.SENSOR_1, arrayList);
-                        }
-                    }
-                }
-                if (data.getLeftHandData().getDataSens2() != null) {
-                    if (!data.getLeftHandData().getDataSens2().isEmpty()) {
-                        ArrayList<Integer> arrayList = new ArrayList<>();
-                        for (int i = 0; i < data.getLeftHandData().getDataSens2().size(); i++) {
-                            arrayList.add(data.getLeftHandData().getDataSens2().get(i).getValue());
-                        }
-                        if (!isDataSensorAllZero(arrayList)) {
-                            leftHandDataSens.put(Const.SENSOR_2, arrayList);
-                        }
-                    }
-                }
-                if (data.getLeftHandData().getDataSens3() != null) {
-                    if (!data.getLeftHandData().getDataSens3().isEmpty()) {
-                        ArrayList<Integer> arrayList = new ArrayList<>();
-                        for (int i = 0; i < data.getLeftHandData().getDataSens3().size(); i++) {
-                            arrayList.add(data.getLeftHandData().getDataSens3().get(i).getValue());
-                        }
-                        if (!isDataSensorAllZero(arrayList)) {
-                            leftHandDataSens.put(Const.SENSOR_3, arrayList);
-                        }
-                    }
-                }
-                if (data.getLeftHandData().getDataSens4() != null) {
-                    if (!data.getLeftHandData().getDataSens4().isEmpty()) {
-                        ArrayList<Integer> arrayList = new ArrayList<>();
-                        for (int i = 0; i < data.getLeftHandData().getDataSens4().size(); i++) {
-                            arrayList.add(data.getLeftHandData().getDataSens4().get(i).getValue());
-                        }
-                        if (!isDataSensorAllZero(arrayList)) {
-                            leftHandDataSens.put(Const.SENSOR_4, arrayList);
-                        }
-                    }
-                }
-                if (data.getLeftHandData().getDataSens5() != null) {
-                    if (!data.getLeftHandData().getDataSens5().isEmpty()) {
-                        ArrayList<Integer> arrayList = new ArrayList<>();
-                        for (int i = 0; i < data.getLeftHandData().getDataSens5().size(); i++) {
-                            arrayList.add(data.getLeftHandData().getDataSens5().get(i).getValue());
-                        }
-                        if (!isDataSensorAllZero(arrayList)) {
-                            leftHandDataSens.put(Const.SENSOR_5, arrayList);
-                        }
-                    }
-                }
-                if (data.getLeftHandData().getDataSens6() != null) {
-                    if (!data.getLeftHandData().getDataSens6().isEmpty()) {
-                        ArrayList<Integer> arrayList = new ArrayList<>();
-                        for (int i = 0; i < data.getLeftHandData().getDataSens6().size(); i++) {
-                            arrayList.add(data.getLeftHandData().getDataSens6().get(i).getValue());
-                        }
-                        if (!isDataSensorAllZero(arrayList)) {
-                            leftHandDataSens.put(Const.SENSOR_6, arrayList);
-                        }
-                    }
-                }
-                if (data.getLeftHandData().getDataSens7() != null) {
-                    if (!data.getLeftHandData().getDataSens7().isEmpty()) {
-                        ArrayList<Integer> arrayList = new ArrayList<>();
-                        for (int i = 0; i < data.getLeftHandData().getDataSens7().size(); i++) {
-                            arrayList.add(data.getLeftHandData().getDataSens7().get(i).getValue());
-                        }
-                        if (!isDataSensorAllZero(arrayList)) {
-                            leftHandDataSens.put(Const.SENSOR_7, arrayList);
-                        }
-                    }
-                }
-                if (data.getLeftHandData().getDataSens8() != null) {
-                    if (!data.getLeftHandData().getDataSens8().isEmpty()) {
-                        ArrayList<Integer> arrayList = new ArrayList<>();
-                        for (int i = 0; i < data.getLeftHandData().getDataSens8().size(); i++) {
-                            arrayList.add(data.getLeftHandData().getDataSens8().get(i).getValue());
-                        }
-                        if (!isDataSensorAllZero(arrayList)) {
-                            leftHandDataSens.put(Const.SENSOR_8, arrayList);
-                        }
-                    }
-                }
-            }
-
-            if (data.getRightHandData() != null) {
-                if (data.getRightHandData().getDataSens1() != null) {
-                    if (!data.getRightHandData().getDataSens1().isEmpty()) {
-                        ArrayList<Integer> arrayList = new ArrayList<>();
-                        for (int i = 0; i < data.getRightHandData().getDataSens1().size(); i++) {
-                            arrayList.add(data.getRightHandData().getDataSens1().get(i).getValue());
-                        }
-                        if (!isDataSensorAllZero(arrayList)) {
-                            rightHandDataSens.put(Const.SENSOR_1, arrayList);
-                        }
-                    }
-                }
-                if (data.getRightHandData().getDataSens2() != null) {
-                    if (!data.getRightHandData().getDataSens2().isEmpty()) {
-                        ArrayList<Integer> arrayList = new ArrayList<>();
-                        for (int i = 0; i < data.getRightHandData().getDataSens2().size(); i++) {
-                            arrayList.add(data.getRightHandData().getDataSens2().get(i).getValue());
-                        }
-                        if (!isDataSensorAllZero(arrayList)) {
-                            rightHandDataSens.put(Const.SENSOR_2, arrayList);
-                        }
-                    }
-                }
-                if (data.getRightHandData().getDataSens3() != null) {
-                    if (!data.getRightHandData().getDataSens3().isEmpty()) {
-                        ArrayList<Integer> arrayList = new ArrayList<>();
-                        for (int i = 0; i < data.getRightHandData().getDataSens3().size(); i++) {
-                            arrayList.add(data.getRightHandData().getDataSens3().get(i).getValue());
-                        }
-                        if (!isDataSensorAllZero(arrayList)) {
-                            rightHandDataSens.put(Const.SENSOR_3, arrayList);
-                        }
-                    }
-                }
-                if (data.getRightHandData().getDataSens4() != null) {
-                    if (!data.getRightHandData().getDataSens4().isEmpty()) {
-                        ArrayList<Integer> arrayList = new ArrayList<>();
-                        for (int i = 0; i < data.getRightHandData().getDataSens4().size(); i++) {
-                            arrayList.add(data.getRightHandData().getDataSens4().get(i).getValue());
-                        }
-                        if (!isDataSensorAllZero(arrayList)) {
-                            rightHandDataSens.put(Const.SENSOR_4, arrayList);
-                        }
-                    }
-                }
-                if (data.getRightHandData().getDataSens5() != null) {
-                    if (!data.getRightHandData().getDataSens5().isEmpty()) {
-                        ArrayList<Integer> arrayList = new ArrayList<>();
-                        for (int i = 0; i < data.getRightHandData().getDataSens5().size(); i++) {
-                            arrayList.add(data.getRightHandData().getDataSens5().get(i).getValue());
-                        }
-                        if (!isDataSensorAllZero(arrayList)) {
-                            rightHandDataSens.put(Const.SENSOR_5, arrayList);
-                        }
-                    }
-                }
-                if (data.getRightHandData().getDataSens6() != null) {
-                    if (!data.getRightHandData().getDataSens6().isEmpty()) {
-                        ArrayList<Integer> arrayList = new ArrayList<>();
-                        for (int i = 0; i < data.getRightHandData().getDataSens6().size(); i++) {
-                            arrayList.add(data.getRightHandData().getDataSens6().get(i).getValue());
-                        }
-                        if (!isDataSensorAllZero(arrayList)) {
-                            rightHandDataSens.put(Const.SENSOR_6, arrayList);
-                        }
-                    }
-                }
-                if (data.getRightHandData().getDataSens7() != null) {
-                    if (!data.getRightHandData().getDataSens7().isEmpty()) {
-                        ArrayList<Integer> arrayList = new ArrayList<>();
-                        for (int i = 0; i < data.getRightHandData().getDataSens7().size(); i++) {
-                            arrayList.add(data.getRightHandData().getDataSens7().get(i).getValue());
-                        }
-                        if (!isDataSensorAllZero(arrayList)) {
-                            rightHandDataSens.put(Const.SENSOR_7, arrayList);
-                        }
-                    }
-                }
-                if (data.getRightHandData().getDataSens8() != null) {
-                    if (!data.getRightHandData().getDataSens8().isEmpty()) {
-                        ArrayList<Integer> arrayList = new ArrayList<>();
-                        for (int i = 0; i < data.getRightHandData().getDataSens8().size(); i++) {
-                            arrayList.add(data.getRightHandData().getDataSens8().get(i).getValue());
-                        }
-                        if (!isDataSensorAllZero(arrayList)) {
-                            rightHandDataSens.put(Const.SENSOR_8, arrayList);
-                        }
-                    }
-                }
-            }
-
-            sensorDataFullParcelable.setFullData(data.isFullData());
-            sensorDataFullParcelable.setDataSensorMapLeftHand(leftHandDataSens);
-            sensorDataFullParcelable.setDataSensorMapRightHand(rightHandDataSens);
-            sensorDataFullParcelable.setDescriptions(data.getDescriptions());
-            sensorDataFullParcelable.setPractice(data.isPractice());
-            sensorDataFullParcelable.setGender(data.getGender());
+            SensorDataFullParcelable sensorDataFullParcelable = getSensorDataFullParcelable();
 
             App.INSTANCE.getRouter().navigateTo(Screens.FULL_RESULT_FRAGMENT, sensorDataFullParcelable);
 
         } else {
-            DataByMaxParcelable inputDataParcelable = new DataByMaxParcelable();
-            ArrayList<Integer> leftHandDataSens = new ArrayList<>();
-            ArrayList<Integer> rightHandDataSens = new ArrayList<>();
-
-            if (data.getLeftHandData() != null) {
-                if (data.getLeftHandData().getDataSens1().get(0) != null) {
-                    leftHandDataSens.add(data.getLeftHandData().getDataSens1().get(0).getValue());
-                }
-                if (data.getLeftHandData().getDataSens2().get(0) != null) {
-                    leftHandDataSens.add(data.getLeftHandData().getDataSens2().get(0).getValue());
-                }
-                if (data.getLeftHandData().getDataSens3().get(0) != null) {
-                    leftHandDataSens.add(data.getLeftHandData().getDataSens3().get(0).getValue());
-                }
-                if (data.getLeftHandData().getDataSens4().get(0) != null) {
-                    leftHandDataSens.add(data.getLeftHandData().getDataSens4().get(0).getValue());
-                }
-                if (data.getLeftHandData().getDataSens5().get(0) != null) {
-                    leftHandDataSens.add(data.getLeftHandData().getDataSens5().get(0).getValue());
-                }
-                if (data.getLeftHandData().getDataSens6().get(0) != null) {
-                    leftHandDataSens.add(data.getLeftHandData().getDataSens6().get(0).getValue());
-                }
-                if (data.getLeftHandData().getDataSens7().get(0) != null) {
-                    leftHandDataSens.add(data.getLeftHandData().getDataSens7().get(0).getValue());
-                }
-                if (data.getLeftHandData().getDataSens8().get(0) != null) {
-                    leftHandDataSens.add(data.getLeftHandData().getDataSens8().get(0).getValue());
-                }
-            }
-
-            if (data.getRightHandData() != null) {
-                if (data.getRightHandData().getDataSens1().get(0) != null) {
-                    rightHandDataSens.add(data.getRightHandData().getDataSens1().get(0).getValue());
-                }
-                if (data.getRightHandData().getDataSens2().get(0) != null) {
-                    rightHandDataSens.add(data.getRightHandData().getDataSens2().get(0).getValue());
-                }
-                if (data.getRightHandData().getDataSens3().get(0) != null) {
-                    rightHandDataSens.add(data.getRightHandData().getDataSens3().get(0).getValue());
-                }
-                if (data.getRightHandData().getDataSens4().get(0) != null) {
-                    rightHandDataSens.add(data.getRightHandData().getDataSens4().get(0).getValue());
-                }
-                if (data.getRightHandData().getDataSens5().get(0) != null) {
-                    rightHandDataSens.add(data.getRightHandData().getDataSens5().get(0).getValue());
-                }
-                if (data.getRightHandData().getDataSens6().get(0) != null) {
-                    rightHandDataSens.add(data.getRightHandData().getDataSens6().get(0).getValue());
-                }
-                if (data.getRightHandData().getDataSens7().get(0) != null) {
-                    rightHandDataSens.add(data.getRightHandData().getDataSens7().get(0).getValue());
-                }
-                if (data.getRightHandData().getDataSens8().get(0) != null) {
-                    rightHandDataSens.add(data.getRightHandData().getDataSens8().get(0).getValue());
-                }
-            }
-
-            inputDataParcelable.setRightHandDataSensor(rightHandDataSens);
-            inputDataParcelable.setLeftHandDataSensor(leftHandDataSens);
-            inputDataParcelable.setPractice(data.isPractice());
-            inputDataParcelable.setDescriptions(data.getDescriptions());
-            inputDataParcelable.setGender(data.getGender());
-            inputDataParcelable.setDifferenceArea(0.0f);
+            DataByMaxParcelable inputDataParcelable = getDataByMaxParcelable();
 
             App.INSTANCE.getRouter().navigateTo(Screens.RESULT_FRAGMENT, inputDataParcelable);
         }
+    }
+
+    private DataByMaxParcelable getDataByMaxParcelable() {
+        DataByMaxParcelable inputDataParcelable = new DataByMaxParcelable();
+        ArrayList<Integer> leftHandDataSens = new ArrayList<>();
+        ArrayList<Integer> rightHandDataSens = new ArrayList<>();
+
+        if (data.getLeftHandData() != null) {
+            if (data.getLeftHandData().getDataSens1().get(0) != null) {
+                leftHandDataSens.add(data.getLeftHandData().getDataSens1().get(0).getValue());
+            }
+            if (data.getLeftHandData().getDataSens2().get(0) != null) {
+                leftHandDataSens.add(data.getLeftHandData().getDataSens2().get(0).getValue());
+            }
+            if (data.getLeftHandData().getDataSens3().get(0) != null) {
+                leftHandDataSens.add(data.getLeftHandData().getDataSens3().get(0).getValue());
+            }
+            if (data.getLeftHandData().getDataSens4().get(0) != null) {
+                leftHandDataSens.add(data.getLeftHandData().getDataSens4().get(0).getValue());
+            }
+            if (data.getLeftHandData().getDataSens5().get(0) != null) {
+                leftHandDataSens.add(data.getLeftHandData().getDataSens5().get(0).getValue());
+            }
+            if (data.getLeftHandData().getDataSens6().get(0) != null) {
+                leftHandDataSens.add(data.getLeftHandData().getDataSens6().get(0).getValue());
+            }
+            if (data.getLeftHandData().getDataSens7().get(0) != null) {
+                leftHandDataSens.add(data.getLeftHandData().getDataSens7().get(0).getValue());
+            }
+            if (data.getLeftHandData().getDataSens8().get(0) != null) {
+                leftHandDataSens.add(data.getLeftHandData().getDataSens8().get(0).getValue());
+            }
+        }
+
+        if (data.getRightHandData() != null) {
+            if (data.getRightHandData().getDataSens1().get(0) != null) {
+                rightHandDataSens.add(data.getRightHandData().getDataSens1().get(0).getValue());
+            }
+            if (data.getRightHandData().getDataSens2().get(0) != null) {
+                rightHandDataSens.add(data.getRightHandData().getDataSens2().get(0).getValue());
+            }
+            if (data.getRightHandData().getDataSens3().get(0) != null) {
+                rightHandDataSens.add(data.getRightHandData().getDataSens3().get(0).getValue());
+            }
+            if (data.getRightHandData().getDataSens4().get(0) != null) {
+                rightHandDataSens.add(data.getRightHandData().getDataSens4().get(0).getValue());
+            }
+            if (data.getRightHandData().getDataSens5().get(0) != null) {
+                rightHandDataSens.add(data.getRightHandData().getDataSens5().get(0).getValue());
+            }
+            if (data.getRightHandData().getDataSens6().get(0) != null) {
+                rightHandDataSens.add(data.getRightHandData().getDataSens6().get(0).getValue());
+            }
+            if (data.getRightHandData().getDataSens7().get(0) != null) {
+                rightHandDataSens.add(data.getRightHandData().getDataSens7().get(0).getValue());
+            }
+            if (data.getRightHandData().getDataSens8().get(0) != null) {
+                rightHandDataSens.add(data.getRightHandData().getDataSens8().get(0).getValue());
+            }
+        }
+
+        inputDataParcelable.setRightHandDataSensor(rightHandDataSens);
+        inputDataParcelable.setLeftHandDataSensor(leftHandDataSens);
+        inputDataParcelable.setPractice(data.isPractice());
+        inputDataParcelable.setDescriptions(data.getDescriptions());
+        inputDataParcelable.setGender(data.getGender());
+        inputDataParcelable.setDifferenceArea(0.0f);
+        return inputDataParcelable;
+    }
+
+    private SensorDataFullParcelable getSensorDataFullParcelable() {
+        SensorDataFullParcelable sensorDataFullParcelable = new SensorDataFullParcelable();
+        Map<String, ArrayList<Integer>> leftHandDataSens = new HashMap<>();
+        Map<String, ArrayList<Integer>> rightHandDataSens = new HashMap<>();
+
+        if (data.getLeftHandData() != null) {
+            if (data.getLeftHandData().getDataSens1() != null) {
+                if (!data.getLeftHandData().getDataSens1().isEmpty()) {
+                    ArrayList<Integer> arrayList = new ArrayList<>();
+                    for (int i = 0; i < data.getLeftHandData().getDataSens1().size(); i++) {
+                        arrayList.add(data.getLeftHandData().getDataSens1().get(i).getValue());
+                    }
+                    if (!isDataSensorAllZero(arrayList)) {
+                        leftHandDataSens.put(Const.SENSOR_1, arrayList);
+                    }
+                }
+            }
+            if (data.getLeftHandData().getDataSens2() != null) {
+                if (!data.getLeftHandData().getDataSens2().isEmpty()) {
+                    ArrayList<Integer> arrayList = new ArrayList<>();
+                    for (int i = 0; i < data.getLeftHandData().getDataSens2().size(); i++) {
+                        arrayList.add(data.getLeftHandData().getDataSens2().get(i).getValue());
+                    }
+                    if (!isDataSensorAllZero(arrayList)) {
+                        leftHandDataSens.put(Const.SENSOR_2, arrayList);
+                    }
+                }
+            }
+            if (data.getLeftHandData().getDataSens3() != null) {
+                if (!data.getLeftHandData().getDataSens3().isEmpty()) {
+                    ArrayList<Integer> arrayList = new ArrayList<>();
+                    for (int i = 0; i < data.getLeftHandData().getDataSens3().size(); i++) {
+                        arrayList.add(data.getLeftHandData().getDataSens3().get(i).getValue());
+                    }
+                    if (!isDataSensorAllZero(arrayList)) {
+                        leftHandDataSens.put(Const.SENSOR_3, arrayList);
+                    }
+                }
+            }
+            if (data.getLeftHandData().getDataSens4() != null) {
+                if (!data.getLeftHandData().getDataSens4().isEmpty()) {
+                    ArrayList<Integer> arrayList = new ArrayList<>();
+                    for (int i = 0; i < data.getLeftHandData().getDataSens4().size(); i++) {
+                        arrayList.add(data.getLeftHandData().getDataSens4().get(i).getValue());
+                    }
+                    if (!isDataSensorAllZero(arrayList)) {
+                        leftHandDataSens.put(Const.SENSOR_4, arrayList);
+                    }
+                }
+            }
+            if (data.getLeftHandData().getDataSens5() != null) {
+                if (!data.getLeftHandData().getDataSens5().isEmpty()) {
+                    ArrayList<Integer> arrayList = new ArrayList<>();
+                    for (int i = 0; i < data.getLeftHandData().getDataSens5().size(); i++) {
+                        arrayList.add(data.getLeftHandData().getDataSens5().get(i).getValue());
+                    }
+                    if (!isDataSensorAllZero(arrayList)) {
+                        leftHandDataSens.put(Const.SENSOR_5, arrayList);
+                    }
+                }
+            }
+            if (data.getLeftHandData().getDataSens6() != null) {
+                if (!data.getLeftHandData().getDataSens6().isEmpty()) {
+                    ArrayList<Integer> arrayList = new ArrayList<>();
+                    for (int i = 0; i < data.getLeftHandData().getDataSens6().size(); i++) {
+                        arrayList.add(data.getLeftHandData().getDataSens6().get(i).getValue());
+                    }
+                    if (!isDataSensorAllZero(arrayList)) {
+                        leftHandDataSens.put(Const.SENSOR_6, arrayList);
+                    }
+                }
+            }
+            if (data.getLeftHandData().getDataSens7() != null) {
+                if (!data.getLeftHandData().getDataSens7().isEmpty()) {
+                    ArrayList<Integer> arrayList = new ArrayList<>();
+                    for (int i = 0; i < data.getLeftHandData().getDataSens7().size(); i++) {
+                        arrayList.add(data.getLeftHandData().getDataSens7().get(i).getValue());
+                    }
+                    if (!isDataSensorAllZero(arrayList)) {
+                        leftHandDataSens.put(Const.SENSOR_7, arrayList);
+                    }
+                }
+            }
+            if (data.getLeftHandData().getDataSens8() != null) {
+                if (!data.getLeftHandData().getDataSens8().isEmpty()) {
+                    ArrayList<Integer> arrayList = new ArrayList<>();
+                    for (int i = 0; i < data.getLeftHandData().getDataSens8().size(); i++) {
+                        arrayList.add(data.getLeftHandData().getDataSens8().get(i).getValue());
+                    }
+                    if (!isDataSensorAllZero(arrayList)) {
+                        leftHandDataSens.put(Const.SENSOR_8, arrayList);
+                    }
+                }
+            }
+        }
+
+        if (data.getRightHandData() != null) {
+            if (data.getRightHandData().getDataSens1() != null) {
+                if (!data.getRightHandData().getDataSens1().isEmpty()) {
+                    ArrayList<Integer> arrayList = new ArrayList<>();
+                    for (int i = 0; i < data.getRightHandData().getDataSens1().size(); i++) {
+                        arrayList.add(data.getRightHandData().getDataSens1().get(i).getValue());
+                    }
+                    if (!isDataSensorAllZero(arrayList)) {
+                        rightHandDataSens.put(Const.SENSOR_1, arrayList);
+                    }
+                }
+            }
+            if (data.getRightHandData().getDataSens2() != null) {
+                if (!data.getRightHandData().getDataSens2().isEmpty()) {
+                    ArrayList<Integer> arrayList = new ArrayList<>();
+                    for (int i = 0; i < data.getRightHandData().getDataSens2().size(); i++) {
+                        arrayList.add(data.getRightHandData().getDataSens2().get(i).getValue());
+                    }
+                    if (!isDataSensorAllZero(arrayList)) {
+                        rightHandDataSens.put(Const.SENSOR_2, arrayList);
+                    }
+                }
+            }
+            if (data.getRightHandData().getDataSens3() != null) {
+                if (!data.getRightHandData().getDataSens3().isEmpty()) {
+                    ArrayList<Integer> arrayList = new ArrayList<>();
+                    for (int i = 0; i < data.getRightHandData().getDataSens3().size(); i++) {
+                        arrayList.add(data.getRightHandData().getDataSens3().get(i).getValue());
+                    }
+                    if (!isDataSensorAllZero(arrayList)) {
+                        rightHandDataSens.put(Const.SENSOR_3, arrayList);
+                    }
+                }
+            }
+            if (data.getRightHandData().getDataSens4() != null) {
+                if (!data.getRightHandData().getDataSens4().isEmpty()) {
+                    ArrayList<Integer> arrayList = new ArrayList<>();
+                    for (int i = 0; i < data.getRightHandData().getDataSens4().size(); i++) {
+                        arrayList.add(data.getRightHandData().getDataSens4().get(i).getValue());
+                    }
+                    if (!isDataSensorAllZero(arrayList)) {
+                        rightHandDataSens.put(Const.SENSOR_4, arrayList);
+                    }
+                }
+            }
+            if (data.getRightHandData().getDataSens5() != null) {
+                if (!data.getRightHandData().getDataSens5().isEmpty()) {
+                    ArrayList<Integer> arrayList = new ArrayList<>();
+                    for (int i = 0; i < data.getRightHandData().getDataSens5().size(); i++) {
+                        arrayList.add(data.getRightHandData().getDataSens5().get(i).getValue());
+                    }
+                    if (!isDataSensorAllZero(arrayList)) {
+                        rightHandDataSens.put(Const.SENSOR_5, arrayList);
+                    }
+                }
+            }
+            if (data.getRightHandData().getDataSens6() != null) {
+                if (!data.getRightHandData().getDataSens6().isEmpty()) {
+                    ArrayList<Integer> arrayList = new ArrayList<>();
+                    for (int i = 0; i < data.getRightHandData().getDataSens6().size(); i++) {
+                        arrayList.add(data.getRightHandData().getDataSens6().get(i).getValue());
+                    }
+                    if (!isDataSensorAllZero(arrayList)) {
+                        rightHandDataSens.put(Const.SENSOR_6, arrayList);
+                    }
+                }
+            }
+            if (data.getRightHandData().getDataSens7() != null) {
+                if (!data.getRightHandData().getDataSens7().isEmpty()) {
+                    ArrayList<Integer> arrayList = new ArrayList<>();
+                    for (int i = 0; i < data.getRightHandData().getDataSens7().size(); i++) {
+                        arrayList.add(data.getRightHandData().getDataSens7().get(i).getValue());
+                    }
+                    if (!isDataSensorAllZero(arrayList)) {
+                        rightHandDataSens.put(Const.SENSOR_7, arrayList);
+                    }
+                }
+            }
+            if (data.getRightHandData().getDataSens8() != null) {
+                if (!data.getRightHandData().getDataSens8().isEmpty()) {
+                    ArrayList<Integer> arrayList = new ArrayList<>();
+                    for (int i = 0; i < data.getRightHandData().getDataSens8().size(); i++) {
+                        arrayList.add(data.getRightHandData().getDataSens8().get(i).getValue());
+                    }
+                    if (!isDataSensorAllZero(arrayList)) {
+                        rightHandDataSens.put(Const.SENSOR_8, arrayList);
+                    }
+                }
+            }
+        }
+
+        sensorDataFullParcelable.setFullData(data.isFullData());
+        sensorDataFullParcelable.setDataSensorMapLeftHand(leftHandDataSens);
+        sensorDataFullParcelable.setDataSensorMapRightHand(rightHandDataSens);
+        sensorDataFullParcelable.setDescriptions(data.getDescriptions());
+        sensorDataFullParcelable.setPractice(data.isPractice());
+        sensorDataFullParcelable.setGender(data.getGender());
+        return sensorDataFullParcelable;
     }
 
     private void createOneSensorMeasure(final String selectedSensor, final int timeRegistrationMaxSignal, String sensorType, boolean isExpert) {
@@ -588,12 +600,20 @@ public class RealmPresenter extends MvpPresenter<RealmView> {
 
     }
 
+    private void createChart() {
+        val data = getSensorDataFullParcelable();
+        App.INSTANCE.getRouter().navigateTo(Screens.MEASUREMENT_LINE_CHART, data);
+    }
+
     public void createMeasureByType(final int measureType, final String selectedSensor, final int timeRegistrationMaxSignal, String sensorType, boolean isExpert) {
         if (measureType == Const.STANDARD_MEASURE_TYPE) {
             createStandardMeasure();
         }
         if (measureType == Const.ONE_SENSOR_MEASURE_TYPE) {
             createOneSensorMeasure(selectedSensor, timeRegistrationMaxSignal, sensorType, isExpert);
+        }
+        if (measureType == Const.CHART) {
+            createChart();
         }
     }
 
