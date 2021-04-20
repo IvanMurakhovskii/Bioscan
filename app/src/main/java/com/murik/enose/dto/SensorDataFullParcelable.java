@@ -2,12 +2,13 @@ package com.murik.enose.dto;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import com.murik.enose.Const;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -53,8 +54,8 @@ public class SensorDataFullParcelable implements Parcelable {
   };
 
   private SensorDataFullParcelable(Parcel parcel){
-    dataSensorMapRightHand = new HashMap<String, ArrayList<Integer>>();
-    dataSensorMapLeftHand = new HashMap<String, ArrayList<Integer>>();
+    dataSensorMapRightHand = new HashMap<>();
+    dataSensorMapLeftHand = new HashMap<>();
     isPractice = parcel.readByte() != 0;
     isFullData = parcel.readByte() != 0;
     parcel.readMap(dataSensorMapRightHand, Map.class.getClassLoader());
