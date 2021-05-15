@@ -3,6 +3,8 @@ package com.murik.enose;
 import android.app.Application;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothGatt;
+import android.content.Context;
+
 import io.realm.Realm;
 import io.realm.RealmConfiguration;
 import ru.terrakok.cicerone.Cicerone;
@@ -29,8 +31,10 @@ public class App extends Application {
         .migration(new ReamMigration())
         .build();
     Realm.setDefaultConfiguration(config);
+  }
 
-
+  public static Context getContext() {
+    return INSTANCE.getApplicationContext();
   }
 
   public BluetoothAdapter getmBluetoothAdapter() {

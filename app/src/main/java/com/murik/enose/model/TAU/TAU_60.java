@@ -15,9 +15,9 @@ public class TAU_60 extends BaseResult {
     }
 
     public void setResult() {
-        if (getA() >= 53 && getA() <= 64) {
+        if (getA() > 53 && getA() <= 64) {
             setColorGREEN();
-        } else if (getA() >= 40 && getA() <= 52) {
+        } else if (getA() >= 40 && getA() <= 53) {
             setColorYELLOW();
             setPossibleReasons(getResources(R.string.TAU_60_YELLOW));
         } else if (getA() >= 65 && getA() <= 70) {

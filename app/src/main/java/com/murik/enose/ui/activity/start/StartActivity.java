@@ -71,10 +71,8 @@ public class StartActivity extends MvpAppCompatActivity implements StartView, On
     @InjectPresenter
     StartPresenter mStartPresenter;
 
-
     private Toolbar toolbar;
     private int REQUEST_ENABLE_BT = 0;
-
 
     public static Intent getIntent(final Context context) {
         Intent intent = new Intent(context, StartActivity.class);

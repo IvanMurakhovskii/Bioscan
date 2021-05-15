@@ -53,13 +53,17 @@
  import com.murik.enose.model.common_A.Result_L;
  import com.murik.enose.model.common_A.S_30_60;
  import com.murik.enose.model.common_A.S_30_60_GRAY;
+ import com.murik.enose.model.total.TotalResult_60;
  import com.murik.enose.model.Е.E_30;
  import com.murik.enose.model.Е.E_60;
  import com.murik.enose.model.Е.E_80;
 
  import java.math.BigDecimal;
  import java.math.RoundingMode;
+ import java.util.ArrayList;
+ import java.util.List;
 
+ import lombok.Getter;
  import lombok.val;
  import lombok.var;
 
@@ -70,11 +74,14 @@
  import static com.murik.enose.service.Impl.BaseMeasureService.getPS2435;
  import static com.murik.enose.service.Impl.BaseMeasureService.getPS3425;
 
+@Getter
 public class ResultAFactoryOneSensor extends ResultAFactory {
 
     private OneSensorShortMeasure oneSensorShortMeasure;
     private OneSensorLongMeasure oneSensorLongMeasure;
     private SensorValueAttitudeFor30 sensorValueAttitudeFor30;
+
+    private List<String> totalIndicators = new ArrayList<>();
 
     private int hand = 0;
 
@@ -146,27 +153,10 @@ public class ResultAFactoryOneSensor extends ResultAFactory {
 
             val maxSignalTime = getInputData().getTimeRegistrationMaxSignal();
 
-//            val PS_2435_right = getPS2435(getInputData().getRightHandDataSensor(), Const.SHORT);
-//            val PS_3425_right = getPS3425(getInputData().getRightHandDataSensor(), Const.SHORT);
-//
-////            val SI_right = PS_3425_right / PS_2435_right;
-//
-//            val PS_2435_left = getPS2435(getInputData().getLeftHandDataSensor(), Const.SHORT);
-//            val PS_3425_left = getPS3425(getInputData().getLeftHandDataSensor(), Const.SHORT);
-
-//            val SI_left = PS_3425_left / PS_2435_left;
-
-
             val PS_2435 = getPS2435(getMaxSensResult(), Const.SHORT);
             val PS_3425 = getPS3425(getMaxSensResult(), Const.SHORT);
 
             float si = (PS_2435 != 0) ? PS_3425 / PS_2435 : -9999;
-
-//            float bosi = 0;
-
-//            if (getInputData().getLeftHandDataSensor() != null && getInputData().getRightHandDataSensor() != null) {
-//                bosi = calculateDifference(SI_left, SI_right);
-//            }
 
             OneSensorResultParametersDto oneSensorResultParameters;
 
@@ -240,16 +230,29 @@ public class ResultAFactoryOneSensor extends ResultAFactory {
 
     private void createParametersFor_60(double a20_30, double a20_60, double a_40_70, Float s20_30, Float s20_60, Float s30_60, Float en, final int tau) {
 
-        getA().add(new ResultA_First40_70(a_40_70, getInputData(), getContext(), 1.81F));
-        getA().add(new ResultA_Second1_2(oneSensorLongMeasure.getSecondA1_2(), getInputData(), getContext(), 1.19F));
-        getA().add(new A_20_30(a20_30, getInputData(), getContext(), "IV"));
-        getA().add(new A_20_60((a20_60), getInputData(), getContext(), "V"));
-        getA().add(new ResultA_First1_2(oneSensorShortMeasure.getFirstA1_2(), getInputData(), getContext(), "III"));
-        getA().add(new ResultA_Second1_3_4_60(oneSensorShortMeasure.getFirstA3_2(), getInputData(), getContext(), 0.39F));
-        getA().add(new TAU_60(tau, getInputData(), getContext()));
-        getA().add(new E_60(en, getInputData(), getContext()));
-        getA().add(new S_30_60((s30_60), getInputData(), getContext(), 1));
+        val I = new ResultA_First40_70(a_40_70, getInputData(), getContext(), 1.81F);
+        val II = new ResultA_Second1_2(oneSensorLongMeasure.getSecondA1_2(), getInputData(), getContext(), 1.19F);
+        val III = new ResultA_First1_2(oneSensorShortMeasure.getFirstA1_2(), getInputData(), getContext(), "III");
+        val IV = new A_20_30(a20_30, getInputData(), getContext(), "IV");
+        val V = new A_20_60((a20_60), getInputData(), getContext(), "V");
+        val VI = new ResultA_Second1_3_4_60(oneSensorShortMeasure.getFirstA3_2(), getInputData(), getContext(), 0.39F);
+        val E = new E_60(en, getInputData(), getContext());
+        val S_30_60 = new S_30_60((s30_60), getInputData(), getContext(), 1);
+        val TAU = new TAU_60(tau, getInputData(), getContext());
 
+        getA().add(I);
+        getA().add(II);
+        getA().add(IV);
+        getA().add(V);
+        getA().add(III);
+        getA().add(VI);
+        getA().add(TAU);
+        getA().add(E);
+        getA().add(S_30_60);
+
+        val totalResult = new TotalResult_60(hand, IV, E, S_30_60, TAU, I, VI, III, V, II);
+
+        totalIndicators = totalResult.createAndGetDescription();
 
         if (getInputData().isExpert()) {
             getA().add(new ResultA_First2_3_Gray(a_40_70, getInputData(), getContext(), 1));
