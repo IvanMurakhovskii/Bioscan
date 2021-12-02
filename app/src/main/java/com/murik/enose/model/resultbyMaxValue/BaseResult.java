@@ -58,6 +58,10 @@ public abstract class BaseResult implements ResultBySens {
         color = ContextCompat.getColor(context, R.color.colorPrimaryDark);
     }
 
+    public void setColorORANGE() {
+        color = ContextCompat.getColor(context, R.color.orange);
+    }
+
     public void setColorGRAY() {
         color = Color.GRAY;
     }

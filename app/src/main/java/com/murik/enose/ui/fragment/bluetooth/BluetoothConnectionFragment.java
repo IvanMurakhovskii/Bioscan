@@ -23,6 +23,7 @@ import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import com.arellomobile.mvp.MvpAppCompatFragment;
 import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.murik.enose.App;
@@ -33,203 +34,205 @@ import com.murik.enose.presentation.view.bluetooth.BluetoothConnectionView;
 import com.murik.enose.service.Impl.BluetoothImplService;
 import com.murik.enose.ui.activity.ProgressDisplay;
 import com.murik.enose.ui.fragment.bluetooth.recycler.BluetoothRecyclerAdapter;
+
 import java.util.Objects;
 
 public class BluetoothConnectionFragment extends MvpAppCompatFragment implements
-    BluetoothConnectionView {
+        BluetoothConnectionView {
 
-  public static final String TAG = "BluetoothConnectionFragment";
-  @InjectPresenter
-  BluetoothConnectionPresenter mBluetoothConnectionPresenter;
+    public static final String TAG = "BluetoothConnectionFragment";
+    @InjectPresenter
+    BluetoothConnectionPresenter mBluetoothConnectionPresenter;
 
-  private final String LOG_TAG = "MyLog";
-  BluetoothAdapter bluetooth = App.INSTANCE.getmBluetoothAdapter();
+    private final String LOG_TAG = "MyLog";
+    BluetoothAdapter bluetooth = App.INSTANCE.getmBluetoothAdapter();
 
-  private int mConnectionState = STATE_DISCONNECTED;
-  private static final int STATE_DISCONNECTED = 0;
-  private static final int STATE_CONNECTING = 1;
-  private static final int STATE_CONNECTED = 2;
+    private int mConnectionState = STATE_DISCONNECTED;
+    private static final int STATE_DISCONNECTED = 0;
+    private static final int STATE_CONNECTING = 1;
+    private static final int STATE_CONNECTED = 2;
 
-  private int REQUEST_ENABLE_BT = 100;
+    private int REQUEST_ENABLE_BT = 100;
 
-  private FloatingActionButton btnSearch;
-  private TextView tvInfo;
-  private RecyclerView rvBluetoothDevices;
-  private ProgressBar progressBar;
+    private FloatingActionButton btnSearch;
+    private TextView tvInfo;
+    private RecyclerView rvBluetoothDevices;
+    private ProgressBar progressBar;
 
-  public static BluetoothConnectionFragment newInstance() {
-    BluetoothConnectionFragment fragment = new BluetoothConnectionFragment();
+    public static BluetoothConnectionFragment newInstance() {
+        BluetoothConnectionFragment fragment = new BluetoothConnectionFragment();
 
-    Bundle args = new Bundle();
-    fragment.setArguments(args);
+        Bundle args = new Bundle();
+        fragment.setArguments(args);
 
-    return fragment;
-  }
-
-  @Override
-  public void onResume() {
-    super.onResume();
-
-    IntentFilter filter = new IntentFilter();
-
-    filter.addAction(BluetoothAdapter.ACTION_DISCOVERY_STARTED);
-    filter.addAction(BluetoothDevice.ACTION_FOUND);
-    filter.addAction(BluetoothImplService.ACTION_GATT_CONNECTED);
-    filter.addAction(BluetoothAdapter.ACTION_DISCOVERY_FINISHED);
-    getActivity().registerReceiver(mReceiver, filter);
-  }
-
-  @Override
-  public void onPause() {
-    super.onPause();
-    getActivity().unregisterReceiver(mReceiver);
-    hideProgress();
-  }
-
-  @Override
-  public View onCreateView(final LayoutInflater inflater, final ViewGroup container,
-      final Bundle savedInstanceState) {
-
-    return inflater.inflate(R.layout.fragment_bluetooth_connection, container, false);
-  }
-
-  @Override
-  public void onViewCreated(final View view, final Bundle savedInstanceState) {
-    super.onViewCreated(view, savedInstanceState);
-    tvInfo = view.findViewById(R.id.tvInfo);
-    btnSearch = view.findViewById(R.id.btnSearchDevice);
-    btnSearch.setOnClickListener(event ->{
-
-      mBluetoothConnectionPresenter.onButtonSearchClick();
-    });
-    rvBluetoothDevices = view.findViewById(R.id.rvBluetoothDevice);
-    mBluetoothConnectionPresenter.initRecyclerView();
-
-    progressBar = view.findViewById(R.id.progressBar_bluetooth);
-
-  }
-
-  public void initRecyclerView(BluetoothRecyclerAdapter adapter){
-    rvBluetoothDevices.setLayoutManager(new LinearLayoutManager(getContext()));
-    rvBluetoothDevices.setAdapter(adapter);
-  }
-
-  public void bluetoothConnecting() {
-
-    if (bluetooth == null ) {
-      return;
-    }
-    if (!bluetooth.isEnabled()) {
-      Intent enableBtIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
-      startActivityForResult(enableBtIntent, REQUEST_ENABLE_BT);
-    }
-    if (bluetooth.isEnabled()){
-      searchBluetoothDevices();
+        return fragment;
     }
 
-  }
+    @Override
+    public void onResume() {
+        super.onResume();
 
-  @Override
-  public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        IntentFilter filter = new IntentFilter();
 
-  }
+        filter.addAction(BluetoothAdapter.ACTION_DISCOVERY_STARTED);
+        filter.addAction(BluetoothDevice.ACTION_FOUND);
+        filter.addAction(BluetoothImplService.ACTION_GATT_CONNECTED);
+        filter.addAction(BluetoothAdapter.ACTION_DISCOVERY_FINISHED);
+        getActivity().registerReceiver(mReceiver, filter);
+    }
 
-  public void searchBluetoothDevices(){
-    setTextViewInfo("Поиск...");
-    requestAppPermissions();
-    showProgress();
-    bluetooth.startDiscovery();
-
-  }
-
-  private final BroadcastReceiver mReceiver = new BroadcastReceiver() {
-    public void onReceive(Context context, Intent intent) {
-      String action = intent.getAction();
-
-      if (BluetoothAdapter.ACTION_STATE_CHANGED.equals(action)) {
-        final int state = intent.getIntExtra(BluetoothAdapter.EXTRA_STATE, BluetoothAdapter.ERROR);
-
-      } else if (BluetoothAdapter.ACTION_DISCOVERY_FINISHED.equals(action)) {
+    @Override
+    public void onPause() {
+        super.onPause();
+        getActivity().unregisterReceiver(mReceiver);
         hideProgress();
-        bluetooth.cancelDiscovery();
-        setTextViewInfo("");
-        Log.d("MyLog", "Finished");
-
-      } else if (BluetoothDevice.ACTION_FOUND.equals(action)) {
-        BluetoothDevice device =  intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);
-        mBluetoothConnectionPresenter.findingDevice(device);
-        Log.d("MyLog", "Name: " + device.getName() + "  Address: " + device.getAddress());
-      } else if(action.equals(BluetoothImplService.ACTION_GATT_CONNECTED)){
-          App.INSTANCE.getRouter().replaceScreen(Screens.BLUETOOTH_LIVE_CHART_FRAGMENT);
-          showProgress();
-      } else if(BluetoothImplService.ACTION_GATT_DISCONNECTED.equals(action)){
-        Toast.makeText(getContext(), "Disconnect from GATT", Toast.LENGTH_SHORT).show();
-        hideProgress();
-      }
-    }
-  };
-
-
-  public void connect(BluetoothDevice device){
-    Intent intent = new Intent(getActivity(), BluetoothImplService.class);
-    intent.setAction(BluetoothImplService.ACTION_SEND_DEVICE);
-    intent.putExtra("DEVICE", device);
-    Objects.requireNonNull(getActivity()).startService(intent);
-
-  }
-
-  protected void requestAppPermissions() {
-    if (android.os.Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
-      return;
     }
 
-    if (hasCorseLocationPermissions() && hasFineLocationPermissions() && hasBluetoothAdminPermissions()) {
-      return;
+    @Override
+    public View onCreateView(final LayoutInflater inflater, final ViewGroup container,
+                             final Bundle savedInstanceState) {
+
+        return inflater.inflate(R.layout.fragment_bluetooth_connection, container, false);
     }
 
-    ActivityCompat.requestPermissions(getActivity(),
-        new String[] {
-            Manifest.permission.ACCESS_FINE_LOCATION,
-            permission.ACCESS_COARSE_LOCATION,
-            permission.BLUETOOTH,
-        }, 0);
-  }
+    @Override
+    public void onViewCreated(final View view, final Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        tvInfo = view.findViewById(R.id.tvInfo);
+        btnSearch = view.findViewById(R.id.btnSearchDevice);
+        btnSearch.setOnClickListener(event -> {
 
-  private boolean hasFineLocationPermissions() {
-    return (ContextCompat.checkSelfPermission(getActivity(), permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED);
-  }
-  private boolean hasCorseLocationPermissions() {
-    return (ContextCompat.checkSelfPermission(getActivity(), permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED);
-  }
+            mBluetoothConnectionPresenter.onButtonSearchClick();
+        });
+        rvBluetoothDevices = view.findViewById(R.id.rvBluetoothDevice);
+        mBluetoothConnectionPresenter.initRecyclerView();
 
-  private boolean hasBluetoothAdminPermissions() {
-    return (ContextCompat.checkSelfPermission(getActivity(), permission.BLUETOOTH_ADMIN) == PackageManager.PERMISSION_GRANTED);
-  }
+        progressBar = view.findViewById(R.id.progressBar_bluetooth);
 
-  public void showProgress() {
-    if (getActivity() instanceof ProgressDisplay) {
-      ((ProgressDisplay) getActivity()).showProgress();
     }
-  }
 
-  @Override
-  public void hideProgressBar() {
-    progressBar.setVisibility(View.GONE);
-  }
-
-  @Override
-  public void showProgressBar() {
-    progressBar.setVisibility(View.VISIBLE);
-  }
-
-  public void hideProgress() {
-    if (getActivity() instanceof ProgressDisplay) {
-      ((ProgressDisplay) getActivity()).hideProgress();
+    public void initRecyclerView(BluetoothRecyclerAdapter adapter) {
+        rvBluetoothDevices.setLayoutManager(new LinearLayoutManager(getContext()));
+        rvBluetoothDevices.setAdapter(adapter);
     }
-  }
 
-  public void setTextViewInfo(String message){
-    tvInfo.setText(message);
-  }
+    public void bluetoothConnecting() {
+
+        if (bluetooth == null) {
+            return;
+        }
+        if (!bluetooth.isEnabled()) {
+            Intent enableBtIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
+            startActivityForResult(enableBtIntent, REQUEST_ENABLE_BT);
+        }
+        if (bluetooth.isEnabled()) {
+            searchBluetoothDevices();
+        }
+
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+    }
+
+    public void searchBluetoothDevices() {
+        setTextViewInfo("Поиск...");
+        requestAppPermissions();
+        showProgress();
+        bluetooth.startDiscovery();
+
+    }
+
+    private final BroadcastReceiver mReceiver = new BroadcastReceiver() {
+        public void onReceive(Context context, Intent intent) {
+            String action = intent.getAction();
+
+            if (BluetoothAdapter.ACTION_STATE_CHANGED.equals(action)) {
+                final int state = intent.getIntExtra(BluetoothAdapter.EXTRA_STATE, BluetoothAdapter.ERROR);
+
+            } else if (BluetoothAdapter.ACTION_DISCOVERY_FINISHED.equals(action)) {
+                hideProgress();
+                bluetooth.cancelDiscovery();
+                setTextViewInfo("");
+                Log.d("MyLog", "Finished");
+
+            } else if (BluetoothDevice.ACTION_FOUND.equals(action)) {
+                BluetoothDevice device = intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);
+                mBluetoothConnectionPresenter.findingDevice(device);
+                Log.d("MyLog", "Name: " + device.getName() + "  Address: " + device.getAddress());
+            } else if (action.equals(BluetoothImplService.ACTION_GATT_CONNECTED)) {
+                App.INSTANCE.getRouter().replaceScreen(Screens.BLUETOOTH_LIVE_CHART_FRAGMENT);
+                showProgress();
+            } else if (BluetoothImplService.ACTION_GATT_DISCONNECTED.equals(action)) {
+                Toast.makeText(getContext(), "Disconnect from GATT", Toast.LENGTH_SHORT).show();
+                hideProgress();
+            }
+        }
+    };
+
+
+    public void connect(BluetoothDevice device) {
+        Intent intent = new Intent(getActivity(), BluetoothImplService.class);
+        intent.setAction(BluetoothImplService.ACTION_SEND_DEVICE);
+        intent.putExtra("DEVICE", device);
+        Objects.requireNonNull(getActivity()).startService(intent);
+
+    }
+
+    protected void requestAppPermissions() {
+        if (android.os.Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
+            return;
+        }
+
+        if (hasCorseLocationPermissions() && hasFineLocationPermissions() && hasBluetoothAdminPermissions()) {
+            return;
+        }
+
+        ActivityCompat.requestPermissions(getActivity(),
+                new String[]{
+                        Manifest.permission.ACCESS_FINE_LOCATION,
+                        permission.ACCESS_COARSE_LOCATION,
+                        permission.BLUETOOTH,
+                }, 0);
+    }
+
+    private boolean hasFineLocationPermissions() {
+        return (ContextCompat.checkSelfPermission(getActivity(), permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED);
+    }
+
+    private boolean hasCorseLocationPermissions() {
+        return (ContextCompat.checkSelfPermission(getActivity(), permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED);
+    }
+
+    private boolean hasBluetoothAdminPermissions() {
+        return (ContextCompat.checkSelfPermission(getActivity(), permission.BLUETOOTH_ADMIN) == PackageManager.PERMISSION_GRANTED);
+    }
+
+    public void showProgress() {
+        if (getActivity() instanceof ProgressDisplay) {
+            ((ProgressDisplay) getActivity()).showProgress();
+        }
+    }
+
+    @Override
+    public void hideProgressBar() {
+        progressBar.setVisibility(View.GONE);
+    }
+
+    @Override
+    public void showProgressBar() {
+        progressBar.setVisibility(View.VISIBLE);
+    }
+
+    public void hideProgress() {
+        if (getActivity() instanceof ProgressDisplay) {
+            ((ProgressDisplay) getActivity()).hideProgress();
+        }
+    }
+
+    public void setTextViewInfo(String message) {
+        tvInfo.setText(message);
+    }
 
 }

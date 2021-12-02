@@ -1,4 +1,4 @@
-package com.murik.enose.model.total;
+package com.murik.enose.model.total.helper;
 
 import android.graphics.Color;
 import android.support.v4.content.ContextCompat;

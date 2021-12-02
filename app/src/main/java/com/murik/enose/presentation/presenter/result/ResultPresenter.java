@@ -14,6 +14,7 @@ import com.murik.enose.model.ResultAFactory;
 import com.murik.enose.model.ResultBySens;
 import com.murik.enose.model.resultbyMaxValue.ResultAFactoryOneSensor;
 import com.murik.enose.model.resultbyMaxValue.ResultAFactoryStandard;
+import com.murik.enose.model.total.TotalResult;
 import com.murik.enose.presentation.view.result.ResultView;
 import com.murik.enose.ui.fragment.result.recycler.HeaderViewHolder;
 import com.murik.enose.ui.fragment.result.recycler.ResultViewHolder;
@@ -32,7 +33,7 @@ public class ResultPresenter extends MvpPresenter<ResultView> {
 
     private ResultAFactory resultAFactory;
     private ArrayList<ResultBySens> res = new ArrayList<>();
-    private List<String> totalIndicators = new ArrayList<>();
+    private List<TotalResult> totalIndicators = new ArrayList<>();
     private Context context;
     private DataByMaxParcelable data;
 
@@ -92,7 +93,7 @@ public class ResultPresenter extends MvpPresenter<ResultView> {
     }
 
     public void onBindTotalIndicators(int pos, TotalIndicatorsViewHolder holder) {
-        holder.setTvDescriptions(totalIndicators.get(pos - (res.size() + 1) - 1));
+        holder.setTvDescriptions(totalIndicators.get(pos - (res.size() + 1) - 1).getDescription());
     }
 
     public void onBindPlacesViewPosition(int pos, ResultViewHolder holder) {

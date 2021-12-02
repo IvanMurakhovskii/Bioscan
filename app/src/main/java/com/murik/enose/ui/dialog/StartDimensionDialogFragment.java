@@ -104,6 +104,7 @@ public class StartDimensionDialogFragment extends AppCompatDialogFragment {
         });
         return isLeftHand;
     }
+
     public BluetoothDimensionTimeEnum getDimensionTime() {
         return (BluetoothDimensionTimeEnum) dimensionTimeSpinner.getSelectedItem();
     }
