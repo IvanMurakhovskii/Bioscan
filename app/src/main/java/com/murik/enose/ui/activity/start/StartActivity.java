@@ -40,6 +40,7 @@ import com.murik.enose.R;
 import com.murik.enose.Screens;
 import com.murik.enose.dto.DataByMaxParcelable;
 import com.murik.enose.dto.SensorDataFullParcelable;
+import com.murik.enose.dto.SummaryParcelable;
 import com.murik.enose.presentation.presenter.start.StartPresenter;
 import com.murik.enose.presentation.view.start.StartView;
 import com.murik.enose.service.Impl.BluetoothImplService;
@@ -49,6 +50,7 @@ import com.murik.enose.ui.fragment.bar_chart.ResultBarChartFragment;
 import com.murik.enose.ui.fragment.bluetooth.BluetoothConnectionFragment;
 import com.murik.enose.ui.fragment.dimension.BluetoothDimensionFragment;
 import com.murik.enose.ui.fragment.input.InputFragment;
+import com.murik.enose.ui.fragment.summary_result.SummaryResultFragment;
 import com.murik.enose.ui.fragment.measurementLineChart.MeasurementLineChart;
 import com.murik.enose.ui.fragment.oneSensorMeasure.OneSensorTabContainerFragment;
 import com.murik.enose.ui.fragment.parserXml.ParserXmlFragment;
@@ -117,6 +119,8 @@ public class StartActivity extends MvpAppCompatActivity implements StartView, On
                         return BluetoothDimensionFragment.newInstance();
                     case Screens.MEASUREMENT_LINE_CHART:
                         return MeasurementLineChart.newInstance((SensorDataFullParcelable) data);
+                    case Screens.SUMMARY_RESULT:
+                        return SummaryResultFragment.newInstance((SummaryParcelable) data);
                     default:
                         throw new RuntimeException("Unknown screen key");
 

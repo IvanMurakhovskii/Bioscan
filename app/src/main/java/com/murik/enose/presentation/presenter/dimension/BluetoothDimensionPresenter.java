@@ -9,6 +9,7 @@ import com.murik.enose.Screens;
 import com.murik.enose.model.RealmController;
 import com.murik.enose.dto.SensorDataFullParcelable;
 import com.murik.enose.presentation.view.dimension.BluetoothDimensionView;
+import com.murik.enose.utils.ListUtils;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -28,8 +29,8 @@ public class BluetoothDimensionPresenter extends MvpPresenter<BluetoothDimension
     private int gender = Const.GENDER_MALE;
     private boolean isLeftHand = false;
 
-    private List<Integer> sens1LeftHand = new ArrayList<>();
-    private List<Integer> sens1RightHand = new ArrayList<>();
+    private ArrayList<Integer> sens1LeftHand = new ArrayList<>();
+    private ArrayList<Integer> sens1RightHand = new ArrayList<>();
     private List<Integer> sens2 = new ArrayList<>();
     private List<Integer> sens3 = new ArrayList<>();
     private List<Integer> sens4 = new ArrayList<>();
@@ -62,8 +63,11 @@ public class BluetoothDimensionPresenter extends MvpPresenter<BluetoothDimension
         sensorDataFullParcelable.setGender(gender);
         sensorDataFullParcelable.setPractice(isPractice);
 
-        dataLeftHand.put(Const.SENSOR_1, new ArrayList<>(sens1LeftHand));
-        dataRightHand.put(Const.SENSOR_1, new ArrayList<>(sens1RightHand));
+        ListUtils.inverseListValueIfMiddleValueBelowZero(sens1LeftHand);
+        ListUtils.inverseListValueIfMiddleValueBelowZero(sens1RightHand);
+
+        dataLeftHand.put(Const.SENSOR_1, sens1LeftHand);
+        dataRightHand.put(Const.SENSOR_1, sens1RightHand);
 
         sensorDataFullParcelable.setDataSensorMapLeftHand(dataLeftHand);
         sensorDataFullParcelable.setDataSensorMapRightHand(dataRightHand);

@@ -22,7 +22,10 @@ import com.github.mikephil.charting.components.Description;
 import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.data.PieEntry;
+import com.murik.enose.App;
 import com.murik.enose.R;
+import com.murik.enose.Screens;
+import com.murik.enose.dto.SummaryParcelable;
 import com.murik.enose.model.ResultBySens;
 import com.murik.enose.dto.DataByMaxParcelable;
 import com.murik.enose.presentation.presenter.result.ResultPresenter;
@@ -45,7 +48,7 @@ public class ResultFragment extends MvpAppCompatFragment implements ResultView {
 
   private RecyclerView mResultRecycler;
   private PieChart pieChart;
-  private FloatingActionButton fab_diagram;
+  private FloatingActionButton fab_summary;
 
   public static Fragment newInstance(DataByMaxParcelable resultBySens, int mPage) {
     ResultFragment fragment = new ResultFragment();
@@ -82,8 +85,10 @@ public class ResultFragment extends MvpAppCompatFragment implements ResultView {
     super.onViewCreated(view, savedInstanceState);
     mResultRecycler = view.findViewById(R.id.result_recycler_view);
     pieChart = view.findViewById(R.id.result_pie_chart);
-    fab_diagram = view.findViewById(R.id.fab_diagram);
+    fab_summary = view.findViewById(R.id.fab_summary);
     mResultPresenter.setContext(getContext());
+
+    fab_summary.setOnClickListener((event) -> mResultPresenter.onSummaryClick());
 
   }
 
@@ -149,6 +154,11 @@ public class ResultFragment extends MvpAppCompatFragment implements ResultView {
   @Override
   public void calculateResult() {
     mResultPresenter.calculateResult(inputDataParcelable, mPage);
+  }
+
+  @Override
+  public void showSummaryButton() {
+    fab_summary.show();
   }
 
   @Override

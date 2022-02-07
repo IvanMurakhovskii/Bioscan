@@ -67,7 +67,6 @@
  import com.murik.enose.model.Е.E_60;
  import com.murik.enose.model.Е.E_80;
  import com.murik.enose.service.Impl.BaseMeasureService;
- import com.murik.enose.service.MeasureService;
  import com.murik.enose.utils.ListUtils;
 
  import java.math.BigDecimal;
@@ -85,6 +84,7 @@
  import static com.murik.enose.service.Impl.BaseMeasureService.getOneSensorResultParameters;
  import static com.murik.enose.service.Impl.BaseMeasureService.getPS2435;
  import static com.murik.enose.service.Impl.BaseMeasureService.getPS3425;
+ import static com.murik.enose.utils.SummaryColorCoefficientUtils.getColorCoefficient;
 
 @Getter
 public class ResultAFactoryOneSensor extends ResultAFactory {
@@ -289,6 +289,23 @@ public class ResultAFactoryOneSensor extends ResultAFactory {
 //        getA().add(R1_2);
         getA().add(S_30_60);
         getA().add(E2);
+
+        double SP = (1 * getColorCoefficient(II.getViewColor()))
+                + (1 * getColorCoefficient(III.getViewColor()))
+                + (1 * getColorCoefficient(V.getViewColor()))
+                + (getColorCoefficient(I.getViewColor()) * 0.9)
+                + (1 * getColorCoefficient(IV.getViewColor()))
+                + (getColorCoefficient(VI.getViewColor()) * 0.9)
+                + (1 * getColorCoefficient(S_30_60.getViewColor()))
+                + (getColorCoefficient(TAU.getViewColor()) * 0.9)
+                + (getColorCoefficient(E.getViewColor()) * 0.9)
+                + (getColorCoefficient(E2.getViewColor()) * 0.9);
+
+        double SPN = (SP - 9.5)/(23.1 - 9.5);
+
+        double YZ = (1 - SPN)*100;
+
+        setSummaryResult(YZ);
 
         val totalResult = new TotalResult_60(getContext(), I, II, III, IV, V, VI, E, S_30_60, TAU, hand);
 

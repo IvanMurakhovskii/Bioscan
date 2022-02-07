@@ -12,7 +12,6 @@ import com.murik.enose.model.TAU.TAU_60;
 import com.murik.enose.model.common_A.A_20_30;
 import com.murik.enose.model.common_A.A_20_60;
 import com.murik.enose.model.common_A.S_30_60;
-import com.murik.enose.model.total.helper.ColorHelper;
 import com.murik.enose.model.Е.E_60;
 
 import java.util.ArrayList;

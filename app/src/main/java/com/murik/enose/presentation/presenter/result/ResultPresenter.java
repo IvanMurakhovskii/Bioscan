@@ -9,6 +9,7 @@ import com.murik.enose.App;
 import com.murik.enose.Const;
 import com.murik.enose.Screens;
 import com.murik.enose.dto.DataByMaxParcelable;
+import com.murik.enose.dto.SummaryParcelable;
 import com.murik.enose.model.RealmController;
 import com.murik.enose.model.ResultAFactory;
 import com.murik.enose.model.ResultBySens;
@@ -48,9 +49,21 @@ public class ResultPresenter extends MvpPresenter<ResultView> {
     protected void onFirstViewAttach() {
         try {
             getViewState().calculateResult();
+            showSummaryButtonIf60();
         } catch (Exception e) {
             Log.e("ResultPresenter", e.getMessage());
         }
+    }
+
+    private void showSummaryButtonIf60() {
+        if (data.getTimeRegistrationMaxSignal() == 60) {
+            getViewState().showSummaryButton();
+        }
+    }
+
+    public void onSummaryClick() {
+        val summary = resultAFactory.getSummaryResult();
+        App.INSTANCE.getRouter().navigateTo(Screens.SUMMARY_RESULT, new SummaryParcelable(summary));
     }
 
     public void calculateResult(DataByMaxParcelable data, int hand) {

@@ -1,4 +1,4 @@
-package com.murik.enose.model.total.helper;
+package com.murik.enose.helper;
 
 import android.graphics.Color;
 import android.support.v4.content.ContextCompat;
@@ -6,12 +6,9 @@ import android.support.v4.content.ContextCompat;
 import com.murik.enose.App;
 import com.murik.enose.R;
 
-import lombok.AllArgsConstructor;
-
-@AllArgsConstructor
 public class ColorHelper {
 
-    public static int setColorPRIMARY_DARK() {
+    public static int getColorPRIMARY_DARK() {
         return ContextCompat.getColor(App.getContext(), R.color.colorPrimaryDark);
     }
 
@@ -21,6 +18,10 @@ public class ColorHelper {
 
     public static int getColorBURGUNDY() {
         return ContextCompat.getColor(App.getContext(), R.color.colorResultBurgundy);
+    }
+
+    public static int getColorORANGE() {
+        return ContextCompat.getColor(App.getContext(), R.color.orange);
     }
 
     public static int getColorRED() {

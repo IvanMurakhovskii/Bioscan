@@ -16,4 +16,16 @@ public class ListUtilsTest{
         int value = ListUtils.findClosestValueIndex(testList, 6d);
         assertEquals(value, resultIndex);
     }
+
+    @Test
+    public void inverseListValueIfMiddleValueBelowZero_ShouldReturnInverseList() {
+        List<Integer> testList = Arrays.asList(1,-2,-4,-7,-9,-10,11);
+
+
+
+        ListUtils.inverseListValueIfMiddleValueBelowZero(testList);
+
+        List<Integer> returnedList = Arrays.asList(-1,2,4,7,9,10,-11);
+        assertEquals(testList, returnedList);
+    }
 }
