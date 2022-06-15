@@ -9,24 +9,32 @@ import com.murik.enose.App;
 import com.murik.enose.Const;
 import com.murik.enose.Screens;
 import com.murik.enose.dto.DataByMaxParcelable;
+import com.murik.enose.dto.SummaryParcelable;
 import com.murik.enose.model.RealmController;
 import com.murik.enose.model.ResultAFactory;
 import com.murik.enose.model.ResultBySens;
 import com.murik.enose.model.resultbyMaxValue.ResultAFactoryOneSensor;
 import com.murik.enose.model.resultbyMaxValue.ResultAFactoryStandard;
+import com.murik.enose.model.total.TotalResult;
 import com.murik.enose.presentation.view.result.ResultView;
 import com.murik.enose.ui.fragment.result.recycler.HeaderViewHolder;
 import com.murik.enose.ui.fragment.result.recycler.ResultViewHolder;
+import com.murik.enose.ui.fragment.result.recycler.TotalIndicatorsViewHolder;
 
 import java.math.RoundingMode;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.List;
+
+import lombok.val;
+import lombok.var;
 
 @InjectViewState
 public class ResultPresenter extends MvpPresenter<ResultView> {
 
     private ResultAFactory resultAFactory;
     private ArrayList<ResultBySens> res = new ArrayList<>();
+    private List<TotalResult> totalIndicators = new ArrayList<>();
     private Context context;
     private DataByMaxParcelable data;
 
@@ -41,9 +49,22 @@ public class ResultPresenter extends MvpPresenter<ResultView> {
     protected void onFirstViewAttach() {
         try {
             getViewState().calculateResult();
+            showSummaryButtonIf60();
         } catch (Exception e) {
             Log.e("ResultPresenter", e.getMessage());
         }
+    }
+
+    private void showSummaryButtonIf60() {
+        if (data.getTimeRegistrationMaxSignal() == 60) {
+            getViewState().showSummaryButton();
+        }
+    }
+
+    public void onSummaryClick() {
+        val summary = resultAFactory.getSummaryResult();
+        val timeRegistrationMaxSignal = resultAFactory.getInputData().getTimeRegistrationMaxSignal();
+        App.INSTANCE.getRouter().navigateTo(Screens.SUMMARY_RESULT, new SummaryParcelable(summary, timeRegistrationMaxSignal));
     }
 
     public void calculateResult(DataByMaxParcelable data, int hand) {
@@ -68,13 +89,25 @@ public class ResultPresenter extends MvpPresenter<ResultView> {
                     res.add(resultBySens.get(i));
             }
 
+            if(resultAFactory instanceof ResultAFactoryOneSensor) {
+                totalIndicators = ((ResultAFactoryOneSensor)resultAFactory).getTotalIndicators();
+            }
+
             getViewState().initPieChart(resultAFactory.getA());
             getViewState().initRecyclerView();
         }
     }
 
-    public void onBindHeader(HeaderViewHolder holder) {
-        holder.setTvDescriptions(data.getDescriptions());
+    public void onBindHeader(int position, HeaderViewHolder holder) {
+        if (position == 0) {
+            holder.setTvDescriptions(data.getDescriptions());
+        } else {
+            holder.setTvDescriptions("Интегральные показатели");
+        }
+    }
+
+    public void onBindTotalIndicators(int pos, TotalIndicatorsViewHolder holder) {
+        holder.setTvDescriptions(totalIndicators.get(pos - (res.size() + 1) - 1).getDescription());
     }
 
     public void onBindPlacesViewPosition(int pos, ResultViewHolder holder) {
@@ -84,11 +117,18 @@ public class ResultPresenter extends MvpPresenter<ResultView> {
 
         holder.setDivider(res.get(position).getViewColor());
         holder.setTvComment(res.get(position).getLegend() + " =" + df.format(res.get(position).getA()) + "\n" + res.get(position).getResultComment());
+    }
 
+    public int getTotalIndicatorsPositionStart() {
+        return res.size() + 1;
     }
 
     public int getResultRowsCount() {
-        return res.size() + 1;
+        var size = res.size() + 1;
+        if (!totalIndicators.isEmpty()) {
+          size += totalIndicators.size() + 1;
+        }
+        return size;
     }
 
     public void onSaveButtonClick() {

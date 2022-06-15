@@ -12,4 +12,5 @@ public interface ResultView extends MvpView {
   @StateStrategyType(value = SkipStrategy.class)
   void showDialog();
   void calculateResult();
+  void showSummaryButton();
 }

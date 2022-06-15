@@ -30,9 +30,18 @@ public class S_30_60 extends BaseResultWithCoefficient {
         } else if (getA() >= 0.44 && getA() <= 0.55) {
             setColorBURGUNDY();
             setPossibleReasons(getResources(R.string.A_30_60_BURGUNDY_2));
-        } else if (getA() >= 0.10 && getA() <= 0.17) {
+        } else if (getA() >= 0.10 && getA() <= 0.16) {
             setColorBURGUNDY();
             setPossibleReasons(getResources(R.string.A_30_60_BURGUNDY_1));
+        } else if (getA() >= 0.44 && getA() <= 0.55) {
+            setColorBURGUNDY();
+            setPossibleReasons(getResources(R.string.A_30_60_BURGUNDY_2));
+        } else if (getA() < 0.1) {
+            setColor(Color.WHITE);
+            setPossibleReasons(getResources(R.string.A_30_60_BURGUNDY_1));
+        } else if (getA() > 0.6) {
+            setColor(Color.WHITE);
+            setPossibleReasons(getResources(R.string.A_30_60_BURGUNDY_2));
         }
     }
 }

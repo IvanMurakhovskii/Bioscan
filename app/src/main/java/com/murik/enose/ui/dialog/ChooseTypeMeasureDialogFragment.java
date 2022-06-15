@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.RadioGroup;
+import android.widget.Switch;
 
 import com.murik.enose.Const;
 import com.murik.enose.R;
@@ -32,6 +33,7 @@ public class ChooseTypeMeasureDialogFragment extends DialogFragment {
     private RadioGroup rgExpert;
     private LinearLayout llOneSensorSettings;
     private LinearLayout llMaxSignal;
+    private Switch animalsSwitch;
 
     public void setDialogListener(
             DialogListener mNoticeDialogListener) {
@@ -54,6 +56,7 @@ public class ChooseTypeMeasureDialogFragment extends DialogFragment {
         rgExpert = view.findViewById(R.id.rg_expert_type);
         llOneSensorSettings = view.findViewById(R.id.ll_one_sensor_settings);
         llMaxSignal = view.findViewById(R.id.ll_max_signal);
+        animalsSwitch = view.findViewById(R.id.animals);
 
         rgChooseMeasureType.setOnCheckedChangeListener((group, checkedId) -> {
             switch (checkedId) {
@@ -138,6 +141,10 @@ public class ChooseTypeMeasureDialogFragment extends DialogFragment {
             default:
                 return Const.DIAGNOST;
         }
+    }
+
+    public boolean isAnimalsSelected() {
+        return animalsSwitch.isChecked();
     }
 
     public boolean getExpertType() {

@@ -14,21 +14,21 @@ public class AreaDifferenceDiscrete extends AreaDifference {
 
     @Override
     public void setResult() {
-        double a = Math.abs(getAreaDifference());
-        if (a >= 21 && a <= 40) {
+        double a = getAreaDifference();
+        if (Math.abs(a) >= 21 && Math.abs(a) <= 40) {
             setColorYELLOW();
-            if (getAreaDifference() > 0) {
+            if (a > 0) {
                 setResultIfDifferenceGrateZero();
             } else {
                 setResultIfDifferenceLessZero();
             }
-        } else if(a >= 41 && a <= 60) {
+        } else if(Math.abs(a) >= 41 && Math.abs(a) <= 60) {
             setColorRED();
             setPossibleReasons(getResources(R.string.DIFFERENCE_AREA_RED));
-        } else if (a >= 61 && a <= 81) {
+        } else if (Math.abs(a) >= 61 && Math.abs(a) <= 81) {
             setColorBURGUNDY();
             setPossibleReasons(getResources(R.string.DIFFERENCE_AREA_BURGUNDY));
-        } else if(a > 80) {
+        } else if(Math.abs(a) > 80) {
             setColorCRIMSON();
             setPossibleReasons(getResources(R.string.DIFFERENCE_AREA_CRIMSON));
         }
