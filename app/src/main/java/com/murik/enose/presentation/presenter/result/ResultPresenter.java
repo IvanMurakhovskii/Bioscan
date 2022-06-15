@@ -63,7 +63,8 @@ public class ResultPresenter extends MvpPresenter<ResultView> {
 
     public void onSummaryClick() {
         val summary = resultAFactory.getSummaryResult();
-        App.INSTANCE.getRouter().navigateTo(Screens.SUMMARY_RESULT, new SummaryParcelable(summary));
+        val timeRegistrationMaxSignal = resultAFactory.getInputData().getTimeRegistrationMaxSignal();
+        App.INSTANCE.getRouter().navigateTo(Screens.SUMMARY_RESULT, new SummaryParcelable(summary, timeRegistrationMaxSignal));
     }
 
     public void calculateResult(DataByMaxParcelable data, int hand) {

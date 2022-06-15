@@ -22,6 +22,7 @@ public class DataByMaxParcelable implements Parcelable {
     private int gender = Const.GENDER_MALE;
     private boolean isPractice;
     private boolean isExpert;
+    private boolean isAnimalsSelected;
     private String measureType = Const.STANDARD_MEASURE;
     private Float differenceArea = 0.0f;
     private int timeRegistrationMaxSignal = 80;
@@ -47,6 +48,7 @@ public class DataByMaxParcelable implements Parcelable {
         dest.writeList(leftHandDataSensor);
         dest.writeByte((byte) (isPractice ? 1 : 0));
         dest.writeByte((byte) (isExpert ? 1 : 0));
+        dest.writeByte((byte) (isAnimalsSelected ? 1 : 0));
         dest.writeString(sensorType);
     }
 
@@ -68,6 +70,7 @@ public class DataByMaxParcelable implements Parcelable {
         leftHandDataSensor = new ArrayList<>();
         isPractice = parcel.readByte() != 0;
         isExpert = parcel.readByte() != 0;
+        isAnimalsSelected = parcel.readByte() != 0;
         parcel.readList(rightHandDataSensor, Integer.class.getClassLoader());
         parcel.readList(leftHandDataSensor, Integer.class.getClassLoader());
         descriptions = parcel.readString();

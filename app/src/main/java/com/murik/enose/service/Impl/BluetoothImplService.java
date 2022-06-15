@@ -9,6 +9,7 @@ import android.bluetooth.BluetoothGattDescriptor;
 import android.bluetooth.BluetoothGattService;
 import android.bluetooth.BluetoothProfile;
 import android.content.Intent;
+import android.os.Build;
 import android.os.IBinder;
 import android.util.Log;
 
@@ -45,6 +46,8 @@ public class BluetoothImplService extends Service implements BluetoothService {
             "com.murik.enose.EXTRA_DATA";
     public final static String ACTION_CHARACTERISTIC_CHANGE =
             "com.murik.enose.CHARACTERISTIC_CHANGE";
+    public final static String ACTION_CONNECTED_FAILED =
+            "com.murik.enose.FAILED";
 
     private final BluetoothGattCallback mBluetoothGattCallback = new BluetoothGattCallback() {
         @Override
@@ -67,7 +70,13 @@ public class BluetoothImplService extends Service implements BluetoothService {
                 intentAction = ACTION_GATT_DISCONNECTED;
                 mConnectionState = STATE_DISCONNECTED;
                 Log.i(TAG, "Disconnected from GATT server.");
+                gatt.close();
                 broadcastUpdate(intentAction);
+            }
+
+            if (status == 133) {
+                Log.i(TAG, "Connecting failed!");
+                broadcastUpdate(ACTION_CONNECTED_FAILED);
             }
         }
 
@@ -146,7 +155,12 @@ public class BluetoothImplService extends Service implements BluetoothService {
         String action = intent.getAction();
         if (Objects.equals(action, ACTION_SEND_DEVICE)) {
             device = intent.getParcelableExtra("DEVICE");
-            mBluetoothGatt = device.connectGatt(getApplicationContext(), false, mBluetoothGattCallback);
+
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                device.connectGatt(getApplicationContext(), true, mBluetoothGattCallback, BluetoothDevice.DEVICE_TYPE_DUAL);
+            } else {
+                device.connectGatt(getApplicationContext(), true, mBluetoothGattCallback);
+            }
         }
         throw new UnsupportedOperationException("Not yet implemented");
     }
@@ -158,7 +172,14 @@ public class BluetoothImplService extends Service implements BluetoothService {
         if (Objects.equals(action, ACTION_SEND_DEVICE)) {
             device = intent.getParcelableExtra("DEVICE");
 
-            mBluetoothGatt = device.connectGatt(getApplicationContext(), false, mBluetoothGattCallback);
+//            mBluetoothGatt = device.connectGatt(getApplicationContext(), false, mBluetoothGattCallback);
+
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                mBluetoothGatt = device.connectGatt(getApplicationContext(), false, mBluetoothGattCallback, BluetoothDevice.TRANSPORT_LE);
+            } else {
+                mBluetoothGatt = device.connectGatt(getApplicationContext(), false, mBluetoothGattCallback);
+            }
+
             App.INSTANCE.setmBluetoothGatt(mBluetoothGatt);
             return START_NOT_STICKY;
         }

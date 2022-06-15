@@ -14,6 +14,8 @@ import com.murik.enose.ui.fragment.bluetooth.recycler.BluetoothRecyclerViewHolde
 import java.util.ArrayList;
 import java.util.Set;
 
+import lombok.SneakyThrows;
+
 @InjectViewState
 public class BluetoothConnectionPresenter extends MvpPresenter<BluetoothConnectionView> {
 
@@ -68,6 +70,7 @@ public class BluetoothConnectionPresenter extends MvpPresenter<BluetoothConnecti
         return devices.size();
     }
 
+    @SneakyThrows
     @SuppressLint("CheckResult")
     public void onItemRecyclerClickListener(BluetoothRecyclerViewHolder viewHolder) {
         bluetooth.cancelDiscovery();

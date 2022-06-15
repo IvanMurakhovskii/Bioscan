@@ -37,6 +37,16 @@
  import com.murik.enose.model.A_Second.ResultA_Second1_3_4_60;
  import com.murik.enose.model.A_Second.ResultA_Second2_3;
  import com.murik.enose.model.A_Second.ResultA_Second3_4;
+ import com.murik.enose.model.A_animals.A_20_30_Animals;
+ import com.murik.enose.model.A_animals.A_20_60_Animals;
+ import com.murik.enose.model.A_animals.E_2_60_Animals;
+ import com.murik.enose.model.A_animals.E_60_Animals;
+ import com.murik.enose.model.A_animals.ResultA_First1_2_Animals;
+ import com.murik.enose.model.A_animals.ResultA_First40_70_Animals;
+ import com.murik.enose.model.A_animals.ResultA_Second1_2_Animals;
+ import com.murik.enose.model.A_animals.ResultA_Second1_3_4_60_Animals;
+ import com.murik.enose.model.A_animals.S_30_60_Animals;
+ import com.murik.enose.model.A_animals.TAU_60_Animals;
  import com.murik.enose.model.OneSensorLongMeasure;
  import com.murik.enose.model.OneSensorShortMeasure;
  import com.murik.enose.model.R1_2;
@@ -164,6 +174,7 @@ public class ResultAFactoryOneSensor extends ResultAFactory {
         if (!getMaxSensResult().isEmpty()) {
 
             val maxSignalTime = getInputData().getTimeRegistrationMaxSignal();
+            val isAnimalsSelected = getInputData().isAnimalsSelected();
 
             val PS_2435 = getPS2435(getMaxSensResult(), Const.SHORT);
             val PS_3425 = getPS3425(getMaxSensResult(), Const.SHORT);
@@ -203,6 +214,10 @@ public class ResultAFactoryOneSensor extends ResultAFactory {
                 if (getInputData().getSensorType().equals(Const.DIAGNOST)) {
                     createParametersForDiagnost(si, a_20_30, a_20_60, s30_60, L, En, E2);
                 } else {
+                    if (isAnimalsSelected) {
+                        createParametersFor_Animals(a_20_30, a_20_60, a_40_70, s20_30, s20_60, s30_60, En, E2, tau);
+                        return true;
+                    }
                     if (maxSignalTime == 80) {
                         createParametersFor_80(si, a_20_30, a_20_60, s30_60, L, En, E2, tau);
                     } else if (maxSignalTime == 60) {
@@ -252,6 +267,20 @@ public class ResultAFactoryOneSensor extends ResultAFactory {
         getA().add(S);
         getA().add(E2);
 
+        double SP = (0.95 * getColorCoefficient(II.getViewColor()))
+                + (0.95 * getColorCoefficient(III.getViewColor()))
+                + (0.9 * getColorCoefficient(V.getViewColor()))
+                + (0.9 * getColorCoefficient(I.getViewColor()))
+                + (1 * getColorCoefficient(IV.getViewColor()))
+                + (1 * getColorCoefficient(VI.getViewColor()))
+                + (1 * getColorCoefficient(S.getViewColor()))
+                + (1 * getColorCoefficient(tau_30.getViewColor()));
+
+        double SPN = (SP - 7.7)/(18.8 - 7.7);
+
+        double YZ = (1 - SPN) * 100;
+
+        setSummaryResult(YZ);
 
         val totalResult = new TotalResult_30(getContext(), I, II, III, IV, V, VI, E, S, tau_30, hand);
 
@@ -262,6 +291,31 @@ public class ResultAFactoryOneSensor extends ResultAFactory {
             getA().add(new A_20_30_GRAY(sensorValueAttitudeFor30.getA20_30(), getInputData(), getContext(), 1.81F));
             getA().add(new S_15_30_GRAY(sensorValueAttitudeFor30.calculateAndGetS15_30(), getInputData(), getContext(), 1.81F));
         }
+    }
+
+    private void createParametersFor_Animals(double a20_30, double a20_60, double a_40_70, Float s20_30, Float s20_60, Float s30_60, Float en, Float e2, final int tau) {
+
+        val I = new ResultA_First40_70_Animals(a_40_70, getInputData(), getContext(), 1.81F);
+        val II = new ResultA_Second1_2_Animals(oneSensorLongMeasure.getSecondA1_2(), getInputData(), getContext(), 1.19F);
+        val III = new ResultA_First1_2_Animals(oneSensorShortMeasure.getFirstA1_2(), getInputData(), getContext(), "III");
+        val IV = new A_20_30_Animals(a20_30, getInputData(), getContext(), "IV");
+        val V = new A_20_60_Animals((a20_60), getInputData(), getContext(), "V");
+        val VI = new ResultA_Second1_3_4_60_Animals(oneSensorShortMeasure.getFirstA3_2(), getInputData(), getContext(), 0.39F);
+        val E = new E_60_Animals(en, getInputData(), getContext());
+        val E2 = new E_2_60_Animals(e2, getInputData(), getContext());
+        val S_30_60 = new S_30_60_Animals((s30_60), getInputData(), getContext(), 1);
+        val TAU = new TAU_60_Animals(tau, getInputData(), getContext());
+
+        getA().add(II);
+        getA().add(III);
+        getA().add(V);
+        getA().add(I);
+        getA().add(IV);
+        getA().add(VI);
+        getA().add(TAU);
+        getA().add(E);
+        getA().add(S_30_60);
+        getA().add(E2);
     }
 
     private void createParametersFor_60(double a20_30, double a20_60, double a_40_70, Float s20_30, Float s20_60, Float s30_60, Float en, Float e2, int r1_2, final int tau) {

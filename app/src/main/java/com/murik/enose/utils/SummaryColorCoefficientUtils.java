@@ -2,8 +2,6 @@ package com.murik.enose.utils;
 
 import android.graphics.Color;
 
-import com.murik.enose.helper.ColorHelper;
-
 import lombok.experimental.UtilityClass;
 
 import static com.murik.enose.helper.ColorHelper.*;

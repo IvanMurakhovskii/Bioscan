@@ -17,7 +17,7 @@ import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.murik.enose.R;
 import com.murik.enose.dto.SummaryParcelable;
 import com.murik.enose.presentation.presenter.summaryResult.SummaryResultPresenter;
-import com.murik.enose.presentation.view.summaryResoltView.SummaryResultView;
+import com.murik.enose.presentation.view.summaryResultView.SummaryResultView;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;

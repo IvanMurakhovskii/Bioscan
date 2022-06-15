@@ -100,12 +100,12 @@ public class ResultFragment extends MvpAppCompatFragment implements ResultView {
 
   public void initPieChart(ArrayList<ResultBySens> sensResult) {
     ArrayList<PieEntry> entries = new ArrayList<>();
-    ArrayList<String> lables = new ArrayList<>();
+    ArrayList<String> labels = new ArrayList<>();
     ArrayList<Integer> colors = new ArrayList<>();
 
     for (int i = 0; i < sensResult.size(); i++) {
       entries.add(new PieEntry(10, sensResult.get(i).getLegend()));
-      lables.add(sensResult.get(i).getLegend());
+      labels.add(sensResult.get(i).getLegend());
       colors.add(sensResult.get(i).getViewColor());
     }
 

@@ -125,6 +125,12 @@
                     android:layout_height="wrap_content"
                     android:text="30" />
             </RadioGroup>
+
+            <Switch
+                android:id="@+id/animals"
+                android:layout_width="146dp"
+                android:layout_height="wrap_content"
+                android:text="Животные" />
         </LinearLayout>
 
 

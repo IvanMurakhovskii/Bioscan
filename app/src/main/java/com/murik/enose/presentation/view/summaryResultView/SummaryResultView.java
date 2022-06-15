@@ -1,4 +1,4 @@
-package com.murik.enose.presentation.view.summaryResoltView;
+package com.murik.enose.presentation.view.summaryResultView;
 
 import com.arellomobile.mvp.MvpView;
 
