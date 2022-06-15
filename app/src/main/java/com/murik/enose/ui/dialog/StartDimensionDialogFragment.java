@@ -12,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
 
@@ -21,16 +22,21 @@ import com.murik.enose.enums.BluetoothDimensionTimeEnum;
 
 import java.util.Objects;
 
+import static com.murik.enose.Const.BIOSCANNER_DEVICE_TYPE;
+import static com.murik.enose.Const.DUAL_SENSOR_DEVICE_TYPE;
+
 public class StartDimensionDialogFragment extends AppCompatDialogFragment {
 
     private DialogListener mDialogListener;
     private EditText descriptions;
     private RadioGroup rgGender;
+    private RadioGroup rgDeviceType;
     private RadioGroup swHand;
     private SwitchCompat swPractice;
     private EditText dimensionTime;
     private EditText substanceDimensionTime;
     private Spinner dimensionTimeSpinner;
+    private View view;
 
     private int gender = Const.GENDER_MALE;
     private boolean isLeftHand = true;
@@ -48,9 +54,10 @@ public class StartDimensionDialogFragment extends AppCompatDialogFragment {
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
         builder = new AlertDialog.Builder(getActivity());
         LayoutInflater inflater = Objects.requireNonNull(getActivity()).getLayoutInflater();
-        View view = inflater.inflate(R.layout.dialog_start_dimension, null);
+        view = inflater.inflate(R.layout.dialog_start_dimension, null);
         descriptions = view.findViewById(R.id.start_dimension_description);
         rgGender = view.findViewById(R.id.rg_gender_des);
+        rgDeviceType = view.findViewById(R.id.rg_device_type);
         swPractice = view.findViewById(R.id.sc_practice_des);
         swHand = view.findViewById(R.id.rg_hand);
         dimensionTimeSpinner = view.findViewById(R.id.spinner_dimension_time);
@@ -69,29 +76,17 @@ public class StartDimensionDialogFragment extends AppCompatDialogFragment {
                         (DialogInterface dialog, int id) ->
                                 StartDimensionDialogFragment.this.getDialog().cancel());
 
-        return builder.create();
-    }
-
-    public String getDescriptions() {
-        return descriptions.getText().toString();
-    }
-
-    public int getGender() {
-
         rgGender.setOnCheckedChangeListener((group, checkedId) -> {
             switch (checkedId) {
-                case R.id.rb_male:
+                case R.id.rb_male_des:
                     gender = Const.GENDER_MALE;
                     break;
-                case R.id.rb_feminine:
+                case R.id.rb_feminine_des:
                     gender = Const.GENDER_FEMININE;
                     break;
             }
         });
-        return gender;
-    }
 
-    public boolean isLeftHand() {
         swHand.setOnCheckedChangeListener((group, checkedId) -> {
             switch (checkedId) {
                 case R.id.rb_left_hand:
@@ -102,9 +97,31 @@ public class StartDimensionDialogFragment extends AppCompatDialogFragment {
                     break;
             }
         });
-        return isLeftHand;
+
+
+        return builder.create();
     }
 
+    public String getDescriptions() {
+        return descriptions.getText().toString();
+    }
+
+    public int getGender() {
+
+        return gender;
+    }
+
+    public int getDeviceType() {
+
+        int selectedId = rgDeviceType.getCheckedRadioButtonId();
+
+        RadioButton radioButton = view.findViewById(selectedId);
+        return "Биосканер".equals(radioButton.getText()) ? BIOSCANNER_DEVICE_TYPE : DUAL_SENSOR_DEVICE_TYPE;
+    }
+
+    public boolean isLeftHand() {
+        return isLeftHand;
+    }
     public BluetoothDimensionTimeEnum getDimensionTime() {
         return (BluetoothDimensionTimeEnum) dimensionTimeSpinner.getSelectedItem();
     }

@@ -6,9 +6,9 @@ import com.arellomobile.mvp.MvpPresenter;
 import com.murik.enose.App;
 import com.murik.enose.Const;
 import com.murik.enose.Screens;
+import com.murik.enose.model.Entity.DataSensorRealm;
 import com.murik.enose.dto.DataByMaxParcelable;
 import com.murik.enose.dto.SensorDataFullParcelable;
-import com.murik.enose.model.Entity.DataSensorRealm;
 import com.murik.enose.presentation.view.realm.RealmView;
 import com.murik.enose.service.Impl.XmlServiceImpl;
 
@@ -507,7 +507,7 @@ public class RealmPresenter extends MvpPresenter<RealmView> {
         return sensorDataFullParcelable;
     }
 
-    private void createOneSensorMeasure(final String selectedSensor, final int timeRegistrationMaxSignal, String sensorType, boolean isExpert, boolean isAnimalsSelected) {
+    private void createOneSensorMeasure(final String selectedSensor, final int timeRegistrationMaxSignal, String sensorType, boolean isExpert) {
         DataByMaxParcelable dataByMaxParcelable = new DataByMaxParcelable();
 
         dataByMaxParcelable.setDescriptions(data.getDescriptions());
@@ -515,7 +515,6 @@ public class RealmPresenter extends MvpPresenter<RealmView> {
         dataByMaxParcelable.setPractice(data.isPractice());
         dataByMaxParcelable.setTimeRegistrationMaxSignal(timeRegistrationMaxSignal);
         dataByMaxParcelable.setExpert(isExpert);
-        dataByMaxParcelable.setAnimalsSelected(isAnimalsSelected);
 
         dataByMaxParcelable.setSensorType(sensorType);
 
@@ -811,12 +810,12 @@ public class RealmPresenter extends MvpPresenter<RealmView> {
         XmlServiceImpl.createXMLWithMeasurement(measurement, time);
     }
 
-    public void createMeasureByType(final int measureType, final String selectedSensor, final int timeRegistrationMaxSignal, String sensorType, boolean isExpert, boolean isAnimalsSelected) {
+    public void createMeasureByType(final int measureType, final String selectedSensor, final int timeRegistrationMaxSignal, String sensorType, boolean isExpert) {
         if (measureType == Const.STANDARD_MEASURE_TYPE) {
             createStandardMeasure();
         }
         if (measureType == Const.ONE_SENSOR_MEASURE_TYPE) {
-            createOneSensorMeasure(selectedSensor, timeRegistrationMaxSignal, sensorType, isExpert, isAnimalsSelected);
+            createOneSensorMeasure(selectedSensor, timeRegistrationMaxSignal, sensorType, isExpert);
         }
         if (measureType == Const.CHART) {
             createChart();

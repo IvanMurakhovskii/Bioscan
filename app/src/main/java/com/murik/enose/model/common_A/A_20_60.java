@@ -23,26 +23,16 @@ public class A_20_60 extends BaseResultWithCoefficient {
     }
 
     public void setResult() {
-        if (getA() >= 0.18 && getA() <= 0.29) {
+        if (getA() >= 0.24 && getA() <= 0.29) {
             setColorGREEN();
-        } else if (getA() >= 0.32 && getA() <= 0.35) {
+        } else if(getA() >= 0.040 && getA() <= 0.055) {
+            setColorBLUE();
+        } else if (getA() >= 0.30 && getA() <= 0.35) {
             setColorYELLOW();
             setPossibleReasons(getResources(R.string.A_20_60_YELLOW));
-        } else if (getA() >= 0.15 && getA() <= 0.17) {
-            setColorYELLOW();
-            setPossibleReasons(getResources(R.string.A_20_60_YELLOW_2));
         } else if(getA() >= 0.40 && getA() <= 0.50) {
             setColorRED();
-            setPossibleReasons(getResources(R.string.A_20_60_RED_1));
-        } else if(getA() >= 0.11 && getA() <= 0.14) {
-            setColorRED();
-            setPossibleReasons(getResources(R.string.A_20_60_RED_2));
-        } else if(getA() <= 0.11) {
-            setColorBURGUNDY();
-            setPossibleReasons(getResources(R.string.A_20_60_BURGUNDY));
-        }else if(getA() <= 0.20) {
-            setColor(Color.WHITE);
-            setPossibleReasons(getResources(R.string.A_20_60_WHITE));
+            setPossibleReasons(getResources(R.string.A_20_60_RED));
         }
     }
 }

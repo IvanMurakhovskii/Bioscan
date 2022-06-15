@@ -29,12 +29,9 @@ public class ResultA_Second1_3_4_60 extends BaseResultSecond {
         } else if (getA() > 0.42 && getA() <= 0.49) {
             setColorBURGUNDY();
             setPossibleReasons(getResources(R.string.A_LONG1_1_3_BURGUNDY_1));
-        } else if (getA() >= 0.50 && getA() <= 0.59) {
+        } else if (getA() > 0.50) {
             setColorBURGUNDY();
             setPossibleReasons(getResources(R.string.A_LONG1_1_3_BURGUNDY_2));
-        } else if (getA() >= 0.60 && getA() <= 0.70) {
-            setColorBURGUNDY();
-            setPossibleReasons(getResources(R.string.A_LONG1_1_3_BURGUNDY_3));
         }
     }
 }

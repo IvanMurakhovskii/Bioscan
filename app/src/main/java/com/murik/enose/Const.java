@@ -12,6 +12,9 @@ public class Const {
   public static final int RIGHT_HAND = 1;
   public static final int MEAN_HAND = 2;
 
+  public static final int BIOSCANNER_DEVICE_TYPE = 0;
+  public static final int DUAL_SENSOR_DEVICE_TYPE = 1;
+
   public static final String SENSOR_1 = "SID0001";
   public static final String SENSOR_2 = "SID0002";
   public static final String SENSOR_3 = "SID0003";
@@ -22,8 +25,9 @@ public class Const {
   public static final String SENSOR_8 = "SID0008";
 
   public static final String[] SENSORS_SID = {"SID0001", "SID0002", "SID0003", "SID0004", "SID0005", "SID0006", "SID0007", "SID0008"};
-  public static final String[] SENSORS_SID_ENDOKRIN = {"SID0003", "SID0004", "SID0005", "SID0007"};
-  public static final String[] SENSORS_SID_ENERGY = {"SID0001", "SID0003", "SID0007"};
+  public static final String[] SENSORS_SID_ENDOKRIN = { "SID0003", "SID0004", "SID0005", "SID0007"};
+  public static final String[] SENSORS_SID_ENERGY = {"SID0001", "SID0003","SID0007"};
+
 
   //all sensors
   public static final int[] TOTAL = {30, 45, 60, 80, 100, 120, 180};
@@ -60,10 +64,12 @@ public class Const {
   public static final int PAGE_BODY = 1;
   public static final int PAGE_ENERGY_ONE_SENSOR = 2;
 
+
   public static final List<String> energySens = Arrays.asList(Const.SENSOR_1, Const.SENSOR_3, Const.SENSOR_7);
   public static final List<String> endocrinSens = Arrays.asList(Const.SENSOR_3, Const.SENSOR_4, Const.SENSOR_5, Const.SENSOR_7);
   public static final List<String> allSens = Arrays.asList(Const.SENSOR_1, Const.SENSOR_2, Const.SENSOR_3, Const.SENSOR_4, Const.SENSOR_5, Const.SENSOR_6, Const.SENSOR_7, Const.SENSOR_8);
   public static final List<String> allSensWithoutEight = Arrays.asList(Const.SENSOR_1, Const.SENSOR_2, Const.SENSOR_3, Const.SENSOR_4, Const.SENSOR_5, Const.SENSOR_6, Const.SENSOR_7);
+
 
   public static final int PAGE_TOTAL = 0;
   public static final int PAGE_ENDOKRIN = 1;
@@ -86,6 +92,7 @@ public class Const {
 
   public static final String DIAGNOST = "DIAGNOSE"; // НД
   public static final String BIOSCANER = "BIOSCANER"; // OPS
+  public static final String DUAL_SENSOR = "DOUBLE_SENSOR";
 
   private static int[] range(int start, int length) {
     int[] range = new int[length - start + 1];

@@ -23,19 +23,38 @@
     android:paddingBottom="16dp">
     <RadioButton
       android:id="@+id/rb_male_des"
-      android:text="Муж"
+      android:text="@string/rb_male_text"
       android:checked="true"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
       />
     <RadioButton
       android:id="@+id/rb_feminine_des"
-      android:text="Жен"
+      android:text="@string/rb_female_text"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
       />
   </RadioGroup>
-
+  <RadioGroup
+      android:id="@+id/rg_device_type"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:orientation="horizontal"
+      android:paddingBottom="16dp">
+    <RadioButton
+        android:id="@+id/rb_bioscanner_dev_type"
+        android:text="@string/rb_bioscanner_dev_type_text"
+        android:checked="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        />
+    <RadioButton
+        android:id="@+id/rb_dual_sensor_dev_type"
+        android:text="@string/rb_dual_sensor_dev_type_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        />
+  </RadioGroup>
   <RadioGroup
     android:id="@+id/rg_hand"
     android:layout_width="wrap_content"

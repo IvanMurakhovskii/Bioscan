@@ -142,7 +142,6 @@ public class BaseMeasureService {
             S_BODY = getAreaByMask(Const.BODY, sensorData);
         }
         val En = (S_ENERGY / S_DISCRETE);
-        val E2 = (S_BODY / S_DISCRETE);
 
         val L = (S_BODY / S_DISCRETE);
 
@@ -151,7 +150,6 @@ public class BaseMeasureService {
                 .setS20_60(s20/s60)
                 .setS30_60(s30/s60)
                 .setEn(En)
-                .setE2(E2)
                 .setL(L);
     }
 }

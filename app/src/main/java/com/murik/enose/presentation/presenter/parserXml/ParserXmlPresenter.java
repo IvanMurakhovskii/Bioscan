@@ -13,7 +13,6 @@ import com.murik.enose.Screens;
 import com.murik.enose.model.RealmController;
 import com.murik.enose.dto.SensorDataFullParcelable;
 import com.murik.enose.presentation.view.parserXML.ParserXmlView;
-import com.murik.enose.utils.ListUtils;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -22,7 +21,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import org.xmlpull.v1.XmlPullParser;
@@ -70,24 +68,13 @@ public class ParserXmlPresenter extends MvpPresenter<ParserXmlView> {
         try {
             if (getFileLeftHand() != null) {
                 mapLeftHand = passeXML(getFileLeftHand(), context);
-
-                for (Map.Entry<String, ArrayList<Integer>> entry : mapLeftHand.entrySet()) {
-                    ListUtils.inverseListValueIfMiddleValueBelowZero(entry.getValue());
-                }
-
             }
             if (getFileRightHand() != null) {
                 mapRightHand = passeXML(getFileRightHand(), context);
-
-                for (Map.Entry<String, ArrayList<Integer>> entry : mapRightHand.entrySet()) {
-                    ListUtils.inverseListValueIfMiddleValueBelowZero(entry.getValue());
-                }
             }
         } catch (XmlPullParserException e) {
             e.printStackTrace();
         }
-
-
 
 
         if (mapLeftHand != null) {

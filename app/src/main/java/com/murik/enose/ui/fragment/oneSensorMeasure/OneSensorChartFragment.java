@@ -132,7 +132,7 @@ public class OneSensorChartFragment extends MvpAppCompatFragment implements OneS
 
         btnResult.setOnClickListener(event -> oneSensorMeasurePresenter.btnResultClickListener(dataByMaxParcelable));
 
-        oneSensorMeasurePresenter.createRadarChart(mPage, dataByMaxParcelable, this.getContext());
+        oneSensorMeasurePresenter.createRadarChart(mPage, dataByMaxParcelable, new BaseMeasureService(), this.getContext());
     }
 
     public void initRadarChart(ArrayList<RadarEntry> entryLeftHand, ArrayList<RadarEntry> entryRightHand,

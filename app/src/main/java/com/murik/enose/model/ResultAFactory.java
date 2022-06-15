@@ -11,21 +11,16 @@ import com.murik.enose.model.resultbyMaxValue.ResultByMask;
 
 import java.util.ArrayList;
 
-import lombok.Getter;
-import lombok.Setter;
 import lombok.val;
 
-@Getter
-@Setter
 public abstract class ResultAFactory {
 
-    private ArrayList<ResultBySens> A = new ArrayList<>();
+    private ResultContainer A = new ResultContainer();
     private ArrayList<Integer> maxSensResult = new ArrayList<>();
     private ResultByMask resultByMask;
     private DataByMaxParcelable inputData;
 
     private Context context;
-    private Double summaryResult = 0d;
 
     public ResultAFactory(DataByMaxParcelable inputData, int hand, Context context) {
 
@@ -59,7 +54,7 @@ public abstract class ResultAFactory {
 
     public abstract boolean calculateResultA();
 
-    public ArrayList<ResultBySens> getA() {
+    public ResultContainer getA() {
         return A;
     }
 

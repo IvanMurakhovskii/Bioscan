@@ -10,14 +10,14 @@
     <string name="input_description">Введите описание</string>
     <string name="practice">Практики:</string>
     <string name="screenshot">Screenshot</string>
-    <string name="sensor_1">Sensor 1</string>
-    <string name="sensor_2">Sensor 2</string>
-    <string name="sensor_3">Sensor 3</string>
-    <string name="sensor_4">Sensor 4</string>
-    <string name="sensor_5">Sensor 5</string>
-    <string name="sensor_6">Sensor 6</string>
-    <string name="sensor_7">Sensor 7</string>
-    <string name="sensor_8">Sensor 8</string>
+    <string name="sensor_1">Сенсор 1</string>
+    <string name="sensor_2">Сенсор 2</string>
+    <string name="sensor_3">Сенсор 3</string>
+    <string name="sensor_4">Сенсор 4</string>
+    <string name="sensor_5">Сенсор 5</string>
+    <string name="sensor_6">Сенсор 6</string>
+    <string name="sensor_7">Сенсор 7</string>
+    <string name="sensor_8">Сенсор 8</string>
     <string name="submit">Submit</string>
     <string name="delete">Удалить</string>
     <string name="descriptions">Описание</string>
@@ -29,9 +29,12 @@
     <string name="empty_list">Список пуст</string>
     <string name="result">Результат</string>
     <string name="search">Поиск</string>
-    <string name="no_connecting">Устройсто не подключено</string>
+    <string name="no_connecting">Устройство не подключено</string>
     <string name="cancel">Отмена</string>
     <string name="disconnect_bluetooth_gatt">Отключить прибор</string>
+    <string name="test_db">Тест БД</string>
+    <string name="clear_db">Очистить БД</string>
+    <string name="export_all_db">Экспорт всего из БД</string>
     <string name="no_choice_select">ничего не выбрано</string>
     <string name="add_file">Добавить файл</string>
     <string name="standard">Стандарт</string>
@@ -40,6 +43,10 @@
     <string name="substanceDimensionTime">Время нагрузки</string>
     <string name="chart">График</string>
     <string name="by_sensor">По сенсору</string>
+    <string name="rb_male_text">Муж</string>
+    <string name="rb_female_text">Жен</string>
+    <string name="rb_bioscanner_dev_type_text">Биосканер</string>
+    <string name="rb_dual_sensor_dev_type_text">Бисенсор</string>
 
     <string-array name="dimension_mode">
         <item>30</item>

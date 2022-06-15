@@ -1,7 +1,5 @@
 package com.murik.enose.model;
 
-import android.util.Log;
-
 import com.murik.enose.Const;
 import com.murik.enose.dto.DataByMaxParcelable;
 import com.murik.enose.dto.SensorDataFullParcelable;

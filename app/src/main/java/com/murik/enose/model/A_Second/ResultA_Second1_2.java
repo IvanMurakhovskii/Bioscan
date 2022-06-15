@@ -16,16 +16,13 @@ public class ResultA_Second1_2 extends BaseResultSecond {
     }
 
     public void setResult() {
-        if (getA() >= 0.57 && getA() <= 0.67) {
+        if (getA() >= 0.59 && getA() <= 0.67) {
             setColorGREEN();
         } else if (getA() >= 0.68 && getA() <= 0.72) {
             setColorYELLOW();
             setPossibleReasons(getResources(R.string.A_LONG_1_2_YELLOW_1));
-        } else if (getA() >= 0.45 && getA() <= 0.55) {
-            setColorYELLOW();
-            setPossibleReasons(getResources(R.string.A_LONG_1_2_YELLOW_2));
         } else if (getA() >= 0.56 && getA() <= 0.58) {
-            setColorRED();
+            setColorYELLOW();
             setPossibleReasons(getResources(R.string.A_LONG_1_2_RED_1));
         }
     }

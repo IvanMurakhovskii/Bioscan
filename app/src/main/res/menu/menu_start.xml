@@ -16,4 +16,16 @@
     android:id="@+id/app_bar_disconnect_bluetooth"
   android:title="@string/disconnect_bluetooth_gatt"
   app:showAsAction="never"/>
+  <item
+    android:id="@+id/app_bar_test_db"
+    android:title="@string/test_db"
+    app:showAsAction="never"/>
+  <item
+      android:id="@+id/app_bar_clear_db"
+      android:title="@string/clear_db"
+      app:showAsAction="never"/>
+  <item
+      android:id="@+id/app_bar_export_all_db"
+      android:title="@string/export_all_db"
+      app:showAsAction="never"/>
 </menu>

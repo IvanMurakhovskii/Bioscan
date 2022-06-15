@@ -15,12 +15,12 @@ public class TAU_60 extends BaseResult {
     }
 
     public void setResult() {
-        if (getA() > 53 && getA() <= 67) {
+        if (getA() >= 53 && getA() <= 64) {
             setColorGREEN();
         } else if (getA() >= 40 && getA() <= 52) {
             setColorYELLOW();
             setPossibleReasons(getResources(R.string.TAU_60_YELLOW));
-        } else if (getA() >= 68 && getA() <= 70) {
+        } else if (getA() >= 65 && getA() <= 70) {
             setColorRED();
             setPossibleReasons(getResources(R.string.TAU_60_RED));
         } else if (getA() < 40 && getA() > 30) {

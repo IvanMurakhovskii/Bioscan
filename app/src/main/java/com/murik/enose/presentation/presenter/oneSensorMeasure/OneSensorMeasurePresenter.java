@@ -3,7 +3,6 @@ package com.murik.enose.presentation.presenter.oneSensorMeasure;
 import android.content.Context;
 import android.graphics.Color;
 
-import com.anychart.core.Base;
 import com.arellomobile.mvp.InjectViewState;
 import com.arellomobile.mvp.MvpPresenter;
 import com.github.mikephil.charting.data.RadarEntry;
@@ -74,7 +73,7 @@ public class OneSensorMeasurePresenter extends MvpPresenter<OneSensorMeasureView
         );
     }
 
-    public void createRadarChart(int mPage, final DataByMaxParcelable dataByMaxParcelable, final Context context) {
+    public void createRadarChart(int mPage, final DataByMaxParcelable dataByMaxParcelable, final BaseMeasureService measureService, final Context context) {
         float areaLeft = 0;
         float areaRight = 0;
 
@@ -84,11 +83,11 @@ public class OneSensorMeasurePresenter extends MvpPresenter<OneSensorMeasureView
         float areaBodyRight;
 
         if (dataByMaxParcelable.getTimeRegistrationMaxSignal() == 30) {
-            areaBodyLeft = BaseMeasureService.getAreaByMask(Const.BODY_30, dataByMaxParcelable.getLeftHandDataSensor());
-            areaBodyRight = BaseMeasureService.getAreaByMask(Const.BODY_30, dataByMaxParcelable.getRightHandDataSensor());
+            areaBodyLeft = measureService.getAreaByMask(Const.BODY_30, dataByMaxParcelable.getLeftHandDataSensor());
+            areaBodyRight = measureService.getAreaByMask(Const.BODY_30, dataByMaxParcelable.getRightHandDataSensor());
         } else {
-            areaBodyLeft = BaseMeasureService.getAreaByMask(Const.BODY, dataByMaxParcelable.getLeftHandDataSensor());
-            areaBodyRight = BaseMeasureService.getAreaByMask(Const.BODY, dataByMaxParcelable.getRightHandDataSensor());
+            areaBodyLeft = measureService.getAreaByMask(Const.BODY, dataByMaxParcelable.getLeftHandDataSensor());
+            areaBodyRight = measureService.getAreaByMask(Const.BODY, dataByMaxParcelable.getRightHandDataSensor());
         }
 
         AreaDifference areaDifference = null;
@@ -100,50 +99,50 @@ public class OneSensorMeasurePresenter extends MvpPresenter<OneSensorMeasureView
                     areaLeft = areaBodyLeft;
                     areaRight = areaBodyRight;
 
-                    difference = BaseMeasureService.calculateDifferenceLeftRight(areaLeft, areaRight);
+                    difference = measureService.calculateDifferenceLeftRight(areaLeft, areaRight);
                     areaDifference = new AreaDifferenceTotal(difference, dataByMaxParcelable.getGender(), context);
                 } else {
                     initRadarChart(Const.BODY, Color.RED, Color.BLUE, dataByMaxParcelable);
                     areaLeft = areaBodyLeft;
                     areaRight = areaBodyRight;
 
-                    difference = BaseMeasureService.calculateDifferenceLeftRight(areaLeft, areaRight);
+                    difference = measureService.calculateDifferenceLeftRight(areaLeft, areaRight);
                     areaDifference = new AreaDifferenceTotal(difference, dataByMaxParcelable.getGender(), context);
                 }
                 break;
             case Const.PAGE_DISCRETE:
                 if (dataByMaxParcelable.getTimeRegistrationMaxSignal() == 80) {
                     initRadarChart(Const.DISCRETE, Color.RED, Color.BLUE, dataByMaxParcelable);
-                    areaLeft = BaseMeasureService.getAreaByMask(Const.DISCRETE, dataByMaxParcelable.getLeftHandDataSensor());
-                    areaRight = BaseMeasureService.getAreaByMask(Const.DISCRETE, dataByMaxParcelable.getRightHandDataSensor());
+                    areaLeft = measureService.getAreaByMask(Const.DISCRETE, dataByMaxParcelable.getLeftHandDataSensor());
+                    areaRight = measureService.getAreaByMask(Const.DISCRETE, dataByMaxParcelable.getRightHandDataSensor());
                 } else if (dataByMaxParcelable.getTimeRegistrationMaxSignal() == 60) {
                     initRadarChart(Const.DISCRETE_60, Color.RED, Color.BLUE, dataByMaxParcelable);
-                    areaLeft = BaseMeasureService.getAreaByMask(Const.DISCRETE_60, dataByMaxParcelable.getLeftHandDataSensor());
-                    areaRight = BaseMeasureService.getAreaByMask(Const.DISCRETE_60, dataByMaxParcelable.getRightHandDataSensor());
+                    areaLeft = measureService.getAreaByMask(Const.DISCRETE_60, dataByMaxParcelable.getLeftHandDataSensor());
+                    areaRight = measureService.getAreaByMask(Const.DISCRETE_60, dataByMaxParcelable.getRightHandDataSensor());
                 } else if (dataByMaxParcelable.getTimeRegistrationMaxSignal() == 30) {
                     initRadarChart(Const.DISCRETE_30, Color.RED, Color.BLUE, dataByMaxParcelable);
-                    areaLeft = BaseMeasureService.getAreaByMask(Const.DISCRETE_30, dataByMaxParcelable.getLeftHandDataSensor());
-                    areaRight = BaseMeasureService.getAreaByMask(Const.DISCRETE_30, dataByMaxParcelable.getRightHandDataSensor());
+                    areaLeft = measureService.getAreaByMask(Const.DISCRETE_30, dataByMaxParcelable.getLeftHandDataSensor());
+                    areaRight = measureService.getAreaByMask(Const.DISCRETE_30, dataByMaxParcelable.getRightHandDataSensor());
                 }
 
-                difference = BaseMeasureService.calculateDifferenceLeftRight(areaLeft, areaRight);
+                difference = measureService.calculateDifferenceLeftRight(areaLeft, areaRight);
                 areaDifference = new AreaDifferenceDiscrete(difference, dataByMaxParcelable.getGender(), context);
                 break;
             case Const.PAGE_ENERGY_ONE_SENSOR:
                 if (dataByMaxParcelable.getTimeRegistrationMaxSignal() == 80) {
                     initRadarChart(Const.ENERGY, Color.RED, Color.BLUE, dataByMaxParcelable);
-                    areaLeft = BaseMeasureService.getAreaByMask(Const.ENERGY, dataByMaxParcelable.getLeftHandDataSensor());
-                    areaRight = BaseMeasureService.getAreaByMask(Const.ENERGY, dataByMaxParcelable.getRightHandDataSensor());
+                    areaLeft = measureService.getAreaByMask(Const.ENERGY, dataByMaxParcelable.getLeftHandDataSensor());
+                    areaRight = measureService.getAreaByMask(Const.ENERGY, dataByMaxParcelable.getRightHandDataSensor());
                 } else if (dataByMaxParcelable.getTimeRegistrationMaxSignal() == 60) {
                     initRadarChart(Const.ENERGY_60, Color.RED, Color.BLUE, dataByMaxParcelable);
-                    areaLeft = BaseMeasureService.getAreaByMask(Const.ENERGY_60, dataByMaxParcelable.getLeftHandDataSensor());
-                    areaRight = BaseMeasureService.getAreaByMask(Const.ENERGY_60, dataByMaxParcelable.getRightHandDataSensor());
+                    areaLeft = measureService.getAreaByMask(Const.ENERGY_60, dataByMaxParcelable.getLeftHandDataSensor());
+                    areaRight = measureService.getAreaByMask(Const.ENERGY_60, dataByMaxParcelable.getRightHandDataSensor());
                 } else if (dataByMaxParcelable.getTimeRegistrationMaxSignal() == 30) {
                     initRadarChart(Const.ENERGY_30, Color.RED, Color.BLUE, dataByMaxParcelable);
-                    areaLeft = BaseMeasureService.getAreaByMask(Const.ENERGY_30, dataByMaxParcelable.getLeftHandDataSensor());
-                    areaRight = BaseMeasureService.getAreaByMask(Const.ENERGY_30, dataByMaxParcelable.getRightHandDataSensor());
+                    areaLeft = measureService.getAreaByMask(Const.ENERGY_30, dataByMaxParcelable.getLeftHandDataSensor());
+                    areaRight = measureService.getAreaByMask(Const.ENERGY_30, dataByMaxParcelable.getRightHandDataSensor());
                 }
-                difference = BaseMeasureService.calculateDifferenceLeftRight(areaLeft, areaRight);
+                difference = measureService.calculateDifferenceLeftRight(areaLeft, areaRight);
                 areaDifference = new AreaDifferenceEnergy(difference, dataByMaxParcelable.getGender(), context);
                 break;
         }

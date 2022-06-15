@@ -22,10 +22,7 @@ import com.github.mikephil.charting.components.Description;
 import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.data.PieEntry;
-import com.murik.enose.App;
 import com.murik.enose.R;
-import com.murik.enose.Screens;
-import com.murik.enose.dto.SummaryParcelable;
 import com.murik.enose.model.ResultBySens;
 import com.murik.enose.dto.DataByMaxParcelable;
 import com.murik.enose.presentation.presenter.result.ResultPresenter;
@@ -48,7 +45,7 @@ public class ResultFragment extends MvpAppCompatFragment implements ResultView {
 
   private RecyclerView mResultRecycler;
   private PieChart pieChart;
-  private FloatingActionButton fab_summary;
+  private FloatingActionButton fab_diagram;
 
   public static Fragment newInstance(DataByMaxParcelable resultBySens, int mPage) {
     ResultFragment fragment = new ResultFragment();
@@ -85,10 +82,8 @@ public class ResultFragment extends MvpAppCompatFragment implements ResultView {
     super.onViewCreated(view, savedInstanceState);
     mResultRecycler = view.findViewById(R.id.result_recycler_view);
     pieChart = view.findViewById(R.id.result_pie_chart);
-    fab_summary = view.findViewById(R.id.fab_summary);
+    fab_diagram = view.findViewById(R.id.fab_diagram);
     mResultPresenter.setContext(getContext());
-
-    fab_summary.setOnClickListener((event) -> mResultPresenter.onSummaryClick());
 
   }
 
@@ -100,12 +95,12 @@ public class ResultFragment extends MvpAppCompatFragment implements ResultView {
 
   public void initPieChart(ArrayList<ResultBySens> sensResult) {
     ArrayList<PieEntry> entries = new ArrayList<>();
-    ArrayList<String> labels = new ArrayList<>();
+    ArrayList<String> lables = new ArrayList<>();
     ArrayList<Integer> colors = new ArrayList<>();
 
     for (int i = 0; i < sensResult.size(); i++) {
       entries.add(new PieEntry(10, sensResult.get(i).getLegend()));
-      labels.add(sensResult.get(i).getLegend());
+      lables.add(sensResult.get(i).getLegend());
       colors.add(sensResult.get(i).getViewColor());
     }
 
@@ -154,11 +149,6 @@ public class ResultFragment extends MvpAppCompatFragment implements ResultView {
   @Override
   public void calculateResult() {
     mResultPresenter.calculateResult(inputDataParcelable, mPage);
-  }
-
-  @Override
-  public void showSummaryButton() {
-    fab_summary.show();
   }
 
   @Override

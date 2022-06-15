@@ -36,6 +36,7 @@ import com.murik.enose.App;
 import com.murik.enose.Const;
 import com.murik.enose.R;
 import com.murik.enose.Screens;
+import com.murik.enose.db.DBHelper;
 import com.murik.enose.presentation.presenter.dimension.BluetoothDimensionPresenter;
 import com.murik.enose.presentation.view.dimension.BluetoothDimensionView;
 import com.murik.enose.service.Impl.BluetoothImplService;
@@ -44,6 +45,9 @@ import com.murik.enose.ui.dialog.DialogListener;
 import com.murik.enose.ui.dialog.StartDimensionDialogFragment;
 import com.murik.enose.ui.dialog.TakeAwayHandDialogFragment;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 import java.util.Timer;
@@ -51,15 +55,19 @@ import java.util.TimerTask;
 
 import lombok.val;
 
+import static com.murik.enose.Const.BIOSCANNER_DEVICE_TYPE;
+import static com.murik.enose.Const.DUAL_SENSOR_DEVICE_TYPE;
+
 public class BluetoothDimensionFragment extends MvpAppCompatFragment implements BluetoothDimensionView,
         DialogListener {
-
 
     private static final int ID_DIALOG_START = 1;
     private static final int ID_DIALOG_CONTINUE = 2;
     public static final String DIALOG_CONTINUE_TAG = "DIALOG_CONTINUE";
     public static final String DIALOG_START_TAG = "DIALOG_START";
     public static final String TAG = "BluetoothDimension";
+
+    DBHelper dbHelper;
 
     private Handler progressBarbHandler = new Handler();
 
@@ -76,6 +84,8 @@ public class BluetoothDimensionFragment extends MvpAppCompatFragment implements 
     private boolean isLeftHand = false;
     public int dimensionTime = 20;
     public int substanceDimensionTime = 10;
+    private int deviceType;
+    private int countSensors = 1;
 
     private LineChart lineChart;
     private ProgressBar progressBar;
@@ -93,11 +103,8 @@ public class BluetoothDimensionFragment extends MvpAppCompatFragment implements 
     public boolean isFirstDimension = true;
     private int count = 0;
 
-    private boolean isInitial1 = false;
-    private int initial1 = 0;
-
-    private boolean isInitial3 = false;
-    private int initial3 = 0;
+    List<Integer> initialValue = Arrays.asList(0, 0);
+    List<Boolean> isInitialValue = Arrays.asList(false, false);
 
     BroadcastReceiver mBroadcastReceiver = new BroadcastReceiver() {
         @SuppressLint("ShowToast")
@@ -109,31 +116,31 @@ public class BluetoothDimensionFragment extends MvpAppCompatFragment implements 
                 String str = intent.getStringExtra(BluetoothImplService.EXTRA_DATA);
 
                 for (int i = 0; i < str.length(); i = i + 8) {
-                    val sensNumber = Integer.decode(str.substring(i, i + 1));
-                    val value = Integer.parseInt(str.substring(i + 1, i + 8), 16);
+                    int sensNumber = Integer.decode(str.substring(i, i + 1));
+                    int value = Integer.parseInt(str.substring(i + 1, i + 8), 16);
 
-                    Log.d("MyLog", "sens_count =  " + Integer.decode(str.substring(i, i + 1)) + " value =  "
+                    Log.d("BDF", "sens_index =  " + Integer.decode(str.substring(i, i + 1)) + " value =  "
                             + Integer.parseInt(str.substring(i + 1, i + 8), 16));
 
-                    if (sensNumber == 1) {
-                        if (!isInitial1) {
-                            initial1 = value;
-                            isInitial1 = true;
+                    if (sensNumber <= countSensors) {
+                        int sensorIndex = sensNumber - 1;
+                        if (!isInitialValue.get(sensorIndex)) {
+                            initialValue.set(sensorIndex, value);
+                            isInitialValue.set(sensorIndex, true);
                         }
-
-                        addEntry(initial1 - value, "Sensor 1", Color.BLUE, 0);
+                        
+                        addEntry(initialValue.get(sensorIndex) - value, sensorIndex);
 
                         if (isDimensionStart) {
                             progressBar.getHandler().post(()
                                     -> progressBar.setProgress(count * 100 / dimensionTime));
-                            if (isLeftHand) {
-                                mBluetoothDimensionPresenter.addSens1DataLeftHand(initial1 - value);
-                            } else {
-                                mBluetoothDimensionPresenter.addSens1DataRightHand(initial1 - value);
-                            }
+
+                            mBluetoothDimensionPresenter.addSensData(isLeftHand, sensorIndex, initialValue.get(sensorIndex) - value);
+                            mBluetoothDimensionPresenter.addSensFullData(isLeftHand, sensorIndex, value, initialValue.get(sensorIndex) - value);
+
                             count++;
 
-                            if (count == substanceDimensionTime - 1) {
+                            if (count == substanceDimensionTime - 1 && deviceType == BIOSCANNER_DEVICE_TYPE) {
                                 makeNotificationSound();
                                 Toast.makeText(
                                         getContext(),
@@ -162,15 +169,10 @@ public class BluetoothDimensionFragment extends MvpAppCompatFragment implements 
     };
 
     private void findAndShowMaxSignal() {
-        List<Integer> data;
-        if (isLeftHand) {
-            data = mBluetoothDimensionPresenter.getSens1DataLeftHand();
-        } else {
-            data = mBluetoothDimensionPresenter.getSens1DataRightHand();
-        }
+        List<Integer> data1 = mBluetoothDimensionPresenter.getSensData(isLeftHand, 0);
+        List<Integer> data2 = mBluetoothDimensionPresenter.getSensData(isLeftHand, 0);
 
-        final Integer max = max(data);
-        maxSignal.getHandler().post(() -> maxSignal.setText(max.toString()));
+        maxSignal.getHandler().post(() -> maxSignal.setText(max(data1) + " " + max(data2)));
         llMaxSignal.getHandler().post(() -> llMaxSignal.setVisibility(View.VISIBLE));
     }
 
@@ -184,8 +186,9 @@ public class BluetoothDimensionFragment extends MvpAppCompatFragment implements 
         return max;
     }
 
-    public static BluetoothDimensionFragment newInstance() {
+    public static BluetoothDimensionFragment newInstance(DBHelper dbHelper) {
         BluetoothDimensionFragment fragment = new BluetoothDimensionFragment();
+        fragment.dbHelper = dbHelper;
 
         Bundle args = new Bundle();
         fragment.setArguments(args);
@@ -234,6 +237,7 @@ public class BluetoothDimensionFragment extends MvpAppCompatFragment implements 
 
         btnSave.setOnClickListener(v -> {
             mBluetoothDimensionPresenter.save();
+            mBluetoothDimensionPresenter.saveToDB(dbHelper);
             App.INSTANCE.getRouter().replaceScreen(Screens.REALM_FRAGMENT);
         });
 
@@ -276,16 +280,22 @@ public class BluetoothDimensionFragment extends MvpAppCompatFragment implements 
             count = 0;
             isDimensionStart = true;
             lineChart.getLineData().clearValues();
+            initDataForLineChart();
         }
     }
 
     private void startDimension() {
         isDimensionStart = true;
-        isInitial1 = false;
+        isInitialValue = Arrays.asList(false, false);
         description = startDimensionDialogFragment.getDescriptions();
         isPractice = startDimensionDialogFragment.isPractice();
         gender = startDimensionDialogFragment.getGender();
         isLeftHand = startDimensionDialogFragment.isLeftHand();
+        deviceType = startDimensionDialogFragment.getDeviceType();
+
+        if(deviceType == DUAL_SENSOR_DEVICE_TYPE){
+            countSensors = 2;
+        }
 
         try {
             val dimensionEnum = startDimensionDialogFragment.getDimensionTime();
@@ -301,13 +311,13 @@ public class BluetoothDimensionFragment extends MvpAppCompatFragment implements 
             App.INSTANCE.getRouter().replaceScreen(Screens.REALM_FRAGMENT);
         }
 
-        mBluetoothDimensionPresenter.setDimensionParametrs(description, gender, isPractice, isLeftHand);
+        mBluetoothDimensionPresenter.setDimensionParametrs(description, gender, isPractice, isLeftHand, substanceDimensionTime);
 
         lineChart.getLineData().clearValues();
         makeNotificationSound();
     }
 
-    CountDownTimer countDownTimer = new CountDownTimer(5000, 1000) {
+    CountDownTimer countDownTimer = new CountDownTimer(3000, 1000) {
         @Override
         public void onTick(long millisUntilFinished) {
             dimensionTimer.setText((millisUntilFinished / 1000) + " c");
@@ -316,47 +326,53 @@ public class BluetoothDimensionFragment extends MvpAppCompatFragment implements 
         @Override
         public void onFinish() {
             llDimensionTimer.setVisibility(View.GONE);
-            if (isFirstDimension) {
-                startDimension();
-            } else {
-                continueDimension();
-            }
+            startOrResumeMeasure();
         }
     };
 
+    private void startOrResumeMeasure(){
+        if (isFirstDimension) {
+            startDimension();
+        } else {
+            continueDimension();
+        }
+    }
+
     private void waitBeforeDimension() {
-        llDimensionTimer.setVisibility(View.VISIBLE);
-        countDownTimer.start();
+        if(startDimensionDialogFragment.getDeviceType() == BIOSCANNER_DEVICE_TYPE) {
+            llDimensionTimer.setVisibility(View.VISIBLE);
+            countDownTimer.start();
+        } else {
+            startOrResumeMeasure();
+        }
     }
 
     private void continueDimension() {
         isLeftHand = !isLeftHand;
-        isInitial1 = false;
+        isInitialValue = Arrays.asList(false, false);
         count = 0;
         isDimensionStart = true;
         lineChart.getLineData().clearValues();
+        mBluetoothDimensionPresenter.refreshInitialTime();
     }
 
     TimerTask task = new TimerTask() {
         public void run() {
-            val value = (Math.round(Math.random() * 99));
+            int value = (int)(Math.round(Math.random() * 99));
             Log.i(TAG, "value " + value);
 
-            addEntry((int) value, "Sensor 1", Color.BLUE, 0);
+            addEntry(value, 0);
+            addEntry(value, 1);
 
 //            initial.getHandler().post(() -> initial.setText(String.valueOf(value)));
 //            signal.getHandler().post(() -> signal.setText(String.valueOf(value)));
-
 
             if (isDimensionStart) {
 
                 progressBar.getHandler().post(() -> progressBar.setProgress(count * 100 / dimensionTime));
 
-                if (isLeftHand) {
-                    mBluetoothDimensionPresenter.addSens1DataLeftHand((int) value);
-                } else {
-                    mBluetoothDimensionPresenter.addSens1DataRightHand((int) value);
-                }
+                mBluetoothDimensionPresenter.addSensData(isLeftHand, 0, value);
+                mBluetoothDimensionPresenter.addSensData(isLeftHand, 1, value);
                 count++;
 
                 if (count == substanceDimensionTime - 1) {
@@ -414,6 +430,25 @@ public class BluetoothDimensionFragment extends MvpAppCompatFragment implements 
         btnSave.getHandler().post(() -> btnSave.setVisibility(View.VISIBLE));
     }
 
+    private void initDataForLineChart(){
+        List<Entry> valsComp1 = new ArrayList<>();
+        List<Entry> valsComp2 = new ArrayList<>();
+        Entry c1e1 = new Entry(0, 0);
+        valsComp1.add(c1e1);
+
+        Entry c2e1 = new Entry(0, 0);
+        valsComp2.add(c2e1);
+
+        LineDataSet setComp1 = createSet(valsComp1, "Сенсор 1", Color.GREEN);
+        setComp1.setAxisDependency(YAxis.AxisDependency.LEFT);
+        LineDataSet setComp2 = createSet(valsComp2, "Сенсор 2", Color.MAGENTA);
+        setComp2.setAxisDependency(YAxis.AxisDependency.LEFT);
+        List<ILineDataSet> dataSets = new ArrayList<>();
+        dataSets.add(setComp1);
+        dataSets.add(setComp2);
+        lineChart.setData(new LineData(dataSets));
+    }
+
     private void initLineChart() {
 
         lineChart.getDescription().setText("");
@@ -428,11 +463,7 @@ public class BluetoothDimensionFragment extends MvpAppCompatFragment implements 
 
         lineChart.setPinchZoom(true);
 
-        LineData data = new LineData();
-//      data.setValueTextColor(Color.WHITE);
-
-        // add empty data
-        lineChart.setData(data);
+        initDataForLineChart();
 
         // get the legend (only possible after setting data)
         Legend l = lineChart.getLegend();
@@ -462,22 +493,23 @@ public class BluetoothDimensionFragment extends MvpAppCompatFragment implements 
         lineChart.setDrawBorders(false);
     }
 
-    private void addEntry(Integer value, final String label, final int color, int index) {
+    private void addEntry(Integer value, int index) {
 
         LineData data = lineChart.getData();
 
         if (data != null) {
 
             ILineDataSet set = data.getDataSetByIndex(index);
-            // set.addEntry(...); // can be called as well
 
-            if (set == null) {
-                set = createSet(label, color);
-                data.addDataSet(set);
+            if(set == null){
+                //todo need to find place which clears data after starting of measure
+                initDataForLineChart();
+                data = lineChart.getLineData();
+                set = data.getDataSetByIndex(index);
             }
 
-//            data.addEntry(new Entry(set.getEntryCount(), (float) (Math.random() * 80) + 10f), 0);
             data.addEntry(new Entry(set.getEntryCount(), value), index);
+
             data.notifyDataChanged();
 
             lineChart.notifyDataSetChanged();
@@ -491,9 +523,9 @@ public class BluetoothDimensionFragment extends MvpAppCompatFragment implements 
         }
     }
 
-    private LineDataSet createSet(final String label, final int color) {
+    private LineDataSet createSet(final List<Entry> entries, final String label, final int color) {
 
-        LineDataSet set = new LineDataSet(null, label);
+        LineDataSet set = new LineDataSet(entries, label);
         set.setAxisDependency(YAxis.AxisDependency.RIGHT);
         set.setLineWidth(3f);
         set.setColor(color);
@@ -526,7 +558,6 @@ public class BluetoothDimensionFragment extends MvpAppCompatFragment implements 
             continueDimensionDialogFragment.show(getFragmentManager(), DIALOG_CONTINUE_TAG);
         }
     }
-
 }
 
 

@@ -6,14 +6,18 @@ import android.annotation.SuppressLint;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothManager;
 import android.bluetooth.BluetoothProfile;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.content.ServiceConnection;
 import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
+import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.IBinder;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.NavigationView;
@@ -38,19 +42,19 @@ import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.murik.enose.App;
 import com.murik.enose.R;
 import com.murik.enose.Screens;
+import com.murik.enose.db.DBHelper;
+import com.murik.enose.db.ExportToCsv;
 import com.murik.enose.dto.DataByMaxParcelable;
 import com.murik.enose.dto.SensorDataFullParcelable;
-import com.murik.enose.dto.SummaryParcelable;
 import com.murik.enose.presentation.presenter.start.StartPresenter;
 import com.murik.enose.presentation.view.start.StartView;
-import com.murik.enose.service.Impl.BluetoothImplService;
+import com.murik.enose.service.Impl.BluetoothService;
 import com.murik.enose.ui.activity.ProgressDisplay;
 import com.murik.enose.ui.fragment.LiveBluetoothChart.LiveBluetoothChartFragment;
 import com.murik.enose.ui.fragment.bar_chart.ResultBarChartFragment;
 import com.murik.enose.ui.fragment.bluetooth.BluetoothConnectionFragment;
 import com.murik.enose.ui.fragment.dimension.BluetoothDimensionFragment;
 import com.murik.enose.ui.fragment.input.InputFragment;
-import com.murik.enose.ui.fragment.summary_result.SummaryResultFragment;
 import com.murik.enose.ui.fragment.measurementLineChart.MeasurementLineChart;
 import com.murik.enose.ui.fragment.oneSensorMeasure.OneSensorTabContainerFragment;
 import com.murik.enose.ui.fragment.parserXml.ParserXmlFragment;
@@ -66,6 +70,10 @@ import lombok.val;
 import ru.terrakok.cicerone.Navigator;
 import ru.terrakok.cicerone.android.SupportFragmentNavigator;
 
+import static com.murik.enose.db.DBHelper.DEVICE_TYPE;
+import static com.murik.enose.db.DBHelper.MEASURE_TABLE;
+import static com.murik.enose.db.DBHelper.TIME_FROM_START_OF_MEASURE_COLUMN;
+
 public class StartActivity extends MvpAppCompatActivity implements StartView, OnNavigationItemSelectedListener,
         ProgressDisplay {
     public static final String TAG = "StartActivity";
@@ -73,8 +81,34 @@ public class StartActivity extends MvpAppCompatActivity implements StartView, On
     @InjectPresenter
     StartPresenter mStartPresenter;
 
+    DBHelper dbHelper;
+
+    public static BluetoothService bluetoothService;
+
+    private ServiceConnection serviceConnection = new ServiceConnection() {
+        @Override
+        public void onServiceConnected(ComponentName name, IBinder service) {
+            bluetoothService = ((BluetoothService.LocalBinder) service).getService();
+            if (bluetoothService != null) {
+                if (!bluetoothService.initialize()) {
+                    Log.e(TAG, "Unable to initialize Bluetooth");
+                    finish();
+                }
+                if(bluetoothService.getDevice() != null) {
+                    bluetoothService.connect(bluetoothService.getDevice().getAddress());
+                }
+            }
+        }
+
+        @Override
+        public void onServiceDisconnected(ComponentName name) {
+            bluetoothService = null;
+        }
+    };
+
     private Toolbar toolbar;
     private int REQUEST_ENABLE_BT = 0;
+
 
     public static Intent getIntent(final Context context) {
         Intent intent = new Intent(context, StartActivity.class);
@@ -110,17 +144,15 @@ public class StartActivity extends MvpAppCompatActivity implements StartView, On
                     case Screens.BLUETOOTH_LIVE_CHART_FRAGMENT:
                         return LiveBluetoothChartFragment.newInstance();
                     case Screens.BLUETOOTH_DIMENSION_FRAGMENT:
-                        return BluetoothDimensionFragment.newInstance();
+                        return BluetoothDimensionFragment.newInstance(dbHelper);
                     case Screens.ONE_SENSOR_MEASURE_FRAGMENT:
                         return OneSensorTabContainerFragment.newInstance((DataByMaxParcelable) data);
                     case Screens.RESULT_BAR_CHART_FRAGMENT:
                         return ResultBarChartFragment.newInstance((DataByMaxParcelable) data);
                     case Screens.TEST_DIMENSION:
-                        return BluetoothDimensionFragment.newInstance();
+                        return BluetoothDimensionFragment.newInstance(dbHelper);
                     case Screens.MEASUREMENT_LINE_CHART:
                         return MeasurementLineChart.newInstance((SensorDataFullParcelable) data);
-                    case Screens.SUMMARY_RESULT:
-                        return SummaryResultFragment.newInstance((SummaryParcelable) data);
                     default:
                         throw new RuntimeException("Unknown screen key");
 
@@ -156,6 +188,11 @@ public class StartActivity extends MvpAppCompatActivity implements StartView, On
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
+        dbHelper = new DBHelper(this);
+        SQLiteDatabase database = dbHelper.getWritableDatabase();
+        dbHelper.onCreate(database);
+        Intent gattServiceIntent = new Intent(this, BluetoothService.class);
+        bindService(gattServiceIntent, serviceConnection, Context.BIND_AUTO_CREATE);
     }
 
     private void requestPermissions() {
@@ -233,9 +270,51 @@ public class StartActivity extends MvpAppCompatActivity implements StartView, On
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.app_bar_disconnect_bluetooth:
-                App.INSTANCE.getmBluetoothGatt().disconnect();
+                bluetoothService.getBluetoothAdapter().cancelDiscovery(); //TODO what is that?
             case R.id.app_bar_screen: {
                 onScreenshotButtonClick();
+                return true;
+            }
+            case R.id.app_bar_test_db: {
+//                try {
+//                    //SQLiteDatabase database = dbHelper.getWritableDatabase();
+//                    //For updates schema
+////                    dbHelper.dropTables();
+////                    dbHelper.onCreate(database);
+////                    int measureSessionIndex = dbHelper.createNewMeasureSession(Const.GENDER_MALE);
+////
+////                    Log.d("DB Test", "measureSessionIndex = " + measureSessionIndex);
+//
+////                    dbHelper.saveMeasures(TestData.getMeasures(measureSessionIndex));
+////                    Log.d("DB Test", "measuresCount = " + dbHelper.getMeasuresCount());
+//
+//                    //ExportToCsv exportToCsv = new ExportToCsv();
+//                    //exportToCsv.export(dbHelper.getAll());
+//                }catch (Exception ex){
+//                    Log.e("DB Test", ex.getMessage());
+//                }
+                return true;
+            }
+            case R.id.app_bar_clear_db: {
+//                try {
+//                    SQLiteDatabase database = dbHelper.getWritableDatabase();
+//
+//                    dbHelper.dropTables();
+//                    dbHelper.onCreate(database);
+//                }catch (Exception ex){
+//                    Log.e("DB clearing", ex.getMessage());
+//                }
+                return true;
+            }
+            case R.id.app_bar_export_all_db: {
+                try {
+                    Log.d("DB Test", "measuresCount = " + dbHelper.getMeasuresCount());
+
+                    ExportToCsv exportToCsv = new ExportToCsv();
+                    exportToCsv.export(dbHelper.getAll(), dbHelper.getExportHeaders());
+                }catch (Exception ex){
+                    Log.e("DB clearing", ex.getMessage());
+                }
                 return true;
             }
         }
@@ -262,14 +341,14 @@ public class StartActivity extends MvpAppCompatActivity implements StartView, On
             }
             case R.id.app_bar_bluetooth: {
                 requestAppPermissions();
-                if (App.INSTANCE.getmBluetoothAdapter() == null) {
+                if (bluetoothService.getBluetoothAdapter() == null) {
                     return false;
                 }
-                if (!App.INSTANCE.getmBluetoothAdapter().isEnabled()) {
+                if (!bluetoothService.getBluetoothAdapter().isEnabled()) {
                     Intent enableBtIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
                     startActivityForResult(enableBtIntent, REQUEST_ENABLE_BT);
                 }
-                if (App.INSTANCE.getmBluetoothAdapter().isEnabled()) {
+                if (bluetoothService.getBluetoothAdapter().isEnabled()) {
                     App.INSTANCE.getRouter().replaceScreen(Screens.BLUETOOTH_FRAGMENT);
                 }
                 return true;
@@ -353,8 +432,8 @@ public class StartActivity extends MvpAppCompatActivity implements StartView, On
     protected void onDestroy() {
         super.onDestroy();
         App.INSTANCE.getNavigatorHolder().removeNavigator();
-        Intent intent = new Intent(this, BluetoothImplService.class);
-        stopService(intent);
+        //Intent intent = new Intent(this, BluetoothImplService.class);
+        //stopService(intent);
 
     }
 
@@ -369,7 +448,7 @@ public class StartActivity extends MvpAppCompatActivity implements StartView, On
 
     public boolean isConnected() {
 
-        val mGatt = App.INSTANCE.getmBluetoothGatt();
+        val mGatt = bluetoothService.getBluetoothGatt();
         if (mGatt != null) {
 
             BluetoothManager btm =

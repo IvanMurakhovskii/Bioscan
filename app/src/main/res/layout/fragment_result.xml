@@ -25,12 +25,12 @@ android:layout_height="match_parent">
   </LinearLayout>
 
   <android.support.design.widget.FloatingActionButton
-      android:id="@+id/fab_summary"
+      android:id="@+id/fab_diagram"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:layout_gravity="bottom|right"
       android:layout_margin="@dimen/fab_margin"
       android:backgroundTint="@color/colorPrimary"
-      android:visibility="visible"
-      app:srcCompat="@android:drawable/ic_dialog_info" />
+      android:visibility="gone"
+      app:srcCompat="@drawable/ic_bar_chart" />
 </android.support.design.widget.CoordinatorLayout>

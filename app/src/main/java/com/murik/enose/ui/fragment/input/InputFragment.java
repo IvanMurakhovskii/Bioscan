@@ -117,8 +117,6 @@ public class InputFragment extends MvpAppCompatFragment implements InputView, Ve
 
   @Override
   public boolean onOptionsItemSelected(MenuItem item) {
-    switch (item.getItemId()){
-    }
     return super.onOptionsItemSelected(item);
   }
 

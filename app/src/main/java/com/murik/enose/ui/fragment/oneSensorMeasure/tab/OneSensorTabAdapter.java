@@ -13,7 +13,7 @@ public class OneSensorTabAdapter extends FragmentPagerAdapter {
     private DataByMaxParcelable dataByMaxParcelable;
 
     private final int PAGE_COUNT = 3;
-    private String tabTitle[] = new String[]{"Дискретное", "Легкие", "Энергия"};
+    private String tabTitle[] = new String[]{"Дискретное", "Полное", "Энергия"};
 
     public OneSensorTabAdapter(FragmentManager fm, DataByMaxParcelable dataByMaxParcelable) {
         super(fm);
@@ -25,6 +25,7 @@ public class OneSensorTabAdapter extends FragmentPagerAdapter {
     public Fragment getItem(int position) {
         return OneSensorChartFragment.newInstance(position, dataByMaxParcelable);
     }
+
     @Override
     public int getCount() {
         return PAGE_COUNT;

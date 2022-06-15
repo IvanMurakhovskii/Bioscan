@@ -11,7 +11,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.RadioGroup;
-import android.widget.Switch;
 
 import com.murik.enose.Const;
 import com.murik.enose.R;
@@ -20,6 +19,7 @@ import java.util.Objects;
 
 import static com.murik.enose.R.id.rb_bioscaner;
 import static com.murik.enose.R.id.rb_diagnost;
+import static com.murik.enose.R.id.rb_double_sensor;
 
 public class ChooseTypeMeasureDialogFragment extends DialogFragment {
 
@@ -33,7 +33,6 @@ public class ChooseTypeMeasureDialogFragment extends DialogFragment {
     private RadioGroup rgExpert;
     private LinearLayout llOneSensorSettings;
     private LinearLayout llMaxSignal;
-    private Switch animalsSwitch;
 
     public void setDialogListener(
             DialogListener mNoticeDialogListener) {
@@ -56,7 +55,6 @@ public class ChooseTypeMeasureDialogFragment extends DialogFragment {
         rgExpert = view.findViewById(R.id.rg_expert_type);
         llOneSensorSettings = view.findViewById(R.id.ll_one_sensor_settings);
         llMaxSignal = view.findViewById(R.id.ll_max_signal);
-        animalsSwitch = view.findViewById(R.id.animals);
 
         rgChooseMeasureType.setOnCheckedChangeListener((group, checkedId) -> {
             switch (checkedId) {
@@ -85,6 +83,7 @@ public class ChooseTypeMeasureDialogFragment extends DialogFragment {
     private void onSensorTypeChanged(RadioGroup group, int checkedId) {
         switch (checkedId) {
             case rb_bioscaner:
+            case rb_double_sensor:
                 llMaxSignal.setVisibility(View.VISIBLE);
                 break;
             case rb_diagnost:
@@ -96,8 +95,6 @@ public class ChooseTypeMeasureDialogFragment extends DialogFragment {
     public String getSelectedSensor() {
         int checkedId = rgChooseSensor.getCheckedRadioButtonId();
         switch (checkedId) {
-            case R.id.rb_sens1:
-                return Const.SENSOR_1;
             case R.id.rb_sens2:
                 return Const.SENSOR_2;
             case R.id.rb_sens3:
@@ -120,43 +117,39 @@ public class ChooseTypeMeasureDialogFragment extends DialogFragment {
     public int getTimeRegistrationMaxSignal() {
         int checkedId = rgAlgorithm.getCheckedRadioButtonId();
         switch (checkedId) {
+            case R.id.rb_max_time_1800:
+                return 1800;
+            case R.id.rb_max_time_600:
+                return 600;
+            case R.id.rb_max_time_300:
+                return 300;
             case R.id.rb_max_80:
                 return 80;
             case R.id.rb_max_60:
                 return 60;
-            case R.id.rb_max_30:
-                return 30;
+            case R.id.rb_max_time_15:
+                return 15;
             default:
-                return 80;
+                return 30;
         }
     }
 
     public String getSensorType() {
         int checkedId = rgSensorType.getCheckedRadioButtonId();
-        switch (checkedId) {
-            case R.id.rb_diagnost:
-                return Const.DIAGNOST;
-            case R.id.rb_bioscaner:
-                return Const.BIOSCANER;
-            default:
-                return Const.DIAGNOST;
+        if (checkedId == rb_bioscaner) {
+            return Const.BIOSCANER;
+        } else if (checkedId == rb_double_sensor) {
+            return Const.DUAL_SENSOR;
         }
-    }
-
-    public boolean isAnimalsSelected() {
-        return animalsSwitch.isChecked();
+        return Const.DIAGNOST;
     }
 
     public boolean getExpertType() {
         int checkedId = rgExpert.getCheckedRadioButtonId();
-        switch (checkedId) {
-            case R.id.rb_expert:
-                return true;
-            case R.id.rb_user:
-                return false;
-            default:
-                return true;
+        if (checkedId == R.id.rb_user) {
+            return false;
         }
+        return true;
     }
 
 

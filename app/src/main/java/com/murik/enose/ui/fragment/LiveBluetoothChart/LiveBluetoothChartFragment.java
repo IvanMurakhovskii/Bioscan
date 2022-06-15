@@ -62,7 +62,7 @@ public class LiveBluetoothChartFragment extends MvpAppCompatFragment implements 
         mLiveBluetoothChartPresenter.addDataFromDevice(str);
 
        for(int i = 0;i <  str.length(); i=i+8){
-          Log.d("MyLog","sens_count =  " + Integer.decode(str.substring(i, i+1)) + " value =  "
+          Log.d("Chart","sens_index =  " + Integer.decode(str.substring(i, i+1)) + " value =  "
               + Integer.parseInt(str.substring(i + 1, i + 8),16));
         }
 

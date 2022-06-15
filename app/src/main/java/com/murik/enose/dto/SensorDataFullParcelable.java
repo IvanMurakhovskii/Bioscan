@@ -19,8 +19,8 @@ import lombok.Setter;
 public class SensorDataFullParcelable implements Parcelable {
 
   private String descriptions;
-  Map<String, ArrayList<Integer>> dataSensorMapLeftHand = new HashMap<String, ArrayList<Integer>>();
-  Map<String, ArrayList<Integer>> dataSensorMapRightHand = new HashMap<String, ArrayList<Integer>>();
+  Map<String, ArrayList<Integer>> dataSensorMapLeftHand = new HashMap<>();
+  Map<String, ArrayList<Integer>> dataSensorMapRightHand = new HashMap<>();
   private int gender = Const.GENDER_MALE;
   private boolean isPractice;
   private boolean isFullData;

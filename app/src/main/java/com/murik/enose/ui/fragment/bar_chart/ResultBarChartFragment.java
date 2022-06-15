@@ -126,7 +126,6 @@ public class ResultBarChartFragment extends Fragment {
 
         if (resultAFactory != null && resultAFactory.calculateResultA()) {
             resultBySens = resultAFactory.getA();
-
         }
 
         if (!lables.isEmpty()) {

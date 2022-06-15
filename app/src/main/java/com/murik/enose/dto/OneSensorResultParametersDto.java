@@ -13,5 +13,4 @@ public class OneSensorResultParametersDto {
     private Float s30_60;
     private Float L;
     private Float En;
-    private Float E2;
 }
