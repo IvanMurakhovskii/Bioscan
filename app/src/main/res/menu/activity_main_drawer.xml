@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/app_bar_home"
+            android:icon="?android:attr/fingerprintAuthDrawable"
+            android:title="Каталог измерений" />
+        <item
+            android:id="@+id/app_bar_bluetooth"
+            android:icon="@android:drawable/stat_sys_data_bluetooth"
+            android:title="Подключиться к прибору" />
+        <item
+            android:id="@+id/app_bar_live_chart"
+            android:icon="@android:drawable/stat_sys_data_bluetooth"
+            android:title="Измерение" />
+        <item
+            android:id="@+id/additional_info"
+            android:title="Доп. информация"
+            android:visible="false"/>
+        <item
+            android:id="@+id/app_parse_xml"
+            android:icon="@android:drawable/ic_menu_edit"
+            android:title="Загрузить данные"
+            android:visible="false"/>
+        <item
+            android:id="@+id/app_input"
+            android:icon="@android:drawable/ic_menu_edit"
+            android:title="Ввод данных"
+            android:visible="false"/>
+        <item
+            android:id="@+id/app_disconnect_device"
+            android:icon="@android:drawable/ic_delete"
+            android:title="Отключиться от прибора" />
+
+        <!--<item
+            android:id="@+id/app_bar_usb"
+            android:title="USB"
+            android:icon="@android:drawable/stat_notify_sdcard_usb"/>-->
+    </group>
+
+</menu>

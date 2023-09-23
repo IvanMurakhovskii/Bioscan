@@ -1,0 +1,58 @@
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+  <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:orientation="vertical"
+      android:padding="10dip"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintTop_toTopOf="parent">
+    <!--  Email Label -->
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="Логин"
+        android:textColor="#372c24" />
+    <EditText
+        android:id="@+id/et_login"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dip"
+        android:singleLine="true" />
+    <!--  Password Label -->
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="Пароль"
+        android:textColor="#372c24" />
+    <EditText
+        android:id="@+id/et_password"
+        android:inputType="textPassword"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dip"
+        android:singleLine="true" />
+    <!-- Login button -->
+    <Button
+        android:id="@+id/btnLogin"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dip"
+        android:text="Войти" />
+
+    <!-- Link to Registration Screen -->
+    <!--  <TextView android:id="@+id/link_to_register"-->
+    <!--      android:layout_width="fill_parent"-->
+    <!--      android:layout_height="wrap_content"-->
+    <!--      android:layout_marginTop="40dip"-->
+    <!--      android:layout_marginBottom="40dip"-->
+    <!--      android:text="Register here"-->
+    <!--      android:gravity="center"-->
+    <!--      android:textSize="20dip"-->
+    <!--      android:textColor="#0b84aa"/>-->
+
+  </LinearLayout>
+</android.support.constraint.ConstraintLayout>

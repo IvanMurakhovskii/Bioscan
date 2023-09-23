@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  android:orientation="vertical">
+
+  <RadioGroup
+    android:id="@+id/rg_gender"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:paddingBottom="16dp">
+    <RadioButton
+      android:id="@+id/rb_male"
+      android:text="Муж"
+      android:checked="true"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      />
+    <RadioButton
+      android:id="@+id/rb_feminine"
+      android:text="Жен"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      />
+  </RadioGroup>
+
+  <android.support.v7.widget.SwitchCompat
+    android:id="@+id/sc_practice"
+    android:text="@string/practice"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"/>
+
+</LinearLayout>

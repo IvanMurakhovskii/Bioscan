@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+  <TextView
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:text="Показатель стресса, спазм сосудов:"
+      android:textStyle="bold"
+      android:textSize="16sp"/>
+
+  <LinearLayout
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+    android:orientation="horizontal">
+    <LinearLayout
+        android:id="@+id/ps_color"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_margin="8dp"
+        android:background="@drawable/circle"
+        android:layout_gravity="start"
+        android:orientation="horizontal" >
+    </LinearLayout>
+    <TextView
+        android:id="@+id/tv_ps"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8px"/>
+  </LinearLayout>
+
+
+  <TextView
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:text="Показатель спазмов органов желудочно-кишечного тракта:"
+      android:textStyle="bold"
+      android:textSize="16sp"/>
+
+  <LinearLayout
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:orientation="horizontal">
+    <LinearLayout
+        android:id="@+id/pgct_color"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_margin="8dp"
+        android:background="@drawable/circle"
+        android:layout_gravity="start"
+        android:orientation="horizontal" >
+    </LinearLayout>
+    <TextView
+        android:id="@+id/tv_pgct"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8px"/>
+  </LinearLayout>
+
+  <TextView
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:text="Стабильность процессов (системы сердце / печень):"
+      android:textStyle="bold"
+      android:textSize="16sp"/>
+
+  <LinearLayout
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:orientation="horizontal">
+    <LinearLayout
+        android:id="@+id/sp_color"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_margin="8dp"
+        android:background="@drawable/circle"
+        android:layout_gravity="start"
+        android:orientation="horizontal" >
+    </LinearLayout>
+    <TextView
+        android:id="@+id/tv_sp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8px"/>
+  </LinearLayout>
+
+  <TextView
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:text="Системность:"
+      android:textStyle="bold"
+      android:textSize="16sp"/>
+
+  <LinearLayout
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:orientation="horizontal">
+    <LinearLayout
+        android:id="@+id/y_color"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_margin="8dp"
+        android:background="@drawable/circle"
+        android:layout_gravity="start"
+        android:orientation="horizontal" >
+    </LinearLayout>
+    <TextView
+        android:id="@+id/tv_y"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8px"/>
+  </LinearLayout>
+
+
+
+</LinearLayout>

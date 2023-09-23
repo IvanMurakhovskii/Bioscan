@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+  <EditText
+    android:id="@+id/start_dimension_description"
+    android:inputType="textEmailAddress"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="16dp"
+    android:layout_marginLeft="4dp"
+    android:layout_marginRight="4dp"
+    android:layout_marginBottom="4dp"
+    android:hint="@string/descriptions"/>
+
+  <RadioGroup
+    android:id="@+id/rg_gender_des"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:paddingBottom="16dp">
+    <RadioButton
+      android:id="@+id/rb_male_des"
+      android:text="Муж"
+      android:checked="true"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      />
+    <RadioButton
+      android:id="@+id/rb_feminine_des"
+      android:text="Жен"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      />
+  </RadioGroup>
+
+  <RadioGroup
+    android:id="@+id/rg_hand"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:paddingBottom="16dp">
+    <RadioButton
+      android:id="@+id/rb_left_hand"
+      android:text="@string/left_hand"
+      android:checked="true"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      />
+    <RadioButton
+      android:id="@+id/rb_right_hand"
+      android:text="@string/right_hand"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      />
+  </RadioGroup>
+
+  <!--<android.support.v7.widget.SwitchCompat
+    android:paddingBottom="16dp"
+    android:id="@+id/sc_practice_des"
+    android:text="@string/practice"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"/>-->
+
+  <LinearLayout
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:orientation="vertical">
+
+    <!--    <EditText-->
+    <!--        android:id="@+id/substance_dimension_time"-->
+    <!--        android:inputType="number"-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:layout_marginTop="16dp"-->
+    <!--        android:layout_marginLeft="4dp"-->
+    <!--        android:layout_marginRight="4dp"-->
+    <!--        android:layout_marginBottom="4dp"-->
+    <!--        android:hint="@string/substanceDimensionTime"/>-->
+    <!--    <EditText-->
+    <!--        android:id="@+id/all_dimension_time"-->
+    <!--        android:inputType="number"-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:layout_marginTop="16dp"-->
+    <!--        android:layout_marginLeft="4dp"-->
+    <!--        android:layout_marginRight="4dp"-->
+    <!--        android:layout_marginBottom="4dp"-->
+    <!--        android:hint="@string/dimensionTime"/>-->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Выбрать тип диагностики:" />
+
+    <android.support.v7.widget.AppCompatSpinner
+        android:id="@+id/spinner_dimension_time"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:spinnerMode="dropdown"
+        android:background="@drawable/spinner_background"/>
+
+    <TextView
+        android:id="@+id/tv_algorithm_description"
+        android:layout_width="match_parent"
+        android:textStyle="bold"
+        android:layout_height="wrap_content"/>
+  </LinearLayout>
+
+
+</LinearLayout>

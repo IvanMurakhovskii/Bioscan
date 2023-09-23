@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  android:layout_width="match_parent"
+  android:layout_height="wrap_content"
+  android:screenReaderFocusable="true"
+  android:orientation="vertical"
+  android:focusable="true">
+
+  <android.support.design.widget.TextInputLayout
+    android:layout_width="150dp"
+    android:layout_height="wrap_content"
+    android:hint="@string/sensor_1">
+    <EditText
+      android:id="@+id/sens_1"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:inputType="number"/>
+  </android.support.design.widget.TextInputLayout>
+
+  <android.support.design.widget.TextInputLayout
+    android:layout_width="150dp"
+    android:layout_height="wrap_content"
+    android:hint="@string/sensor_2">
+    <EditText
+      android:id="@+id/sens_2"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:inputType="number"/>
+  </android.support.design.widget.TextInputLayout>
+
+  <android.support.design.widget.TextInputLayout
+    android:layout_width="150dp"
+    android:layout_height="wrap_content"
+    android:hint="@string/sensor_3">
+    <EditText
+      android:id="@+id/sens_3"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:inputType="number"/>
+  </android.support.design.widget.TextInputLayout>
+
+  <android.support.design.widget.TextInputLayout
+    android:layout_width="150dp"
+    android:layout_height="wrap_content"
+    android:hint="@string/sensor_4">
+    <EditText
+      android:id="@+id/sens_4"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:inputType="number"/>
+  </android.support.design.widget.TextInputLayout>
+
+  <android.support.design.widget.TextInputLayout
+    android:layout_width="150dp"
+    android:layout_height="wrap_content"
+    android:hint="@string/sensor_5">
+    <EditText
+      android:id="@+id/sens_5"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:inputType="number"/>
+  </android.support.design.widget.TextInputLayout>
+
+  <android.support.design.widget.TextInputLayout
+    android:layout_width="150dp"
+    android:layout_height="wrap_content"
+    android:hint="@string/sensor_6">
+    <EditText
+      android:id="@+id/sens_6"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:inputType="number"/>
+  </android.support.design.widget.TextInputLayout>
+
+  <android.support.design.widget.TextInputLayout
+    android:layout_width="150dp"
+    android:layout_height="wrap_content"
+    android:hint="@string/sensor_7">
+    <EditText
+      android:id="@+id/sens_7"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:inputType="number"/>
+  </android.support.design.widget.TextInputLayout>
+
+  <android.support.design.widget.TextInputLayout
+    android:layout_width="150dp"
+    android:layout_height="wrap_content"
+    android:hint="@string/sensor_8">
+    <EditText
+      android:id="@+id/sens_8"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:inputType="number"/>
+  </android.support.design.widget.TextInputLayout>
+
+</LinearLayout>

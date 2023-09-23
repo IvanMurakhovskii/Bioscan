@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical">
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:context=".ui.activity.start.StartActivity">
+        <ProgressBar
+            android:id="@+id/summary_progress_bar"
+            style="@style/CircularDeterminateProgressBar"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:progress="60" />
+        <TextView
+            android:id="@+id/text_view_progress"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:gravity="center"
+            android:text="60%"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            app:layout_constraintBottom_toBottomOf="@+id/summary_progress_bar"
+            app:layout_constraintEnd_toEndOf="@+id/summary_progress_bar"
+            app:layout_constraintHorizontal_bias="0.49"
+            app:layout_constraintStart_toStartOf="@+id/summary_progress_bar"
+            app:layout_constraintTop_toTopOf="@+id/summary_progress_bar"
+            app:layout_constraintVertical_bias="0.51" />
+    </android.support.constraint.ConstraintLayout>
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="200dp">
+        <android.support.v7.widget.CardView
+            android:id="@+id/summary_description_card"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardBackgroundColor="@color/colorResultYellow"
+            app:cardCornerRadius="5px"
+            app:cardUseCompatPadding="true"
+            tools:layout_editor_absoluteX="-16dp">
+
+            <TextView
+                android:id="@+id/summary_description"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="7dp"
+                android:layout_marginRight="7dp"
+                android:background="#FFFFFF"
+                android:gravity="center"
+                android:padding="@dimen/tvinput_padding_left"
+                android:textSize="20sp" />
+        </android.support.v7.widget.CardView>
+    </ScrollView>
+
+    <ImageView
+        android:id="@+id/result_image"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="60"
+        android:scaleType="centerInside" />
+</LinearLayout>
+

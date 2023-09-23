@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <color name="fabColor">#FF4081</color>
+  <color name="colorPrimary">#6179FF</color>
+  <color name="colorPrimaryDark">#303F9F</color>
+  <color name="colorAccent">#FF4081</color>
+  <color name="colorResultBurgundy">#CD050A</color>
+  <color name="colorResultRed">#FF331D</color>
+  <color name="colorResultYellow">#FCFC00</color>
+  <color name="colorResultCrimson">#E23EE6</color>
+  <color name="colorResultGreen">#67E300</color>
+  <color name="colorResultBlue">#48c0c8</color>
+  <color name="violet">#9400d3</color>
+  <color name="green">#00AF64</color>
+  <color name="orange">#F46405</color>
+
+</resources>
