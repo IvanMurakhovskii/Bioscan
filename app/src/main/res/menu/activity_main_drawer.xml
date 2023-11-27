@@ -13,7 +13,7 @@
             android:icon="@android:drawable/stat_sys_data_bluetooth"
             android:title="Подключиться к прибору" />
         <item
-            android:id="@+id/app_bar_live_chart"
+            android:id="@+id/app_bar_dimension"
             android:icon="@android:drawable/stat_sys_data_bluetooth"
             android:title="Измерение" />
         <item
@@ -35,10 +35,10 @@
             android:icon="@android:drawable/ic_delete"
             android:title="Отключиться от прибора" />
 
-        <!--<item
-            android:id="@+id/app_bar_usb"
-            android:title="USB"
-            android:icon="@android:drawable/stat_notify_sdcard_usb"/>-->
+        <item
+            android:id="@+id/app_settings"
+            android:icon="@android:drawable/ic_menu_info_details"
+            android:title="Настройки" />
     </group>
 
 </menu>

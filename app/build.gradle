@@ -8,7 +8,7 @@ android {
         minSdkVersion 23
         targetSdkVersion 28
         versionCode 2
-        versionName "0.15.3"
+        versionName "0.15.11.5"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         multiDexEnabled true
         archivesBaseName = "E-nose-lite-$versionName"
@@ -40,7 +40,6 @@ dependencies {
     implementation 'com.android.support:support-media-compat:28.0.0'
     implementation 'com.android.support:support-v4:28.0.0'
     implementation 'com.android.support:design:28.0.0'
-
 
     implementation 'com.android.support.constraint:constraint-layout:2.0.4'
     testImplementation 'junit:junit:4.12'

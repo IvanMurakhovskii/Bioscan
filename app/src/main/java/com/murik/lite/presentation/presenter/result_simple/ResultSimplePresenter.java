@@ -47,7 +47,7 @@ public class ResultSimplePresenter extends MvpPresenter<ResultSimpleView> {
         val summaryLeft = resultAFactoryLeft.getSummaryResult();
         val summaryRight = resultAFactoryRight.getSummaryResult();
 
-        val summary = new SummaryFullParcelable(summaryLeft, summaryRight, data.getTimeRegistrationMaxSignal(), data.getGender());
+        val summary = new SummaryFullParcelable(summaryLeft, summaryRight, data.getAlgorithmId(), data.getGender());
 
         App.INSTANCE.getRouter().navigateTo(Screens.SUMMARY_RESULT, summary);
     }

@@ -6,6 +6,7 @@ import android.util.Log;
 import com.murik.lite.Const;
 import com.murik.lite.dto.DataByMaxParcelable;
 import com.murik.lite.dto.OneSensorResultParametersDto;
+import com.murik.lite.enums.BluetoothDimensionAlgorithm;
 import com.murik.lite.model.A_30.A_10_20;
 import com.murik.lite.model.A_30.A_15_30;
 import com.murik.lite.model.A_30.A_15_30_GRAY;
@@ -132,11 +133,11 @@ public class ResultAFactoryOneSensor extends ResultAFactory {
         Float discreteLeft = 0F;
         Float discreteRight = 0F;
 
-        val maxSignalTime = getInputData().getTimeRegistrationMaxSignal();
+        val algorithm = BluetoothDimensionAlgorithm.getByAlgorithmId(getInputData().getAlgorithmId());
         val leftSensorData = getInputData().getLeftHandDataSensor();
         val rightSensorData = getInputData().getRightHandDataSensor();
 
-        if (maxSignalTime == 30) {
+        if (algorithm.equals(BluetoothDimensionAlgorithm.SIMPLE)) {
             bodyLeft = getAreaByMask(Const.BODY_30, leftSensorData);
             bodyRight = getAreaByMask(Const.BODY_30, rightSensorData);
 
@@ -145,16 +146,16 @@ public class ResultAFactoryOneSensor extends ResultAFactory {
 
             discreteLeft = getAreaByMask(Const.DISCRETE_30, leftSensorData);
             discreteRight = getAreaByMask(Const.DISCRETE_30, rightSensorData);
-        } else if (maxSignalTime == 60) {
+        } else if (algorithm.equals(BluetoothDimensionAlgorithm.BASE)) {
             bodyLeft = getAreaByMask(Const.BODY, leftSensorData);
             bodyRight = getAreaByMask(Const.BODY, rightSensorData);
 
-            energyLeft = getAreaByMask(Const.ENERGY_60, leftSensorData);
-            energyRight = getAreaByMask(Const.ENERGY_60, rightSensorData);
+            energyLeft = getAreaByMask(Const.ENERGY_160, leftSensorData);
+            energyRight = getAreaByMask(Const.ENERGY_160, rightSensorData);
 
-            discreteLeft = getAreaByMask(Const.DISCRETE_60, leftSensorData);
-            discreteRight = getAreaByMask(Const.DISCRETE_60, rightSensorData);
-        } else if (maxSignalTime == 80) {
+            discreteLeft = getAreaByMask(Const.DISCRETE_160, leftSensorData);
+            discreteRight = getAreaByMask(Const.DISCRETE_160, rightSensorData);
+        } else if (algorithm.equals(BluetoothDimensionAlgorithm._200)) {
             bodyLeft = getAreaByMask(Const.BODY, leftSensorData);
             bodyRight = getAreaByMask(Const.BODY, rightSensorData);
 
@@ -177,7 +178,7 @@ public class ResultAFactoryOneSensor extends ResultAFactory {
 
         if (getMaxSensResult() != null && !getMaxSensResult().isEmpty()) {
 
-            val maxSignalTime = getInputData().getTimeRegistrationMaxSignal();
+            val algorithm = BluetoothDimensionAlgorithm.getByAlgorithmId(getInputData().getAlgorithmId());
 
             val PS_2435 = getPS2435(getMaxSensResult(), Const.SHORT);
             val PS_3425 = getPS3425(getMaxSensResult(), Const.SHORT);
@@ -200,7 +201,7 @@ public class ResultAFactoryOneSensor extends ResultAFactory {
             a_20_60 = a60 == 0 ? -9999 : round((double) a20 / a60);
             a_40_70 = a70 == 0 ? -9999 : round((double) a40 / a70);
 
-            oneSensorResultParameters = getOneSensorResultParameters(getMaxSensResult(), maxSignalTime);
+            oneSensorResultParameters = getOneSensorResultParameters(getMaxSensResult(), algorithm);
 
             val s20_30 = oneSensorResultParameters.getS20_30();
             val s20_60 = oneSensorResultParameters.getS20_60();
@@ -210,8 +211,8 @@ public class ResultAFactoryOneSensor extends ResultAFactory {
             val E2 = oneSensorResultParameters.getE2();
 
             try {
-                val tau = calculateDeltaTau(maxSignalTime == 160 ? 60 : maxSignalTime, getMaxSensResult());
-                val T = calculateT(maxSignalTime == 160 ? 60 : maxSignalTime, getMaxSensResult());
+                val tau = calculateDeltaTau(algorithm.getMaxSignalTime(), getMaxSensResult());
+                val T = calculateT(algorithm.getMaxSignalTime(), getMaxSensResult());
 
                 if (getInputData().getSensorType().equals(Const.DIAGNOST)) {
                     createParametersForDiagnost(si, a_20_30, a_20_60, s30_60, L, En, E2);
@@ -220,18 +221,18 @@ public class ResultAFactoryOneSensor extends ResultAFactory {
                         createParametersFor_Animals(a_20_30, a_20_60, a_40_70, s20_30, s20_60, s30_60, En, E2, tau);
                         return true;
                     }
-                    if (maxSignalTime == 80) {
+                    if (algorithm.equals(BluetoothDimensionAlgorithm._200)) {
                         createParametersFor_80(si, a_20_30, a_20_60, s30_60, L, En, E2, tau);
-                    } else if (maxSignalTime == 60) {
+                    } else if (algorithm.equals(BluetoothDimensionAlgorithm.BASE)) {
                         val S_60 = BaseMeasureService.getAreaByMask(Const.MASK_60, getMaxSensResult());
                         val halfOfArea_60 = S_60 / 2.0d;
 
                         val r1_2 = ListUtils.findClosestValueIndex(getMaxSensResult(), halfOfArea_60);
 
                         createParametersFor_60(a_20_30, a_20_60, a_40_70, s30_60, En, E2, r1_2, tau, T);
-                    } else if (maxSignalTime == 30) {
+                    } else if (algorithm.equals(BluetoothDimensionAlgorithm.SIMPLE)) {
                         createParametersFor_30(tau, En, E2, s20_30);
-                    } else if (maxSignalTime == 160) {
+                    } else if (algorithm.equals(BluetoothDimensionAlgorithm.ADVANCED)) {
                         createParametersFor_160(a_20_30, a_20_60, a_40_70, s20_30, s20_60, s30_60, En, E2, 0, tau);
                     }
                 }

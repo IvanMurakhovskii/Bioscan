@@ -72,10 +72,10 @@ public class RealmFragment extends MvpAppCompatFragment implements RealmView, Di
     mRealmPresenter.createMeasureByType(
             chooseTypeMeasureDialogFragment.getMeasureType(),
             chooseTypeMeasureDialogFragment.getSelectedSensor(),
-            chooseTypeMeasureDialogFragment.getTimeRegistrationMaxSignal(),
             chooseTypeMeasureDialogFragment.getSensorType(),
             chooseTypeMeasureDialogFragment.getExpertType(),
-            chooseTypeMeasureDialogFragment.isAnimalsSelected()
+            chooseTypeMeasureDialogFragment.isAnimalsSelected(),
+            chooseTypeMeasureDialogFragment.getAlgotirhm().getAlgorithmId()
     );
   }
 

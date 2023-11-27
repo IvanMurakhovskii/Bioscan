@@ -6,8 +6,8 @@ import lombok.Getter;
 
 @Getter
 public enum HandSideEnum {
-    LEFT("Левая рука"),
-    RIGHT("Правая рука");
+    LEFT("Левая сторона"),
+    RIGHT("Правая сторона");
 
     private String description;
 

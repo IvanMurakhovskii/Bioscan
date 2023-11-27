@@ -47,12 +47,6 @@ public class LiveBluetoothChartFragment extends MvpAppCompatFragment implements 
             if (BluetoothImplService.ACTION_CHARACTERISTIC_CHANGE.equals(action)) {
                 String str = intent.getStringExtra(BluetoothImplService.EXTRA_DATA);
                 mLiveBluetoothChartPresenter.addDataFromDevice(str);
-
-                for (int i = 0; i < str.length(); i = i + 8) {
-                    Log.d("MyLog", "sens_count =  " + Integer.decode(str.substring(i, i + 1)) + " value =  "
-                            + Integer.parseInt(str.substring(i + 1, i + 8), 16));
-                }
-
             }
         }
     };

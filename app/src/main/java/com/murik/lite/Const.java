@@ -1,5 +1,7 @@
 package com.murik.lite;
 
+import android.graphics.Color;
+
 import java.util.Arrays;
 import java.util.List;
 
@@ -23,12 +25,14 @@ public class Const {
   public static final String[] SENSORS_SID_ENDOKRIN = { "SID0003", "SID0004", "SID0005", "SID0007"};
   public static final String[] SENSORS_SID_ENERGY = {"SID0001", "SID0003","SID0007"};
 
+  public static final List<Integer> CHART_COLOR = Arrays.asList(Color.MAGENTA, Color.BLUE, Color.GREEN, Color.RED, Color.YELLOW, Color.BLACK, Color.DKGRAY, Color.LTGRAY);
+
   //all sensors
   public static final int[] TOTAL = {30, 45, 60, 80, 100, 120, 180};
   public static final int[] HEALTH = {150, 160, 170};
 
   public static final int[] ENERGY = {110, 120, 130, 140, 150};
-  public static final int[] ENERGY_60 = {85, 90, 100, 105, 110};
+  public static final int[] ENERGY_160 = {85, 90, 100, 105, 110};
   public static final int[] ENERGY_30 = {40, 45, 50, 55, 60};
   public static final int[] BAD = {20, 30, 180};
   public static final int[] ENDOKRIN = {10, 20, 30, 60};
@@ -41,7 +45,7 @@ public class Const {
   public static final int[] LUNGS = range(10, 20);
   public static final int[] DANGER = range(140, 160);
   public static final int[] DISCRETE = {30, 40, 60, 80, 90, 110, 120, 140};
-  public static final int[] DISCRETE_60 = {30, 40, 60, 80, 90, 110, 120};
+  public static final int[] DISCRETE_160 = {30, 40, 60, 80, 90, 110, 120};
   public static final int[] DISCRETE_30 = { 15, 20, 25, 30, 40, 50, 55};
 
   public static final int[] MASK_60 = range(0, 60);

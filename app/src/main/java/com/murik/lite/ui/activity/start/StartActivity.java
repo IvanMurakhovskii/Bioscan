@@ -100,6 +100,7 @@ public class StartActivity extends MvpAppCompatActivity implements StartView, On
     private DrawerLayout drawer;
 
     private LinearLayout bleConnectionStatus;
+
     private final BroadcastReceiver mReceiver = new BroadcastReceiver() {
         public void onReceive(Context context, Intent intent) {
             String action = intent.getAction();
@@ -111,6 +112,7 @@ public class StartActivity extends MvpAppCompatActivity implements StartView, On
             }
         }
     };
+
     private Toolbar toolbar;
     private int REQUEST_ENABLE_BT = 0;
     private Navigator navigator;
@@ -322,14 +324,9 @@ public class StartActivity extends MvpAppCompatActivity implements StartView, On
     @SuppressLint("NonConstantResourceId")
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.app_bar_settings:
-                App.INSTANCE.getRouter().navigateTo(Screens.SETTINGS_FRAGMENT);
-                return true;
-            case R.id.app_bar_screen: {
-                onScreenshotButtonClick();
-                return true;
-            }
+        if (item.getItemId() == R.id.app_bar_screen) {
+            onScreenshotButtonClick();
+            return true;
         }
 
         return false;
@@ -398,7 +395,6 @@ public class StartActivity extends MvpAppCompatActivity implements StartView, On
 
                 if (!isGpsEnabled()) {
                     Toast.makeText(getApplicationContext(), "Включите GPS!", Toast.LENGTH_SHORT).show();
-                    return false;
                 }
 
                 if (App.INSTANCE.getmBluetoothAdapter() == null) {
@@ -414,9 +410,10 @@ public class StartActivity extends MvpAppCompatActivity implements StartView, On
 
                 return true;
             }
-            case R.id.app_bar_live_chart: {
+            case R.id.app_bar_dimension: {
                 if (isConnected()) {
-                    App.INSTANCE.getRouter().replaceScreen(Screens.BLUETOOTH_DIMENSION_FRAGMENT);
+                    val screen = AuthService.getInstance().isAdmin() ? Screens.BLUETOOTH_LIVE_CHART_FRAGMENT : Screens.BLUETOOTH_DIMENSION_FRAGMENT;
+                    App.INSTANCE.getRouter().replaceScreen(screen);
                     return true;
                 }
                 Toast.makeText(this, "Прибор не подключен", Toast.LENGTH_LONG).show();
@@ -430,7 +427,13 @@ public class StartActivity extends MvpAppCompatActivity implements StartView, On
                 } else {
                     gatt.disconnect();
                 }
+                return true;
             }
+            case R.id.app_settings: {
+                App.INSTANCE.getRouter().navigateTo(Screens.SETTINGS_FRAGMENT);
+                return true;
+            }
+
             default:
                 return super.onOptionsItemSelected(menuItem);
         }
@@ -480,10 +483,15 @@ public class StartActivity extends MvpAppCompatActivity implements StartView, On
     protected void onResume() {
         super.onResume();
 
+        App.INSTANCE.getNavigatorHolder().setNavigator(navigator);
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
         IntentFilter filter = new IntentFilter();
         filter.addAction(BluetoothImplService.ACTION_GATT_DISCONNECTED);
-
-        App.INSTANCE.getNavigatorHolder().setNavigator(navigator);
         this.registerReceiver(mReceiver, filter);
     }
 

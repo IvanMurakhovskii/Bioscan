@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.arellomobile.mvp.MvpAppCompatFragment;
@@ -48,6 +49,7 @@ public class OneSensorChartFragment extends MvpAppCompatFragment implements OneS
     private TextView tvLeftPs_2435;
     private TextView tvRightPs_3425;
     private TextView tvRightPs_2435;
+    private LinearLayout tvDifferenceLayout;
     private TextView tvDifferenceComment;
     private TextView tvAreaDifference;
     private TextView tvAreaDangerOnLungsLeft;
@@ -56,6 +58,7 @@ public class OneSensorChartFragment extends MvpAppCompatFragment implements OneS
     private TextView tvMaxLeft;
     private LinearLayout llLeftDelta;
     private LinearLayout llRightDelta;
+    private ScrollView scrollAreaDifference;
     private CardView llAreaDifference;
     private LinearLayout llRightPs_3425;
     private LinearLayout llRightPs_2435;
@@ -127,8 +130,10 @@ public class OneSensorChartFragment extends MvpAppCompatFragment implements OneS
 
         tvAreaDifference = view.findViewById(R.id.tv_one_sensor_difference);
         llAreaDifference = view.findViewById(R.id.ll_one_sensor_difference);
+        scrollAreaDifference = view.findViewById(R.id.scroll_one_sensor_difference);
 
         tvDifferenceComment = view.findViewById(R.id.tv_difference_comment);
+        tvDifferenceLayout = view.findViewById(R.id.tv_difference_layout);
         tvMaxLeft = view.findViewById(R.id.tv_max_left);
         tvMaxRight = view.findViewById(R.id.tv_max_right);
 
@@ -205,27 +210,27 @@ public class OneSensorChartFragment extends MvpAppCompatFragment implements OneS
     @Override
     public void setLeftDelta(final float delta) {
         llLeftDelta.setVisibility(View.VISIBLE);
-        tvLeftDelta.setText(String.format("%.2f", delta) + "%");
+        tvLeftDelta.setText(String.format("%.2f", delta) + "  %");
     }
 
     @Override
     public void setRightDelta(final float delta) {
         llRightDelta.setVisibility(View.VISIBLE);
-        tvRightDelta.setText(String.format("%.2f", delta) + "%");
+        tvRightDelta.setText(String.format("%.2f", delta) + "  %");
     }
 
     @Override
     public void setAreaDifference(final AreaDifference areaDifference) {
         double difference = Math.abs(areaDifference.getAreaDifference());
-        llAreaDifference.setVisibility(View.VISIBLE);
-        tvAreaDifference.setText(String.format("%.2f", difference) + "%");
+        scrollAreaDifference.setVisibility(View.VISIBLE);
+        tvAreaDifference.setText(String.format("%.1f", difference) + "  %");
 
         String comment = areaDifference.getResultComment();
 
         llAreaDifference.setBackgroundColor(areaDifference.getViewColor());
 
         if(comment != null) {
-            tvDifferenceComment.setVisibility(View.VISIBLE);
+            tvDifferenceLayout.setVisibility(View.VISIBLE);
             tvDifferenceComment.setText(areaDifference.getResultComment());
         }
     }
@@ -268,11 +273,11 @@ public class OneSensorChartFragment extends MvpAppCompatFragment implements OneS
 
     @Override
     public void setMaxRight(Integer max) {
-        tvMaxRight.setText(String.valueOf(max));
+        tvMaxRight.setText(max + " Гц");
     }
 
     @Override
     public void setMaxLeft(Integer max) {
-        tvMaxLeft.setText(String.valueOf(max));
+        tvMaxLeft.setText(max + " Гц");
     }
 }

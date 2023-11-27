@@ -14,7 +14,7 @@ public class SummaryFullParcelable implements Parcelable {
 
     private Double summaryLeft;
     private Double summaryRight;
-    private Integer timeRegistrationMaxSignal;
+    private Integer algorithmId;
     private Integer gender;
 
     @Override
@@ -27,7 +27,7 @@ public class SummaryFullParcelable implements Parcelable {
         dest.writeDouble(summaryLeft);
         dest.writeDouble(summaryRight);
         dest.writeDouble(gender);
-        dest.writeInt(timeRegistrationMaxSignal);
+        dest.writeInt(algorithmId);
     }
 
     public static final Creator<SummaryFullParcelable> CREATOR = new Creator<SummaryFullParcelable>() {
@@ -46,7 +46,7 @@ public class SummaryFullParcelable implements Parcelable {
     private SummaryFullParcelable(Parcel parcel) {
         summaryLeft = parcel.readDouble();
         summaryRight = parcel.readDouble();
-        timeRegistrationMaxSignal = parcel.readInt();
+        algorithmId = parcel.readInt();
         gender = parcel.readInt();
     }
 }

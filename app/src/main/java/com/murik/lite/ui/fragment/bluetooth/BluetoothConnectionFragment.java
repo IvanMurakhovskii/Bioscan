@@ -31,6 +31,7 @@ import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.murik.lite.App;
 import com.murik.lite.R;
 import com.murik.lite.Screens;
+import com.murik.lite.configuration.AuthService;
 import com.murik.lite.presentation.presenter.bluetooth.BluetoothConnectionPresenter;
 import com.murik.lite.presentation.view.bluetooth.BluetoothConnectionView;
 import com.murik.lite.service.Impl.BluetoothImplService;
@@ -39,6 +40,8 @@ import com.murik.lite.ui.activity.start.StartActivity;
 import com.murik.lite.ui.fragment.bluetooth.recycler.BluetoothRecyclerAdapter;
 
 import java.util.Objects;
+
+import lombok.val;
 
 import static java.util.Objects.*;
 
@@ -166,7 +169,8 @@ public class BluetoothConnectionFragment extends MvpAppCompatFragment implements
                 StartActivity activity = (StartActivity) getActivity();
                 requireNonNull(activity).setBleConnectionStateColor(Color.GREEN);
 
-                App.INSTANCE.getRouter().replaceScreen(Screens.BLUETOOTH_DIMENSION_FRAGMENT);
+                val screen = AuthService.getInstance().isAdmin() ? Screens.BLUETOOTH_LIVE_CHART_FRAGMENT : Screens.BLUETOOTH_DIMENSION_FRAGMENT;
+                App.INSTANCE.getRouter().replaceScreen(screen);
                 showProgress();
             } else if (BluetoothImplService.ACTION_GATT_DISCONNECTED.equals(action)) {
                 Toast.makeText(getContext(), "Disconnect from GATT", Toast.LENGTH_SHORT).show();

@@ -19,7 +19,7 @@ public class OneSensorTabAdapter extends FragmentPagerAdapter {
 //    private String adminTabTitle[] = new String[]{"Дискретное", "Полный след молекул", "Энергия"};
 
     private int pageCount = 1;
-    private String tabTitle[] = new String[]{"Полный след молекул"};
+    private String tabTitle[] = new String[]{"Полный сигнал сенсора"};
 
     public OneSensorTabAdapter(FragmentManager fm, DataByMaxParcelable dataByMaxParcelable) {
         super(fm);
@@ -27,7 +27,7 @@ public class OneSensorTabAdapter extends FragmentPagerAdapter {
 
         if (AuthService.getInstance().isAdmin()) {
             pageCount = 3;
-            tabTitle = new String[]{"Полный след молекул", "Дискретное", "Энергия"};
+            tabTitle = new String[]{"Полный сигнал сенсора", "Дискретное", "Энергия"};
         }
 
     }

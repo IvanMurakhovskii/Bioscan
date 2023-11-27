@@ -81,7 +81,7 @@ public class SummaryResultFragment extends MvpAppCompatFragment implements Summa
     @Override
     public void setProgress(Double progress, int color) {
         progressBar.setProgress(BigDecimal.valueOf(progress).setScale(0, RoundingMode.HALF_UP).intValue());
-        progressText.setText(progress.intValue() + "%");
+        progressText.setText(progress.intValue() + " %");
         val drawable = ContextCompat.getDrawable(Objects.requireNonNull(getContext()), R.drawable.circle);
         Objects.requireNonNull(drawable).setColorFilter(color, PorterDuff.Mode.SRC_IN);
         progressText.setBackground(drawable);

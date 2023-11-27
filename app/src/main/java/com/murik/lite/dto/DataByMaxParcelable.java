@@ -25,8 +25,8 @@ public class DataByMaxParcelable implements Parcelable {
     private String measureType = Const.STANDARD_MEASURE;
     private boolean isAnimalsSelected;
     private Float differenceArea = 0.0f;
-    private int timeRegistrationMaxSignal = 80;
     private String dimensionTime;
+    private Integer algorithmId;
 
     private String sensorType = Const.DIAGNOST;
 
@@ -40,7 +40,6 @@ public class DataByMaxParcelable implements Parcelable {
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(descriptions);
         dest.writeInt(gender);
-        dest.writeInt(timeRegistrationMaxSignal);
         if (differenceArea != null) {
             dest.writeFloat(differenceArea);
         }
@@ -52,6 +51,7 @@ public class DataByMaxParcelable implements Parcelable {
         dest.writeByte((byte) (isAnimalsSelected ? 1 : 0));
         dest.writeString(sensorType);
         dest.writeString(dimensionTime);
+        dest.writeInt(algorithmId);
     }
 
     public static final Parcelable.Creator<DataByMaxParcelable> CREATOR = new Parcelable.Creator<DataByMaxParcelable>() {
@@ -77,10 +77,10 @@ public class DataByMaxParcelable implements Parcelable {
         parcel.readList(leftHandDataSensor, Integer.class.getClassLoader());
         descriptions = parcel.readString();
         gender = parcel.readInt();
-        timeRegistrationMaxSignal = parcel.readInt();
         differenceArea = parcel.readFloat();
         measureType = parcel.readString();
         sensorType = parcel.readString();
+        algorithmId = parcel.readInt();
     }
 
 }

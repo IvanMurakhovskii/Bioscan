@@ -2,6 +2,7 @@ package com.murik.lite.service.Impl;
 
 import com.murik.lite.Const;
 import com.murik.lite.dto.OneSensorResultParametersDto;
+import com.murik.lite.enums.BluetoothDimensionAlgorithm;
 import com.murik.lite.utils.ListUtils;
 
 import java.math.BigDecimal;
@@ -136,7 +137,7 @@ public class BaseMeasureService {
         return 0F;
     }
 
-    public static OneSensorResultParametersDto getOneSensorResultParameters(final List<Integer> sensorData, final int maxSignalTime) {
+    public static OneSensorResultParametersDto getOneSensorResultParameters(List<Integer> sensorData, BluetoothDimensionAlgorithm algorithm) {
 
             if(sensorData.size() >= 70) {
                 val a40 = sensorData.get(40);
@@ -152,15 +153,15 @@ public class BaseMeasureService {
             Float S_DISCRETE = 0F;
             Float S_BODY = 0F;
 
-        if(maxSignalTime == 30) {
+        if(algorithm.equals(BluetoothDimensionAlgorithm.SIMPLE)) {
             S_BODY = getAreaByMask(Const.BODY_30, sensorData);
             S_ENERGY = getAreaByMask(Const.ENERGY_30, sensorData);
             S_DISCRETE = getAreaByMask(Const.DISCRETE_30, sensorData);
-        } else if(maxSignalTime == 60 || maxSignalTime == 160) {
-            S_ENERGY = getAreaByMask(Const.ENERGY_60, sensorData);
-            S_DISCRETE = getAreaByMask(Const.DISCRETE_60, sensorData);
+        } else if(algorithm.equals(BluetoothDimensionAlgorithm.BASE) || algorithm.equals(BluetoothDimensionAlgorithm.ADVANCED)) {
+            S_ENERGY = getAreaByMask(Const.ENERGY_160, sensorData);
+            S_DISCRETE = getAreaByMask(Const.DISCRETE_160, sensorData);
             S_BODY = getAreaByMask(Const.BODY, sensorData);
-        } else if(maxSignalTime == 80) {
+        } else if(algorithm.equals(BluetoothDimensionAlgorithm._200)) {
             S_ENERGY = getAreaByMask(Const.ENERGY, sensorData);
             S_DISCRETE = getAreaByMask(Const.DISCRETE, sensorData);
             S_BODY = getAreaByMask(Const.BODY, sensorData);

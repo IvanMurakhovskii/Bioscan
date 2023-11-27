@@ -13,8 +13,8 @@ import lombok.Setter;
 public class SummaryParcelable implements Parcelable {
 
     private Double summary;
-    private Integer timeRegistrationMaxSignal;
     private Integer gender;
+    private Integer algorithmId;
 
     @Override
     public int describeContents() {
@@ -24,8 +24,8 @@ public class SummaryParcelable implements Parcelable {
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeDouble(summary);
-        dest.writeInt(timeRegistrationMaxSignal);
         dest.writeInt(gender);
+        dest.writeInt(algorithmId);
     }
 
     public static final Creator<SummaryParcelable> CREATOR = new Creator<SummaryParcelable>() {
@@ -43,7 +43,7 @@ public class SummaryParcelable implements Parcelable {
 
     private SummaryParcelable(Parcel parcel) {
         summary = parcel.readDouble();
-        timeRegistrationMaxSignal = parcel.readInt();
         gender = parcel.readInt();
+        algorithmId = parcel.readInt();
     }
 }

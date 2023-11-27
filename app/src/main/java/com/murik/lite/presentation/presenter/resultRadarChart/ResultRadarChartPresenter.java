@@ -72,8 +72,8 @@ public class ResultRadarChartPresenter extends MvpPresenter<ResultRadarChartView
                 area = measureService.getAreaBad();
                 delta = measureService.getDeltaBad();
                 delta180 = measureService.getDeltaBad180();
-                getViewState().setTvDeltaLeft180(BigDecimal.valueOf(delta180.get(0)).setScale(1, RoundingMode.DOWN).floatValue() + " %");
-                getViewState().setTvDeltaRight180(BigDecimal.valueOf(delta180.get(1)).setScale(1, RoundingMode.DOWN).floatValue() + " %");
+                getViewState().setTvDeltaLeft180(BigDecimal.valueOf(delta180.get(0)).setScale(1, RoundingMode.DOWN).floatValue() + "  %");
+                getViewState().setTvDeltaRight180(BigDecimal.valueOf(delta180.get(1)).setScale(1, RoundingMode.DOWN).floatValue() + "  %");
                 break;
             case Const.PAGE_ENDOKRIN:
                 initRadarChart(Const.ENDOKRIN, Color.RED, Color.BLUE);
@@ -86,8 +86,8 @@ public class ResultRadarChartPresenter extends MvpPresenter<ResultRadarChartView
         if (measureService.getDifferenceArea() != null) {
             getViewState().setTvDifference(Float.toString(measureService.getDifferenceArea()));
         }
-        getViewState().setTvDeltaLeft(BigDecimal.valueOf(delta.get(0)).setScale(1, RoundingMode.DOWN).floatValue() + " %");
-        getViewState().setTvDeltaRight(BigDecimal.valueOf(delta.get(1)).setScale(1, RoundingMode.DOWN).floatValue() + " %");
+        getViewState().setTvDeltaLeft(BigDecimal.valueOf(delta.get(0)).setScale(1, RoundingMode.DOWN).floatValue() + "  %");
+        getViewState().setTvDeltaRight(BigDecimal.valueOf(delta.get(1)).setScale(1, RoundingMode.DOWN).floatValue() + "  %");
     }
 
     public void initRadarChart(int[] mask, int colorLeft, int colorRight) {
@@ -176,8 +176,8 @@ public class ResultRadarChartPresenter extends MvpPresenter<ResultRadarChartView
         getViewState().setTvRadarAreaLeft(Float.toString(area.get(0)));
         getViewState().setTvRadarAreaRight(Float.toString(area.get(1)));
 
-        getViewState().setTvDeltaLeft(BigDecimal.valueOf(delta.get(0)).setScale(1, RoundingMode.DOWN).floatValue() + " %");
-        getViewState().setTvDeltaRight(BigDecimal.valueOf(delta.get(1)).setScale(1, RoundingMode.DOWN).floatValue() + " %");
+        getViewState().setTvDeltaLeft(BigDecimal.valueOf(delta.get(0)).setScale(1, RoundingMode.DOWN).floatValue() + "  %");
+        getViewState().setTvDeltaRight(BigDecimal.valueOf(delta.get(1)).setScale(1, RoundingMode.DOWN).floatValue() + "  %");
     }
 
 }

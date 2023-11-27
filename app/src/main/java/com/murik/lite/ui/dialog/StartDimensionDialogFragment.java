@@ -32,7 +32,7 @@ public class StartDimensionDialogFragment extends AppCompatDialogFragment {
         builder = new AlertDialog.Builder(getActivity(), R.style.AlertDialogTheme);
 
         builder.setCancelable(false)
-                .setMessage("Дождитесь стабилизации сигнала сенсора и нажмите \"начать измерение\"")
+                .setMessage("Дождитесь стабилизации сигнала сенсора, нажмите \"начать измерение\" и за 2 секунды поставьте прибор на кожу")
                 .setPositiveButton("Начать измерение", (DialogInterface dialog, int id) -> mDialogListener. onStartDimensionClick());
 
         AlertDialog dialog = builder.create();

@@ -6,19 +6,20 @@ import com.arellomobile.mvp.MvpPresenter;
 import com.murik.lite.App;
 import com.murik.lite.Const;
 import com.murik.lite.Screens;
-import com.murik.lite.model.entity.DataSensorRealm;
 import com.murik.lite.dto.DataByMaxParcelable;
 import com.murik.lite.dto.SensorDataFullParcelable;
+import com.murik.lite.model.entity.DataSensorRealm;
 import com.murik.lite.presentation.view.realm.RealmView;
 import com.murik.lite.service.Impl.XmlServiceImpl;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
 import lombok.val;
+
+import static com.murik.lite.utils.ListUtils.isDataSensorAllZero;
 
 @InjectViewState
 public class RealmPresenter extends MvpPresenter<RealmView> {
@@ -32,10 +33,6 @@ public class RealmPresenter extends MvpPresenter<RealmView> {
 
     public int sum(int a, int b) {
         return a + b;
-    }
-
-    private boolean isDataSensorAllZero(List<Integer> data) {
-        return (data.get(0) == 0 && data.get(data.size() / 2) == 0 && data.get(data.size() - 1) == 0);
     }
 
     private void createStandardMeasure() {
@@ -511,16 +508,18 @@ public class RealmPresenter extends MvpPresenter<RealmView> {
         return sensorDataFullParcelable;
     }
 
-    private void createOneSensorMeasure(final String selectedSensor, final int timeRegistrationMaxSignal,
-                                        String sensorType, boolean isExpert, boolean isAnimalsSelected) {
+    private void createOneSensorMeasure(final String selectedSensor, String sensorType,
+                                        boolean isExpert, boolean isAnimalsSelected,
+                                        Integer algorihtmId) {
         DataByMaxParcelable dataByMaxParcelable = new DataByMaxParcelable();
 
         dataByMaxParcelable.setDescriptions(data.getDescriptions());
         dataByMaxParcelable.setGender(data.getGender());
         dataByMaxParcelable.setPractice(data.isPractice());
-        dataByMaxParcelable.setTimeRegistrationMaxSignal(timeRegistrationMaxSignal);
+        dataByMaxParcelable.setAlgorithmId(algorihtmId);
         dataByMaxParcelable.setExpert(isExpert);
         dataByMaxParcelable.setAnimalsSelected(isAnimalsSelected);
+        dataByMaxParcelable.setAlgorithmId(algorihtmId);
 
         dataByMaxParcelable.setSensorType(sensorType);
 
@@ -798,6 +797,7 @@ public class RealmPresenter extends MvpPresenter<RealmView> {
         dataByMaxParcelable.setDescriptions(data.getDescriptions());
         dataByMaxParcelable.setPractice(data.isPractice());
         dataByMaxParcelable.setGender(data.getGender());
+//        dataByMaxParcelable.setAlgorithmId(data.getAlgorithmId());
 
         App.INSTANCE.getRouter().navigateTo(Screens.ONE_SENSOR_MEASURE_FRAGMENT, dataByMaxParcelable);
 
@@ -816,12 +816,12 @@ public class RealmPresenter extends MvpPresenter<RealmView> {
         XmlServiceImpl.createXMLWithMeasurement(measurement, time);
     }
 
-    public void createMeasureByType(final int measureType, final String selectedSensor, final int timeRegistrationMaxSignal, String sensorType, boolean isExpert, boolean isAnimalsSelected) {
+    public void createMeasureByType(final int measureType, final String selectedSensor, String sensorType, boolean isExpert, boolean isAnimalsSelected, Integer algorinthId) {
         if (measureType == Const.STANDARD_MEASURE_TYPE) {
             createStandardMeasure();
         }
         if (measureType == Const.ONE_SENSOR_MEASURE_TYPE) {
-            createOneSensorMeasure(selectedSensor, timeRegistrationMaxSignal, sensorType, isExpert, isAnimalsSelected);
+            createOneSensorMeasure(selectedSensor, sensorType, isExpert, isAnimalsSelected, algorinthId);
         }
         if (measureType == Const.CHART) {
             createChart();

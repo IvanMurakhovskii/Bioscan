@@ -19,7 +19,8 @@ import android.widget.TextView;
 
 import com.murik.lite.Const;
 import com.murik.lite.R;
-import com.murik.lite.enums.BluetoothDimensionTimeEnum;
+import com.murik.lite.enums.BluetoothDimensionAlgorithm;
+import com.murik.lite.enums.NoseType;
 
 import java.util.Objects;
 
@@ -29,6 +30,7 @@ public class InitDimensionDialogFragment extends AppCompatDialogFragment {
     private EditText descriptions;
     private RadioGroup rgGender;
     private RadioGroup swHand;
+    private RadioGroup noseTypeRg;
     private SwitchCompat swPractice;
     private EditText dimensionTime;
     private EditText substanceDimensionTime;
@@ -37,6 +39,7 @@ public class InitDimensionDialogFragment extends AppCompatDialogFragment {
 
     private int gender = Const.GENDER_MALE;
     private boolean isLeftHand = true;
+    private NoseType noseType = NoseType.BIOSCANER;
 
 
     public void setDialogListener(
@@ -57,19 +60,20 @@ public class InitDimensionDialogFragment extends AppCompatDialogFragment {
         rgGender = view.findViewById(R.id.rg_gender_des);
 //        swPractice = view.findViewById(R.id.sc_practice_des);
         swHand = view.findViewById(R.id.rg_hand);
+        noseTypeRg = view.findViewById(R.id.rg_nose_type);
         dimensionTimeSpinner = view.findViewById(R.id.spinner_dimension_time);
 
         dimensionTimeSpinner.setAdapter(new CustomSpinnerAdapter(
                 Objects.requireNonNull(this.getContext()),
                 android.R.layout.simple_spinner_dropdown_item,
-                BluetoothDimensionTimeEnum.values())
+                BluetoothDimensionAlgorithm.getValuesByRole())
         );
 
         dimensionTimeSpinner.setOnItemSelectedListener(
                 new OnItemSelectedListener() {
                     public void onItemSelected(
                             AdapterView<?> parent, View view, int position, long id) {
-                        tvAlgorithmDescription.setText(BluetoothDimensionTimeEnum.values()[position].getAlgorithm().getDescription());
+                        tvAlgorithmDescription.setText(BluetoothDimensionAlgorithm.values()[position].getDescription());
                     }
 
                     public void onNothingSelected(AdapterView<?> parent) {
@@ -85,6 +89,16 @@ public class InitDimensionDialogFragment extends AppCompatDialogFragment {
                 case R.id.rb_feminine_des:
                     gender = Const.GENDER_FEMININE;
                     break;
+            }
+        });
+
+        noseTypeRg.setOnCheckedChangeListener((group, checkedId) -> {
+            switch (checkedId) {
+                case R.id.rb_diagnost:
+                    noseType = NoseType.DIAGNOST;
+                    break;
+                default:
+                    noseType = NoseType.BIOSCANER;
             }
         });
         builder.setView(view)
@@ -119,8 +133,12 @@ public class InitDimensionDialogFragment extends AppCompatDialogFragment {
         return isLeftHand;
     }
 
-    public BluetoothDimensionTimeEnum getDimensionTime() {
-        return (BluetoothDimensionTimeEnum) dimensionTimeSpinner.getSelectedItem();
+    public NoseType getNoseType() {
+        return noseType;
+    }
+
+    public BluetoothDimensionAlgorithm getAlgorithm() {
+        return (BluetoothDimensionAlgorithm) dimensionTimeSpinner.getSelectedItem();
     }
 
 

@@ -9,14 +9,18 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.LinearLayout;
 import android.widget.RadioGroup;
 import android.widget.ScrollView;
+import android.widget.Spinner;
 import android.widget.Switch;
+import android.widget.TextView;
 
 import com.murik.lite.Const;
 import com.murik.lite.R;
 import com.murik.lite.configuration.AuthService;
+import com.murik.lite.enums.BluetoothDimensionAlgorithm;
 
 import java.util.Objects;
 
@@ -36,6 +40,8 @@ public class ChooseTypeMeasureDialogFragment extends DialogFragment {
     private LinearLayout llMaxSignal;
     private Switch animalsSwitch;
     private ScrollView sensorsScroll;
+    private Spinner algorithmSpinner;
+    private TextView algorithmDescription;
 
     public void setDialogListener(
             DialogListener mNoticeDialogListener) {
@@ -52,7 +58,6 @@ public class ChooseTypeMeasureDialogFragment extends DialogFragment {
         View view = inflater.inflate(R.layout.dialog_choose_type_measure, null);
         rgChooseMeasureType = view.findViewById(R.id.rg_choose_type_measure);
         rgChooseSensor = view.findViewById(R.id.rg_sensors);
-        rgAlgorithm = view.findViewById(R.id.rg_registration_max_signal);
         rgSensorType= view.findViewById(R.id.rg_sensor_type);
         rgSensorType = view.findViewById(R.id.rg_sensor_type);
         rgExpert = view.findViewById(R.id.rg_expert_type);
@@ -60,29 +65,35 @@ public class ChooseTypeMeasureDialogFragment extends DialogFragment {
         llMaxSignal = view.findViewById(R.id.ll_max_signal);
         animalsSwitch = view.findViewById(R.id.animals);
         sensorsScroll = view.findViewById(R.id.scroll_sensors);
-        //todo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
+        algorithmSpinner = view.findViewById(R.id.spinner_algorithm);
+        algorithmDescription = view.findViewById(R.id.tv_algorithm_desc);
+
+        algorithmSpinner.setAdapter(new CustomSpinnerAdapter(
+                Objects.requireNonNull(this.getContext()),
+                android.R.layout.simple_spinner_dropdown_item,
+                BluetoothDimensionAlgorithm.getValuesByRole())
+        );
+
+        algorithmSpinner.setOnItemSelectedListener(
+                new AdapterView.OnItemSelectedListener() {
+                    public void onItemSelected(
+                            AdapterView<?> parent, View view, int position, long id) {
+                        algorithmDescription.setText(BluetoothDimensionAlgorithm.values()[position].getDescription());
+                    }
+
+                    public void onNothingSelected(AdapterView<?> parent) {
+                    }
+                }
+        );
 
         if (AuthService.getInstance().isAdmin()) {
             rgChooseMeasureType.setVisibility(View.VISIBLE);
             rgExpert.setVisibility(View.VISIBLE);
             rgSensorType.setVisibility(View.VISIBLE);
-            view.findViewById(R.id.rb_max_160).setVisibility(View.VISIBLE);
-            view.findViewById(R.id.rb_max_80).setVisibility(View.VISIBLE);
             animalsSwitch.setVisibility(View.VISIBLE);
             sensorsScroll.setVisibility(View.VISIBLE);
             llSensors.setVisibility(View.VISIBLE);
         }
-
-//        rgChooseMeasureType.setOnCheckedChangeListener((group, checkedId) -> {
-//            switch (checkedId) {
-//                case R.id.rb_chart:
-//                    llOneSensorSettings.setVisibility(View.GONE);
-//                    break;
-//                case R.id.rb_one_sensor_type:
-//                    llOneSensorSettings.setVisibility(View.VISIBLE);
-//                    break;
-//            }
-//        });
 
         rgSensorType.setOnCheckedChangeListener(this::onSensorTypeChanged);
 
@@ -128,20 +139,6 @@ public class ChooseTypeMeasureDialogFragment extends DialogFragment {
         }
     }
 
-    public int getTimeRegistrationMaxSignal() {
-        int checkedId = rgAlgorithm.getCheckedRadioButtonId();
-        switch (checkedId) {
-            case R.id.rb_max_80:
-                return 80;
-            case R.id.rb_max_160:
-                return 160;
-            case R.id.rb_max_30:
-                return 30;
-            default:
-                return 60;
-        }
-    }
-
     public String getSensorType() {
         int checkedId = rgSensorType.getCheckedRadioButtonId();
         switch (checkedId) {
@@ -175,5 +172,9 @@ public class ChooseTypeMeasureDialogFragment extends DialogFragment {
 
     public boolean isAnimalsSelected() {
         return animalsSwitch.isChecked();
+    }
+
+    public BluetoothDimensionAlgorithm getAlgotirhm() {
+        return (BluetoothDimensionAlgorithm) algorithmSpinner.getSelectedItem();
     }
 }

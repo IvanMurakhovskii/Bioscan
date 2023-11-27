@@ -92,7 +92,7 @@ public class SummaryFragment extends MvpAppCompatFragment implements SummaryView
     @Override
     public void setProgressLeft(Double progress, int color) {
         progressBarLeft.setProgress(BigDecimal.valueOf(progress).setScale(0, RoundingMode.HALF_UP).intValue());
-        progressTextLeft.setText(progress.intValue() + "%");
+        progressTextLeft.setText(progress.intValue() + " %");
         val drawable = ContextCompat.getDrawable(Objects.requireNonNull(getContext()), R.drawable.circle);
         Objects.requireNonNull(drawable).setColorFilter(color, PorterDuff.Mode.SRC_IN);
         progressTextLeft.setBackground(drawable);
@@ -101,7 +101,7 @@ public class SummaryFragment extends MvpAppCompatFragment implements SummaryView
     @Override
     public void setProgressRight(Double progress, int color) {
         progressBarRight.setProgress(BigDecimal.valueOf(progress).setScale(0, RoundingMode.HALF_UP).intValue());
-        progressTextRight.setText(progress.intValue() + "%");
+        progressTextRight.setText(progress.intValue() + " %");
         val drawable = ContextCompat.getDrawable(Objects.requireNonNull(getContext()), R.drawable.circle);
         Objects.requireNonNull(drawable).setColorFilter(color, PorterDuff.Mode.SRC_IN);
         progressTextRight.setBackground(drawable);

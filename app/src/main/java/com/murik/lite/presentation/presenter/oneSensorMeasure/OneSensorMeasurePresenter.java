@@ -10,6 +10,7 @@ import com.murik.lite.App;
 import com.murik.lite.Const;
 import com.murik.lite.Screens;
 import com.murik.lite.dto.DataByMaxParcelable;
+import com.murik.lite.enums.BluetoothDimensionAlgorithm;
 import com.murik.lite.model.AreaDifferenceDiscrete;
 import com.murik.lite.model.AreaDifferenceEnergy;
 import com.murik.lite.model.AreaDifferenceTotal;
@@ -81,9 +82,11 @@ public class OneSensorMeasurePresenter extends MvpPresenter<OneSensorMeasureView
 
         AreaDifference areaDifference = null;
 
+        val algorithm = BluetoothDimensionAlgorithm.getByAlgorithmId(dataByMaxParcelable.getAlgorithmId());
+
         switch (mPage) {
             case Const.PAGE_BODY:
-                if (dataByMaxParcelable.getTimeRegistrationMaxSignal() == 30) {
+                if (algorithm.equals(BluetoothDimensionAlgorithm.SIMPLE)) {
                     initRadarChart(Const.BODY_30, Color.RED, Color.BLUE, dataByMaxParcelable);
                     areaLeft = BaseMeasureService.getAreaByMask(Const.BODY_30, dataByMaxParcelable.getLeftHandDataSensor());
                     areaRight = BaseMeasureService.getAreaByMask(Const.BODY_30, dataByMaxParcelable.getRightHandDataSensor());
@@ -100,15 +103,15 @@ public class OneSensorMeasurePresenter extends MvpPresenter<OneSensorMeasureView
                 }
                 break;
             case Const.PAGE_DISCRETE:
-                if (dataByMaxParcelable.getTimeRegistrationMaxSignal() == 80) {
+                if (algorithm.equals(BluetoothDimensionAlgorithm._200)) {
                     initRadarChart(Const.DISCRETE, Color.RED, Color.BLUE, dataByMaxParcelable);
                     areaLeft = BaseMeasureService.getAreaByMask(Const.DISCRETE, dataByMaxParcelable.getLeftHandDataSensor());
                     areaRight = BaseMeasureService.getAreaByMask(Const.DISCRETE, dataByMaxParcelable.getRightHandDataSensor());
-                } else if (dataByMaxParcelable.getTimeRegistrationMaxSignal() == 60) {
-                    initRadarChart(Const.DISCRETE_60, Color.RED, Color.BLUE, dataByMaxParcelable);
-                    areaLeft = BaseMeasureService.getAreaByMask(Const.DISCRETE_60, dataByMaxParcelable.getLeftHandDataSensor());
-                    areaRight = BaseMeasureService.getAreaByMask(Const.DISCRETE_60, dataByMaxParcelable.getRightHandDataSensor());
-                } else if (dataByMaxParcelable.getTimeRegistrationMaxSignal() == 30) {
+                } else if (algorithm.equals(BluetoothDimensionAlgorithm.ADVANCED)) {
+                    initRadarChart(Const.DISCRETE_160, Color.RED, Color.BLUE, dataByMaxParcelable);
+                    areaLeft = BaseMeasureService.getAreaByMask(Const.DISCRETE_160, dataByMaxParcelable.getLeftHandDataSensor());
+                    areaRight = BaseMeasureService.getAreaByMask(Const.DISCRETE_160, dataByMaxParcelable.getRightHandDataSensor());
+                } else if (algorithm.equals(BluetoothDimensionAlgorithm.SIMPLE)) {
                     initRadarChart(Const.DISCRETE_30, Color.RED, Color.BLUE, dataByMaxParcelable);
                     areaLeft = BaseMeasureService.getAreaByMask(Const.DISCRETE_30, dataByMaxParcelable.getLeftHandDataSensor());
                     areaRight = BaseMeasureService.getAreaByMask(Const.DISCRETE_30, dataByMaxParcelable.getRightHandDataSensor());
@@ -118,15 +121,15 @@ public class OneSensorMeasurePresenter extends MvpPresenter<OneSensorMeasureView
                 areaDifference = new AreaDifferenceDiscrete(difference, dataByMaxParcelable.getGender(), context);
                 break;
             case Const.PAGE_ENERGY_ONE_SENSOR:
-                if (dataByMaxParcelable.getTimeRegistrationMaxSignal() == 80) {
+                if (algorithm.equals(BluetoothDimensionAlgorithm._200)) {
                     initRadarChart(Const.ENERGY, Color.RED, Color.BLUE, dataByMaxParcelable);
                     areaLeft = BaseMeasureService.getAreaByMask(Const.ENERGY, dataByMaxParcelable.getLeftHandDataSensor());
                     areaRight = BaseMeasureService.getAreaByMask(Const.ENERGY, dataByMaxParcelable.getRightHandDataSensor());
-                } else if (dataByMaxParcelable.getTimeRegistrationMaxSignal() == 60) {
-                    initRadarChart(Const.ENERGY_60, Color.RED, Color.BLUE, dataByMaxParcelable);
-                    areaLeft = BaseMeasureService.getAreaByMask(Const.ENERGY_60, dataByMaxParcelable.getLeftHandDataSensor());
-                    areaRight = BaseMeasureService.getAreaByMask(Const.ENERGY_60, dataByMaxParcelable.getRightHandDataSensor());
-                } else if (dataByMaxParcelable.getTimeRegistrationMaxSignal() == 30) {
+                } else if (algorithm.equals(BluetoothDimensionAlgorithm.ADVANCED)) {
+                    initRadarChart(Const.ENERGY_160, Color.RED, Color.BLUE, dataByMaxParcelable);
+                    areaLeft = BaseMeasureService.getAreaByMask(Const.ENERGY_160, dataByMaxParcelable.getLeftHandDataSensor());
+                    areaRight = BaseMeasureService.getAreaByMask(Const.ENERGY_160, dataByMaxParcelable.getRightHandDataSensor());
+                } else if (algorithm.equals(BluetoothDimensionAlgorithm.SIMPLE)) {
                     initRadarChart(Const.ENERGY_30, Color.RED, Color.BLUE, dataByMaxParcelable);
                     areaLeft = BaseMeasureService.getAreaByMask(Const.ENERGY_30, dataByMaxParcelable.getLeftHandDataSensor());
                     areaRight = BaseMeasureService.getAreaByMask(Const.ENERGY_30, dataByMaxParcelable.getRightHandDataSensor());
@@ -140,7 +143,22 @@ public class OneSensorMeasurePresenter extends MvpPresenter<OneSensorMeasureView
             getViewState().setAreaDifference(areaDifference);
         }
 
-        val timeRegistrationMaxSignal = dataByMaxParcelable.getTimeRegistrationMaxSignal();
+        int timeRegistrationMaxSignal = algorithm.getMaxSignalTime();
+        val algorithmId = dataByMaxParcelable.getAlgorithmId();
+
+        if (algorithmId != null) {
+            val a = BluetoothDimensionAlgorithm.getByAlgorithmId(algorithmId);
+            if (a != null) {
+                timeRegistrationMaxSignal =  a.getMaxSignalTime();
+            }
+        } else {
+            if (timeRegistrationMaxSignal == 160) {
+                timeRegistrationMaxSignal = 60;
+            }
+            if (timeRegistrationMaxSignal == 200) {
+                timeRegistrationMaxSignal = 80;
+            }
+        }
 
         if (dataByMaxParcelable.getLeftHandDataSensor() != null && dataByMaxParcelable.getLeftHandDataSensor().size() > timeRegistrationMaxSignal) {
             val maxLeft = dataByMaxParcelable.getLeftHandDataSensor().get(timeRegistrationMaxSignal);

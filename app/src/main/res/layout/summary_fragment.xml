@@ -9,15 +9,28 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         tools:context=".ui.activity.start.StartActivity">
+
+        <TextView
+            android:id="@+id/textView4"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="УРОВЕНЬ ЗДОРОВЬЯ НА МОМЕНТ ИЗМЕРЕНИЯ:"
+            android:textAlignment="center"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
         <ProgressBar
             android:id="@+id/summary_progress_bar"
             style="@style/CircularDeterminateProgressBar"
             android:layout_width="150dp"
             android:layout_height="150dp"
+            android:progress="60"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:progress="60" />
+            app:layout_constraintTop_toBottomOf="@+id/textView4" />
         <TextView
             android:id="@+id/text_view_progress"
             android:layout_width="100dp"
@@ -31,10 +44,27 @@
             app:layout_constraintStart_toStartOf="@+id/summary_progress_bar"
             app:layout_constraintTop_toTopOf="@+id/summary_progress_bar"
             app:layout_constraintVertical_bias="0.51" />
+
+
+        <TextView
+            android:id="@+id/textView5"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:textAlignment="center"
+            android:text="НАИБОЛЕЕ ВЕРОЯТНЫЕ ПРИЧИНЫ СОСТОЯНИЯ:"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/summary_progress_bar" />
+
     </android.support.constraint.ConstraintLayout>
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="200dp">
+
         <android.support.v7.widget.CardView
             android:id="@+id/summary_description_card"
             android:layout_width="match_parent"

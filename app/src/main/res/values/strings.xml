@@ -21,8 +21,8 @@
     <string name="descriptions">Описание</string>
     <string name="about_myself">О себе</string>
     <string name="input_max_signals">Введите максимальные сигналы для точек измерения, Гц:</string>
-    <string name="left_hand">Левая рука</string>
-    <string name="right_hand">Правая рука</string>
+    <string name="left_hand">Левая сторона</string>
+    <string name="right_hand">Правая сторона</string>
     <string name="comment">Комментарий</string>
     <string name="hand">Выберите руку:</string>
     <string name="empty_list">Список пуст</string>

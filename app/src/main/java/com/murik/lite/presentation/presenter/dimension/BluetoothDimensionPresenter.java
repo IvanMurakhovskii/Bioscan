@@ -1,6 +1,9 @@
 package com.murik.lite.presentation.presenter.dimension;
 
 
+import android.hardware.Sensor;
+import android.hardware.SensorEvent;
+
 import com.arellomobile.mvp.InjectViewState;
 import com.arellomobile.mvp.MvpPresenter;
 import com.murik.lite.App;
@@ -14,6 +17,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 @InjectViewState
 public class BluetoothDimensionPresenter extends MvpPresenter<BluetoothDimensionView> {
@@ -56,6 +60,28 @@ public class BluetoothDimensionPresenter extends MvpPresenter<BluetoothDimension
         this.algorithmId = dimension.getAlgorithmId();
     }
 
+    public int addSensorData(boolean isLeftHand, int sensorNumber, int value) {
+        String sensorLabel = "SID000" + sensorNumber;
+        if(isLeftHand){
+            return addSensorValueToMap(dataLeftHand, sensorLabel, value);
+        } else {
+            return addSensorValueToMap(dataRightHand, sensorLabel, value);
+        }
+    }
+
+    private int addSensorValueToMap(Map<String, ArrayList<Integer>> data, String sensorLabel, Integer value) {
+        List<Integer> sensorData = data.get(sensorLabel);
+        if (sensorData == null) {
+            ArrayList<Integer> values = new ArrayList<>();
+            values.add(value);
+            data.put(sensorLabel, values);
+        } else {
+            sensorData.add(value);
+        }
+
+        return sensorData != null ? sensorData.size() : 0;
+    }
+
     public void save() {
         SensorDataFullParcelable sensorDataFullParcelable = new SensorDataFullParcelable();
         sensorDataFullParcelable.setDescriptions(description);
@@ -65,11 +91,19 @@ public class BluetoothDimensionPresenter extends MvpPresenter<BluetoothDimension
         sensorDataFullParcelable.setPractice(isPractice);
         sensorDataFullParcelable.setAlgorithmId(algorithmId);
 
-        ListUtils.inverseListValueIfMiddleValueBelowZero(sens1LeftHand);
-        ListUtils.inverseListValueIfMiddleValueBelowZero(sens1RightHand);
+//        ListUtils.inverseListValueIfMiddleValueBelowZero(sens1LeftHand);
+//        ListUtils.inverseListValueIfMiddleValueBelowZero(sens1RightHand);
 
-        dataLeftHand.put(Const.SENSOR_1, new ArrayList<>(sens1LeftHand));
-        dataRightHand.put(Const.SENSOR_1, new ArrayList<>(sens1RightHand));
+        for (List<Integer> sensData : dataLeftHand.values()) {
+            ListUtils.inverseListValueIfMiddleValueBelowZero(sensData);
+        }
+
+        for (List<Integer> sensData : dataRightHand.values()) {
+            ListUtils.inverseListValueIfMiddleValueBelowZero(sensData);
+        }
+
+//        dataLeftHand.put(Const.SENSOR_1, new ArrayList<>(sens1LeftHand));
+//        dataRightHand.put(Const.SENSOR_1, new ArrayList<>(sens1RightHand));
 
         sensorDataFullParcelable.setDataSensorMapLeftHand(dataLeftHand);
         sensorDataFullParcelable.setDataSensorMapRightHand(dataRightHand);
@@ -82,7 +116,7 @@ public class BluetoothDimensionPresenter extends MvpPresenter<BluetoothDimension
     }
 
     public List<Integer> getSens1DataLeftHand() {
-        return sens1LeftHand;
+        return dataLeftHand.get(Const.SENSOR_1);
     }
 
     public void addSens1DataRightHand(int value) {
@@ -90,7 +124,7 @@ public class BluetoothDimensionPresenter extends MvpPresenter<BluetoothDimension
     }
 
     public List<Integer> getSens1DataRightHand() {
-        return sens1RightHand;
+        return dataRightHand.get(Const.SENSOR_1);
     }
 
     public int getLastDataSens2() {

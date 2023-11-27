@@ -10,6 +10,10 @@ public class ListUtils {
         return list != null && list.size() > size;
     }
 
+    public static boolean isDataSensorAllZero(List<Integer> data) {
+        return (data.get(0) == 0 && data.get(data.size() / 2) == 0 && data.get(data.size() - 1) == 0);
+    }
+
     public static int findClosestValueIndex(List<Integer> list, Double searchValue) {
 
         double closestDiff = Integer.MAX_VALUE;

@@ -7,6 +7,7 @@ import com.arellomobile.mvp.InjectViewState;
 import com.arellomobile.mvp.MvpPresenter;
 import com.murik.lite.dto.DataByMaxParcelable;
 import com.murik.lite.dto.SummaryFullParcelable;
+import com.murik.lite.enums.BluetoothDimensionAlgorithm;
 import com.murik.lite.model.summary.Summary_60;
 import com.murik.lite.presentation.view.summary.SummaryView;
 
@@ -21,7 +22,7 @@ public class SummaryPresenter extends MvpPresenter<SummaryView> {
 
     public void initSummaryResult(Context context) {
 
-        val timeRegistrationMaxSignal = summaryParcelable.getTimeRegistrationMaxSignal();
+        val algorithm = BluetoothDimensionAlgorithm.getByAlgorithmId(summaryParcelable.getAlgorithmId());
         val summaryLeft = summaryParcelable.getSummaryLeft();
 
         val inputData = new DataByMaxParcelable();
