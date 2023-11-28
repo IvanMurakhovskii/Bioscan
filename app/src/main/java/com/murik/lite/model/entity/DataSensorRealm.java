@@ -16,6 +16,7 @@ public class DataSensorRealm extends RealmObject {
     private String descriptions;
     private boolean isPractice;
     private Integer algorithmId;
+    private Integer measurePointId;
     private boolean isFullData;
     private long time;
 

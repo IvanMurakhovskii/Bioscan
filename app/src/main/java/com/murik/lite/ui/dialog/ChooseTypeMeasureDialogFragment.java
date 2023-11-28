@@ -68,7 +68,7 @@ public class ChooseTypeMeasureDialogFragment extends DialogFragment {
         algorithmSpinner = view.findViewById(R.id.spinner_algorithm);
         algorithmDescription = view.findViewById(R.id.tv_algorithm_desc);
 
-        algorithmSpinner.setAdapter(new CustomSpinnerAdapter(
+        algorithmSpinner.setAdapter(new BluetoothDimensionSpinnerAdapter(
                 Objects.requireNonNull(this.getContext()),
                 android.R.layout.simple_spinner_dropdown_item,
                 BluetoothDimensionAlgorithm.getValuesByRole())

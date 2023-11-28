@@ -27,6 +27,7 @@ public class DataByMaxParcelable implements Parcelable {
     private Float differenceArea = 0.0f;
     private String dimensionTime;
     private Integer algorithmId;
+    private Integer measurePointId;
 
     private String sensorType = Const.DIAGNOST;
 
@@ -52,6 +53,7 @@ public class DataByMaxParcelable implements Parcelable {
         dest.writeString(sensorType);
         dest.writeString(dimensionTime);
         dest.writeInt(algorithmId);
+        dest.writeInt(measurePointId);
     }
 
     public static final Parcelable.Creator<DataByMaxParcelable> CREATOR = new Parcelable.Creator<DataByMaxParcelable>() {
@@ -81,6 +83,7 @@ public class DataByMaxParcelable implements Parcelable {
         measureType = parcel.readString();
         sensorType = parcel.readString();
         algorithmId = parcel.readInt();
+        measurePointId = parcel.readInt();
     }
 
 }

@@ -118,10 +118,23 @@
     <!--        android:layout_marginRight="4dp"-->
     <!--        android:layout_marginBottom="4dp"-->
     <!--        android:hint="@string/dimensionTime"/>-->
+
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Выбрать тип диагностики:" />
+        android:text="Выберите точку измерения:" />
+
+    <android.support.v7.widget.AppCompatSpinner
+        android:id="@+id/spinner_measure_point"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:spinnerMode="dropdown"
+        android:background="@drawable/spinner_background"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Выберите тип диагностики:" />
 
     <android.support.v7.widget.AppCompatSpinner
         android:id="@+id/spinner_dimension_time"

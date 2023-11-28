@@ -34,6 +34,7 @@ public class RealmController {
       data.setPractice(dataSens.isPractice());
       data.setGender(dataSens.getGender());
       data.setAlgorithmId(dataSens.getAlgorithmId());
+      data.setMeasurePointId(dataSens.getMeasurePointId());
       data.setFullData(true);
 
       DataSensor rightHandDataSensor = realm.createObject(DataSensor.class);

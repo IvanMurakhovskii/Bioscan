@@ -10,17 +10,16 @@ import android.widget.ArrayAdapter;
 import android.widget.SpinnerAdapter;
 import android.widget.TextView;
 
-import com.murik.lite.configuration.AuthService;
-import com.murik.lite.enums.BluetoothDimensionAlgorithm;
+import com.murik.lite.enums.MeasurePoint;
 
 
-public class CustomSpinnerAdapter extends ArrayAdapter<BluetoothDimensionAlgorithm> implements SpinnerAdapter {
+public class MeasurePointSpinnerAdapter extends ArrayAdapter<MeasurePoint> implements SpinnerAdapter {
 
-    private BluetoothDimensionAlgorithm[] items;
+    private MeasurePoint[] items;
     private Context context;
     private int resource;
 
-    public CustomSpinnerAdapter(@NonNull Context context, int resource, @NonNull BluetoothDimensionAlgorithm[] objects) {
+    public MeasurePointSpinnerAdapter(@NonNull Context context, int resource, @NonNull MeasurePoint[] objects) {
         super(context, resource, objects);
         this.context = context;
         this.items = objects;
@@ -44,11 +43,7 @@ public class CustomSpinnerAdapter extends ArrayAdapter<BluetoothDimensionAlgorit
         TextView lbl = (TextView) v.findViewById(android.R.id.text1);
         lbl.setPadding(0, 12, 0, 12);
 
-        String text = items[position].getName();
-
-        if (AuthService.getInstance().isAdmin()) {
-            text += " (" + items[position].getMaxSignalTime() + ")";
-        }
+        String text = items[position].getDescription();
 
         lbl.setText(text);
 

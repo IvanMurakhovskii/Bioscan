@@ -39,6 +39,7 @@ import com.murik.lite.App;
 import com.murik.lite.Const;
 import com.murik.lite.R;
 import com.murik.lite.Screens;
+import com.murik.lite.enums.NoseType;
 import com.murik.lite.presentation.presenter.dimension.BluetoothDimensionPresenter;
 import com.murik.lite.presentation.presenter.dimension.Dimension;
 import com.murik.lite.presentation.view.dimension.BluetoothDimensionView;
@@ -51,7 +52,10 @@ import com.murik.lite.ui.dialog.StartDialogListener;
 import com.murik.lite.ui.dialog.StartDimensionDialogFragment;
 import com.murik.lite.ui.dialog.TakeAwayHandDialogFragment;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -74,6 +78,7 @@ public class BluetoothDimensionFragment extends MvpAppCompatFragment implements 
     public boolean isFirstDimension = true;
     @InjectPresenter
     BluetoothDimensionPresenter mBluetoothDimensionPresenter;
+    Map<Integer, Integer> initialValues = new HashMap<>();
     private Handler progressBarbHandler = new Handler();
     private InitDimensionDialogFragment initDimensionDialogFragment;
     private ContinueDimensionDialogFragment continueDimensionDialogFragment;
@@ -81,6 +86,7 @@ public class BluetoothDimensionFragment extends MvpAppCompatFragment implements 
     private String description;
     private boolean isPractice;
     private int gender = Const.GENDER_MALE;
+    private NoseType noseType = NoseType.BIOSCANER;
     private boolean isDimensionStart = false;
     private boolean isLeftHand = false;
     private LineChart lineChart;
@@ -92,19 +98,17 @@ public class BluetoothDimensionFragment extends MvpAppCompatFragment implements 
     private LinearLayout llMaxSignal;
     private LinearLayout llDimensionTimer;
     private TextView dimensionTimer;
-//    private TextView initial;
-//    private TextView signal;
+//  private TextView initial;
+//  private TextView signal;
     private GifImageView gifImageView;
     private int count = 0;
+
     TimerTask task = new TimerTask() {
         public void run() {
             val value = (Math.round(Math.random() * 99));
             Log.i(TAG, "value " + value);
 
-            addEntry((int) value, "Sensor 1", Color.MAGENTA, 0);
-
-//            initial.getHandler().post(() -> initial.setText(String.valueOf(value)));
-//            signal.getHandler().post(() -> signal.setText(String.valueOf(value)));
+            addEntry((int) value, "Sensor 1", Color.MAGENTA, 0, noseType);
 
 
             if (isDimensionStart) {
@@ -130,6 +134,7 @@ public class BluetoothDimensionFragment extends MvpAppCompatFragment implements 
             }
         }
     };
+
     private boolean isInitial1 = false;
     CountDownTimer countDownTimer = new CountDownTimer(5000, 1000) {
         @Override
@@ -147,14 +152,12 @@ public class BluetoothDimensionFragment extends MvpAppCompatFragment implements 
             }
         }
     };
-    private int initial1 = 0;
+
     BroadcastReceiver mBroadcastReceiver = new BroadcastReceiver() {
         @SuppressLint("ShowToast")
         @Override
         public void onReceive(Context context, Intent intent) {
             String action = intent.getAction();
-
-            val lineColor = isDimensionStart ? Color.MAGENTA : Color.GRAY;
 
             if (BluetoothImplService.ACTION_CHARACTERISTIC_CHANGE.equals(action)) {
                 String str = intent.getStringExtra(BluetoothImplService.EXTRA_DATA);
@@ -163,54 +166,59 @@ public class BluetoothDimensionFragment extends MvpAppCompatFragment implements 
                     val sensNumber = Integer.decode(str.substring(i, i + 1));
                     val value = Integer.parseInt(str.substring(i + 1, i + 8), 16);
 
-                    Log.d("MyLog", "sens_count =  " + Integer.decode(str.substring(i, i + 1)) + " value =  "
-                            + Integer.parseInt(str.substring(i + 1, i + 8), 16));
+                    Log.i(TAG, " sensor " + sensNumber + " value = " + value);
 
-                    if (sensNumber == 1) {
-                        if (!isInitial1) {
-                            initial1 = value;
-                            isInitial1 = true;
-                        }
+                    if (initialValues.get(sensNumber) == null) {
+                        initialValues.put(sensNumber, value);
+                    }
 
-                        addEntry(initial1 - value, "Sensor 1", lineColor, 0);
+//                    if (!isInitial1) {
+//                        initial1 = value;
+//                        isInitial1 = true;
+//                    }
+
+                    if (value != 0) {
+                        Integer result = initialValues.get(sensNumber) - value;
+
+                        val lineColor = isDimensionStart ? Const.CHART_COLOR.get(sensNumber - 1) : Color.GRAY;
+                        addEntry(result, "Sensor " + sensNumber, lineColor, sensNumber - 1, noseType);
+
+//                        Log.i(TAG, "addEntry = " + result + " sensor " + sensNumber);
 
                         if (isDimensionStart) {
                             progressBar.getHandler().post(()
                                     -> progressBar.setProgress(count * 100 / dimensionTime));
-                            if (isLeftHand) {
-                                mBluetoothDimensionPresenter.addSens1DataLeftHand(initial1 - value);
-                            } else {
-                                mBluetoothDimensionPresenter.addSens1DataRightHand(initial1 - value);
-                            }
-                            count++;
 
-                            if (count == substanceDimensionTime - 1) {
-                                makeNotificationSound();
-                                takeAwayHandDialog();
-                            }
-
-                            if (count == substanceDimensionTime + 2) {
-                                findAndShowMaxSignal();
-                            }
-
-                            if (isDimensionTimeOver(count)) {
-
-                                stopDimension();
-                                makeNotificationSound();
-                                Toast.makeText(
-                                        getContext(),
-                                        "Измерение завершено!",
-                                        Toast.LENGTH_LONG
-                                ).show();
-                            }
+                            count = mBluetoothDimensionPresenter.addSensorData(isLeftHand, sensNumber, result);
                         }
+                    }
+                }
+
+                if (isDimensionStart) {
+                    if (count == substanceDimensionTime - 1) {
+                        makeNotificationSound();
+                        takeAwayHandDialog();
+                    }
+
+                    if (count == substanceDimensionTime + 6) {
+                        findAndShowMaxSignal();
+                    }
+
+                    if (isDimensionTimeOver(count)) {
+
+
+                        stopDimension();
+                        makeNotificationSound();
+                        Toast.makeText(
+                                getContext(),
+                                "Измерение завершено!",
+                                Toast.LENGTH_LONG
+                        ).show();
                     }
                 }
             }
         }
     };
-    private boolean isInitial3 = false;
-    private int initial3 = 0;
 
     public static BluetoothDimensionFragment newInstance() {
         BluetoothDimensionFragment fragment = new BluetoothDimensionFragment();
@@ -349,23 +357,27 @@ public class BluetoothDimensionFragment extends MvpAppCompatFragment implements 
     private void startDimension() {
         isDimensionStart = true;
         isInitial1 = false;
+        initialValues = new HashMap<>();
         description = initDimensionDialogFragment.getDescriptions();
 //        isPractice = initDimensionDialogFragment.isPractice();
         gender = initDimensionDialogFragment.getGender();
+        noseType = initDimensionDialogFragment.getNoseType();
         isLeftHand = initDimensionDialogFragment.isLeftHand();
 
         try {
-            val dimensionEnum = initDimensionDialogFragment.getDimensionTime();
-            val algorithmId = dimensionEnum.getAlgorithm().getAlgorithmId();
-            dimensionTime = dimensionEnum.getDimensionTime();
-            substanceDimensionTime = dimensionEnum.getMaxSignalTime();
+            val algorithm = initDimensionDialogFragment.getAlgorithm();
+            val measurePoint = initDimensionDialogFragment.getMeasurePoint();
+            dimensionTime = algorithm.getDimensionTime();
+            substanceDimensionTime = algorithm.getMaxSignalTime();
 
             val dimension = Dimension.builder().description(description)
-                    .gender(gender).isPractice(isPractice).algorithmId(algorithmId).build();
+                    .gender(gender).isPractice(isPractice).algorithmId(algorithm.getAlgorithmId())
+                    .measurePointId(measurePoint.getId())
+                    .build();
 
             mBluetoothDimensionPresenter.setDimensionParameters(dimension);
 
-            lineChart.getLineData().clearValues();
+            resetChart();
             makeNotificationSound();
         } catch (NumberFormatException e) {
             Toast.makeText(
@@ -386,9 +398,10 @@ public class BluetoothDimensionFragment extends MvpAppCompatFragment implements 
     private void continueDimension() {
         isLeftHand = !isLeftHand;
         isInitial1 = false;
+        initialValues = new HashMap<>();
         count = 0;
         isDimensionStart = true;
-        lineChart.getLineData().clearValues();
+        resetChart();
         makeNotificationSound();
     }
 
@@ -480,29 +493,22 @@ public class BluetoothDimensionFragment extends MvpAppCompatFragment implements 
 
         lineChart.setPinchZoom(true);
 
-        LineData data = new LineData();
-//      data.setValueTextColor(Color.WHITE);
+//        LineData data = new LineData();
 
         // add empty data
-        lineChart.setData(data);
+//        lineChart.setData(data);
 
-        // get the legend (only possible after setting data)
+        initDataSets();
+
         Legend l = lineChart.getLegend();
-
-        // modify the legend ...
-//        l.setForm(Legend.LegendForm.LINE);
-//      l.setTextColor(Color.WHITE);
 
         XAxis xl = lineChart.getXAxis();
         xl.setDrawGridLines(true);
-//        xl.setAvoidFirstLastClipping(false);
         xl.setEnabled(true);
         xl.setTextSize(12);
 
         YAxis y1 = lineChart.getAxisLeft();
         y1.setDrawGridLines(false);
-//      leftAxis.setAxisMaximum(10f);
-//      leftAxis.setAxisMinimum(0f);
         y1.setDrawGridLines(true);
         y1.setTextSize(12);
 
@@ -514,46 +520,78 @@ public class BluetoothDimensionFragment extends MvpAppCompatFragment implements 
         lineChart.setDrawBorders(false);
     }
 
-    private void addEntry(Integer value, final String label, final int color, int index) {
+    private void resetChart() {
+        lineChart.getLineData().clearValues();
+        initDataSets();
+    }
+
+    public static final int MAX_SENS_NUMBER = 8;
+
+    private void initDataSets() {
+        List<ILineDataSet> dataSets = new ArrayList<>();
+
+        for (int i = 0; i < MAX_SENS_NUMBER; i++) {
+            List<Entry> entries = new ArrayList<>();
+            Entry entry = new Entry(0, 0);
+
+            entries.add(entry);
+            LineDataSet sets = createSet(entries, String.format("S_%s", i + 1), Const.CHART_COLOR.get(i));
+            sets.setAxisDependency(YAxis.AxisDependency.LEFT);
+
+            dataSets.add(sets);
+        }
+
+        lineChart.setData(new LineData(dataSets));
+
+        if (noseType == NoseType.BIOSCANER) {
+            lineChart.getLegend().setEnabled(false);
+        } else {
+            lineChart.getLegend().setEnabled(true);
+        }
+    }
+
+    private void addEntry(Integer value, final String label, final int color, int index, NoseType noseType) {
 
         LineData data = lineChart.getData();
 
         if (data != null) {
 
             ILineDataSet set = data.getDataSetByIndex(index);
-            // set.addEntry(...); // can be called as well
 
-            if (set == null) {
-                set = createSet(label, color);
-                data.addDataSet(set);
-            }
 
-//            data.addEntry(new Entry(set.getEntryCount(), (float) (Math.random() * 80) + 10f), 0);
+//            if (set == null) {
+//                if (noseType == NoseType.DIAGNOST) {
+//                    initDataForDiagnostLineChart();
+//                    data = lineChart.getLineData();
+//                    set = data.getDataSetByIndex(index);
+//                } else {
+//                    set = createSet(null, label, color);
+//                    data.addDataSet(set);
+//                }
+//            }
+
             data.addEntry(new Entry(set.getEntryCount(), value), index);
-            data.notifyDataChanged();
 
+            data.notifyDataChanged();
             lineChart.notifyDataSetChanged();
 
             lineChart.setVisibleXRangeMaximum(150);
-            // mChart.setVisibleYRange(30, AxisDependency.LEFT);
-
-            // move to the latest entry
             lineChart.moveViewToX(data.getEntryCount());
-
         }
     }
 
-    private LineDataSet createSet(final String label, final int color) {
+    private LineDataSet createSet(final List<Entry> entries, final String label, final int color) {
 
-        LineDataSet set = new LineDataSet(null, null);
+        LineDataSet set = new LineDataSet(entries, label);
         set.setAxisDependency(YAxis.AxisDependency.RIGHT);
         set.setLineWidth(3f);
-        set.setColor(color);
+        set.setColor(isDimensionStart ? color: Color.GRAY);
         set.setHighlightEnabled(false);
         set.setDrawValues(false);
         set.setDrawCircles(false);
         set.setMode(LineDataSet.Mode.CUBIC_BEZIER);
         set.setCubicIntensity(0.2f);
+
         return set;
     }
 

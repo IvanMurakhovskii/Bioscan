@@ -1,14 +1,10 @@
 package com.murik.lite.presentation.presenter.dimension;
 
 
-import android.hardware.Sensor;
-import android.hardware.SensorEvent;
-
 import com.arellomobile.mvp.InjectViewState;
 import com.arellomobile.mvp.MvpPresenter;
 import com.murik.lite.App;
 import com.murik.lite.Const;
-import com.murik.lite.model.RealmController;
 import com.murik.lite.dto.SensorDataFullParcelable;
 import com.murik.lite.presentation.view.dimension.BluetoothDimensionView;
 import com.murik.lite.utils.ListUtils;
@@ -17,7 +13,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 
 @InjectViewState
 public class BluetoothDimensionPresenter extends MvpPresenter<BluetoothDimensionView> {
@@ -31,6 +26,7 @@ public class BluetoothDimensionPresenter extends MvpPresenter<BluetoothDimension
     private boolean isPractice;
     private int gender = Const.GENDER_MALE;
     private Integer algorithmId;
+    private Integer measurePointId;
     private boolean isLeftHand = false;
 
     private List<Integer> sens1LeftHand = new ArrayList<>();
@@ -58,6 +54,7 @@ public class BluetoothDimensionPresenter extends MvpPresenter<BluetoothDimension
         this.gender = dimension.getGender();
         this.isPractice = dimension.isPractice();
         this.algorithmId = dimension.getAlgorithmId();
+        this.measurePointId = dimension.getMeasurePointId();
     }
 
     public int addSensorData(boolean isLeftHand, int sensorNumber, int value) {
@@ -90,6 +87,7 @@ public class BluetoothDimensionPresenter extends MvpPresenter<BluetoothDimension
         sensorDataFullParcelable.setGender(gender);
         sensorDataFullParcelable.setPractice(isPractice);
         sensorDataFullParcelable.setAlgorithmId(algorithmId);
+        sensorDataFullParcelable.setMeasurePointId(measurePointId);
 
 //        ListUtils.inverseListValueIfMiddleValueBelowZero(sens1LeftHand);
 //        ListUtils.inverseListValueIfMiddleValueBelowZero(sens1RightHand);

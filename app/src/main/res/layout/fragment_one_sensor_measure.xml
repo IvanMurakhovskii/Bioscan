@@ -59,6 +59,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Левая S = "
+                        android:textColor="@android:color/black"
                         android:textSize="20sp" />
 
                     <TextView
@@ -66,6 +67,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginRight="8dp"
+                        android:textColor="@android:color/black"
                         android:textSize="20sp" />
                 </LinearLayout>
 
@@ -78,6 +80,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:text="max = "
+                        android:textColor="@android:color/black"
                         android:textSize="20sp" />
 
                     <TextView
@@ -85,6 +88,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textSize="20sp"
+                        android:textColor="@android:color/black"
                         android:textStyle="bold"/>
                 </LinearLayout>
 
@@ -99,6 +103,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:text="Левая Δ = "
+                        android:textColor="@android:color/black"
                         android:textSize="20sp" />
 
                     <TextView
@@ -106,6 +111,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginRight="8dp"
+                        android:textColor="@android:color/black"
                         android:textSize="20sp" />
                 </LinearLayout>
 
@@ -120,6 +126,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:text="PS(3425) = "
+                        android:textColor="@android:color/black"
                         android:textSize="20sp" />
 
                     <TextView
@@ -127,6 +134,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginRight="8dp"
+                        android:textColor="@android:color/black"
                         android:textSize="20sp" />
                 </LinearLayout>
 
@@ -141,6 +149,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:text="PS(2435) = "
+                        android:textColor="@android:color/black"
                         android:textSize="20sp" />
 
                     <TextView
@@ -148,6 +157,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginRight="8dp"
+                        android:textColor="@android:color/black"
                         android:textSize="20sp" />
                 </LinearLayout>
 
@@ -162,12 +172,14 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="S(O)/S(Л) = "
+                        android:textColor="@android:color/black"
                         android:textSize="20sp" />
 
                     <TextView
                         android:id="@+id/tv_one_sensor_danger_on_lungs_left"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:textColor="@android:color/black"
                         android:textSize="20sp" />
                 </LinearLayout>
             </LinearLayout>
@@ -201,6 +213,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:text="Правая S = "
+                        android:textColor="@android:color/black"
                         android:textSize="20sp" />
 
                     <TextView
@@ -208,6 +221,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginRight="8dp"
+                        android:textColor="@android:color/black"
                         android:textSize="20sp" />
 
                 </LinearLayout>
@@ -221,12 +235,14 @@
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:text="max = "
+                        android:textColor="@android:color/black"
                         android:textSize="20sp" />
 
                     <TextView
                         android:id="@+id/tv_max_right"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:textColor="@android:color/black"
                         android:textSize="20sp"
                         android:textStyle="bold"/>
                 </LinearLayout>
@@ -242,6 +258,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:text="Правая Δ = "
+                        android:textColor="@android:color/black"
                         android:textSize="20sp" />
 
                     <TextView
@@ -249,6 +266,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginRight="8dp"
+                        android:textColor="@android:color/black"
                         android:textSize="20sp" />
                 </LinearLayout>
 
@@ -263,6 +281,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:text="PS(3425) = "
+                        android:textColor="@android:color/black"
                         android:textSize="20sp" />
 
                     <TextView
@@ -270,6 +289,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginRight="8dp"
+                        android:textColor="@android:color/black"
                         android:textSize="20sp" />
                 </LinearLayout>
 
@@ -284,6 +304,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:text="PS(2435) = "
+                        android:textColor="@android:color/black"
                         android:textSize="20sp" />
 
                     <TextView
@@ -291,6 +312,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginRight="8dp"
+                        android:textColor="@android:color/black"
                         android:textSize="20sp" />
                 </LinearLayout>
 
@@ -305,11 +327,13 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="S(O)/S(Л) = "
+                        android:textColor="@android:color/black"
                         android:textSize="20sp" />
 
                     <TextView
                         android:id="@+id/tv_one_sensor_danger_on_lungs_right"
                         android:layout_width="wrap_content"
+                        android:textColor="@android:color/black"
                         android:layout_height="wrap_content"
                         android:textSize="20sp" />
                 </LinearLayout>
@@ -349,6 +373,7 @@
                     android:layout_height="match_parent"
                     android:text="Различия в результатах измерений составляют: "
                     android:textStyle="bold"
+                    android:textColor="@android:color/black"
                     android:textSize="20sp" />
 
                 <LinearLayout
@@ -359,6 +384,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
+                        android:textColor="@android:color/black"
                         android:text="Δ(1/2) = "
                         android:textSize="20sp" />
 
@@ -366,6 +392,7 @@
                         android:id="@+id/tv_one_sensor_difference"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:textColor="@android:color/black"
                         android:textSize="20sp"
                         android:textStyle="bold"/>
                 </LinearLayout>
@@ -382,6 +409,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Вероятные причины различий (только для измерений на руках!):"
+                        android:textColor="@android:color/black"
                         android:textSize="20sp"
                         android:textStyle="bold" />
 
@@ -390,6 +418,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:textAlignment="center"
+                        android:textColor="@android:color/black"
                         android:textSize="20sp"
                         android:textStyle="bold" />
                 </LinearLayout>

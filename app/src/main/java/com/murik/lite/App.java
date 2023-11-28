@@ -35,7 +35,7 @@ public class App extends Application {
         mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
         Realm.init(this);
         RealmConfiguration config = new RealmConfiguration.Builder().name("myrealm.realm")
-                .schemaVersion(8)
+                .schemaVersion(9)
                 .migration(new ReamMigration())
                 .build();
         Realm.setDefaultConfiguration(config);

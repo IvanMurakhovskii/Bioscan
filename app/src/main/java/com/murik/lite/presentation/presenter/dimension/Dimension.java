@@ -10,4 +10,5 @@ public class Dimension {
     private boolean isPractice;
     private int gender;
     private Integer algorithmId;
+    private Integer measurePointId;
 }

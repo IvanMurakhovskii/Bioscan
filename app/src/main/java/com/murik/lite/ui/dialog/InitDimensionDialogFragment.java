@@ -20,6 +20,7 @@ import android.widget.TextView;
 import com.murik.lite.Const;
 import com.murik.lite.R;
 import com.murik.lite.enums.BluetoothDimensionAlgorithm;
+import com.murik.lite.enums.MeasurePoint;
 import com.murik.lite.enums.NoseType;
 
 import java.util.Objects;
@@ -35,6 +36,7 @@ public class InitDimensionDialogFragment extends AppCompatDialogFragment {
     private EditText dimensionTime;
     private EditText substanceDimensionTime;
     private Spinner dimensionTimeSpinner;
+    private Spinner measurePointSpinner;
     private TextView tvAlgorithmDescription;
 
     private int gender = Const.GENDER_MALE;
@@ -63,10 +65,18 @@ public class InitDimensionDialogFragment extends AppCompatDialogFragment {
         noseTypeRg = view.findViewById(R.id.rg_nose_type);
         dimensionTimeSpinner = view.findViewById(R.id.spinner_dimension_time);
 
-        dimensionTimeSpinner.setAdapter(new CustomSpinnerAdapter(
+        dimensionTimeSpinner.setAdapter(new BluetoothDimensionSpinnerAdapter(
                 Objects.requireNonNull(this.getContext()),
                 android.R.layout.simple_spinner_dropdown_item,
                 BluetoothDimensionAlgorithm.getValuesByRole())
+        );
+
+        measurePointSpinner = view.findViewById(R.id.spinner_measure_point);
+
+        measurePointSpinner.setAdapter(new MeasurePointSpinnerAdapter(
+                Objects.requireNonNull(this.getContext()),
+                android.R.layout.simple_spinner_dropdown_item,
+                MeasurePoint.values())
         );
 
         dimensionTimeSpinner.setOnItemSelectedListener(
@@ -141,6 +151,7 @@ public class InitDimensionDialogFragment extends AppCompatDialogFragment {
         return (BluetoothDimensionAlgorithm) dimensionTimeSpinner.getSelectedItem();
     }
 
-
-
+    public MeasurePoint getMeasurePoint() {
+        return (MeasurePoint) measurePointSpinner.getSelectedItem();
+    }
 }

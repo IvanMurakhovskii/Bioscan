@@ -201,6 +201,12 @@ public class ReamMigration implements RealmMigration {
             oldVersion++;
         }
 
+        if (oldVersion == 8) {
+            Objects.requireNonNull(userSchema).addField("measurePointId", Integer.class);
+
+            oldVersion++;
+        }
+
         if (oldVersion < newVersion) {
             throw new IllegalStateException(String.format(Locale.US, "Migration missing from v%d to v%d", oldVersion, newVersion));
         }

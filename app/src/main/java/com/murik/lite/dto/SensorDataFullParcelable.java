@@ -25,6 +25,7 @@ public class SensorDataFullParcelable implements Parcelable {
   private boolean isPractice;
   private boolean isFullData;
   private Integer algorithmId;
+  private Integer measurePointId;
 
   @Override
   public int describeContents() {
@@ -36,6 +37,7 @@ public class SensorDataFullParcelable implements Parcelable {
     dest.writeString(descriptions);
     dest.writeInt(gender);
     dest.writeInt(algorithmId);
+    dest.writeInt(measurePointId);
     dest.writeByte((byte) (isPractice ? 1 : 0));
     dest.writeByte((byte) (isFullData ? 1 : 0));
     dest.writeMap(dataSensorMapLeftHand);
@@ -65,5 +67,6 @@ public class SensorDataFullParcelable implements Parcelable {
     descriptions = parcel.readString();
     gender = parcel.readInt();
     algorithmId = parcel.readInt();
+    measurePointId = parcel.readInt();
   }
 }

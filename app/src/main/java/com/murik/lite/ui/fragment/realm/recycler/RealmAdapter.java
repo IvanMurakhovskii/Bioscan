@@ -15,6 +15,7 @@ import android.widget.Toast;
 import com.murik.lite.App;
 import com.murik.lite.R;
 import com.murik.lite.enums.BluetoothDimensionAlgorithm;
+import com.murik.lite.enums.MeasurePoint;
 import com.murik.lite.model.entity.DataSensorRealm;
 import com.murik.lite.presentation.presenter.realm.RealmPresenter;
 
@@ -67,10 +68,10 @@ public class RealmAdapter extends RealmRecyclerViewAdapter<DataSensorRealm, Real
             }
         }
 
-        /*realmViewHolder.btnDelete.setOnClickListener(event -> realm.executeTransaction(r -> {
-            RealmResults<DataSensorRealm> result = r.where(DataSensorRealm.class).equalTo("id", data.getId()).findAll();
-            result.deleteAllFromRealm();
-        }));*/
+        if (data.getMeasurePointId() != null) {
+            MeasurePoint measurePoint = MeasurePoint.getById(data.getMeasurePointId());
+            realmViewHolder.setMeasurePoint(measurePoint.getDescription());
+        }
 
         AlertDialog alertDialog = new AlertDialog.Builder(activity)
                 .setTitle("Вы действительно хотите удалить измерение?")
