@@ -58,6 +58,9 @@ public class LoginFragment extends MvpAppCompatFragment {
         btnLogin.setOnClickListener(v -> {
             if (isAuth()) {
                 App.INSTANCE.getRouter().navigateTo(Screens.REALM_FRAGMENT);
+            }
+
+            if (AuthService.getInstance().isAdmin()) {
                 ((StartActivity) Objects.requireNonNull(getActivity())).visibleAdminMenuItems(true);
             }
         });

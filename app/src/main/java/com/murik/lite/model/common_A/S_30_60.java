@@ -23,10 +23,10 @@ public class S_30_60 extends BaseResultWithCoefficient {
     public void setResult() {
         if (getA() >= 0.19 && getA() <= 0.26) {
             setColorGREEN();
-        } else if (getA() >= 0.16 && getA() <= 0.189) {
+        } else if (getA() > 0.16 && getA() < 0.19) {
             setColorYELLOW();
             setPossibleReasons(getResources(R.string.A_30_60_YELLOW_1));
-        } else if (getA() >= 0.261 && getA() <= 0.30) {
+        } else if (getA() > 0.26 && getA() <= 0.30) {
             setColorYELLOW();
             setPossibleReasons(getResources(R.string.A_30_60_YELLOW_2));
         } else if (getA() >= 0.31 && getA() <= 0.43) {

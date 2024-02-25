@@ -1,6 +1,7 @@
 package com.murik.lite.model;
 
 import com.murik.lite.Const;
+import com.murik.lite.service.Impl.BaseMeasureService;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
@@ -35,14 +36,14 @@ public class SensorValueAttitudeFor30 {
         }
     }
 
-    public Float calculateAndGetS15_30() {
+    public Double calculateAndGetS15_30() {
         try {
             val s30 = getAreaByMask(Const.MASK_30, resultData);
             val s15 = getAreaByMask(Const.MASK_15, resultData);
 
-            return s15/s30;
+            return BaseMeasureService.round(s15/s30);
         } catch (Exception e) {
-            return -9999F;
+            return -9999D;
         }
 
     }

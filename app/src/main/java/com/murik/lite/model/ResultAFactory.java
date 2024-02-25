@@ -55,7 +55,7 @@ public abstract class ResultAFactory {
         }
     }
 
-    public abstract Float calculateAndGetAreaDifference();
+    public abstract Double calculateAndGetAreaDifference();
 
     public abstract boolean calculateResultA();
 

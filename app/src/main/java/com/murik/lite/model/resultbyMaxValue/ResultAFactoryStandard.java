@@ -40,9 +40,9 @@ public class ResultAFactoryStandard extends ResultAFactory {
   }
 
   @Override
-  public Float calculateAndGetAreaDifference() {
-    float areaBodyLeft = getAreaByMask(Const.BODY, getInputData().getLeftHandDataSensor());
-    float areaBodyRight = getAreaByMask(Const.BODY, getInputData().getRightHandDataSensor());
+  public Double calculateAndGetAreaDifference() {
+    double areaBodyLeft = getAreaByMask(Const.BODY, getInputData().getLeftHandDataSensor());
+    double areaBodyRight = getAreaByMask(Const.BODY, getInputData().getRightHandDataSensor());
 
     return calculateDifferenceLeftRight(areaBodyLeft, areaBodyRight);
   }

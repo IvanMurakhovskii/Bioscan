@@ -68,14 +68,14 @@ public class MaskListFragment extends MvpAppCompatFragment implements RealmView,
 
   @Override
   public void onDialogPositiveClick(int id) {
-    mRealmPresenter.createMeasureByType(
-            chooseTypeMeasureDialogFragment.getMeasureType(),
-            chooseTypeMeasureDialogFragment.getSelectedSensor(),
-            chooseTypeMeasureDialogFragment.getTimeRegistrationMaxSignal(),
-            chooseTypeMeasureDialogFragment.getSensorType(),
-            chooseTypeMeasureDialogFragment.getExpertType(),
-            chooseTypeMeasureDialogFragment.isAnimalsSelected()
-    );
+//    mRealmPresenter.createMeasureByType(
+//            chooseTypeMeasureDialogFragment.getMeasureType(),
+//            chooseTypeMeasureDialogFragment.getSelectedSensor(),
+//            chooseTypeMeasureDialogFragment.getTimeRegistrationMaxSignal(),
+//            chooseTypeMeasureDialogFragment.getSensorType(),
+//            chooseTypeMeasureDialogFragment.getExpertType(),
+//            chooseTypeMeasureDialogFragment.isAnimalsSelected(),
+//    );
   }
 
   @Override

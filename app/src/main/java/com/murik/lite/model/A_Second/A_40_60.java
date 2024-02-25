@@ -20,10 +20,10 @@ public class A_40_60 extends BaseResultSecond {
         } else if (getA() >= 0.68 && getA() <= 0.75) {
             setColorYELLOW();
             setPossibleReasons(getResources(R.string.A_LONG_1_2_YELLOW_1));
-        } else if (getA() >= 0.45 && getA() < 0.54) {
+        } else if (getA() >= 0.45 && getA() < 0.539) {
             setColorYELLOW();
             setPossibleReasons(getResources(R.string.A_LONG_1_2_YELLOW_2_1));
-        } else if (getA() >= 0.54 && getA() <= 0.57) {
+        } else if (getA() >= 0.539 && getA() <= 0.57) {
             setColorYELLOW();
             setPossibleReasons(getResources(R.string.A_LONG_1_2_YELLOW_2_2));
         } else if (getA() >= 0.27 && getA() <= 0.34) {

@@ -18,8 +18,8 @@
             android:title="Измерение" />
         <item
             android:id="@+id/additional_info"
-            android:title="Доп. информация"
-            android:visible="false"/>
+            android:icon="@android:drawable/ic_menu_add"
+            android:title="Доп. информация"/>
         <item
             android:id="@+id/app_parse_xml"
             android:icon="@android:drawable/ic_menu_edit"

@@ -2,6 +2,7 @@ package com.murik.lite.presentation.presenter.result;
 
 import android.content.Context;
 import android.util.Log;
+import android.view.View;
 
 import com.arellomobile.mvp.InjectViewState;
 import com.arellomobile.mvp.MvpPresenter;
@@ -10,6 +11,7 @@ import com.murik.lite.Const;
 import com.murik.lite.Screens;
 import com.murik.lite.configuration.AuthService;
 import com.murik.lite.dto.DataByMaxParcelable;
+import com.murik.lite.dto.MeasureDataParcelable;
 import com.murik.lite.dto.SummaryParcelable;
 import com.murik.lite.model.RealmController;
 import com.murik.lite.model.ResultAFactory;
@@ -34,7 +36,7 @@ import lombok.var;
 @InjectViewState
 public class ResultPresenter extends MvpPresenter<ResultView> {
 
-    private final ArrayList<CustomResultItem> resultItems = new ArrayList<>();
+    private final List<CustomResultItem> resultItems = new ArrayList<>();
     private ResultAFactory resultAFactory;
     private List<TotalResult> totalIndicators = new ArrayList<>();
     private Context context;
@@ -47,6 +49,15 @@ public class ResultPresenter extends MvpPresenter<ResultView> {
         val summary = resultAFactory.getSummaryResult();
         val algorithmId = resultAFactory.getInputData().getAlgorithmId();
         App.INSTANCE.getRouter().navigateTo(Screens.SUMMARY_RESULT, new SummaryParcelable(summary, resultAFactory.getInputData().getGender(), algorithmId));
+    }
+
+    public void onSubstanceClick(int hand) {
+        val measureData = new MeasureDataParcelable();
+        measureData.setAlgorithmId(data.getAlgorithmId());
+        val measureList = hand == Const.LEFT_HAND ? data.getLeftHandDataSensor() : data.getRightHandDataSensor();
+        measureData.setData(measureList);
+
+        App.INSTANCE.getRouter().navigateTo(Screens.SUBSTANCES_FRAGMENT, measureData);
     }
 
     public void setContext(Context context) {
@@ -93,7 +104,7 @@ public class ResultPresenter extends MvpPresenter<ResultView> {
                             )
                     );
                 } else {
-                    if (result.getResultComment() != null) {
+                    if (!result.getResultComment().isEmpty()) {
                         resultItems.add(
                                 new CustomResultItem(result.getViewColor(), String.valueOf(i + 1), result.getResultComment(), result.getA())
                         );
@@ -130,8 +141,8 @@ public class ResultPresenter extends MvpPresenter<ResultView> {
         holder.setDivider(resultItems.get(position).getColor());
 
         if (AuthService.getInstance().isAdmin()) {
-            holder.setTvComment(resultItems.get(position).getLegend() + ". = "
-                    + df.format(resultItems.get(position).getValue()) + "\n"
+            holder.setTvComment(resultItems.get(position).getLegend() + " = "
+                    + resultItems.get(position).getValue() + "\n"
                     + resultItems.get(position).getDescription());
         } else {
             holder.setTvComment(resultItems.get(position).getLegend() + ". " + resultItems.get(position).getDescription());

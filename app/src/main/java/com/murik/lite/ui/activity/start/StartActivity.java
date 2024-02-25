@@ -52,6 +52,7 @@ import com.murik.lite.Screens;
 import com.murik.lite.configuration.AuthService;
 import com.murik.lite.dto.AdditionalParcelable;
 import com.murik.lite.dto.DataByMaxParcelable;
+import com.murik.lite.dto.MeasureDataParcelable;
 import com.murik.lite.dto.SensorDataFullParcelable;
 import com.murik.lite.dto.SummaryParcelable;
 import com.murik.lite.presentation.presenter.start.StartPresenter;
@@ -73,6 +74,7 @@ import com.murik.lite.ui.fragment.realm.RealmFragment;
 import com.murik.lite.ui.fragment.result.ResultTabFragment;
 import com.murik.lite.ui.fragment.resultRadarChart.RadarTabContentFragment;
 import com.murik.lite.ui.fragment.settings.SettingsFragment;
+import com.murik.lite.ui.fragment.substances.SubstancesFragment;
 import com.murik.lite.ui.fragment.summaryResult.SummaryResultFragment;
 
 import java.io.File;
@@ -98,6 +100,7 @@ public class StartActivity extends MvpAppCompatActivity implements StartView, On
     private MenuItem inputData;
     private MenuItem additionalInfo;
     private DrawerLayout drawer;
+    private TextView tvAppRole;
 
     private LinearLayout bleConnectionStatus;
 
@@ -163,6 +166,8 @@ public class StartActivity extends MvpAppCompatActivity implements StartView, On
                         return LoginFragment.newInstance();
                     case Screens.SETTINGS_FRAGMENT:
                         return SettingsFragment.newInstance();
+                    case Screens.SUBSTANCES_FRAGMENT:
+                        return SubstancesFragment.newInstance((MeasureDataParcelable) data);
                     default:
                         throw new RuntimeException("Unknown screen key");
 
@@ -190,6 +195,7 @@ public class StartActivity extends MvpAppCompatActivity implements StartView, On
         setSupportActionBar(toolbar);
 
         drawer = findViewById(R.id.drawer_layout);
+
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
 
@@ -203,6 +209,8 @@ public class StartActivity extends MvpAppCompatActivity implements StartView, On
         val headerView = navigationView.getHeaderView(0);
         login = headerView.findViewById(R.id.btn_app_login);
         logout = headerView.findViewById(R.id.btn_app_logout);
+        tvAppRole = headerView.findViewById(R.id.tv_app_role);
+
 
         parseXml = navigationView.getMenu().findItem(R.id.app_parse_xml);
         inputData = navigationView.getMenu().findItem(R.id.app_input);
@@ -213,22 +221,21 @@ public class StartActivity extends MvpAppCompatActivity implements StartView, On
         if (AuthService.getInstance().isAuth()) {
             login.setVisibility(View.GONE);
             logout.setVisibility(View.VISIBLE);
-
-            visibleAdminMenuItems(true);
-
-            if (AuthService.getInstance().isAdmin()) {
-
-            }
         }
+
+        visibleAdminMenuItems(AuthService.getInstance().isAdmin());
 
         login.setOnClickListener(v -> {
             login.setVisibility(View.GONE);
             logout.setVisibility(View.VISIBLE);
 
+            tvAppRole.setText(AuthService.getInstance().getUserRole().name());
+
             App.INSTANCE.getRouter().navigateTo(Screens.LOGIN_FRAGMENT);
 
             drawer.closeDrawer(Gravity.START);
         });
+
         logout.setOnClickListener(v -> {
             AuthService.getInstance().logout();
 
@@ -238,6 +245,8 @@ public class StartActivity extends MvpAppCompatActivity implements StartView, On
             visibleAdminMenuItems(false);
 
             drawer.closeDrawer(Gravity.START);
+
+            tvAppRole.setText("");
 
             App.INSTANCE.getRouter().navigateTo(Screens.REALM_FRAGMENT);
         });
@@ -379,6 +388,7 @@ public class StartActivity extends MvpAppCompatActivity implements StartView, On
             }
             case R.id.app_input: {
                 App.INSTANCE.getRouter().replaceScreen(Screens.INPUT_FRAGMENT);
+//                App.INSTANCE.getRouter().replaceScreen(Screens.SUBSTANCES_FRAGMENT, 1L);
                 return true;
             }
             case R.id.app_parse_xml: {
@@ -566,7 +576,6 @@ public class StartActivity extends MvpAppCompatActivity implements StartView, On
     public void visibleAdminMenuItems(boolean visible) {
         parseXml.setVisible(visible);
         inputData.setVisible(visible);
-        additionalInfo.setVisible(visible);
     }
 }
 

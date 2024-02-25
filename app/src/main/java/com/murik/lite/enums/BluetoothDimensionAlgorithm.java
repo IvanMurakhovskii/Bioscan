@@ -8,8 +8,8 @@ import lombok.Getter;
 @Getter
 @AllArgsConstructor
 public enum BluetoothDimensionAlgorithm {
+    BASE(20, "Базовый", "Основной алгоритм измерения", 60, 72),
     SIMPLE(10, "Быстрый", "Применять для экстренных случаев", 30, 80),
-    BASE(20, "Общий", "Основной алгоритм измерения", 60, 72),
     ADVANCED(30, "Расширенный", "Применять в случае недомогания или подозрения на него", 60, 160),
     _200(25, "Компетентный", "Наиболее подробная диагностика", 80, 200);
 
@@ -27,6 +27,10 @@ public enum BluetoothDimensionAlgorithm {
     }
 
     public static BluetoothDimensionAlgorithm getByAlgorithmId(Integer algorithmId) {
+        if (algorithmId == null) {
+            return null;
+        }
+
         for (BluetoothDimensionAlgorithm e : BluetoothDimensionAlgorithm.values()) {
             if (e.getAlgorithmId() == algorithmId) {
                 return e;

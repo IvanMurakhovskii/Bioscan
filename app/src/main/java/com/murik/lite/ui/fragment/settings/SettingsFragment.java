@@ -48,6 +48,15 @@ public class SettingsFragment extends MvpAppCompatFragment implements
                 case R.id.lion:
                     SettingsService.getInstance().setSummaryTheme(SummaryTheme.LION);
                     break;
+                case R.id.abstraction:
+                    SettingsService.getInstance().setSummaryTheme(SummaryTheme.ABSTRACT);
+                    break;
+                case R.id.dream:
+                    SettingsService.getInstance().setSummaryTheme(SummaryTheme.DREAM);
+                    break;
+                case R.id.apricot:
+                    SettingsService.getInstance().setSummaryTheme(SummaryTheme.APRICOT);
+                    break;
                 default:
                     SettingsService.getInstance().setSummaryTheme(SummaryTheme.ABSTRACT);
                     break;

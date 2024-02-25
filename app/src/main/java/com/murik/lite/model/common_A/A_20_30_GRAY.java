@@ -20,19 +20,20 @@ public class A_20_30_GRAY extends BaseResultWithCoefficient {
 
     public void setResult() {
         setColorGRAY();
+        setPossibleReasons("этанол, ацетон");
 
-        if (getA() >= 0.18 && getA() <= 0.22) {
-            setPossibleReasons("этанол");
-        } else if(getA() >= 0.68 && getA() <= 0.72) {
-            setPossibleReasons("ацетон");
-        } else if(getA() >= 0.27 && getA() <= 0.32) {
-            setPossibleReasons("вода");
-        } else if(getA() >= 0.42 && getA() <= 0.44) {
-            setPossibleReasons("толуол");
-        } else if(getA() >= 0.37 && getA() <= 0.41) {
-            setPossibleReasons("хлороформ");
-        } else if (getA() == 0.5) {
-            setPossibleReasons("проверить прибор, сенсор");
-        }
+//        if (getA() >= 0.18 && getA() <= 0.22) {
+//            setPossibleReasons("этанол");
+//        } else if(getA() >= 0.68 && getA() <= 0.72) {
+//            setPossibleReasons("ацетон");
+//        } else if(getA() >= 0.27 && getA() <= 0.32) {
+//            setPossibleReasons("вода");
+//        } else if(getA() >= 0.42 && getA() <= 0.44) {
+//            setPossibleReasons("толуол");
+//        } else if(getA() >= 0.37 && getA() <= 0.41) {
+//            setPossibleReasons("хлороформ");
+//        } else if (getA() == 0.5) {
+//            setPossibleReasons("проверить прибор, сенсор");
+//        }
     }
 }

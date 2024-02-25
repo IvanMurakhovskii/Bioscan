@@ -39,6 +39,7 @@ import com.murik.lite.App;
 import com.murik.lite.Const;
 import com.murik.lite.R;
 import com.murik.lite.Screens;
+import com.murik.lite.configuration.AuthService;
 import com.murik.lite.enums.NoseType;
 import com.murik.lite.presentation.presenter.dimension.BluetoothDimensionPresenter;
 import com.murik.lite.presentation.presenter.dimension.Dimension;
@@ -135,7 +136,6 @@ public class BluetoothDimensionFragment extends MvpAppCompatFragment implements 
         }
     };
 
-    private boolean isInitial1 = false;
     CountDownTimer countDownTimer = new CountDownTimer(5000, 1000) {
         @Override
         public void onTick(long millisUntilFinished) {
@@ -166,24 +166,17 @@ public class BluetoothDimensionFragment extends MvpAppCompatFragment implements 
                     val sensNumber = Integer.decode(str.substring(i, i + 1));
                     val value = Integer.parseInt(str.substring(i + 1, i + 8), 16);
 
-                    Log.i(TAG, " sensor " + sensNumber + " value = " + value);
-
                     if (initialValues.get(sensNumber) == null) {
                         initialValues.put(sensNumber, value);
                     }
 
-//                    if (!isInitial1) {
-//                        initial1 = value;
-//                        isInitial1 = true;
-//                    }
-
                     if (value != 0) {
                         Integer result = initialValues.get(sensNumber) - value;
 
-                        val lineColor = isDimensionStart ? Const.CHART_COLOR.get(sensNumber - 1) : Color.GRAY;
-                        addEntry(result, "Sensor " + sensNumber, lineColor, sensNumber - 1, noseType);
+                        int sensIndex = sensNumber - 1 >= Const.CHART_COLOR.size() ? 0 : sensNumber - 1;
 
-//                        Log.i(TAG, "addEntry = " + result + " sensor " + sensNumber);
+                        val lineColor = isDimensionStart ? Const.CHART_COLOR.get(sensIndex) : Color.GRAY;
+                        addEntry(result, "Sensor " + sensNumber, lineColor, sensNumber - 1, noseType);
 
                         if (isDimensionStart) {
                             progressBar.getHandler().post(()
@@ -212,7 +205,7 @@ public class BluetoothDimensionFragment extends MvpAppCompatFragment implements 
                         Toast.makeText(
                                 getContext(),
                                 "Измерение завершено!",
-                                Toast.LENGTH_LONG
+                                Toast.LENGTH_SHORT
                         ).show();
                     }
                 }
@@ -231,6 +224,10 @@ public class BluetoothDimensionFragment extends MvpAppCompatFragment implements 
 
     @SuppressLint("SetTextI18n")
     private void findAndShowMaxSignal() {
+        if (noseType == NoseType.DIAGNOST) {
+            return;
+        }
+
         List<Integer> data;
         if (isLeftHand) {
             data = mBluetoothDimensionPresenter.getSens1DataLeftHand();
@@ -306,11 +303,11 @@ public class BluetoothDimensionFragment extends MvpAppCompatFragment implements 
         progressBar.setProgressTintList(ColorStateList.valueOf(color));
     }
 
-//    @Override
-//    public void onStop() {
-//        super.onStop();
-//        Objects.requireNonNull(getActivity()).unregisterReceiver(mBroadcastReceiver);
-//    }
+    @Override
+    public void onStop() {
+        super.onStop();
+        Objects.requireNonNull(getActivity()).unregisterReceiver(mBroadcastReceiver);
+    }
 
     @Override
     public void onResume() {
@@ -318,12 +315,6 @@ public class BluetoothDimensionFragment extends MvpAppCompatFragment implements 
         IntentFilter filter = new IntentFilter();
         filter.addAction(BluetoothImplService.ACTION_CHARACTERISTIC_CHANGE);
         Objects.requireNonNull(getActivity()).registerReceiver(mBroadcastReceiver, filter);
-    }
-
-    @Override
-    public void onPause() {
-        super.onPause();
-        Objects.requireNonNull(getActivity()).unregisterReceiver(mBroadcastReceiver);
     }
 
     @Override
@@ -356,7 +347,6 @@ public class BluetoothDimensionFragment extends MvpAppCompatFragment implements 
 
     private void startDimension() {
         isDimensionStart = true;
-        isInitial1 = false;
         initialValues = new HashMap<>();
         description = initDimensionDialogFragment.getDescriptions();
 //        isPractice = initDimensionDialogFragment.isPractice();
@@ -372,7 +362,8 @@ public class BluetoothDimensionFragment extends MvpAppCompatFragment implements 
 
             val dimension = Dimension.builder().description(description)
                     .gender(gender).isPractice(isPractice).algorithmId(algorithm.getAlgorithmId())
-                    .measurePointId(measurePoint.getId())
+                    //todo потом убрать проверку на админа
+                    .measurePointId(AuthService.getInstance().isAdmin() ? measurePoint.getId() : null)
                     .build();
 
             mBluetoothDimensionPresenter.setDimensionParameters(dimension);
@@ -397,7 +388,6 @@ public class BluetoothDimensionFragment extends MvpAppCompatFragment implements 
 
     private void continueDimension() {
         isLeftHand = !isLeftHand;
-        isInitial1 = false;
         initialValues = new HashMap<>();
         count = 0;
         isDimensionStart = true;
@@ -570,13 +560,15 @@ public class BluetoothDimensionFragment extends MvpAppCompatFragment implements 
 //                }
 //            }
 
-            data.addEntry(new Entry(set.getEntryCount(), value), index);
+            if (set != null) {
+                data.addEntry(new Entry(set.getEntryCount(), value), index);
 
-            data.notifyDataChanged();
-            lineChart.notifyDataSetChanged();
+                data.notifyDataChanged();
+                lineChart.notifyDataSetChanged();
 
-            lineChart.setVisibleXRangeMaximum(150);
-            lineChart.moveViewToX(data.getEntryCount());
+                lineChart.setVisibleXRangeMaximum(150);
+                lineChart.moveViewToX(data.getEntryCount());
+            }
         }
     }
 

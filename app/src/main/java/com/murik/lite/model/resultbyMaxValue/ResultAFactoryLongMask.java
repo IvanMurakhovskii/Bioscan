@@ -23,8 +23,8 @@ public class ResultAFactoryLongMask extends ResultAFactory {
     }
 
     @Override
-    public Float calculateAndGetAreaDifference() {
-        return 0F;
+    public Double calculateAndGetAreaDifference() {
+        return 0D;
     }
 
     @Override

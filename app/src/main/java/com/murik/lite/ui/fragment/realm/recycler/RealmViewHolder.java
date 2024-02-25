@@ -6,6 +6,8 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.murik.lite.R;
+import com.murik.lite.enums.BluetoothDimensionAlgorithm;
+import com.murik.lite.enums.MeasurePoint;
 
 public class RealmViewHolder extends RecyclerView.ViewHolder {
 
@@ -34,13 +36,23 @@ public class RealmViewHolder extends RecyclerView.ViewHolder {
         tvTime.setText(time);
     }
 
-    public void setAlgorithm(String time) {
-        tvAlgorithm.setVisibility(View.VISIBLE);
-        tvAlgorithm.setText(time);
+    public void setAlgorithm(Integer algorithmId) {
+        BluetoothDimensionAlgorithm algorithm = BluetoothDimensionAlgorithm.getByAlgorithmId(algorithmId);
+        if (algorithm != null) {
+            tvAlgorithm.setVisibility(View.VISIBLE);
+            tvAlgorithm.setText(algorithm.getName());
+        } else {
+            tvAlgorithm.setVisibility(View.GONE);
+        }
     }
 
-    public void setMeasurePoint(String time) {
-        tvMeasurePoint.setVisibility(View.VISIBLE);
-        tvMeasurePoint.setText(time);
+    public void setMeasurePoint(Integer measurePointId) {
+        MeasurePoint measurePoint = MeasurePoint.getById(measurePointId);
+        if (measurePoint != null) {
+            tvMeasurePoint.setVisibility(View.VISIBLE);
+            tvMeasurePoint.setText(measurePoint.getDescription());
+        } else {
+            tvMeasurePoint.setVisibility(View.GONE);
+        }
     }
 }

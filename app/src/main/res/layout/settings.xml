@@ -30,6 +30,18 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Лев"/>
+
+    <RadioButton
+        android:id="@+id/dream"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Ловец снов"/>
+
+    <RadioButton
+    android:id="@+id/apricot"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:text="Абрикос"/>
   </RadioGroup>
 
   <Button

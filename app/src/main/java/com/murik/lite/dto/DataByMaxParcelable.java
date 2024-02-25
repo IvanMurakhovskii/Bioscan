@@ -52,8 +52,12 @@ public class DataByMaxParcelable implements Parcelable {
         dest.writeByte((byte) (isAnimalsSelected ? 1 : 0));
         dest.writeString(sensorType);
         dest.writeString(dimensionTime);
-        dest.writeInt(algorithmId);
-        dest.writeInt(measurePointId);
+        if (algorithmId != null) {
+            dest.writeInt(algorithmId);
+        }
+        if (measurePointId != null) {
+            dest.writeInt(measurePointId);
+        }
     }
 
     public static final Parcelable.Creator<DataByMaxParcelable> CREATOR = new Parcelable.Creator<DataByMaxParcelable>() {

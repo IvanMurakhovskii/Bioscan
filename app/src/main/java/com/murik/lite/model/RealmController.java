@@ -3,9 +3,11 @@ package com.murik.lite.model;
 import com.murik.lite.Const;
 import com.murik.lite.dto.DataByMaxParcelable;
 import com.murik.lite.dto.SensorDataFullParcelable;
+import com.murik.lite.enums.Role;
 import com.murik.lite.model.entity.DataSensor;
 import com.murik.lite.model.entity.DataSensorRealm;
 import com.murik.lite.model.entity.RealmInt;
+import com.murik.lite.model.entity.Users;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -22,6 +24,7 @@ import lombok.NoArgsConstructor;
 public class RealmController {
 
   private Realm realm = Realm.getDefaultInstance();
+
 
   public void addInfoFull(SensorDataFullParcelable dataSens) {
 
@@ -367,6 +370,23 @@ public class RealmController {
 
   }
 
+  public Users createUser(String login, String passwordHash) {
+    realm.executeTransaction(realm -> {
+      Users user = realm.createObject(Users.class, getNextUserKey());
+      user.setLogin(login);
+      user.setPassword(passwordHash);
+      user.setRole(login.equals("tak_admin") ? Role.ADMIN.name() : Role.USER.name());
+
+      realm.insert(user);
+    });
+
+    if (!realm.isClosed()) {
+      realm.close();
+    }
+
+    return realm.where(Users.class).equalTo("login", login).findFirst();
+  }
+
   public DataSensorRealm findById(int id){
    return realm.where(DataSensorRealm.class).equalTo("id", id).findFirst();
   }
@@ -375,6 +395,14 @@ public class RealmController {
   public RealmResults<DataSensorRealm> getInfo() {
     return realm.where(DataSensorRealm.class).findAllAsync()
             .sort("time", Sort.DESCENDING);
+  }
+
+  private int getNextUserKey() {
+    if (realm.where(Users.class).max("id") == null) {
+      return 0;
+    } else {
+      return Objects.requireNonNull(realm.where(Users.class).max("id")).intValue() + 1;
+    }
   }
 
   private int getNextKey() {

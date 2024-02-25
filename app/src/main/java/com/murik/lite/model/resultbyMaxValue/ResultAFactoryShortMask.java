@@ -35,8 +35,8 @@ public class ResultAFactoryShortMask extends ResultAFactory {
     }
 
     @Override
-    public Float calculateAndGetAreaDifference() {
-        return 0F;
+    public Double calculateAndGetAreaDifference() {
+        return 0D;
     }
 
     @Override
@@ -44,12 +44,12 @@ public class ResultAFactoryShortMask extends ResultAFactory {
         if(!getMaxSensResult().isEmpty()){
             OneSensorShortMeasure oneSensorShortMeasure = new OneSensorShortMeasure(getMaxSensResult());
 
-            var totalArea = 0F;
-            var dangerToLungsArea = 0F;
-            var PS_3425 = 1F;
-            var PS_2435 = 1F;
-            var SI = 1F;
-            var K = 0F;
+            var totalArea = 0d;
+            var dangerToLungsArea = 0d;
+            var PS_3425 = 1d;
+            var PS_2435 = 1d;
+            var SI = 1d;
+            var K = 0d;
 
             BaseMeasureService ms = new BaseMeasureService();
 

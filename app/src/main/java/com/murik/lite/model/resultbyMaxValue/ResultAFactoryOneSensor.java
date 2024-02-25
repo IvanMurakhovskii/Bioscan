@@ -98,6 +98,7 @@ import static com.murik.lite.service.Impl.BaseMeasureService.getAreaByMask;
 import static com.murik.lite.service.Impl.BaseMeasureService.getOneSensorResultParameters;
 import static com.murik.lite.service.Impl.BaseMeasureService.getPS2435;
 import static com.murik.lite.service.Impl.BaseMeasureService.getPS3425;
+import static com.murik.lite.service.Impl.BaseMeasureService.round;
 import static com.murik.lite.utils.ListUtils.getData;
 import static com.murik.lite.utils.SummaryColorCoefficientUtils.getColorCoefficient;
 
@@ -122,16 +123,16 @@ public class ResultAFactoryOneSensor extends ResultAFactory {
     }
 
     @Override
-    public Float calculateAndGetAreaDifference() {
+    public Double calculateAndGetAreaDifference() {
 
-        Float bodyLeft = 0F;
-        Float bodyRight = 0F;
+        Double bodyLeft = 0d;
+        Double bodyRight = 0d;
 
-        Float energyRight = 0F;
-        Float energyLeft = 0F;
+        Double energyRight = 0d;
+        Double energyLeft = 0d;
 
-        Float discreteLeft = 0F;
-        Float discreteRight = 0F;
+        Double discreteLeft = 0d;
+        Double discreteRight = 0d;
 
         val algorithm = BluetoothDimensionAlgorithm.getByAlgorithmId(getInputData().getAlgorithmId());
         val leftSensorData = getInputData().getLeftHandDataSensor();
@@ -183,7 +184,7 @@ public class ResultAFactoryOneSensor extends ResultAFactory {
             val PS_2435 = getPS2435(getMaxSensResult(), Const.SHORT);
             val PS_3425 = getPS3425(getMaxSensResult(), Const.SHORT);
 
-            float si = (PS_2435 != 0) ? PS_3425 / PS_2435 : -9999;
+            double si = (PS_2435 != 0) ? PS_3425 / PS_2435 : -9999;
 
             OneSensorResultParametersDto oneSensorResultParameters;
 
@@ -247,7 +248,7 @@ public class ResultAFactoryOneSensor extends ResultAFactory {
         }
     }
 
-    private void createParametersFor_30(final int tau, final Float En, Float e2, final double a20_30) {
+    private void createParametersFor_30(final int tau, final Double En, Double e2, final double a20_30) {
 
         val I = new A_10_20(sensorValueAttitudeFor30.getA10_20(), getInputData(), getContext(), 1.81F);
         val II = new A_15_30(sensorValueAttitudeFor30.getA15_30(), getInputData(), getContext(), 1.81F);
@@ -298,7 +299,7 @@ public class ResultAFactoryOneSensor extends ResultAFactory {
         }
     }
 
-    private void createParametersFor_60(double a20_30, double a20_60, double a_40_70, Float s30_60, Float en, Float e2, int r1_2, final int tau, final int T) {
+    private void createParametersFor_60(double a20_30, double a20_60, double a_40_70, Double s30_60, Double en, Double e2, int r1_2, final int tau, final int T) {
 
         val a15 = getData(getMaxSensResult(), 15);
         val a20 = getData(getMaxSensResult(), 20);
@@ -323,7 +324,7 @@ public class ResultAFactoryOneSensor extends ResultAFactory {
         val VI = new A_90_60(oneSensorShortMeasure.getFirstA3_2(), getInputData(), getContext(), 0.39F);
         val E = new E_60(en, getInputData(), getContext());
 //        val E2 = new E_2_60(e2, getInputData(), getContext());
-        val S_30_60 = new S_30_60((s30_60), getInputData(), getContext(), 1);
+        val S_30_60 = new S_30_60(s30_60, getInputData(), getContext(), 1);
         val VI_L = new A_25_45(a_25_45, getInputData(), getContext(), 1);
         val VII_L = new A_15_20(a_15_20, getInputData(), getContext(), 1);
         val TAU = new TAU_60(tau, getInputData(), getContext());
@@ -360,7 +361,7 @@ public class ResultAFactoryOneSensor extends ResultAFactory {
                 + (getColorCoefficient(T_60.getViewColor()))
                 + (getColorCoefficient(S_30_60.getViewColor()))
                 + (getColorCoefficient(II_30.getViewColor()) * 0.95d)
-                + (getColorCoefficient(VII_L.getViewColor()) * 0.9)
+                + (getColorCoefficient(VII_L.getViewColor()) * 0.9d)
                 + (getColorCoefficient(VI_L.getViewColor()))
                 + (getColorCoefficient(S_15_30.getViewColor()));
 
@@ -385,7 +386,7 @@ public class ResultAFactoryOneSensor extends ResultAFactory {
         }
     }
 
-    private void createParametersFor_80(float si, double a20_30, double a20_60, Float s30_60, Float l, Float en, Float E2, final int tau) {
+    private void createParametersFor_80(double si, double a20_30, double a20_60, Double s30_60, Double l, Double en, Double E2, final int tau) {
 
         val a30 = getData(getMaxSensResult(), 30);
         val a40 = getData(getMaxSensResult(), 40);
@@ -463,7 +464,7 @@ public class ResultAFactoryOneSensor extends ResultAFactory {
         setSummaryResult(YZ);
     }
 
-    private void createParametersFor_160(double a20_30, double a20_60, double a_40_70, Float s20_30, Float s20_60, Float s30_60, Float en, Float e2, int r1_2, final int tau) {
+    private void createParametersFor_160(double a20_30, double a20_60, double a_40_70, Double s20_30, Double s20_60, Double s30_60, Double en, Double e2, int r1_2, final int tau) {
 
         val I = new A_40_70(a_40_70, getInputData(), getContext(), 1.81F);
         val II = new A_40_60(oneSensorLongMeasure.getSecondA1_2(), getInputData(), getContext(), 1.19F);
@@ -518,7 +519,7 @@ public class ResultAFactoryOneSensor extends ResultAFactory {
         }
     }
 
-    private void createParametersForDiagnost(float si, double a20_30, double a20_60, Float s30_60, Float l, Float en, Float E2) {
+    private void createParametersForDiagnost(double si, double a20_30, double a20_60, Double s30_60, Double l, Double en, Double E2) {
         getA().add(new SI(si, getInputData(), getContext()));
         getA().add(new ResultA_First2_3_Diagnost(oneSensorShortMeasure.getFirstA2_3(), getInputData(), getContext(), 1.81F));
         getA().add(new ResultA_First1_2_Diagnost(oneSensorShortMeasure.getFirstA1_2(), getInputData(), getContext(), 1.35F));
@@ -547,8 +548,8 @@ public class ResultAFactoryOneSensor extends ResultAFactory {
     }
 
     private void createParametersFor_Animals(double a20_30, double a20_60, double a_40_70,
-                                             Float s20_30, Float s20_60, Float s30_60, Float en,
-                                             Float e2, final int tau) {
+                                             Double s20_30, Double s20_60, Double s30_60, Double en,
+                                             Double e2, final int tau) {
 
         val I = new ResultA_First40_70_Animals(a_40_70, getInputData(), getContext(), 1.81F);
         val II = new ResultA_Second1_2_Animals(oneSensorLongMeasure.getSecondA1_2(), getInputData(), getContext(), 1.19F);
@@ -573,11 +574,11 @@ public class ResultAFactoryOneSensor extends ResultAFactory {
         getA().add(E2);
     }
 
-    private double round(double value) {
-        if (value > 1.0) {
-            return new BigDecimal(value).setScale(1, RoundingMode.HALF_EVEN).doubleValue();
-        } else {
-            return new BigDecimal(value).setScale(2, RoundingMode.HALF_EVEN).doubleValue();
-        }
-    }
+//    private double round(double value) {
+//        if (value > 1.0) {
+//            return new BigDecimal(value).setScale(1, RoundingMode.HALF_EVEN).doubleValue();
+//        } else {
+//            return new BigDecimal(value).setScale(2, RoundingMode.HALF_EVEN).doubleValue();
+//        }
+//    }
 }

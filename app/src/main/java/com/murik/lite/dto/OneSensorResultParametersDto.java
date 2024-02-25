@@ -8,10 +8,10 @@ import lombok.experimental.Accessors;
 @Setter
 @Accessors(chain = true)
 public class OneSensorResultParametersDto {
-    private Float s20_30;
-    private Float s20_60;
-    private Float s30_60;
-    private Float L;
-    private Float En;
-    private Float E2;
+    private Double s20_30;
+    private Double s20_60;
+    private Double s30_60;
+    private Double L;
+    private Double En;
+    private Double E2;
 }

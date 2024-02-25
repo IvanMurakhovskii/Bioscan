@@ -198,23 +198,23 @@ public class OneSensorChartFragment extends MvpAppCompatFragment implements OneS
     }
 
     @Override
-    public void setLeftArea(final float area) {
+    public void setLeftArea(final double area) {
         tvLeftArea.setText(String.valueOf(area));
     }
 
     @Override
-    public void setRightArea(final float area) {
+    public void setRightArea(final double area) {
         tvRightArea.setText(String.valueOf(area));
     }
 
     @Override
-    public void setLeftDelta(final float delta) {
+    public void setLeftDelta(final double delta) {
         llLeftDelta.setVisibility(View.VISIBLE);
         tvLeftDelta.setText(String.format("%.2f", delta) + "  %");
     }
 
     @Override
-    public void setRightDelta(final float delta) {
+    public void setRightDelta(final double delta) {
         llRightDelta.setVisibility(View.VISIBLE);
         tvRightDelta.setText(String.format("%.2f", delta) + "  %");
     }
@@ -222,51 +222,51 @@ public class OneSensorChartFragment extends MvpAppCompatFragment implements OneS
     @Override
     public void setAreaDifference(final AreaDifference areaDifference) {
         double difference = Math.abs(areaDifference.getAreaDifference());
-        scrollAreaDifference.setVisibility(View.VISIBLE);
+        llAreaDifference.setVisibility(View.VISIBLE);
         tvAreaDifference.setText(String.format("%.1f", difference) + "  %");
 
         String comment = areaDifference.getResultComment();
 
         llAreaDifference.setBackgroundColor(areaDifference.getViewColor());
 
-        if(comment != null) {
+        if(!comment.isEmpty()) {
             tvDifferenceLayout.setVisibility(View.VISIBLE);
             tvDifferenceComment.setText(areaDifference.getResultComment());
         }
     }
 
     @Override
-    public void setLeftPs_3425(float ps) {
+    public void setLeftPs_3425(double ps) {
         llLeftPs_3425.setVisibility(View.VISIBLE);
         tvLeftPs_3425.setText(String.format("%.2f", ps));
     }
 
     @Override
-    public void setLeftPs_2435(float ps) {
+    public void setLeftPs_2435(double ps) {
         llLeftPs_2435.setVisibility(View.VISIBLE);
         tvLeftPs_2435.setText(String.format("%.2f", ps));
     }
 
     @Override
-    public void setRightPs_3425(float ps) {
+    public void setRightPs_3425(double ps) {
         llRightPs_3425.setVisibility(View.VISIBLE);
         tvRightPs_3425.setText(String.format("%.2f", ps));
     }
 
     @Override
-    public void setRightPs_2435(float ps) {
+    public void setRightPs_2435(double ps) {
         llRightPs_2435.setVisibility(View.VISIBLE);
         tvRightPs_2435.setText(String.format("%.2f", ps));
     }
 
     @Override
-    public void setDeltaDangerOnLungsLeft(final float delta) {
+    public void setDeltaDangerOnLungsLeft(final double delta) {
         llDangerOnLungsAreaLeft.setVisibility(View.VISIBLE);
         tvAreaDangerOnLungsLeft.setText(String.format("%.2f", delta));
     }
 
     @Override
-    public void setDeltaDangerOnLungsRight(final float delta) {
+    public void setDeltaDangerOnLungsRight(final double delta) {
         llDangerOnLungsAreaRight.setVisibility(View.VISIBLE);
         tvAreaDangerOnLungsRight.setText(String.format("%.2f", delta));
     }

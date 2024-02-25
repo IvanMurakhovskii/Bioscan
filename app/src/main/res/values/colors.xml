@@ -13,5 +13,6 @@
   <color name="violet">#9400d3</color>
   <color name="green">#00AF64</color>
   <color name="orange">#F46405</color>
+  <color name="textColor">#111111</color>
 
 </resources>

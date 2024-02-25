@@ -60,18 +60,10 @@ public class RealmAdapter extends RealmRecyclerViewAdapter<DataSensorRealm, Real
 
         realmViewHolder.setTvTime(date);
 
-        if (data.getAlgorithmId() != null) {
-            BluetoothDimensionAlgorithm algorithm = BluetoothDimensionAlgorithm.getByAlgorithmId(data.getAlgorithmId());
 
-            if (algorithm != null) {
-                realmViewHolder.setAlgorithm(algorithm.getName());
-            }
-        }
+        realmViewHolder.setAlgorithm(data.getAlgorithmId());
 
-        if (data.getMeasurePointId() != null) {
-            MeasurePoint measurePoint = MeasurePoint.getById(data.getMeasurePointId());
-            realmViewHolder.setMeasurePoint(measurePoint.getDescription());
-        }
+        realmViewHolder.setMeasurePoint(data.getMeasurePointId());
 
         AlertDialog alertDialog = new AlertDialog.Builder(activity)
                 .setTitle("Вы действительно хотите удалить измерение?")

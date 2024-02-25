@@ -5,33 +5,42 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content">
 
-  <TextView
+  <LinearLayout
+      android:id="@+id/nose_type_layout"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
-      android:text="Тип прибора"
-      android:textSize="18sp"
-      android:textStyle="bold"/>
+      android:visibility="gone"
+      android:orientation="vertical">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Тип прибора"
+        android:textSize="18sp"
+        android:textStyle="bold"/>
 
-  <RadioGroup
-      android:id="@+id/rg_nose_type"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:orientation="horizontal"
-      android:paddingBottom="16dp">
-    <RadioButton
-        android:id="@+id/rb_bioscaner"
-        android:text="Биосканер"
-        android:checked="true"
-        android:layout_width="match_parent"
+    <RadioGroup
+        android:id="@+id/rg_nose_type"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        />
-    <RadioButton
-        android:id="@+id/rb_diagnost"
-        android:text="Диагност"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        />
-  </RadioGroup>
+        android:orientation="horizontal"
+        android:paddingBottom="16dp">
+      <RadioButton
+          android:id="@+id/rb_bioscaner"
+          android:text="Биосканер"
+          android:checked="true"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          />
+      <RadioButton
+          android:id="@+id/rb_diagnost"
+          android:text="Диагност"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          />
+    </RadioGroup>
+  </LinearLayout>
+
+
 
   <EditText
     android:id="@+id/start_dimension_description"
@@ -119,17 +128,24 @@
     <!--        android:layout_marginBottom="4dp"-->
     <!--        android:hint="@string/dimensionTime"/>-->
 
-    <TextView
-        android:layout_width="match_parent"
+    <LinearLayout
+        android:id="@+id/measure_point_layout"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Выберите точку измерения:" />
+        android:visibility="gone"
+        android:orientation="vertical">
+      <TextView
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:text="Выберите точку измерения:" />
 
-    <android.support.v7.widget.AppCompatSpinner
-        android:id="@+id/spinner_measure_point"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:spinnerMode="dropdown"
-        android:background="@drawable/spinner_background"/>
+      <android.support.v7.widget.AppCompatSpinner
+          android:id="@+id/spinner_measure_point"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:spinnerMode="dropdown"
+          android:background="@drawable/spinner_background"/>
+    </LinearLayout>
 
     <TextView
         android:layout_width="match_parent"

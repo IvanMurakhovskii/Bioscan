@@ -16,21 +16,25 @@ public class ResultA_First2_3_Gray extends BaseResultFirst {
 
     public void setResult() {
         setColorGRAY();
-        if (getA() >=0.1 && getA() <=0.2) {
-            setColorGRAY();
-            setPossibleReasons(getResources(R.string.A_SHORT_2_3_GRAY_3));
-        } else if (getA() >=0.75 && getA() <=0.89) {
-            setColorGRAY();
-            setPossibleReasons(getResources(R.string.A_SHORT_2_3_GRAY_4));
-        } else if (getA() >= 0.9 && getA() <= 1.7) {
-            setColorGRAY();
-            setPossibleReasons(getResources(R.string.A_SHORT_2_3_GRAY_2));
-        } else if (getA() >= 2.0 && getA() <= 2.4) {
-            setColorGRAY();
-            setPossibleReasons(getResources(R.string.A_SHORT_2_3_GRAY_5));
-        } else if (getA() >= 2.5 && getA() <= 6) {
-            setColorGRAY();
-            setPossibleReasons(getResources(R.string.A_SHORT_2_3_GRAY_6));
-        }
+
+        setColorGRAY();
+        setPossibleReasons(getResources(R.string.A_SHORT_2_3_GRAY_3));
+
+//        if (getA() >=0.1 && getA() <=0.2) {
+//            setColorGRAY();
+//            setPossibleReasons(getResources(R.string.A_SHORT_2_3_GRAY_3));
+//        } else if (getA() >=0.75 && getA() <=0.89) {
+//            setColorGRAY();
+//            setPossibleReasons(getResources(R.string.A_SHORT_2_3_GRAY_4));
+//        } else if (getA() >= 0.9 && getA() <= 1.7) {
+//            setColorGRAY();
+//            setPossibleReasons(getResources(R.string.A_SHORT_2_3_GRAY_2));
+//        } else if (getA() >= 2.0 && getA() <= 2.4) {
+//            setColorGRAY();
+//            setPossibleReasons(getResources(R.string.A_SHORT_2_3_GRAY_5));
+//        } else if (getA() >= 2.5 && getA() <= 6) {
+//            setColorGRAY();
+//            setPossibleReasons(getResources(R.string.A_SHORT_2_3_GRAY_6));
+//        }
     }
 }

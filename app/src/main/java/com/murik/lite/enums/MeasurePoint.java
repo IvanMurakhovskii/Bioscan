@@ -9,7 +9,7 @@ public enum MeasurePoint {
 
     FOREARM(10,"Предплечье"),
     WRIST(20, "Запястье"),
-    PALM(30, "ладонь"),
+    PALM(30, "Ладонь"),
     LIVER_FACE(40, "Печень  (лицо)"),
     HEART_FACE(45, "Сердце (лицо)"),
     SMALL_INTESTINE_FACE(50, "Тонкий кишечник (лицо)"),
@@ -44,6 +44,10 @@ public enum MeasurePoint {
     }
 
     public static MeasurePoint getById(Integer id) {
+        if (id == null) {
+            return null;
+        }
+
         for (MeasurePoint e : MeasurePoint.values()) {
             if (e.getId().equals(id)) {
                 return e;

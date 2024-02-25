@@ -13,8 +13,8 @@ import lombok.Setter;
 
 public abstract class BaseResult implements ResultBySens {
     private double A;
-    private int color;
-    private String possibleReasons = "";
+    private int color = Color.WHITE;
+    private String possibleReasons = "Проверить условия измерения! При повторе – очень опасно! Воспаление! Обратить внимание!";
     private Context context;
     private String legend;
     private DataByMaxParcelable inputData;
@@ -27,7 +27,6 @@ public abstract class BaseResult implements ResultBySens {
         this.A = A;
         this.context = context;
         this.inputData = inputData;
-        setColorGREEN();
 
         if (Double.isNaN(A) || Double.isInfinite(A)) {
             color = Color.WHITE;
@@ -99,6 +98,7 @@ public abstract class BaseResult implements ResultBySens {
 
     public void setColorGREEN() {
         color = ContextCompat.getColor(context, R.color.green);
+        possibleReasons = "";
     }
 
     public void setColorGREENLITE() {

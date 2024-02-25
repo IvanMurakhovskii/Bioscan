@@ -15,6 +15,8 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
+
 import com.arellomobile.mvp.MvpAppCompatFragment;
 import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.github.mikephil.charting.charts.PieChart;
@@ -46,7 +48,14 @@ public class ResultFragment extends MvpAppCompatFragment implements ResultView {
 
   private RecyclerView mResultRecycler;
   private PieChart pieChart;
+  private FloatingActionButton fab_add;
   private FloatingActionButton fab_summary;
+  private FloatingActionButton fab_substances;
+
+  private TextView addAlarmActionText;
+  private TextView addPersonActionText;
+
+  private boolean  isAllFabsVisible = false;
 
   public static Fragment newInstance(DataByMaxParcelable resultBySens, int mPage) {
     ResultFragment fragment = new ResultFragment();
@@ -83,10 +92,38 @@ public class ResultFragment extends MvpAppCompatFragment implements ResultView {
     super.onViewCreated(view, savedInstanceState);
     mResultRecycler = view.findViewById(R.id.result_recycler_view);
     pieChart = view.findViewById(R.id.result_pie_chart);
-    fab_summary = view.findViewById(R.id.fab_summary);
+    fab_add = view.findViewById(R.id.add_fab);
+    fab_summary = view.findViewById(R.id.summary_fab);
+    fab_substances = view.findViewById(R.id.substances_fab);
     mResultPresenter.setContext(getContext());
 
+    addAlarmActionText = view.findViewById(R.id.add_alarm_action_text);
+    addPersonActionText = view.findViewById(R.id.add_person_action_text);
+
     fab_summary.setOnClickListener((event) -> mResultPresenter.onSummaryClick());
+
+    fab_substances.setOnClickListener((event) -> mResultPresenter.onSubstanceClick(mPage));
+
+    isAllFabsVisible = false;
+
+    fab_add.setOnClickListener((event) -> {
+      if (!isAllFabsVisible) {
+        fab_summary.show();
+        fab_substances.show();
+
+        addAlarmActionText.setVisibility(View.VISIBLE);
+        addPersonActionText.setVisibility(View.VISIBLE);
+
+        isAllFabsVisible = true;
+      } else {
+        fab_summary.hide();
+        fab_substances.hide();
+        addAlarmActionText.setVisibility(View.GONE);
+        addPersonActionText.setVisibility(View.GONE);
+
+        isAllFabsVisible = false;
+      }
+    });
 
   }
 

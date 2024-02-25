@@ -5,6 +5,7 @@ import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothGatt;
 import android.content.Context;
 
+import com.murik.lite.configuration.ApplicationComponent;
 import com.murik.lite.model.RealmController;
 
 import io.realm.Realm;
@@ -41,6 +42,8 @@ public class App extends Application {
         Realm.setDefaultConfiguration(config);
 
         realmController = new RealmController();
+
+//        ApplicationComponent appComponent = DaggerApplicationComponent.create();
     }
 
     public BluetoothAdapter getmBluetoothAdapter() {

@@ -33,16 +33,24 @@ public class Summary_60 extends BaseResult {
             setPossibleReasons(getResources(R.string.SUMMARY_60_GREEN));
             if (settings.equals(SummaryTheme.LION)) {
                 setImageResId(R.drawable.man_1);
-            } else {
+            } else if (settings.equals(SummaryTheme.ABSTRACT)) {
                 setImageResId(R.drawable.green_2);
+            } else if (settings.equals(SummaryTheme.DREAM)) {
+                setImageResId(R.drawable.dream_1);
+            } else if (settings.equals(SummaryTheme.APRICOT)) {
+                setImageResId(R.drawable.apricot_1);
             }
         } else if (a >= 86 && a < 94) {
             setColorGREENLITE();
             setPossibleReasons(getResources(R.string.SUMMARY_60_GREEN_LITE));
             if (settings.equals(SummaryTheme.LION)) {
                 setImageResId(R.drawable.man_2);
-            } else {
+            } else if (settings.equals(SummaryTheme.ABSTRACT)) {
                 setImageResId(R.drawable.green_lite);
+            } else if (settings.equals(SummaryTheme.DREAM)) {
+                setImageResId(R.drawable.dream_2);
+            } else if (settings.equals(SummaryTheme.APRICOT)) {
+                setImageResId(R.drawable.apricot_2);
             }
         } else if (a >= 78.5 && a < 86) {
             setColorGREENLITE();
@@ -50,8 +58,12 @@ public class Summary_60 extends BaseResult {
 
             if (settings.equals(SummaryTheme.LION)) {
                 setImageResId(R.drawable.man_3);
-            } else {
+            } else if (settings.equals(SummaryTheme.ABSTRACT)) {
                 setImageResId(R.drawable.green_lite_2);
+            } else if (settings.equals(SummaryTheme.DREAM)) {
+                setImageResId(R.drawable.dream_3);
+            } else if (settings.equals(SummaryTheme.APRICOT)) {
+                setImageResId(R.drawable.apricot_3);
             }
         } else if (a >= 70 && a < 78.5) {
             setColorYELLOW();
@@ -59,8 +71,12 @@ public class Summary_60 extends BaseResult {
 
             if (settings.equals(SummaryTheme.LION)) {
                 setImageResId(R.drawable.man_4);
-            } else {
+            } else if (settings.equals(SummaryTheme.ABSTRACT)) {
                 setImageResId(R.drawable.yellow);
+            } else if (settings.equals(SummaryTheme.DREAM)) {
+                setImageResId(R.drawable.dream_4);
+            } else if (settings.equals(SummaryTheme.APRICOT)) {
+                setImageResId(R.drawable.apricot_4);
             }
         } else if (a >= 65.1 && a < 70) {
             setColorYELLOW();
@@ -68,8 +84,12 @@ public class Summary_60 extends BaseResult {
 
             if (settings.equals(SummaryTheme.LION)) {
                 setImageResId(R.drawable.man_5);
-            } else {
+            } else if (settings.equals(SummaryTheme.ABSTRACT)) {
                 setImageResId(R.drawable.yellow_2);
+            } else if (settings.equals(SummaryTheme.DREAM)) {
+                setImageResId(R.drawable.dream_5);
+            } else if (settings.equals(SummaryTheme.APRICOT)) {
+                setImageResId(R.drawable.apricot_5);
             }
         } else if (a >= 60 && a < 65.1) {
             setColorORANGE();
@@ -77,8 +97,12 @@ public class Summary_60 extends BaseResult {
 
             if (settings.equals(SummaryTheme.LION)) {
                 setImageResId(R.drawable.man_6);
-            } else {
+            } else if (settings.equals(SummaryTheme.ABSTRACT)) {
                 setImageResId(R.drawable.orange);
+            } else if (settings.equals(SummaryTheme.DREAM)) {
+                setImageResId(R.drawable.dream_6);
+            } else if (settings.equals(SummaryTheme.APRICOT)) {
+                setImageResId(R.drawable.apricot_6);
             }
         } else if (a >= 55 && a < 60) {
             setColorORANGE();
@@ -86,8 +110,12 @@ public class Summary_60 extends BaseResult {
 
             if (settings.equals(SummaryTheme.LION)) {
                 setImageResId(R.drawable.man_7);
-            } else {
+            } else if (settings.equals(SummaryTheme.ABSTRACT)) {
                 setImageResId(R.drawable.orange_2);
+            } else if (settings.equals(SummaryTheme.DREAM)) {
+                setImageResId(R.drawable.dream_7);
+            } else if (settings.equals(SummaryTheme.APRICOT)) {
+                setImageResId(R.drawable.apricot_7);
             }
         } else if (a > 49.1 && a < 55) {
             setColorRED();
@@ -95,8 +123,12 @@ public class Summary_60 extends BaseResult {
 
             if (settings.equals(SummaryTheme.LION)) {
                 setImageResId(R.drawable.man_8);
-            } else {
+            } else  if (settings.equals(SummaryTheme.ABSTRACT)) {
                 setImageResId(R.drawable.red);
+            } else if (settings.equals(SummaryTheme.DREAM)) {
+                setImageResId(R.drawable.dream_8);
+            } else if (settings.equals(SummaryTheme.APRICOT)) {
+                setImageResId(R.drawable.apricot_8);
             }
         } else if (a >= 34 && a < 49.1) {
             setColorRED();
@@ -104,8 +136,12 @@ public class Summary_60 extends BaseResult {
 
             if (settings.equals(SummaryTheme.LION)) {
                 setImageResId(R.drawable.man_9);
-            } else {
+            } else if (settings.equals(SummaryTheme.ABSTRACT)) {
                 setImageResId(R.drawable.red_2);
+            } else if (settings.equals(SummaryTheme.DREAM)) {
+                setImageResId(R.drawable.dream_9);
+            } else if (settings.equals(SummaryTheme.APRICOT)) {
+                setImageResId(R.drawable.apricot_9);
             }
         } else if (a > 20 && a < 34) {
             setColorBURGUNDY();
@@ -113,8 +149,12 @@ public class Summary_60 extends BaseResult {
 
             if (settings.equals(SummaryTheme.LION)) {
                 setImageResId(R.drawable.man_10);
-            } else {
+            } else if (settings.equals(SummaryTheme.ABSTRACT)) {
                 setImageResId(R.drawable.burgundy);
+            } else if (settings.equals(SummaryTheme.DREAM)) {
+                setImageResId(R.drawable.dream_10);
+            } else if (settings.equals(SummaryTheme.APRICOT)) {
+                setImageResId(R.drawable.apricot_10);
             }
         } else if (a > 10 && a < 20) {
             setColor(Color.WHITE);
@@ -122,8 +162,12 @@ public class Summary_60 extends BaseResult {
 
             if (settings.equals(SummaryTheme.LION)) {
                 setImageResId(R.drawable.man_11);
-            } else {
+            } else if (settings.equals(SummaryTheme.ABSTRACT)) {
                 setImageResId(R.drawable.burgundy);
+            } else if (settings.equals(SummaryTheme.DREAM)) {
+                setImageResId(R.drawable.dream_11);
+            } else if (settings.equals(SummaryTheme.APRICOT)) {
+                setImageResId(R.drawable.apricot_11);
             }
         } else if (a <= 10) {
             setColor(Color.WHITE);
@@ -131,8 +175,12 @@ public class Summary_60 extends BaseResult {
 
             if (settings.equals(SummaryTheme.LION)) {
                 setImageResId(R.drawable.man_12);
-            } else {
+            } else if (settings.equals(SummaryTheme.ABSTRACT)) {
                 setImageResId(R.drawable.white);
+            } else if (settings.equals(SummaryTheme.DREAM)) {
+                setImageResId(R.drawable.dream_12);
+            } else if (settings.equals(SummaryTheme.APRICOT)) {
+                setImageResId(R.drawable.apricot_12);
             }
         }
     }

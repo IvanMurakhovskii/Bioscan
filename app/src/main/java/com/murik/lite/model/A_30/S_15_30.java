@@ -18,10 +18,10 @@ public class S_15_30 extends BaseResultFirst {
     public void setResult() {
         if (getA() >= 0.21 && getA() <= 0.26) {
             setColorGREEN();
-        } else if (getA() >= 0.17 && getA() < 0.19) {
+        } else if (getA() >= 0.17 && getA() < 0.189) {
             setColorYELLOW();
             setPossibleReasons(getResources(R.string.S30_15_30_YELLOW));
-        } else if (getA() >= 0.19 && getA() < 0.21) {
+        } else if (getA() >= 0.19 && getA() < 209) {
             setColorYELLOW();
             setPossibleReasons(getResources(R.string.S30_15_30_YELLOW_1));
         } else if (getA() >= 0.27 && getA() <= 0.30) {
@@ -30,8 +30,8 @@ public class S_15_30 extends BaseResultFirst {
         } else if (getA() >= 0.31 && getA() <= 0.43) {
             setColorRED();
             setPossibleReasons(getResources(R.string.S30_15_30_RED));
-        } else if (getA() >= 0.1 && getA() <= 0.16) {
-            setColorRED();
+        } else if (getA() >= 0.109 && getA() < 0.17) {
+            setColorBURGUNDY();
             setPossibleReasons(getResources(R.string.S30_15_30_RED_1));
         } else if (getA() >= 0.44 && getA() <= 0.65) {
             setColorBURGUNDY();

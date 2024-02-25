@@ -75,10 +75,10 @@ public class OneSensorMeasurePresenter extends MvpPresenter<OneSensorMeasureView
     }
 
     public void createRadarChart(int mPage, final DataByMaxParcelable dataByMaxParcelable, final Context context) {
-        float areaLeft = 0;
-        float areaRight = 0;
+        double areaLeft = 0;
+        double areaRight = 0;
 
-        float difference;
+        double difference;
 
         AreaDifference areaDifference = null;
 

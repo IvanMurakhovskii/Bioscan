@@ -7,7 +7,7 @@ import com.murik.lite.R;
 import com.murik.lite.dto.DataByMaxParcelable;
 import com.murik.lite.model.resultbyMaxValue.BaseResultWithCoefficient;
 
-public class    A_20_30_for_80 extends BaseResultWithCoefficient {
+public class A_20_30_for_80 extends BaseResultWithCoefficient {
 
 
     public A_20_30_for_80(double A, DataByMaxParcelable inputData, Context context, float coefficient) {
@@ -18,19 +18,25 @@ public class    A_20_30_for_80 extends BaseResultWithCoefficient {
     public void setResult() {
         if (getA() > 0.56 && getA() <= 0.66) {
             setColorGREEN();
-        } else if (getA() >= 0.67 && getA() <= 0.75) {
+        } else if (getA() >= 0.67 && getA() < 0.70) {
             setColorYELLOW();
             setPossibleReasons(getResources(R.string.A_20_30_80_YELLOW_1));
-        }  else if(getA() >= 0.50 && getA() <= 0.55) {
+        } else if (getA() >= 0.70 && getA() <= 0.75) {
             setColorYELLOW();
-            setPossibleReasons(getResources(R.string.A_20_30_YELLOW_3));
-        } else if(getA() >= 0.27 && getA() <= 0.49) {
+            setPossibleReasons(getResources(R.string.A_20_30_80_YELLOW_1_2));
+        } else if (getA() >= 0.50 && getA() <= 0.55) {
+            setColorYELLOW();
+            setPossibleReasons(getResources(R.string.A_20_30_80_YELLOW_2));
+        } else if (getA() >= 0.27 && getA() <= 0.33) {
             setColorRED();
-            setPossibleReasons(getResources(R.string.A_20_30_RED_1));
-        } else if(getA() >= 0.76 && getA() <= 0.95) {
+            setPossibleReasons(getResources(R.string.A_20_30_80_RED_3));
+        }  else if (getA() >= 0.33 && getA() <= 0.49) {
+            setColorRED();
+            setPossibleReasons(getResources(R.string.A_20_30_80_RED_3_1));
+        } else if (getA() >= 0.76 && getA() <= 0.95) {
             setColorRED();
             setPossibleReasons(getResources(R.string.A_20_30_RED_2));
-        } else if(getA() >= 0.96) {
+        } else if (getA() >= 0.96) {
             setColorBURGUNDY();
             setPossibleReasons(getResources(R.string.A_20_30_BURGUNDY));
         } else {

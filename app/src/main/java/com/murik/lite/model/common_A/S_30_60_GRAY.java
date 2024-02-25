@@ -16,16 +16,18 @@ public class S_30_60_GRAY extends BaseResultWithCoefficient {
 
     public void setResult() {
         setColorGRAY();
-        if (getA() >= 0.050 && getA() <= 0.114) {
-            setColorGRAY();
-            setPossibleReasons(getResources(R.string.A_30_60_GRAY_1));
-        } else if (getA() >= 0.114 && getA() <= 0.18) {
-            setColorGRAY();
-            setPossibleReasons(getResources(R.string.A_30_60_GRAY_2));
-        }  else if (getA() >= 0.37 && getA() <= 0.41) {
-            setColorGRAY();
-            setPossibleReasons(getResources(R.string.A_30_60_GRAY_3));
-        }
+        setPossibleReasons(getResources(R.string.A_30_60_GRAY_1));
+
+//        if (getA() >= 0.050 && getA() <= 0.114) {
+//            setColorGRAY();
+//            setPossibleReasons(getResources(R.string.A_30_60_GRAY_1));
+//        } else if (getA() >= 0.114 && getA() <= 0.18) {
+//            setColorGRAY();
+//            setPossibleReasons(getResources(R.string.A_30_60_GRAY_2));
+//        }  else if (getA() >= 0.37 && getA() <= 0.41) {
+//            setColorGRAY();
+//            setPossibleReasons(getResources(R.string.A_30_60_GRAY_3));
+//        }
 
     }
 }

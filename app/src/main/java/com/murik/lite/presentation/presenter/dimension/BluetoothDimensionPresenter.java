@@ -5,6 +5,7 @@ import com.arellomobile.mvp.InjectViewState;
 import com.arellomobile.mvp.MvpPresenter;
 import com.murik.lite.App;
 import com.murik.lite.Const;
+import com.murik.lite.configuration.AuthService;
 import com.murik.lite.dto.SensorDataFullParcelable;
 import com.murik.lite.presentation.view.dimension.BluetoothDimensionView;
 import com.murik.lite.utils.ListUtils;
@@ -87,7 +88,9 @@ public class BluetoothDimensionPresenter extends MvpPresenter<BluetoothDimension
         sensorDataFullParcelable.setGender(gender);
         sensorDataFullParcelable.setPractice(isPractice);
         sensorDataFullParcelable.setAlgorithmId(algorithmId);
-        sensorDataFullParcelable.setMeasurePointId(measurePointId);
+        if (AuthService.getInstance().isAdmin()) {
+            sensorDataFullParcelable.setMeasurePointId(measurePointId);
+        }
 
 //        ListUtils.inverseListValueIfMiddleValueBelowZero(sens1LeftHand);
 //        ListUtils.inverseListValueIfMiddleValueBelowZero(sens1RightHand);

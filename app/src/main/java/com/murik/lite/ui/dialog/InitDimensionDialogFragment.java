@@ -13,12 +13,14 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.murik.lite.Const;
 import com.murik.lite.R;
+import com.murik.lite.configuration.AuthService;
 import com.murik.lite.enums.BluetoothDimensionAlgorithm;
 import com.murik.lite.enums.MeasurePoint;
 import com.murik.lite.enums.NoseType;
@@ -38,6 +40,8 @@ public class InitDimensionDialogFragment extends AppCompatDialogFragment {
     private Spinner dimensionTimeSpinner;
     private Spinner measurePointSpinner;
     private TextView tvAlgorithmDescription;
+    private LinearLayout noseTypeLayout;
+    private LinearLayout measurePointLayout;
 
     private int gender = Const.GENDER_MALE;
     private boolean isLeftHand = true;
@@ -64,6 +68,8 @@ public class InitDimensionDialogFragment extends AppCompatDialogFragment {
         swHand = view.findViewById(R.id.rg_hand);
         noseTypeRg = view.findViewById(R.id.rg_nose_type);
         dimensionTimeSpinner = view.findViewById(R.id.spinner_dimension_time);
+        measurePointLayout = view.findViewById(R.id.measure_point_layout);
+        noseTypeLayout = view.findViewById(R.id.nose_type_layout);
 
         dimensionTimeSpinner.setAdapter(new BluetoothDimensionSpinnerAdapter(
                 Objects.requireNonNull(this.getContext()),
@@ -72,6 +78,11 @@ public class InitDimensionDialogFragment extends AppCompatDialogFragment {
         );
 
         measurePointSpinner = view.findViewById(R.id.spinner_measure_point);
+
+        if (AuthService.getInstance().isAdmin()) {
+            measurePointLayout.setVisibility(View.VISIBLE);
+            noseTypeLayout.setVisibility(View.VISIBLE);
+        }
 
         measurePointSpinner.setAdapter(new MeasurePointSpinnerAdapter(
                 Objects.requireNonNull(this.getContext()),
@@ -113,7 +124,7 @@ public class InitDimensionDialogFragment extends AppCompatDialogFragment {
         });
         builder.setView(view)
                 .setTitle("Измерение")
-                .setPositiveButton("Начать измерение", (DialogInterface dialog, int id) -> mDialogListener. onDialogPositiveClick(1))
+                .setPositiveButton("Начать", (DialogInterface dialog, int id) -> mDialogListener. onDialogPositiveClick(1))
                 .setNegativeButton("Отмена",
                         (DialogInterface dialog, int id) ->
                                 InitDimensionDialogFragment.this.getDialog().cancel());
@@ -144,6 +155,10 @@ public class InitDimensionDialogFragment extends AppCompatDialogFragment {
     }
 
     public NoseType getNoseType() {
+        if (!AuthService.getInstance().isAdmin()) {
+            return NoseType.BIOSCANER;
+        }
+
         return noseType;
     }
 

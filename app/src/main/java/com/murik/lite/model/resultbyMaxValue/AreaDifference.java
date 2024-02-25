@@ -9,7 +9,7 @@ import com.murik.lite.R;
 public abstract class AreaDifference {
     private double areaDifference;
     private int color;
-    private String possibleReasons = null;
+    private String possibleReasons = "норма";
     private Context context;
     private int gender;
 

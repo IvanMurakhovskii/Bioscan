@@ -20,4 +20,5 @@ public class Screens {
   public static final String ADDITIONAL_RESULT_FRAGMENT = "ADDITIONAL_RESULT_FRAGMENT";
   public static final String LOGIN_FRAGMENT = "LOGIN_FRAGMENT";
   public static final String SETTINGS_FRAGMENT = "SETTINGS_FRAGMENT";
+  public static final String SUBSTANCES_FRAGMENT = "SUBSTANCES_FRAGMENT";
 }

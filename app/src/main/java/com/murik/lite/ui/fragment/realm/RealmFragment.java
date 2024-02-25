@@ -63,8 +63,6 @@ public class RealmFragment extends MvpAppCompatFragment implements RealmView, Di
     recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
     RealmAdapter adapter = new RealmAdapter(realmController.getInfo(), true, mRealmPresenter, Objects.requireNonNull(getActivity()));
     recyclerView.setAdapter(adapter);
-
-
   }
 
   @Override

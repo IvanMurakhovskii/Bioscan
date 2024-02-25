@@ -9,27 +9,27 @@ import java.util.ArrayList;
 public interface OneSensorMeasureView extends MvpView {
     void initRadarChart(ArrayList<RadarEntry> leftHandData, ArrayList<RadarEntry> rightHandData, String description, int colorLeft, int colorRight);
 
-    void setLeftArea(float area);
+    void setLeftArea(double area);
 
-    void setRightArea(float area);
+    void setRightArea(double area);
 
-    void setLeftDelta(float delta);
+    void setLeftDelta(double delta);
 
-    void setRightDelta(float delta);
+    void setRightDelta(double delta);
 
     void setAreaDifference(AreaDifference difference);
 
-    void setLeftPs_3425(float ps);
+    void setLeftPs_3425(double ps);
 
-    void setLeftPs_2435(float ps);
+    void setLeftPs_2435(double ps);
 
-    void setRightPs_3425(float ps);
+    void setRightPs_3425(double ps);
 
-    void setRightPs_2435(float ps);
+    void setRightPs_2435(double ps);
 
-    void setDeltaDangerOnLungsLeft(float delta);
+    void setDeltaDangerOnLungsLeft(double delta);
 
-    void setDeltaDangerOnLungsRight(float delta);
+    void setDeltaDangerOnLungsRight(double delta);
 
     void setMaxRight(Integer delta);
 

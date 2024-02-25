@@ -4,7 +4,5 @@ import lombok.Getter;
 
 @Getter
 public enum SummaryTheme {
-    LION,
-    ABSTRACT;
-
+    LION, ABSTRACT, DREAM, APRICOT
 }

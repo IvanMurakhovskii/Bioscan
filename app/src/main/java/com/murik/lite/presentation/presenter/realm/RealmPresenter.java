@@ -6,6 +6,7 @@ import com.arellomobile.mvp.MvpPresenter;
 import com.murik.lite.App;
 import com.murik.lite.Const;
 import com.murik.lite.Screens;
+import com.murik.lite.configuration.AuthService;
 import com.murik.lite.dto.DataByMaxParcelable;
 import com.murik.lite.dto.SensorDataFullParcelable;
 import com.murik.lite.model.entity.DataSensorRealm;
@@ -28,11 +29,13 @@ public class RealmPresenter extends MvpPresenter<RealmView> {
 
     public void onItemRecyclerClick(DataSensorRealm data) {
         this.data = data;
-        getViewState().showDialog();
-    }
 
-    public int sum(int a, int b) {
-        return a + b;
+        if (!AuthService.getInstance().isAdmin() && data.getAlgorithmId() != null) {
+            createOneSensorMeasure(Const.SENSOR_1, Const.BIOSCANER, false, false, data.getAlgorithmId());
+        } else {
+            getViewState().showDialog();
+        }
+
     }
 
     private void createStandardMeasure() {
