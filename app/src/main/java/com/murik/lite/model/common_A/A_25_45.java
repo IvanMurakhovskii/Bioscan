@@ -25,6 +25,12 @@ public class A_25_45 extends BaseResultWithCoefficient {
         } else if (getA() >= 0.57 && getA() <= 0.65) {
             setColorYELLOW();
             setPossibleReasons(getResources(R.string.A_25_45_YELLOW));
+        } else if (getA() >= 0.66 && getA() <= 0.69) {
+            setColorRED();
+            setPossibleReasons(getResources(R.string.A_25_45_RED));
+        } else if (getA() >= 0.7 && getA() <= 0.76) {
+            setColorBURGUNDY();
+            setPossibleReasons(getResources(R.string.A_25_45_BURGUNDY));
         }
     }
 }

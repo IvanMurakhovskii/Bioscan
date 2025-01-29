@@ -39,6 +39,14 @@ public class Summary_60 extends BaseResult {
                 setImageResId(R.drawable.dream_1);
             } else if (settings.equals(SummaryTheme.APRICOT)) {
                 setImageResId(R.drawable.apricot_1);
+            } else if (settings.equals(SummaryTheme.MARSHMALLOW)) {
+                setImageResId(R.drawable.marshmallow_1);
+            } else if (settings.equals(SummaryTheme.GNOMES)) {
+                setImageResId(R.drawable.gnomes_1);
+            } else if (settings.equals(SummaryTheme.SANTA_LETTER)) {
+                setImageResId(R.drawable.santa_letter_1);
+            } else if (settings.equals(SummaryTheme.GLASS_LION)) {
+                setImageResId(R.drawable.glass_lion_1);
             }
         } else if (a >= 86 && a < 94) {
             setColorGREENLITE();
@@ -51,6 +59,14 @@ public class Summary_60 extends BaseResult {
                 setImageResId(R.drawable.dream_2);
             } else if (settings.equals(SummaryTheme.APRICOT)) {
                 setImageResId(R.drawable.apricot_2);
+            } else if (settings.equals(SummaryTheme.MARSHMALLOW)) {
+                setImageResId(R.drawable.marshmallow_2);
+            } else if (settings.equals(SummaryTheme.GNOMES)) {
+                setImageResId(R.drawable.gnomes_2);
+            } else if (settings.equals(SummaryTheme.SANTA_LETTER)) {
+                setImageResId(R.drawable.santa_letter_2);
+            } else if (settings.equals(SummaryTheme.GLASS_LION)) {
+                setImageResId(R.drawable.glass_lion_2);
             }
         } else if (a >= 78.5 && a < 86) {
             setColorGREENLITE();
@@ -64,6 +80,14 @@ public class Summary_60 extends BaseResult {
                 setImageResId(R.drawable.dream_3);
             } else if (settings.equals(SummaryTheme.APRICOT)) {
                 setImageResId(R.drawable.apricot_3);
+            } else if (settings.equals(SummaryTheme.MARSHMALLOW)) {
+                setImageResId(R.drawable.marshmallow_3);
+            } else if (settings.equals(SummaryTheme.GNOMES)) {
+                setImageResId(R.drawable.gnomes_3);
+            } else if (settings.equals(SummaryTheme.SANTA_LETTER)) {
+                setImageResId(R.drawable.santa_letter_3);
+            } else if (settings.equals(SummaryTheme.GLASS_LION)) {
+                setImageResId(R.drawable.glass_lion_3);
             }
         } else if (a >= 70 && a < 78.5) {
             setColorYELLOW();
@@ -77,6 +101,14 @@ public class Summary_60 extends BaseResult {
                 setImageResId(R.drawable.dream_4);
             } else if (settings.equals(SummaryTheme.APRICOT)) {
                 setImageResId(R.drawable.apricot_4);
+            } else if (settings.equals(SummaryTheme.MARSHMALLOW)) {
+                setImageResId(R.drawable.marshmallow_4);
+            } else if (settings.equals(SummaryTheme.GNOMES)) {
+                setImageResId(R.drawable.gnomes_4);
+            } else if (settings.equals(SummaryTheme.SANTA_LETTER)) {
+                setImageResId(R.drawable.santa_letter_4);
+            } else if (settings.equals(SummaryTheme.GLASS_LION)) {
+                setImageResId(R.drawable.glass_lion_4);
             }
         } else if (a >= 65.1 && a < 70) {
             setColorYELLOW();
@@ -90,6 +122,14 @@ public class Summary_60 extends BaseResult {
                 setImageResId(R.drawable.dream_5);
             } else if (settings.equals(SummaryTheme.APRICOT)) {
                 setImageResId(R.drawable.apricot_5);
+            } else if (settings.equals(SummaryTheme.MARSHMALLOW)) {
+                setImageResId(R.drawable.marshmallow_5);
+            } else if (settings.equals(SummaryTheme.GNOMES)) {
+                setImageResId(R.drawable.gnomes_5);
+            } else if (settings.equals(SummaryTheme.SANTA_LETTER)) {
+                setImageResId(R.drawable.santa_letter_5);
+            } else if (settings.equals(SummaryTheme.GLASS_LION)) {
+                setImageResId(R.drawable.glass_lion_5);
             }
         } else if (a >= 60 && a < 65.1) {
             setColorORANGE();
@@ -103,6 +143,14 @@ public class Summary_60 extends BaseResult {
                 setImageResId(R.drawable.dream_6);
             } else if (settings.equals(SummaryTheme.APRICOT)) {
                 setImageResId(R.drawable.apricot_6);
+            } else if (settings.equals(SummaryTheme.MARSHMALLOW)) {
+                setImageResId(R.drawable.marshmallow_6);
+            } else if (settings.equals(SummaryTheme.GNOMES)) {
+                setImageResId(R.drawable.gnomes_6);
+            } else if (settings.equals(SummaryTheme.SANTA_LETTER)) {
+                setImageResId(R.drawable.santa_letter_6);
+            } else if (settings.equals(SummaryTheme.GLASS_LION)) {
+                setImageResId(R.drawable.glass_lion_6);
             }
         } else if (a >= 55 && a < 60) {
             setColorORANGE();
@@ -116,6 +164,14 @@ public class Summary_60 extends BaseResult {
                 setImageResId(R.drawable.dream_7);
             } else if (settings.equals(SummaryTheme.APRICOT)) {
                 setImageResId(R.drawable.apricot_7);
+            } else if (settings.equals(SummaryTheme.MARSHMALLOW)) {
+                setImageResId(R.drawable.marshmallow_7);
+            } else if (settings.equals(SummaryTheme.GNOMES)) {
+                setImageResId(R.drawable.gnomes_7);
+            } else if (settings.equals(SummaryTheme.SANTA_LETTER)) {
+                setImageResId(R.drawable.santa_letter_7);
+            } else if (settings.equals(SummaryTheme.GLASS_LION)) {
+                setImageResId(R.drawable.glass_lion_7);
             }
         } else if (a > 49.1 && a < 55) {
             setColorRED();
@@ -123,12 +179,20 @@ public class Summary_60 extends BaseResult {
 
             if (settings.equals(SummaryTheme.LION)) {
                 setImageResId(R.drawable.man_8);
-            } else  if (settings.equals(SummaryTheme.ABSTRACT)) {
+            } else if (settings.equals(SummaryTheme.ABSTRACT)) {
                 setImageResId(R.drawable.red);
             } else if (settings.equals(SummaryTheme.DREAM)) {
                 setImageResId(R.drawable.dream_8);
             } else if (settings.equals(SummaryTheme.APRICOT)) {
                 setImageResId(R.drawable.apricot_8);
+            } else if (settings.equals(SummaryTheme.MARSHMALLOW)) {
+                setImageResId(R.drawable.marshmallow_8);
+            } else if (settings.equals(SummaryTheme.GNOMES)) {
+                setImageResId(R.drawable.gnomes_8);
+            } else if (settings.equals(SummaryTheme.SANTA_LETTER)) {
+                setImageResId(R.drawable.santa_letter_8);
+            } else if (settings.equals(SummaryTheme.GLASS_LION)) {
+                setImageResId(R.drawable.glass_lion_8);
             }
         } else if (a >= 34 && a < 49.1) {
             setColorRED();
@@ -142,6 +206,14 @@ public class Summary_60 extends BaseResult {
                 setImageResId(R.drawable.dream_9);
             } else if (settings.equals(SummaryTheme.APRICOT)) {
                 setImageResId(R.drawable.apricot_9);
+            } else if (settings.equals(SummaryTheme.MARSHMALLOW)) {
+                setImageResId(R.drawable.marshmallow_9);
+            } else if (settings.equals(SummaryTheme.GNOMES)) {
+                setImageResId(R.drawable.gnomes_9);
+            } else if (settings.equals(SummaryTheme.SANTA_LETTER)) {
+                setImageResId(R.drawable.santa_letter_9);
+            } else if (settings.equals(SummaryTheme.GLASS_LION)) {
+                setImageResId(R.drawable.glass_lion_9);
             }
         } else if (a > 20 && a < 34) {
             setColorBURGUNDY();
@@ -155,6 +227,14 @@ public class Summary_60 extends BaseResult {
                 setImageResId(R.drawable.dream_10);
             } else if (settings.equals(SummaryTheme.APRICOT)) {
                 setImageResId(R.drawable.apricot_10);
+            } else if (settings.equals(SummaryTheme.MARSHMALLOW)) {
+                setImageResId(R.drawable.marshmallow_10);
+            } else if (settings.equals(SummaryTheme.GNOMES)) {
+                setImageResId(R.drawable.gnomes_10);
+            } else if (settings.equals(SummaryTheme.SANTA_LETTER)) {
+                setImageResId(R.drawable.santa_letter_10);
+            } else if (settings.equals(SummaryTheme.GLASS_LION)) {
+                setImageResId(R.drawable.glass_lion_10);
             }
         } else if (a > 10 && a < 20) {
             setColor(Color.WHITE);
@@ -168,6 +248,14 @@ public class Summary_60 extends BaseResult {
                 setImageResId(R.drawable.dream_11);
             } else if (settings.equals(SummaryTheme.APRICOT)) {
                 setImageResId(R.drawable.apricot_11);
+            } else if (settings.equals(SummaryTheme.MARSHMALLOW)) {
+                setImageResId(R.drawable.marshmallow_11);
+            } else if (settings.equals(SummaryTheme.GNOMES)) {
+                setImageResId(R.drawable.gnomes_11);
+            } else if (settings.equals(SummaryTheme.SANTA_LETTER)) {
+                setImageResId(R.drawable.santa_letter_11);
+            } else if (settings.equals(SummaryTheme.GLASS_LION)) {
+                setImageResId(R.drawable.glass_lion_11);
             }
         } else if (a <= 10) {
             setColor(Color.WHITE);
@@ -181,6 +269,14 @@ public class Summary_60 extends BaseResult {
                 setImageResId(R.drawable.dream_12);
             } else if (settings.equals(SummaryTheme.APRICOT)) {
                 setImageResId(R.drawable.apricot_12);
+            } else if (settings.equals(SummaryTheme.MARSHMALLOW)) {
+                setImageResId(R.drawable.marshmallow_12);
+            } else if (settings.equals(SummaryTheme.GNOMES)) {
+                setImageResId(R.drawable.gnomes_12);
+            } else if (settings.equals(SummaryTheme.SANTA_LETTER)) {
+                setImageResId(R.drawable.santa_letter_12);
+            } else if (settings.equals(SummaryTheme.GLASS_LION)) {
+                setImageResId(R.drawable.glass_lion_12);
             }
         }
     }

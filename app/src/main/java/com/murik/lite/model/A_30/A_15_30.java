@@ -1,6 +1,7 @@
 package com.murik.lite.model.A_30;
 
 import android.content.Context;
+import android.graphics.Color;
 
 import com.murik.lite.R;
 import com.murik.lite.dto.DataByMaxParcelable;
@@ -19,9 +20,9 @@ public class A_15_30 extends BaseResultFirst {
     }
 
     public void setResult() {
-        if (getA() >= 0.33 && getA() < 0.449) {
+        if (getA() >= 0.33 && getA() < 0.45) {
             setColorGREEN();
-        } else if (getA() >= 0.449 && getA() <= 0.470) {
+        } else if (getA() >= 0.45 && getA() <= 0.470) {
             setColorYELLOW();
             setPossibleReasons(getResources(R.string.A_15_30_YELLOW));
         } else if (getA() >= 0.28 && getA() <= 0.32) {
@@ -42,8 +43,8 @@ public class A_15_30 extends BaseResultFirst {
         } else if (getA() >= 0.71) {
             setColorBURGUNDY();
             setPossibleReasons(getResources(R.string.A_15_30_BURGUNDY_2));
-        }  else if (getA() <= 0.1 && getInputData().isPractice()) {
-            setColorCRIMSON();
+        }  else if (getA() <= 0.1) {
+            setColor(Color.WHITE);
             setPossibleReasons(getResources(R.string.A_15_30_ERROR));
         }
     }

@@ -37,6 +37,8 @@ public class App extends Application {
         Realm.init(this);
         RealmConfiguration config = new RealmConfiguration.Builder().name("myrealm.realm")
                 .schemaVersion(9)
+                .allowWritesOnUiThread(true)
+                .allowQueriesOnUiThread(true)
                 .migration(new ReamMigration())
                 .build();
         Realm.setDefaultConfiguration(config);

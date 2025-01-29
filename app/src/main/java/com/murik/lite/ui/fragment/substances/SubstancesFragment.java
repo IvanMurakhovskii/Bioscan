@@ -35,16 +35,18 @@ public class SubstancesFragment extends MvpAppCompatFragment implements Substanc
 
     public static final String TAG = "SubstancesFragment";
     public static final String RESULT_KEY = "RESULT";
+    public static final String PAGE_NUMBER_KEY = "PAGE_NUMBER_KEY";
 
     @InjectPresenter
     SubstancesPresenter presenter;
     private HorizontalBarChart horizontalBarChart;
 
-    public static Fragment newInstance(MeasureDataParcelable resultBySens) {
+    public static Fragment newInstance(int position, MeasureDataParcelable resultBySens) {
         SubstancesFragment fragment = new SubstancesFragment();
 
         Bundle args = new Bundle();
         args.putParcelable(RESULT_KEY, resultBySens);
+        args.putInt(PAGE_NUMBER_KEY, position);
         fragment.setArguments(args);
 
         return fragment;
@@ -56,11 +58,9 @@ public class SubstancesFragment extends MvpAppCompatFragment implements Substanc
         View view = inflater.inflate(R.layout.substances_fragment, container, false);
         setHasOptionsMenu(true);
 
-        System.out.println("substance");
-
         Bundle bundle = getArguments();
         if (bundle != null) {
-            presenter.setData(bundle.getParcelable(RESULT_KEY));
+            presenter.setData(bundle.getParcelable(RESULT_KEY), bundle.getInt(PAGE_NUMBER_KEY));
         }
 
         return view;

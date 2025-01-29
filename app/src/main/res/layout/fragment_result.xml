@@ -16,16 +16,6 @@ android:layout_height="match_parent">
         android:layout_weight="1">
     </com.github.mikephil.charting.charts.PieChart>
 
-<!--    <android.support.design.widget.FloatingActionButton-->
-<!--        android:id="@+id/fab_summary"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_gravity="bottom|right"-->
-<!--        android:layout_margin="@dimen/fab_margin"-->
-<!--        android:backgroundTint="@color/colorPrimary"-->
-<!--        android:visibility="visible"-->
-<!--        app:srcCompat="@android:drawable/ic_dialog_info" />-->
-
     <android.support.v7.widget.RecyclerView
         android:id="@+id/result_recycler_view"
         android:layout_width="match_parent"

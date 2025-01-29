@@ -19,7 +19,7 @@ public class A_15_45 extends BaseResultFirst {
         if(getA() >= 0.66 && getA() <= 0.76){
             setColorGREEN();
         } else if(getA() >= 0.35 && getA() <= 0.55) {
-            setColorRED();
+            setColorYELLOW();
             setPossibleReasons(getResources(R.string.S30_15_45_RED_1));
         } else if(getA() >= 0.56 && getA() <= 0.65) {
             setColorRED();

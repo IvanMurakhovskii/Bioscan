@@ -41,11 +41,11 @@ public class A_20_60 extends BaseResultWithCoefficient {
         } else if(getA() >= 0.05 && getA() <= 0.1) {
             setColorBURGUNDY();
             setPossibleReasons(getResources(R.string.A_20_60_BURGUNDY_1));
-        }/* else if(getA() <= 0.11) {
+        } else if(getA() > 0.5) {
             setColorBURGUNDY();
-            setPossibleReasons(getResources(R.string.A_20_60_BURGUNDY));
-        }*/ else if(getA() <= 0.05) {
-            setColor(Color.WHITE);
+            setPossibleReasons(getResources(R.string.A_20_60_BURGUNDY_2));
+        } else if(getA() <= 0.05) {
+            setColorBURGUNDY();
             setPossibleReasons(getResources(R.string.A_20_60_WHITE));
         }
     }

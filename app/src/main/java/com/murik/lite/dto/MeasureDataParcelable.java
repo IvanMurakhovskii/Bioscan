@@ -4,6 +4,7 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 import com.murik.lite.Const;
+import com.murik.lite.enums.SubstanceType;
 
 import java.util.ArrayList;
 
@@ -18,7 +19,6 @@ public class MeasureDataParcelable implements Parcelable {
 
     private ArrayList<Integer> data;
     private Integer algorithmId;
-
 
     @Override
     public int describeContents() {

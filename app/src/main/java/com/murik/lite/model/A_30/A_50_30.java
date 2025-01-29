@@ -18,13 +18,13 @@ public class A_50_30 extends BaseResultFirst {
     public void setResult() {
         if (getA() >= 0.42 && getA() <= 0.50) {
             setColorGREEN();
-        } else if (getA() >= 0.51 && getA() <= 0.55) {
+        } else if (getA() >= 0.51 && getA() <= 0.65) {
             setColorYELLOW();
             setPossibleReasons(getResources(R.string.A_50_30_YELLOW));
         } else if (getA() >= 0.10 && getA() <= 0.15) {
             setColorRED();
             setPossibleReasons(getResources(R.string.A_50_30_RED));
-        } else if(getA() < 0) {
+        } else if(getA() <= 0) {
             setColor(Color.WHITE);
             setPossibleReasons(getResources(R.string.A_50_30_WHITE));
         } else if (getA() > 1) {

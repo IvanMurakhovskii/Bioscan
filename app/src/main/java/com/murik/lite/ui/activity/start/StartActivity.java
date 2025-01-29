@@ -75,6 +75,7 @@ import com.murik.lite.ui.fragment.result.ResultTabFragment;
 import com.murik.lite.ui.fragment.resultRadarChart.RadarTabContentFragment;
 import com.murik.lite.ui.fragment.settings.SettingsFragment;
 import com.murik.lite.ui.fragment.substances.SubstancesFragment;
+import com.murik.lite.ui.fragment.substances.SubstancesTabContainerFragment;
 import com.murik.lite.ui.fragment.summaryResult.SummaryResultFragment;
 
 import java.io.File;
@@ -167,7 +168,7 @@ public class StartActivity extends MvpAppCompatActivity implements StartView, On
                     case Screens.SETTINGS_FRAGMENT:
                         return SettingsFragment.newInstance();
                     case Screens.SUBSTANCES_FRAGMENT:
-                        return SubstancesFragment.newInstance((MeasureDataParcelable) data);
+                        return SubstancesTabContainerFragment.newInstance((MeasureDataParcelable) data);
                     default:
                         throw new RuntimeException("Unknown screen key");
 

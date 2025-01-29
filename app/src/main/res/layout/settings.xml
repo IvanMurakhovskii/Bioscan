@@ -42,6 +42,30 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:text="Абрикос"/>
+
+    <RadioButton
+        android:id="@+id/marshmallow"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Зефирка"/>
+
+    <RadioButton
+        android:id="@+id/gnomes"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Гномики"/>
+
+    <RadioButton
+        android:id="@+id/santa_letter"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Письмо деду Морозу"/>
+
+    <RadioButton
+        android:id="@+id/glass_lion"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Стеклянный лев"/>
   </RadioGroup>
 
   <Button
