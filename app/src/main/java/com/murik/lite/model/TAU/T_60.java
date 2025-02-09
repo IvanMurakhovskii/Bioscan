@@ -34,4 +34,19 @@ public class T_60 extends BaseResult {
             setPossibleReasons(getResources(R.string.TAU_60_WHITE));
         }
     }
+    public void setStressResult() {
+        if (getA() >= 38 && getA() <= 69) {
+            setColorORANGE();
+            setPossibleReasons(getResources(R.string.stress2));
+        } else if (getA() >= 69 && getA() <= 74) {
+            setColorRED();
+            setPossibleReasons(getResources(R.string.stress3));
+        } else if (getA() >= 74 && getA() < 82) {
+            setColorBURGUNDY();
+            setPossibleReasons(getResources(R.string.stress4));
+        } else if (getA() >= 82) {
+            setColorBLUE();
+            setPossibleReasons(getResources(R.string.stress5));
+        }
+    }
 }

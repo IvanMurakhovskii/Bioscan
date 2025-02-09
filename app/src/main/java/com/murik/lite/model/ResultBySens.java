@@ -4,6 +4,7 @@ import android.content.Context;
 
 public interface ResultBySens {
    void setResult();
+   void setStressResult();
    double getA();
    int getViewColor();
    String getResultComment();

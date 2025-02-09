@@ -41,6 +41,10 @@ public abstract class BaseResult implements ResultBySens {
 
     @Override
     public abstract void setResult();
+    @Override
+    public void setStressResult() {
+
+    }
 
     @Override
     public int getViewColor() {

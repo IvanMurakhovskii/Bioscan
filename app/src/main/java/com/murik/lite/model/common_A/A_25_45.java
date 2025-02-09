@@ -33,4 +33,19 @@ public class A_25_45 extends BaseResultWithCoefficient {
             setPossibleReasons(getResources(R.string.A_25_45_BURGUNDY));
         }
     }
+    public void setStressResult() {
+        if (getA() >= 0.57 && getA() <= 0.65) {
+            setColorORANGE();
+            setPossibleReasons(getResources(R.string.stress2));
+        } else if (getA() >= 0.65 && getA() < 0.70) {
+            setColorRED();
+            setPossibleReasons(getResources(R.string.stress3));
+        } else if (getA() >= 0.70 && getA() <= 0.76) {
+            setColorBURGUNDY();
+            setPossibleReasons(getResources(R.string.stress4));
+        } else if (getA() >= 0.76) {
+            setColorBLUE();
+            setPossibleReasons(getResources(R.string.stress5));
+        }
+    }
 }

@@ -58,6 +58,9 @@ public abstract class ResultAFactory {
     public abstract Double calculateAndGetAreaDifference();
 
     public abstract boolean calculateResultA();
+    public boolean calculateStressResultA() {
+        return calculateResultA();
+    }
 
     public ArrayList<ResultBySens> getA() {
         return A;
