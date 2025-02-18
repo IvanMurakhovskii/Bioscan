@@ -52,6 +52,7 @@ import com.murik.lite.model.OneSensorLongMeasure;
 import com.murik.lite.model.OneSensorShortMeasure;
 import com.murik.lite.model.R1_2;
 import com.murik.lite.model.ResultAFactory;
+import com.murik.lite.model.ResultBySens;
 import com.murik.lite.model.SensorValueAttitudeFor30;
 import com.murik.lite.model.TAU.TAU_30;
 import com.murik.lite.model.TAU.TAU_60;
@@ -736,8 +737,17 @@ public class ResultAFactoryOneSensor extends ResultAFactory {
         double SPN = (SP - 10.65) / (25.7 - 10.65);
 
         double YZ = (1 - SPN) * 100;
+        ArrayList<ResultBySens> list = getA();
+        double sum =0 ;
+        for (ResultBySens resultBySens:list
+                ) {
+            sum+= resultBySens.getA()/resultBySens.Normalise();
+        }
+        if (!list.isEmpty()) {
+            sum/=list.size();
+        }
 
-        setSummaryResult(YZ);
+        setSummaryResult((1-sum)*100);
 
 
 //        val totalResult = new TotalResult_60(getContext(), I, II, III, IV, V, VI, E, S_30_60, TAU, hand);

@@ -156,6 +156,11 @@ public class StressResultPresenter extends MvpPresenter<ResultView> {
         realmController.addInfoMax(data);
         App.INSTANCE.getRouter().newScreenChain(Screens.REALM_FRAGMENT);
     }
+    public void onSummaryClick() {
+        val summary = resultAFactory.getSummaryResult();
+        val algorithmId = resultAFactory.getInputData().getAlgorithmId();
+        App.INSTANCE.getRouter().navigateTo(Screens.STRESS_SUMMARY_RESULT, new SummaryParcelable(summary, resultAFactory.getInputData().getGender(), algorithmId));
+    }
 
     public void showDiagram() {
         App.INSTANCE.getRouter().navigateTo(Screens.RESULT_BAR_CHART_FRAGMENT, data);

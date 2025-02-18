@@ -134,5 +134,7 @@ public abstract class BaseResult implements ResultBySens {
     public String getLegend() {
         return legend;
     }
+    @Override
+    public double Normalise() { return 1.0; }
 
 }

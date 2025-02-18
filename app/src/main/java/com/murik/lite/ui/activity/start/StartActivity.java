@@ -78,6 +78,7 @@ import com.murik.lite.ui.fragment.substances.SubstancesFragment;
 import com.murik.lite.ui.fragment.substances.SubstancesTabContainerFragment;
 import com.murik.lite.ui.fragment.summaryResult.SummaryResultFragment;
 import com.murik.lite.ui.fragment.result.stress.StressResultTabFragment;
+import com.murik.lite.ui.fragment.summaryResult.SummaryStressResultFragment;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -172,6 +173,8 @@ public class StartActivity extends MvpAppCompatActivity implements StartView, On
                         return SubstancesTabContainerFragment.newInstance((MeasureDataParcelable) data);
                     case Screens.STRESS_RESULT:
                         return StressResultTabFragment.newInstance((DataByMaxParcelable) data);
+                    case Screens.STRESS_SUMMARY_RESULT:
+                        return SummaryStressResultFragment.newInstance((SummaryParcelable) data);
                     default:
                         throw new RuntimeException("Unknown screen key");
 

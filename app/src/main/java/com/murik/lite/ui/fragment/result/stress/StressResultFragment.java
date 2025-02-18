@@ -92,7 +92,8 @@ public class StressResultFragment extends MvpAppCompatFragment implements Result
   @Override
   public void onViewCreated(@NonNull final View view, final Bundle savedInstanceState) {
     fab_add = view.findViewById(R.id.add_fab);
-    fab_add.hide();
+    //fab_add.hide();
+    fab_add.setOnClickListener((event) -> mResultPresenter.onSummaryClick());
     super.onViewCreated(view, savedInstanceState);
     mResultRecycler = view.findViewById(R.id.result_recycler_view);
     pieChart = view.findViewById(R.id.result_pie_chart);

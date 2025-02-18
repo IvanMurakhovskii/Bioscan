@@ -49,4 +49,5 @@ public class T_60 extends BaseResult {
             setPossibleReasons(getResources(R.string.stress5));
         }
     }
+    public double Normalise() { return 100.0; }
 }

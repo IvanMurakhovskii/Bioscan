@@ -22,4 +22,5 @@ public class Screens {
   public static final String SETTINGS_FRAGMENT = "SETTINGS_FRAGMENT";
   public static final String SUBSTANCES_FRAGMENT = "SUBSTANCES_FRAGMENT";
   public static final String STRESS_RESULT = "STRESS_RESULT";
+  public static final String STRESS_SUMMARY_RESULT = "STRESS_SUMMARY_RESULT";
 }
