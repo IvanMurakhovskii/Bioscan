@@ -36,15 +36,19 @@ public class T_60 extends BaseResult {
     }
     public void setStressResult() {
         if (getA() >= 38 && getA() <= 69) {
+            stressLevel = 2;
             setColorORANGE();
             setPossibleReasons(getResources(R.string.stress2));
         } else if (getA() >= 69 && getA() <= 74) {
+            stressLevel = 3;
             setColorRED();
             setPossibleReasons(getResources(R.string.stress3));
         } else if (getA() >= 74 && getA() < 82) {
+            stressLevel = 4;
             setColorBURGUNDY();
             setPossibleReasons(getResources(R.string.stress4));
         } else if (getA() >= 82) {
+            stressLevel = 5;
             setColorBLUE();
             setPossibleReasons(getResources(R.string.stress5));
         }

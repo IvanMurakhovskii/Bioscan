@@ -50,15 +50,19 @@ public class A_15_30 extends BaseResultFirst {
     }
     public void setStressResult() {
         if (getA() >= 0.45 && getA() <= 0.49) {
+            stressLevel = 2;
             setColorORANGE();
             setPossibleReasons(getResources(R.string.stress2));
         } else if (getA() >= 0.49 && getA() < 0.55) {
+            stressLevel = 3;
             setColorRED();
             setPossibleReasons(getResources(R.string.stress3));
         } else if (getA() >= 0.55 && getA() <= 0.60) {
+            stressLevel = 4;
             setColorBURGUNDY();
             setPossibleReasons(getResources(R.string.stress4));
         } else if (getA() >= 0.60) {
+            stressLevel = 5;
             setColorBLUE();
             setPossibleReasons(getResources(R.string.stress5));
         }

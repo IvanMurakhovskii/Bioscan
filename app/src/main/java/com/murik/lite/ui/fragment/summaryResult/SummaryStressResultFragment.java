@@ -80,14 +80,14 @@ public class SummaryStressResultFragment extends MvpAppCompatFragment implements
         summaryResultPresenter.initStressSummaryResult(getContext());
         titleView = view.findViewById(R.id.textView4);
         titleView.setText("УРОВЕНЬ СТРЕССА");
-        //descriptionView = view.findViewById(R.id.textView5);
-        //descriptionView.setText("ОПИСАНИЕ");
+        descriptionView = view.findViewById(R.id.textView5);
+        descriptionView.setText("ОПИСАНИЕ");
     }
 
     @Override
     public void setProgress(Double progress, int color) {
-        progressBar.setProgress(BigDecimal.valueOf(progress).setScale(0, RoundingMode.HALF_UP).intValue());
-        progressText.setText(progress.intValue() + " %");
+        progressBar.setProgress(0);
+        progressText.setText(progress.intValue() + "");
         val drawable = ContextCompat.getDrawable(Objects.requireNonNull(getContext()), R.drawable.circle);
         Objects.requireNonNull(drawable).setColorFilter(color, PorterDuff.Mode.SRC_IN);
         progressText.setBackground(drawable);

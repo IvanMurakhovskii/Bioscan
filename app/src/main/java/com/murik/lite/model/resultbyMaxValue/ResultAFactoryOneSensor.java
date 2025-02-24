@@ -741,13 +741,13 @@ public class ResultAFactoryOneSensor extends ResultAFactory {
         double sum =0 ;
         for (ResultBySens resultBySens:list
                 ) {
-            sum+= resultBySens.getA()/resultBySens.Normalise();
+            sum+= resultBySens.getStressA();
         }
         if (!list.isEmpty()) {
             sum/=list.size();
         }
 
-        setSummaryResult((1-sum)*100);
+        setSummaryResult(sum);
 
 
 //        val totalResult = new TotalResult_60(getContext(), I, II, III, IV, V, VI, E, S_30_60, TAU, hand);

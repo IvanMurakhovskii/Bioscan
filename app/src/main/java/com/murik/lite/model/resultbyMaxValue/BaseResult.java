@@ -18,6 +18,7 @@ public abstract class BaseResult implements ResultBySens {
     private Context context;
     private String legend;
     private DataByMaxParcelable inputData;
+    protected int stressLevel = 1;
 
     @Getter
     @Setter
@@ -136,5 +137,7 @@ public abstract class BaseResult implements ResultBySens {
     }
     @Override
     public double Normalise() { return 1.0; }
+    @Override
+    public int getStressA() { return stressLevel; }
 
 }
