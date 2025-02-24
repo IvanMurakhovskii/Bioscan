@@ -89,6 +89,32 @@ android:layout_height="match_parent">
         app:layout_constraintBottom_toBottomOf="@+id/substances_fab"
         app:layout_constraintEnd_toStartOf="@+id/substances_fab"
         app:layout_constraintTop_toTopOf="@+id/substances_fab" />
+		
+	<android.support.design.widget.FloatingActionButton
+        android:id="@+id/stress_fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="24dp"
+        app:fabSize="normal"
+        app:layout_constraintBottom_toTopOf="@+id/substances_fab"
+        app:layout_constraintEnd_toEndOf="@+id/substances_fab"
+        app:layout_constraintStart_toStartOf="@+id/substances_fab"
+        android:backgroundTint="@color/colorPrimary"
+        android:visibility="gone"
+        app:srcCompat="@android:drawable/ic_dialog_info"  />
+
+    <TextView
+        android:id="@+id/add_stress_action_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:textStyle="bold"
+        android:textColor="@color/colorPrimaryDark"
+        android:visibility="gone"
+        android:text="Уровень стресса"
+        app:layout_constraintBottom_toBottomOf="@+id/stress_fab"
+        app:layout_constraintEnd_toStartOf="@+id/stress_fab"
+        app:layout_constraintTop_toTopOf="@+id/stress_fab" />
 
     <!--    <android.support.design.widget.FloatingActionButton-->
     <!--        android:id="@+id/fab_summary"-->
