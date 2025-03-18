@@ -322,7 +322,6 @@ public class ResultAFactoryOneSensor extends ResultAFactory {
         val III = new A_30_60(a_30_60, getInputData(), getContext(), "III");
         val IV = new A_20_30(a20_30, getInputData(), getContext(), "IV");
         val V = new A_20_60((a20_60), getInputData(), getContext(), "V");
-        III.setStressResult();
         val VI = new A_90_60(oneSensorShortMeasure.getFirstA3_2(), getInputData(), getContext(), 0.39F);
         val E = new E_60(en, getInputData(), getContext());
 //        val E2 = new E_2_60(e2, getInputData(), getContext());
@@ -632,19 +631,19 @@ public class ResultAFactoryOneSensor extends ResultAFactory {
                         createParametersFor_Animals(a_20_30, a_20_60, a_40_70, s20_30, s20_60, s30_60, En, E2, tau);
                         return true;
                     }
+                    val S_60 = BaseMeasureService.getAreaByMask(Const.MASK_60, getMaxSensResult());
+                    val halfOfArea_60 = S_60 / 2.0d;
+
+                    val r1_2 = ListUtils.findClosestValueIndex(getMaxSensResult(), halfOfArea_60);
                     if (algorithm.equals(BluetoothDimensionAlgorithm._200)) {
                         createParametersFor_80(si, a_20_30, a_20_60, s30_60, L, En, E2, tau);
                     } else if (algorithm.equals(BluetoothDimensionAlgorithm.BASE)) {
-                        val S_60 = BaseMeasureService.getAreaByMask(Const.MASK_60, getMaxSensResult());
-                        val halfOfArea_60 = S_60 / 2.0d;
-
-                        val r1_2 = ListUtils.findClosestValueIndex(getMaxSensResult(), halfOfArea_60);
 
                         createStressParametersFor_60(a_20_30, a_20_60, a_40_70, s30_60, En, E2, r1_2, tau, T);
                     } else if (algorithm.equals(BluetoothDimensionAlgorithm.SIMPLE)) {
                         createParametersFor_30(tau, En, E2, s20_30);
                     } else if (algorithm.equals(BluetoothDimensionAlgorithm.ADVANCED)) {
-                        createParametersFor_160(a_20_30, a_20_60, a_40_70, s20_30, s20_60, s30_60, En, E2, 0, tau);
+                        createStressParametersFor_60(a_20_30, a_20_60, a_40_70, s30_60, En, E2, r1_2, tau, T);
                     }
                 }
 
@@ -747,7 +746,7 @@ public class ResultAFactoryOneSensor extends ResultAFactory {
             sum/=list.size();
         }
 
-        setSummaryResult(sum);
+        setSummaryResult(sum*20);
 
 
 //        val totalResult = new TotalResult_60(getContext(), I, II, III, IV, V, VI, E, S_30_60, TAU, hand);

@@ -1,4 +1,5 @@
 <resources>
+	<string name="stress0">0 Нет стресса</string>
     <string name="stress1">1 Легкий</string>
     <string name="stress2">2 Повышенный</string>
     <string name="stress3">3 Заметный (проявление психосоматических реакций)   (при повторе на уровне 2 - не норма, возможно воспаление, давление). При частом повторении - не норма! Принять меры! </string>
