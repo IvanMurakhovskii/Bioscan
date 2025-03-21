@@ -31,19 +31,27 @@ public class A_15_20 extends BaseResultWithCoefficient {
         }
     }
     public void setStressResult() {
-        if (getA() >= 0.69 && getA() <= 0.75) {
+        if (getA() >= 0 && getA() < 0.60) {
+            setColorGREEN();
+            stressLevel = 0;
+            setPossibleReasons(getResources(R.string.stress0));
+        } else if (getA() >= 0.60 && getA() < 0.76) {
+            setColorYELLOW();
+            stressLevel = 1;
+            setPossibleReasons(getResources(R.string.stress1));
+        } else if (getA() >= 0.76 && getA() < 0.82) {
             stressLevel = 2;
             setColorORANGE();
             setPossibleReasons(getResources(R.string.stress2));
-        } else if (getA() >= 0.75 && getA() < 0.78) {
+        } else if (getA() >= 0.82 && getA() < 100) {
             stressLevel = 3;
             setColorRED();
             setPossibleReasons(getResources(R.string.stress3));
-        } else if (getA() >= 0.78 && getA() <= 0.81) {
+        } else if (getA() >= 100 && getA() < 200) {
             stressLevel = 4;
             setColorBURGUNDY();
             setPossibleReasons(getResources(R.string.stress4));
-        } else if (getA() >= 0.81) {
+        } else if (getA() >= 200) {
             setColorBLUE();
             stressLevel = 5;
             setPossibleReasons(getResources(R.string.stress5));

@@ -86,8 +86,9 @@ public class SummaryStressResultFragment extends MvpAppCompatFragment implements
 
     @Override
     public void setProgress(Double progress, int color) {
-        progressBar.setProgress(0);
-        progressText.setText(progress.intValue() + "");
+        progressBar.setProgress(BigDecimal.valueOf(progress).setScale(0, RoundingMode.HALF_UP).intValue());
+        int rounded = (int)Math.round(progress);
+        progressText.setText(rounded + " %");
         val drawable = ContextCompat.getDrawable(Objects.requireNonNull(getContext()), R.drawable.circle);
         Objects.requireNonNull(drawable).setColorFilter(color, PorterDuff.Mode.SRC_IN);
         progressText.setBackground(drawable);

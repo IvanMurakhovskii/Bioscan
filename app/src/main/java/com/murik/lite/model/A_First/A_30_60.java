@@ -50,23 +50,27 @@ public class A_30_60 extends BaseResultFirst {
         }
     }
     public void setStressResult() {
-        if (getA() >= 0.44 && getA() <= 0.56) {
+        if (getA() >= 0 && getA() < 0.44) {
+            setColorGREEN();
+            stressLevel = 0;
+            setPossibleReasons(getResources(R.string.stress0));
+        } else if (getA() >= 0.44 && getA() < 0.56) {
             setColorYELLOW();
             stressLevel = 1;
             setPossibleReasons(getResources(R.string.stress1));
-        } else if (getA() >= 0.56 && getA() <= 0.64) {
+        } else if (getA() >= 0.56 && getA() < 0.66) {
             setColorORANGE();
             stressLevel = 2;
             setPossibleReasons(getResources(R.string.stress2));
-        } else if (getA() >= 0.64 && getA() < 0.70) {
+        } else if (getA() >= 0.66 && getA() < 0.77) {
             setColorRED();
             stressLevel = 3;
             setPossibleReasons(getResources(R.string.stress3));
-        } else if (getA() >= 0.70 && getA() <= 0.76) {
+        } else if (getA() >= 0.77 && getA() <= 0.85) {
             setColorBURGUNDY();
             stressLevel = 4;
             setPossibleReasons(getResources(R.string.stress4));
-        } else if (getA() >= 0.76) {
+        } else if (getA() >= 0.85) {
             setColorBLUE();
             stressLevel = 5;
             setPossibleReasons(getResources(R.string.stress5));

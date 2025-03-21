@@ -28,7 +28,27 @@ public class StressSummary_60 extends BaseResult {
 
         val settings = SettingsService.getInstance().getSummaryTheme();
         val a = BigDecimal.valueOf(getA()).setScale(0, RoundingMode.HALF_UP).intValue();
-        if (a >= 0 && a <= 1) {
+        if (a >= 0 && a <= 10) {
+            setColorGREEN();
+            setPossibleReasons(getResources(R.string.stress0));
+            if (settings.equals(SummaryTheme.LION)) {
+                setImageResId(R.drawable.man_1);
+            } else if (settings.equals(SummaryTheme.ABSTRACT)) {
+                setImageResId(R.drawable.green_2);
+            } else if (settings.equals(SummaryTheme.DREAM)) {
+                setImageResId(R.drawable.dream_1);
+            } else if (settings.equals(SummaryTheme.APRICOT)) {
+                setImageResId(R.drawable.apricot_1);
+            } else if (settings.equals(SummaryTheme.MARSHMALLOW)) {
+                setImageResId(R.drawable.marshmallow_1);
+            } else if (settings.equals(SummaryTheme.GNOMES)) {
+                setImageResId(R.drawable.gnomes_1);
+            } else if (settings.equals(SummaryTheme.SANTA_LETTER)) {
+                setImageResId(R.drawable.santa_letter_1);
+            } else if (settings.equals(SummaryTheme.GLASS_LION)) {
+                setImageResId(R.drawable.glass_lion_1);
+            }
+        } else if (a >= 10 && a <= 20) {
             setColorYELLOW();
             setPossibleReasons(getResources(R.string.stress1));
 
@@ -49,7 +69,7 @@ public class StressSummary_60 extends BaseResult {
             } else if (settings.equals(SummaryTheme.GLASS_LION)) {
                 setImageResId(R.drawable.glass_lion_4);
             }
-        } else if (a >= 1 && a <= 2) {
+        } else if (a >= 20 && a <= 40) {
             setColorORANGE();
             setPossibleReasons(getResources(R.string.stress2));
 
@@ -70,7 +90,7 @@ public class StressSummary_60 extends BaseResult {
             } else if (settings.equals(SummaryTheme.GLASS_LION)) {
                 setImageResId(R.drawable.glass_lion_6);
             }
-        } else if (a >= 2 && a <= 3) {
+        } else if (a >= 40 && a <= 60) {
             setColorRED();
             setPossibleReasons(getResources(R.string.stress3));
 
@@ -91,7 +111,7 @@ public class StressSummary_60 extends BaseResult {
             } else if (settings.equals(SummaryTheme.GLASS_LION)) {
                 setImageResId(R.drawable.glass_lion_8);
             }
-        } else if (a >= 3 && a <= 4) {
+        } else if (a >= 60 && a <= 80) {
             setColorBURGUNDY();
             setPossibleReasons(getResources(R.string.stress4));
 
@@ -112,7 +132,7 @@ public class StressSummary_60 extends BaseResult {
             } else if (settings.equals(SummaryTheme.GLASS_LION)) {
                 setImageResId(R.drawable.glass_lion_9);
             }
-        } else if (a >= 4 && a <= 5) {
+        } else if (a >= 80 && a <= 100) {
             setColorBLUE();
             setPossibleReasons(getResources(R.string.stress5));
 
