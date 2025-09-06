@@ -28,7 +28,7 @@ import java.util.Objects;
 import lombok.val;
 
 
-public class SummaryStressResultFragment extends MvpAppCompatFragment implements SummaryResultView {
+public class SummarySecondStressResultFragment extends MvpAppCompatFragment implements SummaryResultView {
 
     public static final String TAG = "SummaryResultFragment";
     public static final String SUMMARY_DATE = "SummaryResultFragment";
@@ -44,8 +44,8 @@ public class SummaryStressResultFragment extends MvpAppCompatFragment implements
     private TextView titleView;
     private TextView descriptionView;
 
-    public static SummaryStressResultFragment newInstance(SummaryParcelable summaryParcelable) {
-        SummaryStressResultFragment fragment = new SummaryStressResultFragment();
+    public static SummarySecondStressResultFragment newInstance(SummaryParcelable summaryParcelable) {
+        SummarySecondStressResultFragment fragment = new SummarySecondStressResultFragment();
 
         Bundle args = new Bundle();
         fragment.setArguments(args);
@@ -77,9 +77,9 @@ public class SummaryStressResultFragment extends MvpAppCompatFragment implements
         resultCard = view.findViewById(R.id.summary_description_card);
         imageView = view.findViewById(R.id.result_image);
 
-        summaryResultPresenter.initStressSummaryResult(getContext());
+        summaryResultPresenter.initSecondStressSummaryResult(getContext());
         titleView = view.findViewById(R.id.textView4);
-        titleView.setText("УРОВЕНЬ СТРЕССА «Бей, беги»");
+        titleView.setText("УРОВЕНЬ СТРЕССА «Спазм, замирание»");
         descriptionView = view.findViewById(R.id.textView5);
         descriptionView.setText("ОПИСАНИЕ");
     }

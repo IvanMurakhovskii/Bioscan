@@ -61,6 +61,9 @@ public abstract class ResultAFactory {
     public boolean calculateStressResultA() {
         return calculateResultA();
     }
+    public boolean calculateSecondStressResultA() {
+        return calculateResultA();
+    }
 
     public ArrayList<ResultBySens> getA() {
         return A;

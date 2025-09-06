@@ -5,8 +5,10 @@ import android.content.Context;
 public interface ResultBySens {
    void setResult();
    void setStressResult();
+   void setSecondStressResult();
    double getA();
    int getStressA();
+   int getSecondStressA();
    int getViewColor();
    String getResultComment();
    Context getContext();
