@@ -1,4 +1,4 @@
-package com.murik.lite.ui.fragment.result;
+package com.murik.lite.ui.fragment.result.stress;
 
 import android.graphics.Color;
 import android.os.Bundle;
@@ -24,45 +24,42 @@ import com.github.mikephil.charting.components.Description;
 import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.data.PieEntry;
+import com.murik.lite.Const;
 import com.murik.lite.R;
 import com.murik.lite.configuration.AuthService;
 import com.murik.lite.model.ResultBySens;
 import com.murik.lite.dto.DataByMaxParcelable;
+import com.murik.lite.model.resultbyMaxValue.ResultAFactoryOneSensor;
+import com.murik.lite.model.resultbyMaxValue.ResultAFactoryStandard;
 import com.murik.lite.presentation.presenter.result.ResultPresenter;
 import com.murik.lite.presentation.view.result.ResultView;
-import com.murik.lite.ui.fragment.result.recycler.ResultAdapter;
+import com.murik.lite.ui.fragment.result.recycler.CustomResultItem;
+import com.murik.lite.ui.fragment.result.recycler.SecondStressResultAdapter;
+import com.murik.lite.presentation.presenter.result.stress.SecondStressResultPresenter;
 import java.util.ArrayList;
 import java.util.Objects;
 
-public class ResultFragment extends MvpAppCompatFragment implements ResultView {
-  public static final String TAG = "ResultFragment";
+import lombok.val;
+
+public class SecondStressResultFragment extends MvpAppCompatFragment implements ResultView {
+  public static final String TAG = "SecondStressResultFragment";
   public static final String CALCULATE_A_KEY = "RESULT_A";
   public static final String ARG_PAGE = "ARG_PAGE";
 
   private int mPage;
 
   @InjectPresenter
-  ResultPresenter mResultPresenter;
-
+  SecondStressResultPresenter mResultPresenter;
   DataByMaxParcelable inputDataParcelable;
 
   private RecyclerView mResultRecycler;
   private PieChart pieChart;
   private FloatingActionButton fab_add;
-  private FloatingActionButton fab_summary;
-  private FloatingActionButton fab_substances;
-  private FloatingActionButton fab_stress;
-  private FloatingActionButton fab_secondStress;
 
-  private TextView addAlarmActionText;
-  private TextView addPersonActionText;
-  private TextView addStressActionText;
-  private TextView addSecondStressActionText;
-
-  private boolean  isAllFabsVisible = false;
+  private boolean isAllFabsVisible = false;
 
   public static Fragment newInstance(DataByMaxParcelable resultBySens, int mPage) {
-    ResultFragment fragment = new ResultFragment();
+    SecondStressResultFragment fragment = new SecondStressResultFragment();
 
     Bundle args = new Bundle();
     args.putParcelable(CALCULATE_A_KEY, resultBySens);
@@ -77,13 +74,14 @@ public class ResultFragment extends MvpAppCompatFragment implements ResultView {
     super.onCreate(savedInstanceState);
 
   }
+
   @NonNull
   @Override
   public View onCreateView(@NonNull final LayoutInflater inflater, final ViewGroup container,
                            final Bundle savedInstanceState) {
     Bundle bundle = getArguments();
-    if(bundle != null){
-      inputDataParcelable =  bundle.getParcelable(CALCULATE_A_KEY);
+    if (bundle != null) {
+      inputDataParcelable = bundle.getParcelable(CALCULATE_A_KEY);
       mPage = bundle.getInt(ARG_PAGE);
     }
     setHasOptionsMenu(true);
@@ -93,58 +91,13 @@ public class ResultFragment extends MvpAppCompatFragment implements ResultView {
 
   @Override
   public void onViewCreated(@NonNull final View view, final Bundle savedInstanceState) {
+    fab_add = view.findViewById(R.id.add_fab);
+    //fab_add.hide();
+    fab_add.setOnClickListener((event) -> mResultPresenter.onSummaryClick());
     super.onViewCreated(view, savedInstanceState);
     mResultRecycler = view.findViewById(R.id.result_recycler_view);
     pieChart = view.findViewById(R.id.result_pie_chart);
-    fab_add = view.findViewById(R.id.add_fab);
-    fab_summary = view.findViewById(R.id.summary_fab);
-    fab_substances = view.findViewById(R.id.substances_fab);
-    fab_stress = view.findViewById(R.id.stress_fab);
-    fab_secondStress = view.findViewById(R.id.second_stress_fab);
     mResultPresenter.setContext(getContext());
-
-    addAlarmActionText = view.findViewById(R.id.add_alarm_action_text);
-    addPersonActionText = view.findViewById(R.id.add_person_action_text);
-    addStressActionText = view.findViewById(R.id.add_stress_action_text);
-    addSecondStressActionText = view.findViewById(R.id.add_second_stress_action_text);
-
-    fab_summary.setOnClickListener((event) -> mResultPresenter.onSummaryClick());
-
-    fab_substances.setOnClickListener((event) -> mResultPresenter.onSubstanceClick(mPage));
-
-    fab_stress.setOnClickListener((event) -> mResultPresenter.onStressClick(inputDataParcelable));
-
-    fab_secondStress.setOnClickListener((event) -> mResultPresenter.onSecondStressClick(inputDataParcelable));
-
-    isAllFabsVisible = false;
-
-    fab_add.setOnClickListener((event) -> {
-      if (!isAllFabsVisible) {
-        fab_summary.show();
-        fab_substances.show();
-        fab_stress.show();
-        fab_secondStress.show();
-
-        addAlarmActionText.setVisibility(View.VISIBLE);
-        addPersonActionText.setVisibility(View.VISIBLE);
-        addStressActionText.setVisibility(View.VISIBLE);
-        addSecondStressActionText.setVisibility(View.VISIBLE);
-
-        isAllFabsVisible = true;
-      } else {
-        fab_summary.hide();
-        fab_substances.hide();
-        fab_stress.hide();
-        fab_secondStress.hide();
-        addAlarmActionText.setVisibility(View.GONE);
-        addPersonActionText.setVisibility(View.GONE);
-        addStressActionText.setVisibility(View.GONE);
-        addSecondStressActionText.setVisibility(View.GONE);
-
-        isAllFabsVisible = false;
-      }
-    });
-
   }
 
 
@@ -191,7 +144,7 @@ public class ResultFragment extends MvpAppCompatFragment implements ResultView {
   @Override
   public void initRecyclerView(){
     mResultRecycler.setLayoutManager(new LinearLayoutManager(getContext()));
-    ResultAdapter adapter = new ResultAdapter(mResultPresenter);
+    SecondStressResultAdapter adapter = new SecondStressResultAdapter(mResultPresenter);
     mResultRecycler.setAdapter(adapter);
   }
 
@@ -201,7 +154,7 @@ public class ResultFragment extends MvpAppCompatFragment implements ResultView {
     android.support.v7.app.AlertDialog.Builder builder = new Builder(Objects.requireNonNull(getContext()));
     builder.setMessage("Сохранить?");
     builder.setPositiveButton("Save", (dialog, id) -> mResultPresenter.onSave(inputDataParcelable)
-    )
+            )
             .setNegativeButton("Cancel", (dialog, id) ->
                     dialog.cancel())
             .create();
@@ -215,26 +168,7 @@ public class ResultFragment extends MvpAppCompatFragment implements ResultView {
 
   @Override
   public void showSummaryButton() {
-    fab_summary.show();
+
   }
-
-  @Override
-  public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-    inflater.inflate(R.menu.menu_result_fragment, menu);
-    super.onCreateOptionsMenu(menu, inflater);
-  }
-
-  @Override
-  public boolean onOptionsItemSelected(MenuItem item) {
-
-    switch (item.getItemId()){
-      case R.id.app_bar_save: {
-        mResultPresenter.onSaveButtonClick();
-        return true;
-      }
-      default:
-        return super.onOptionsItemSelected(item);
-    }
-  }
-
 }
+

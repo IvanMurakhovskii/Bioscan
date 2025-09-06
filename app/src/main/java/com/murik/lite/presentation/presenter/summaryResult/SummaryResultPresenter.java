@@ -9,6 +9,7 @@ import com.murik.lite.R;
 import com.murik.lite.dto.DataByMaxParcelable;
 import com.murik.lite.dto.SummaryParcelable;
 import com.murik.lite.model.summary.Summary_60;
+import com.murik.lite.model.summary.stress.SecondStressSummary_60;
 import com.murik.lite.model.summary.stress.StressSummary_60;
 import com.murik.lite.presentation.view.summaryResultView.SummaryResultView;
 import lombok.Setter;
@@ -44,6 +45,22 @@ public class SummaryResultPresenter extends MvpPresenter<SummaryResultView> {
         inputData.setGender(summaryParcelable.getGender());
 
         StressSummary_60 summaryResult = new StressSummary_60(summary, inputData, context);
+
+        String resultComment = summaryResult.getResultComment();
+        int viewColor = summaryResult.getViewColor();
+        int resultImageResId = summaryResult.getImageResId();
+
+        getViewState().setProgress(summary, viewColor);
+        getViewState().setDescription(resultComment, viewColor);
+        getViewState().setResultImage(resultImageResId);
+    }
+    public void initSecondStressSummaryResult(Context context) {
+        val summary = summaryParcelable.getSummary();
+
+        val inputData = new DataByMaxParcelable();
+        inputData.setGender(summaryParcelable.getGender());
+
+        SecondStressSummary_60 summaryResult = new SecondStressSummary_60(summary, inputData, context);
 
         String resultComment = summaryResult.getResultComment();
         int viewColor = summaryResult.getViewColor();

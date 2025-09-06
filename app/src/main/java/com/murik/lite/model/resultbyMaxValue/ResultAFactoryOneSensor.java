@@ -656,6 +656,79 @@ public class ResultAFactoryOneSensor extends ResultAFactory {
             return false;
         }
     }
+    @Override
+    public boolean calculateSecondStressResultA() {
+
+        if (getMaxSensResult() != null && !getMaxSensResult().isEmpty()) {
+
+            val algorithm = BluetoothDimensionAlgorithm.getByAlgorithmId(getInputData().getAlgorithmId());
+
+            val PS_2435 = getPS2435(getMaxSensResult(), Const.SHORT);
+            val PS_3425 = getPS3425(getMaxSensResult(), Const.SHORT);
+
+            double si = (PS_2435 != 0) ? PS_3425 / PS_2435 : -9999;
+
+            OneSensorResultParametersDto oneSensorResultParameters;
+
+            var a_20_30 = 0d;
+            var a_20_60 = 0d;
+            var a_40_70 = 0d;
+
+            val a20 = getData(getMaxSensResult(), 20);
+            val a30 = getData(getMaxSensResult(), 30);
+            val a40 = getData(getMaxSensResult(), 40);
+            val a60 = getData(getMaxSensResult(), 60);
+            val a70 = getData(getMaxSensResult(), 70);
+
+            a_20_30 = a30 == 0 ? -9999 : round((double) a20 / a30);
+            a_20_60 = a60 == 0 ? -9999 : round((double) a20 / a60);
+            a_40_70 = a70 == 0 ? -9999 : round((double) a40 / a70);
+
+            oneSensorResultParameters = getOneSensorResultParameters(getMaxSensResult(), algorithm);
+
+            val s20_30 = oneSensorResultParameters.getS20_30();
+            val s20_60 = oneSensorResultParameters.getS20_60();
+            val s30_60 = oneSensorResultParameters.getS30_60();
+            val L = oneSensorResultParameters.getL();
+            val En = oneSensorResultParameters.getEn();
+            val E2 = oneSensorResultParameters.getE2();
+
+            try {
+                val tau = calculateDeltaTau(algorithm.getMaxSignalTime(), getMaxSensResult());
+                val T = calculateT(algorithm.getMaxSignalTime(), getMaxSensResult());
+
+                if (getInputData().getSensorType().equals(Const.DIAGNOST)) {
+                    createParametersForDiagnost(si, a_20_30, a_20_60, s30_60, L, En, E2);
+                } else {
+                    if (getInputData().isAnimalsSelected()) {
+                        createParametersFor_Animals(a_20_30, a_20_60, a_40_70, s20_30, s20_60, s30_60, En, E2, tau);
+                        return true;
+                    }
+                    val S_60 = BaseMeasureService.getAreaByMask(Const.MASK_60, getMaxSensResult());
+                    val halfOfArea_60 = S_60 / 2.0d;
+
+                    val r1_2 = ListUtils.findClosestValueIndex(getMaxSensResult(), halfOfArea_60);
+                    if (algorithm.equals(BluetoothDimensionAlgorithm._200)) {
+                        createParametersFor_80(si, a_20_30, a_20_60, s30_60, L, En, E2, tau);
+                    } else if (algorithm.equals(BluetoothDimensionAlgorithm.BASE)) {
+
+                        createSecondStressParametersFor_60(a_20_30, a_20_60, a_40_70, s30_60, En, E2, r1_2, tau, T);
+                    } else if (algorithm.equals(BluetoothDimensionAlgorithm.SIMPLE)) {
+                        createParametersFor_30(tau, En, E2, s20_30);
+                    } else if (algorithm.equals(BluetoothDimensionAlgorithm.ADVANCED)) {
+                        createSecondStressParametersFor_60(a_20_30, a_20_60, a_40_70, s30_60, En, E2, r1_2, tau, T);
+                    }
+                }
+
+            } catch (Exception e) {
+                Log.e("ResultAFactoryOneSensor", e.getMessage());
+                return false;
+            }
+            return true;
+        } else {
+            return false;
+        }
+    }
     private void createStressParametersFor_60(double a20_30, double a20_60, double a_40_70, Double s30_60, Double en, Double e2, int r1_2, final int tau, final int T) {
 
         val a15 = getData(getMaxSensResult(), 15);
@@ -740,7 +813,113 @@ public class ResultAFactoryOneSensor extends ResultAFactory {
         double sum =0 ;
         for (ResultBySens resultBySens:list
                 ) {
-            sum+= resultBySens.getStressA();
+            sum+= resultBySens.getSecondStressA();
+        }
+        if (!list.isEmpty()) {
+            sum/=list.size();
+        }
+
+        setSummaryResult(sum*20);
+
+
+//        val totalResult = new TotalResult_60(getContext(), I, II, III, IV, V, VI, E, S_30_60, TAU, hand);
+
+//        totalIndicators = totalResult.createAndGetDescription();
+
+        if (getInputData().isExpert()) {
+            getA().add(new ResultA_First2_3_Gray(a_40_70, getInputData(), getContext(), 1));
+            getA().add(new ResultA_First1_2_Gray(a_30_60, getInputData(), getContext(), "III_G"));
+            getA().add(new A_20_30_GRAY((a20_30), getInputData(), getContext(), "IV_G"));
+            getA().add(new A_20_60_GRAY((a20_60), getInputData(), getContext(), "V_G"));
+            getA().add(new S_30_60_GRAY((s30_60), getInputData(), getContext(), 1.63F));
+            getA().add(new E_2_60_GREY(e2, getInputData(), getContext()));
+        }
+    }
+    private void createSecondStressParametersFor_60(double a20_30, double a20_60, double a_40_70, Double s30_60, Double en, Double e2, int r1_2, final int tau, final int T) {
+
+        val a15 = getData(getMaxSensResult(), 15);
+        val a20 = getData(getMaxSensResult(), 20);
+        val a25 = getData(getMaxSensResult(), 25);
+        val a30 = getData(getMaxSensResult(), 30);
+        val a40 = getData(getMaxSensResult(), 40);
+        val a45 = getData(getMaxSensResult(), 45);
+        val a60 = getData(getMaxSensResult(), 60);
+        val a70 = getData(getMaxSensResult(), 70);
+
+        val a_15_20 = a20 == 0 ? -9999 : round((double) a15 / a20);
+        val a_25_45 = a45 == 0 ? -9999 : round((double) a25 / a45);
+        val a_30_60 = a60 == 0 ? -9999 : round((double) a30 / a60);
+        val a_40_60 = a60 == 0 ? -9999 : round((double) a40 / a60);
+
+
+        val I = new A_40_70(a_40_70, getInputData(), getContext(), 1.81F);
+        val II = new A_40_60(a_40_60, getInputData(), getContext(), 1.19F);
+        II.setSecondStressResult();
+        val III = new A_30_60(a_30_60, getInputData(), getContext(), "III");
+        III.setSecondStressResult();
+        val IV = new A_20_30(a20_30, getInputData(), getContext(), "IV");
+        IV.setSecondStressResult();
+        val V = new A_20_60((a20_60), getInputData(), getContext(), "V");
+        V.setSecondStressResult();
+        val VI = new A_90_60(oneSensorShortMeasure.getFirstA3_2(), getInputData(), getContext(), 0.39F);
+        val E = new E_60(en, getInputData(), getContext());
+//        val E2 = new E_2_60(e2, getInputData(), getContext());
+        val S_30_60 = new S_30_60(s30_60, getInputData(), getContext(), 1);
+        S_30_60.setSecondStressResult();
+        val VI_L = new A_25_45(a_25_45, getInputData(), getContext(), 1);
+        VI_L.setSecondStressResult();
+        val VII_L = new A_15_20(a_15_20, getInputData(), getContext(), 1);
+        VII_L.setSecondStressResult();
+        val TAU = new TAU_60(tau, getInputData(), getContext());
+        val T_60 = new T_60(T, getInputData(), getContext());
+        T_60.setSecondStressResult();
+        val R1_2 = new R1_2(r1_2, getInputData(), getContext());
+        val S_15_30 = new S_15_30(sensorValueAttitudeFor30.calculateAndGetS15_30(), getInputData(), getContext(), 1.81F);
+
+        val I_30 = new A_10_20(sensorValueAttitudeFor30.getA10_20(), getInputData(), getContext(), 1.81F, "I_30");
+        val II_30 = new A_15_30(sensorValueAttitudeFor30.getA15_30(), getInputData(), getContext(), 1.81F, "II_30");
+
+        S_15_30.setSecondStressResult();
+        I_30.setSecondStressResult();
+        II_30.setSecondStressResult();
+        getA().add(II);
+        getA().add(III);
+        getA().add(V);
+//        getA().add(I);
+        //getA().add(IV);
+//        getA().add(VI);
+        getA().add(T_60);
+//        getA().add(E);
+//        getA().add(R1_2);
+        getA().add(S_30_60);
+        //getA().add(S_15_30);
+        getA().add(VI_L);
+        getA().add(VII_L);
+        getA().add(II_30);
+        getA().add(I_30);
+
+//        getA().add(E2);
+
+        double SP = (getColorCoefficient(II.getViewColor()))
+                + (getColorCoefficient(III.getViewColor()))
+                + (getColorCoefficient(V.getViewColor()))
+                + (getColorCoefficient(I_30.getViewColor()) * 0.9d)
+                + (getColorCoefficient(IV.getViewColor()))
+                + (getColorCoefficient(T_60.getViewColor()))
+                + (getColorCoefficient(S_30_60.getViewColor()))
+                + (getColorCoefficient(II_30.getViewColor()) * 0.95d)
+                + (getColorCoefficient(VII_L.getViewColor()) * 0.9d)
+                + (getColorCoefficient(VI_L.getViewColor()))
+                + (getColorCoefficient(S_15_30.getViewColor()));
+
+        double SPN = (SP - 10.65) / (25.7 - 10.65);
+
+        double YZ = (1 - SPN) * 100;
+        ArrayList<ResultBySens> list = getA();
+        double sum =0 ;
+        for (ResultBySens resultBySens:list
+        ) {
+            sum+= resultBySens.getSecondStressA();
         }
         if (!list.isEmpty()) {
             sum/=list.size();

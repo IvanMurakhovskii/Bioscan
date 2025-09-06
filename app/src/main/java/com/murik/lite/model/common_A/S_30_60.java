@@ -49,4 +49,27 @@ public class S_30_60 extends BaseResultWithCoefficient {
             setPossibleReasons(getResources(R.string.A_30_60_WHITE_2));
         }
     }
+    public void setSecondStressResult() {
+        if ((getA() >= 0.19 && getA() <= 1000) || (getA() < 0.06)) {
+            setColorGREEN();
+            secondStressLevel = 0;
+            setPossibleReasons(getResources(R.string.second_stress0));
+        } else if (getA() >= 0.15 && getA() < 0.19) {
+            secondStressLevel = 1;
+            setColorYELLOW();
+            setPossibleReasons(getResources(R.string.second_stress1));
+        } else if (getA() >= 0.12 && getA() < 0.15) {
+            secondStressLevel = 2;
+            setColorORANGE();
+            setPossibleReasons(getResources(R.string.second_stress2));
+        } else if (getA() >= 0.10 && getA() < 0.12) {
+            secondStressLevel = 3;
+            setColorRED();
+            setPossibleReasons(getResources(R.string.second_stress3));
+        } else {
+            secondStressLevel = 5;
+            setColorBLUE();
+            setPossibleReasons(getResources(R.string.second_stress5));
+        }
+    }
 }

@@ -72,12 +72,14 @@ import com.murik.lite.ui.fragment.oneSensorMeasure.OneSensorTabContainerFragment
 import com.murik.lite.ui.fragment.parserXml.ParserXmlFragment;
 import com.murik.lite.ui.fragment.realm.RealmFragment;
 import com.murik.lite.ui.fragment.result.ResultTabFragment;
+import com.murik.lite.ui.fragment.result.stress.SecondStressResultTabFragment;
 import com.murik.lite.ui.fragment.resultRadarChart.RadarTabContentFragment;
 import com.murik.lite.ui.fragment.settings.SettingsFragment;
 import com.murik.lite.ui.fragment.substances.SubstancesFragment;
 import com.murik.lite.ui.fragment.substances.SubstancesTabContainerFragment;
 import com.murik.lite.ui.fragment.summaryResult.SummaryResultFragment;
 import com.murik.lite.ui.fragment.result.stress.StressResultTabFragment;
+import com.murik.lite.ui.fragment.summaryResult.SummarySecondStressResultFragment;
 import com.murik.lite.ui.fragment.summaryResult.SummaryStressResultFragment;
 
 import java.io.File;
@@ -175,6 +177,10 @@ public class StartActivity extends MvpAppCompatActivity implements StartView, On
                         return StressResultTabFragment.newInstance((DataByMaxParcelable) data);
                     case Screens.STRESS_SUMMARY_RESULT:
                         return SummaryStressResultFragment.newInstance((SummaryParcelable) data);
+                    case Screens.SECOND_STRESS_RESULT:
+                        return SecondStressResultTabFragment.newInstance((DataByMaxParcelable) data);
+                    case Screens.SECOND_STRESS_SUMMARY_RESULT:
+                        return SummarySecondStressResultFragment.newInstance((SummaryParcelable) data);
                     default:
                         throw new RuntimeException("Unknown screen key");
 

@@ -76,4 +76,31 @@ public class A_30_60 extends BaseResultFirst {
             setPossibleReasons(getResources(R.string.stress5));
         }
     }
+    public void setSecondStressResult() {
+        if ((getA() >= 0.48 && getA() <= 1000)) {
+            setColorGREEN();
+            secondStressLevel = 0;
+            setPossibleReasons(getResources(R.string.second_stress0));
+        } else if (getA() >= 0.38 && getA() < 0.48) {
+            secondStressLevel = 1;
+            setColorYELLOW();
+            setPossibleReasons(getResources(R.string.second_stress1));
+        } else if (getA() >= 0.33 && getA() < 0.38) {
+            secondStressLevel = 2;
+            setColorORANGE();
+            setPossibleReasons(getResources(R.string.second_stress2));
+        } else if (getA() >= 0.26 && getA() < 0.33) {
+            secondStressLevel = 3;
+            setColorRED();
+            setPossibleReasons(getResources(R.string.second_stress3));
+        } else if (getA() >= 0.22 && getA() < 0.26) {
+            secondStressLevel = 4;
+            setColorBURGUNDY();
+            setPossibleReasons(getResources(R.string.second_stress4));
+        } else {
+            secondStressLevel = 5;
+            setColorBLUE();
+            setPossibleReasons(getResources(R.string.second_stress5));
+        }
+    }
 }

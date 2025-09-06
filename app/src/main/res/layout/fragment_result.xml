@@ -111,10 +111,36 @@ android:layout_height="match_parent">
         android:textStyle="bold"
         android:textColor="@color/colorPrimaryDark"
         android:visibility="gone"
-        android:text="Уровень стресса"
+        android:text="Уровень стресса «Бей, беги»"
         app:layout_constraintBottom_toBottomOf="@+id/stress_fab"
         app:layout_constraintEnd_toStartOf="@+id/stress_fab"
         app:layout_constraintTop_toTopOf="@+id/stress_fab" />
+		
+	<android.support.design.widget.FloatingActionButton
+        android:id="@+id/second_stress_fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="24dp"
+        app:fabSize="normal"
+        app:layout_constraintBottom_toTopOf="@+id/stress_fab"
+        app:layout_constraintEnd_toEndOf="@+id/stress_fab"
+        app:layout_constraintStart_toStartOf="@+id/stress_fab"
+        android:backgroundTint="@color/colorPrimary"
+        android:visibility="gone"
+        app:srcCompat="@android:drawable/ic_dialog_info"  />
+
+    <TextView
+        android:id="@+id/add_second_stress_action_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:textStyle="bold"
+        android:textColor="@color/colorPrimaryDark"
+        android:visibility="gone"
+        android:text="Уровень стресса «Спазм, замирание»"
+        app:layout_constraintBottom_toBottomOf="@+id/second_stress_fab"
+        app:layout_constraintEnd_toStartOf="@+id/second_stress_fab"
+        app:layout_constraintTop_toTopOf="@+id/second_stress_fab" />
 
     <!--    <android.support.design.widget.FloatingActionButton-->
     <!--        android:id="@+id/fab_summary"-->

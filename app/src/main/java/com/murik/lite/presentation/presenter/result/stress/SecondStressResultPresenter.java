@@ -1,4 +1,4 @@
-package com.murik.lite.presentation.presenter.result;
+package com.murik.lite.presentation.presenter.result.stress;
 
 import android.content.Context;
 import android.util.Log;
@@ -34,7 +34,7 @@ import lombok.val;
 import lombok.var;
 
 @InjectViewState
-public class ResultPresenter extends MvpPresenter<ResultView> {
+public class SecondStressResultPresenter extends MvpPresenter<ResultView> {
 
     private final List<CustomResultItem> resultItems = new ArrayList<>();
     private ResultAFactory resultAFactory;
@@ -42,32 +42,7 @@ public class ResultPresenter extends MvpPresenter<ResultView> {
     private Context context;
     private DataByMaxParcelable data;
 
-    public ResultPresenter() {
-    }
-
-    public void onSummaryClick() {
-        val summary = resultAFactory.getSummaryResult();
-        val algorithmId = resultAFactory.getInputData().getAlgorithmId();
-        App.INSTANCE.getRouter().navigateTo(Screens.SUMMARY_RESULT, new SummaryParcelable(summary, resultAFactory.getInputData().getGender(), algorithmId));
-    }
-
-    public void onSubstanceClick(int hand) {
-        val measureData = new MeasureDataParcelable();
-        measureData.setAlgorithmId(data.getAlgorithmId());
-        val measureList = hand == Const.LEFT_HAND ? data.getLeftHandDataSensor() : data.getRightHandDataSensor();
-        measureData.setData(measureList);
-
-        App.INSTANCE.getRouter().navigateTo(Screens.SUBSTANCES_FRAGMENT, measureData);
-    }
-
-    public void onStressClick(DataByMaxParcelable dataByMaxParcelable) {
-        dataByMaxParcelable.setMeasureType(Const.ONE_SENSOR_MEASURE);
-        App.INSTANCE.getRouter().navigateTo(Screens.STRESS_RESULT, dataByMaxParcelable);
-    }
-
-    public void onSecondStressClick(DataByMaxParcelable dataByMaxParcelable) {
-        dataByMaxParcelable.setMeasureType(Const.ONE_SENSOR_MEASURE);
-        App.INSTANCE.getRouter().navigateTo(Screens.SECOND_STRESS_RESULT, dataByMaxParcelable);
+    public SecondStressResultPresenter() {
     }
 
     public void setContext(Context context) {
@@ -95,7 +70,7 @@ public class ResultPresenter extends MvpPresenter<ResultView> {
             resultAFactory = new ResultAFactoryOneSensor(data, hand, context);
         }
 
-        if (resultAFactory.calculateResultA()) {
+        if (resultAFactory.calculateSecondStressResultA()) {
             ArrayList<ResultBySens> resultBySens = resultAFactory.getA();
             if (!resultItems.isEmpty()) {
                 resultItems.clear();
@@ -180,6 +155,11 @@ public class ResultPresenter extends MvpPresenter<ResultView> {
         RealmController realmController = new RealmController();
         realmController.addInfoMax(data);
         App.INSTANCE.getRouter().newScreenChain(Screens.REALM_FRAGMENT);
+    }
+    public void onSummaryClick() {
+        val summary = resultAFactory.getSummaryResult();
+        val algorithmId = resultAFactory.getInputData().getAlgorithmId();
+        App.INSTANCE.getRouter().navigateTo(Screens.SECOND_STRESS_SUMMARY_RESULT, new SummaryParcelable(summary, resultAFactory.getInputData().getGender(), algorithmId));
     }
 
     public void showDiagram() {
