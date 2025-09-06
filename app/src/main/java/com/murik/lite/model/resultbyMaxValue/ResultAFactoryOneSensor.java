@@ -813,7 +813,7 @@ public class ResultAFactoryOneSensor extends ResultAFactory {
         double sum =0 ;
         for (ResultBySens resultBySens:list
                 ) {
-            sum+= resultBySens.getSecondStressA();
+            sum+= resultBySens.getStressA();
         }
         if (!list.isEmpty()) {
             sum/=list.size();
