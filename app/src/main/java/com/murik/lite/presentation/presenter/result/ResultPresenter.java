@@ -12,6 +12,7 @@ import com.murik.lite.Screens;
 import com.murik.lite.configuration.AuthService;
 import com.murik.lite.dto.DataByMaxParcelable;
 import com.murik.lite.dto.MeasureDataParcelable;
+import com.murik.lite.dto.StressSummaryFullParcelable;
 import com.murik.lite.dto.SummaryParcelable;
 import com.murik.lite.model.RealmController;
 import com.murik.lite.model.ResultAFactory;
@@ -68,6 +69,11 @@ public class ResultPresenter extends MvpPresenter<ResultView> {
     public void onSecondStressClick(DataByMaxParcelable dataByMaxParcelable) {
         dataByMaxParcelable.setMeasureType(Const.ONE_SENSOR_MEASURE);
         App.INSTANCE.getRouter().navigateTo(Screens.SECOND_STRESS_RESULT, dataByMaxParcelable);
+    }
+
+    public void onFullStressClick() {
+        resultAFactory.calculateSummaryStress();
+        App.INSTANCE.getRouter().navigateTo(Screens.SUMMARY_FULL_STRESS_RESULT, new StressSummaryFullParcelable(resultAFactory.getSummaryRunStress(), resultAFactory.getSummaryStopStress(), 1));
     }
 
     public void setContext(Context context) {

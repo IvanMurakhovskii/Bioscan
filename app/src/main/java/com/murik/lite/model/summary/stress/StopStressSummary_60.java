@@ -18,9 +18,9 @@ import lombok.val;
 
 @Setter
 @Getter
-public class SecondStressSummary_60 extends BaseResult {
+public class StopStressSummary_60 extends BaseResult {
 
-    public SecondStressSummary_60(double A, DataByMaxParcelable inputData, Context context) {
+    public StopStressSummary_60(double A, DataByMaxParcelable inputData, Context context) {
         super(A, inputData, context);
     }
 

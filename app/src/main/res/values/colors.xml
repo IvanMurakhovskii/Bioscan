@@ -14,5 +14,10 @@
   <color name="green">#00AF64</color>
   <color name="orange">#F46405</color>
   <color name="textColor">#111111</color>
+  <color name="background_color">#F5F5F5</color>
+  <color name="primary_text">#212121</color>
+  <color name="secondary_text">#757575</color>
+  <color name="switch_track">#BDBDBD</color>
+  <color name="card_info_background">#E3F2FD</color>
 
 </resources>

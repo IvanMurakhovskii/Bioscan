@@ -54,7 +54,7 @@ public class SummaryResultFragment extends MvpAppCompatFragment implements Summa
     @Override
     public View onCreateView(final LayoutInflater inflater, final ViewGroup container,
                              final Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.summary_fragment, container, false);
+        View view = inflater.inflate(R.layout.summary_fragment_2, container, false);
         setHasOptionsMenu(true);
 
         Bundle bundle = getArguments();

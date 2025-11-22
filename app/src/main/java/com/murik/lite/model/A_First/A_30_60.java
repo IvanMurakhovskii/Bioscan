@@ -21,12 +21,12 @@ public class A_30_60 extends BaseResultFirst {
     }
 
     public void setResult() {
-        if (getA() >= 0.340 && getA() <= 0.47) {
+        if (getA() > 0.330 && getA() <= 0.47) {
             setColorGREEN();
         } else if (getA() >= 0.48 && getA() <= 0.55) {
             setColorYELLOW();
             setPossibleReasons(getResources(R.string.A_SHORT_1_2_YELLOW_80));
-        } else if (getA() >= 0.28 && getA() <= 0.32) {
+        } else if (getA() >= 0.28 && getA() <= 0.33) {
             setColorYELLOW();
             setPossibleReasons(getResources(R.string.A_SHORT_1_2_YELLOW_2));
         } else if (getA() >= 0.20 && getA() <= 0.27) {

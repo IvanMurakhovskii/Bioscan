@@ -1,77 +1,133 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:background="@color/background_color"
+    android:padding="16dp">
 
-  <TextView
+  <LinearLayout
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      android:text="Выбор темы представления результата:"
-      android:textStyle="bold"
-      android:textSize="16sp"/>
+      android:orientation="vertical">
 
-  <RadioGroup
-      android:id="@+id/summary_theme_rg"
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:orientation="vertical"
-      android:paddingBottom="16dp">
-
-    <RadioButton
-        android:id="@+id/abstraction"
+    <!-- Header Card -->
+    <android.support.v7.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Абстракция"/>
+        android:layout_marginBottom="16dp"
+        app:cardCornerRadius="12dp"
+        app:cardElevation="4dp">
 
+      <LinearLayout
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:orientation="vertical"
+          android:padding="20dp">
 
-    <RadioButton
-        android:id="@+id/lion"
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Настройки темы"
+            android:textAlignment="center"
+            android:textColor="@color/primary_text"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="Выберите тему представления результатов"
+            android:textAlignment="center"
+            android:textColor="@color/secondary_text"
+            android:textSize="14sp" />
+
+      </LinearLayout>
+    </android.support.v7.widget.CardView>
+
+    <android.support.v7.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Лев"/>
+        android:layout_marginBottom="16dp"
+        app:cardCornerRadius="12dp"
+        app:cardElevation="4dp">
+      <LinearLayout
+          android:layout_width="match_parent"
+          android:layout_height="match_parent"
+          android:orientation="vertical"
+          android:padding="8dp">
 
-    <RadioButton
-        android:id="@+id/dream"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Ловец снов"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Выбор темы представления результата:"
+            android:textStyle="bold"
+            android:textSize="16sp"/>
 
-    <RadioButton
-    android:id="@+id/apricot"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:text="Абрикос"/>
+        <RadioGroup
+            android:id="@+id/summary_theme_rg"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingBottom="16dp">
 
-    <RadioButton
-        android:id="@+id/marshmallow"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Зефирка"/>
+          <RadioButton
+              android:id="@+id/abstraction"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:text="Абстракция"/>
 
-    <RadioButton
-        android:id="@+id/gnomes"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Гномики"/>
+          <RadioButton
+              android:id="@+id/lion"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:text="Лев"/>
 
-    <RadioButton
-        android:id="@+id/santa_letter"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Письмо деду Морозу"/>
+          <RadioButton
+              android:id="@+id/dream"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:text="Ловец снов"/>
 
-    <RadioButton
-        android:id="@+id/glass_lion"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Стеклянный лев"/>
-  </RadioGroup>
+          <RadioButton
+              android:id="@+id/apricot"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:text="Абрикос"/>
 
-  <Button
-      android:id="@+id/btn_settings_save"
-      android:layout_width="fill_parent"
-      android:layout_height="wrap_content"
-      android:layout_marginTop="10dip"
-      android:text="Сохранить" />
-</LinearLayout>
+          <RadioButton
+              android:id="@+id/marshmallow"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:text="Зефирка"/>
+
+          <RadioButton
+              android:id="@+id/gnomes"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:text="Гномики"/>
+
+          <RadioButton
+              android:id="@+id/santa_letter"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:text="Письмо деду Морозу"/>
+
+          <RadioButton
+              android:id="@+id/glass_lion"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:text="Стеклянный лев"/>
+        </RadioGroup>
+
+        <Button
+            android:id="@+id/btn_settings_save"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dip"
+            android:text="Сохранить" />
+      </LinearLayout>
+    </android.support.v7.widget.CardView>
+  </LinearLayout>
+</ScrollView>

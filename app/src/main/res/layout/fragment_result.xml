@@ -13,144 +13,184 @@ android:layout_height="match_parent">
         android:id="@+id/result_pie_chart"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="1">
-    </com.github.mikephil.charting.charts.PieChart>
+        android:layout_weight="1" />
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/result_recycler_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="1"/>
+        android:layout_weight="1" />
 
   </LinearLayout>
 
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/add_fab"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="end"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="16dp"
-        android:backgroundTint="@color/colorPrimary"
-        app:srcCompat="@android:drawable/arrow_up_float"
-        app:fabSize="normal"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+  <android.support.design.widget.FloatingActionButton
+      android:id="@+id/add_fab"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:backgroundTint="@color/colorPrimary"
+      app:srcCompat="@android:drawable/ic_menu_add"
+      android:layout_marginEnd="16dp"
+      android:layout_marginBottom="16dp"
+      app:fabSize="normal"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:tint="@android:color/white" />
 
+  <!-- Расширенное меню FAB -->
+  <android.support.design.widget.FloatingActionButton
+      android:id="@+id/summary_fab"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:backgroundTint="@color/colorPrimary"
+      android:layout_marginBottom="24dp"
+      android:visibility="gone"
+      app:fabSize="mini"
+      app:layout_constraintBottom_toTopOf="@+id/add_fab"
+      app:layout_constraintEnd_toEndOf="@+id/add_fab"
+      app:srcCompat="@android:drawable/ic_dialog_info"
+      app:tint="@android:color/white" />
 
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/summary_fab"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="24dp"
-        app:fabSize="normal"
-        app:layout_constraintBottom_toTopOf="@+id/add_fab"
-        app:layout_constraintEnd_toEndOf="@+id/add_fab"
-        app:layout_constraintStart_toStartOf="@+id/add_fab"
-        android:backgroundTint="@color/colorPrimary"
-        android:visibility="gone"
-        app:srcCompat="@android:drawable/ic_dialog_info"  />
+  <TextView
+      android:id="@+id/add_alarm_action_text"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:background="@drawable/fab_label_background"
+      android:gravity="center_vertical"
+      android:paddingStart="12dp"
+      android:paddingEnd="16dp"
+      android:layout_marginEnd="8dp"
+      android:text="Суммарный показатель"
+      android:textColor="@android:color/white"
+      android:textSize="14sp"
+      android:textStyle="bold"
+      android:visibility="gone"
+      app:layout_constraintBottom_toBottomOf="@+id/summary_fab"
+      app:layout_constraintEnd_toStartOf="@+id/summary_fab"
+      app:layout_constraintTop_toTopOf="@+id/summary_fab" />
 
-    <TextView
-        android:id="@+id/add_alarm_action_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:textStyle="bold"
-        android:textColor="@color/colorPrimaryDark"
-        android:visibility="gone"
-        android:text="Суммарный показатель"
-        app:layout_constraintBottom_toBottomOf="@+id/summary_fab"
-        app:layout_constraintEnd_toStartOf="@+id/summary_fab"
-        app:layout_constraintTop_toTopOf="@+id/summary_fab" />
+  <android.support.design.widget.FloatingActionButton
+      android:id="@+id/substances_fab"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:backgroundTint="#4CAF50"
+      android:layout_marginBottom="24dp"
+      android:visibility="gone"
+      app:fabSize="mini"
+      app:layout_constraintBottom_toTopOf="@+id/summary_fab"
+      app:layout_constraintEnd_toEndOf="@+id/summary_fab"
+      app:srcCompat="@android:drawable/ic_menu_manage"
+      app:tint="@android:color/white" />
 
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/substances_fab"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="24dp"
-        android:visibility="gone"
-        app:fabSize="normal"
-        app:layout_constraintBottom_toTopOf="@+id/summary_fab"
-        app:layout_constraintEnd_toEndOf="@+id/summary_fab"
-        app:layout_constraintStart_toStartOf="@+id/summary_fab"
-        android:backgroundTint="@color/colorPrimary"
-        app:srcCompat="@android:drawable/ic_menu_manage" />
+  <TextView
+      android:id="@+id/add_person_action_text"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:background="@drawable/fab_label_background"
+      android:gravity="center_vertical"
+      android:paddingStart="12dp"
+      android:paddingEnd="16dp"
+      android:layout_marginEnd="8dp"
+      android:text="Вещества"
+      android:textColor="@android:color/white"
+      android:textSize="14sp"
+      android:textStyle="bold"
+      android:visibility="gone"
+      app:layout_constraintBottom_toBottomOf="@+id/substances_fab"
+      app:layout_constraintEnd_toStartOf="@+id/substances_fab"
+      app:layout_constraintTop_toTopOf="@+id/substances_fab" />
 
-    <TextView
-        android:id="@+id/add_person_action_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:textStyle="bold"
-        android:textColor="@color/colorPrimaryDark"
-        android:visibility="gone"
-        android:text="Вещества"
-        app:layout_constraintBottom_toBottomOf="@+id/substances_fab"
-        app:layout_constraintEnd_toStartOf="@+id/substances_fab"
-        app:layout_constraintTop_toTopOf="@+id/substances_fab" />
-		
-	<android.support.design.widget.FloatingActionButton
-        android:id="@+id/stress_fab"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="24dp"
-        app:fabSize="normal"
-        app:layout_constraintBottom_toTopOf="@+id/substances_fab"
-        app:layout_constraintEnd_toEndOf="@+id/substances_fab"
-        app:layout_constraintStart_toStartOf="@+id/substances_fab"
-        android:backgroundTint="@color/colorPrimary"
-        android:visibility="gone"
-        app:srcCompat="@android:drawable/ic_dialog_info"  />
+  <android.support.design.widget.FloatingActionButton
+      android:id="@+id/stress_fab"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:backgroundTint="#FF9800"
+      android:visibility="gone"
+      android:layout_marginBottom="24dp"
+      app:fabSize="mini"
+      app:layout_constraintBottom_toTopOf="@+id/substances_fab"
+      app:layout_constraintEnd_toEndOf="@+id/substances_fab"
+      app:srcCompat="@android:drawable/ic_dialog_info"
+      app:tint="@android:color/white" />
 
-    <TextView
-        android:id="@+id/add_stress_action_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:textStyle="bold"
-        android:textColor="@color/colorPrimaryDark"
-        android:visibility="gone"
-        android:text="Уровень стресса «Бей, беги»"
-        app:layout_constraintBottom_toBottomOf="@+id/stress_fab"
-        app:layout_constraintEnd_toStartOf="@+id/stress_fab"
-        app:layout_constraintTop_toTopOf="@+id/stress_fab" />
-		
-	<android.support.design.widget.FloatingActionButton
-        android:id="@+id/second_stress_fab"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="24dp"
-        app:fabSize="normal"
-        app:layout_constraintBottom_toTopOf="@+id/stress_fab"
-        app:layout_constraintEnd_toEndOf="@+id/stress_fab"
-        app:layout_constraintStart_toStartOf="@+id/stress_fab"
-        android:backgroundTint="@color/colorPrimary"
-        android:visibility="gone"
-        app:srcCompat="@android:drawable/ic_dialog_info"  />
+  <TextView
+      android:id="@+id/add_stress_action_text"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:background="@drawable/fab_label_background"
+      android:gravity="center_vertical"
+      android:paddingStart="12dp"
+      android:paddingEnd="16dp"
+      android:text="Стресс: Бей, беги"
+      android:textColor="@android:color/white"
+      android:textSize="14sp"
+      android:layout_marginEnd="8dp"
+      android:textStyle="bold"
+      android:visibility="gone"
+      app:layout_constraintBottom_toBottomOf="@+id/stress_fab"
+      app:layout_constraintEnd_toStartOf="@+id/stress_fab"
+      app:layout_constraintTop_toTopOf="@+id/stress_fab" />
 
-    <TextView
-        android:id="@+id/add_second_stress_action_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:textStyle="bold"
-        android:textColor="@color/colorPrimaryDark"
-        android:visibility="gone"
-        android:text="Уровень стресса «Спазм, замирание»"
-        app:layout_constraintBottom_toBottomOf="@+id/second_stress_fab"
-        app:layout_constraintEnd_toStartOf="@+id/second_stress_fab"
-        app:layout_constraintTop_toTopOf="@+id/second_stress_fab" />
+  <android.support.design.widget.FloatingActionButton
+      android:id="@+id/second_stress_fab"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:backgroundTint="#9C27B0"
+      android:layout_marginBottom="24dp"
+      android:visibility="gone"
+      app:fabSize="mini"
+      app:layout_constraintBottom_toTopOf="@+id/stress_fab"
+      app:layout_constraintEnd_toEndOf="@+id/stress_fab"
+      app:srcCompat="@android:drawable/ic_dialog_info"
+      app:tint="@android:color/white" />
 
-    <!--    <android.support.design.widget.FloatingActionButton-->
-    <!--        android:id="@+id/fab_summary"-->
-    <!--        android:layout_width="wrap_content"-->
-    <!--        android:layout_height="wrap_content"-->
-    <!--        android:layout_gravity="bottom|right"-->
-    <!--        android:layout_margin="@dimen/fab_margin"-->
-    <!--        android:backgroundTint="@color/colorPrimary"-->
-    <!--        android:visibility="visible"-->
-    <!--        app:srcCompat="@android:drawable/ic_dialog_info" />-->
+  <TextView
+      android:id="@+id/add_second_stress_action_text"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:background="@drawable/fab_label_background"
+      android:gravity="center_vertical"
+      android:paddingStart="12dp"
+      android:paddingEnd="16dp"
+      android:text="Стресс: Спазм, замирание"
+      android:textColor="@android:color/white"
+      android:layout_marginEnd="8dp"
+      android:textSize="14sp"
+      android:textStyle="bold"
+      android:visibility="gone"
+      app:layout_constraintBottom_toBottomOf="@+id/second_stress_fab"
+      app:layout_constraintEnd_toStartOf="@+id/second_stress_fab"
+      app:layout_constraintTop_toTopOf="@+id/second_stress_fab" />
+
+  <android.support.design.widget.FloatingActionButton
+      android:id="@+id/full_summary_stress_fab"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:backgroundTint="#F44336"
+      android:layout_marginBottom="24dp"
+      android:visibility="gone"
+      app:fabSize="mini"
+      app:layout_constraintBottom_toTopOf="@+id/second_stress_fab"
+      app:layout_constraintEnd_toEndOf="@+id/second_stress_fab"
+      app:srcCompat="@android:drawable/ic_dialog_alert"
+      app:tint="@android:color/white" />
+
+  <TextView
+      android:id="@+id/full_summary_stress_fab_text"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:background="@drawable/fab_label_background"
+      android:gravity="center_vertical"
+      android:paddingStart="12dp"
+      android:layout_marginEnd="8dp"
+      android:paddingEnd="16dp"
+      android:text="Суммарный стресс"
+      android:textColor="@android:color/white"
+      android:textSize="14sp"
+      android:textStyle="bold"
+      android:visibility="gone"
+      app:layout_constraintBottom_toBottomOf="@+id/full_summary_stress_fab"
+      app:layout_constraintEnd_toStartOf="@+id/full_summary_stress_fab"
+      app:layout_constraintTop_toTopOf="@+id/full_summary_stress_fab" />
 
 
 </android.support.constraint.ConstraintLayout>

@@ -13,6 +13,7 @@ import lombok.Setter;
 
 public abstract class BaseResult implements ResultBySens {
     private double A;
+    @Setter
     private int color = Color.WHITE;
     private String possibleReasons = "Проверить условия измерения! При повторе – очень опасно! Воспаление! Обратить внимание!";
     private Context context;
@@ -71,39 +72,67 @@ public abstract class BaseResult implements ResultBySens {
     }
 
     public void setColorPRIMARY_DARK() {
-        color = ContextCompat.getColor(context, R.color.colorPrimaryDark);
+        color = getColorPRIMARY_DARK();
     }
 
     public void setColorORANGE() {
-        color = ContextCompat.getColor(context, R.color.orange);
+        color = getColorORANGE();
     }
 
     public void setColorGRAY() {
-        color = Color.GRAY;
+        color = getColorGRAY();
     }
 
     public void setColorBURGUNDY() {
-        color = ContextCompat.getColor(context, R.color.colorResultBurgundy);
+        color = getColorBURGUNDY();
     }
 
     public void setColorRED() {
-        color = ContextCompat.getColor(context, R.color.colorResultRed);
-    }
-
-    public void setColor(int color) {
-        this.color = color;
+        color = getColorRED();
     }
 
     public void setColorCRIMSON() {
-        color = ContextCompat.getColor(context, R.color.colorResultCrimson);
+        color = getColorCRIMSON();
     }
 
     public void setColorPINK() {
-        color = ContextCompat.getColor(context, R.color.fabColor);
+        color = getColorPINK();
     }
 
     public void setColorYELLOW() {
-        color = ContextCompat.getColor(context, R.color.colorResultYellow);
+        color = getColorYELLOW();
+    }
+
+    public int getColorPRIMARY_DARK() {
+        return ContextCompat.getColor(context, R.color.colorPrimaryDark);
+    }
+
+    public int getColorORANGE() {
+        return ContextCompat.getColor(context, R.color.orange);
+    }
+
+    public int getColorGRAY() {
+        return Color.GRAY;
+    }
+
+    public int getColorBURGUNDY() {
+        return ContextCompat.getColor(context, R.color.colorResultBurgundy);
+    }
+
+    public int getColorRED() {
+        return ContextCompat.getColor(context, R.color.colorResultRed);
+    }
+
+    public int getColorCRIMSON() {
+        return ContextCompat.getColor(context, R.color.colorResultCrimson);
+    }
+
+    public int getColorPINK() {
+        return ContextCompat.getColor(context, R.color.fabColor);
+    }
+
+    public int getColorYELLOW() {
+        return ContextCompat.getColor(context, R.color.colorResultYellow);
     }
 
     public void setColorGREEN() {

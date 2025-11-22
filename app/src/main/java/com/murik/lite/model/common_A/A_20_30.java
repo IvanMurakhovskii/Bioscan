@@ -23,7 +23,7 @@ public class A_20_30 extends BaseResultWithCoefficient {
     public void setResult() {
         if (getA() >= 0.56 && getA() <= 0.66) {
             setColorGREEN();
-        } else if (getA() >= 0.67 && getA() < 0.69) {
+        } else if (getA() >= 0.67 && getA() < 0.7) {
             setColorYELLOW();
             setPossibleReasons(getResources(R.string.A_20_30_YELLOW_1_1));
         } else if (getA() >= 0.7 && getA() <= 0.75) {

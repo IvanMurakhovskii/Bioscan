@@ -126,7 +126,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:cardBackgroundColor="@color/colorResultYellow"
-
             app:cardCornerRadius="5px"
             app:cardUseCompatPadding="true"
             app:layout_constraintTop_toBottomOf="@+id/summary_progress_bar_left"

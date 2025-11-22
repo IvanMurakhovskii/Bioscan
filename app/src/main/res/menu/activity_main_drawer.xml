@@ -34,7 +34,11 @@
             android:id="@+id/app_disconnect_device"
             android:icon="@android:drawable/ic_delete"
             android:title="Отключиться от прибора" />
+    </group>
 
+    <group
+        android:id="@+id/settings_group"
+        android:checkableBehavior="single">
         <item
             android:id="@+id/app_settings"
             android:icon="@android:drawable/ic_menu_info_details"

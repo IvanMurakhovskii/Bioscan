@@ -88,4 +88,9 @@ public class ResultAFactoryStandard extends ResultAFactory {
     }
   }
 
+  @Override
+  public void calculateSummaryStress() {
+
+  }
+
 }

@@ -54,6 +54,7 @@ import com.murik.lite.dto.AdditionalParcelable;
 import com.murik.lite.dto.DataByMaxParcelable;
 import com.murik.lite.dto.MeasureDataParcelable;
 import com.murik.lite.dto.SensorDataFullParcelable;
+import com.murik.lite.dto.StressSummaryFullParcelable;
 import com.murik.lite.dto.SummaryParcelable;
 import com.murik.lite.presentation.presenter.start.StartPresenter;
 import com.murik.lite.presentation.view.start.StartView;
@@ -77,6 +78,7 @@ import com.murik.lite.ui.fragment.resultRadarChart.RadarTabContentFragment;
 import com.murik.lite.ui.fragment.settings.SettingsFragment;
 import com.murik.lite.ui.fragment.substances.SubstancesFragment;
 import com.murik.lite.ui.fragment.substances.SubstancesTabContainerFragment;
+import com.murik.lite.ui.fragment.summaryResult.SummaryFullStressFragment;
 import com.murik.lite.ui.fragment.summaryResult.SummaryResultFragment;
 import com.murik.lite.ui.fragment.result.stress.StressResultTabFragment;
 import com.murik.lite.ui.fragment.summaryResult.SummarySecondStressResultFragment;
@@ -181,6 +183,8 @@ public class StartActivity extends MvpAppCompatActivity implements StartView, On
                         return SecondStressResultTabFragment.newInstance((DataByMaxParcelable) data);
                     case Screens.SECOND_STRESS_SUMMARY_RESULT:
                         return SummarySecondStressResultFragment.newInstance((SummaryParcelable) data);
+                    case Screens.SUMMARY_FULL_STRESS_RESULT:
+                        return SummaryFullStressFragment.newInstance((StressSummaryFullParcelable) data);
                     default:
                         throw new RuntimeException("Unknown screen key");
 

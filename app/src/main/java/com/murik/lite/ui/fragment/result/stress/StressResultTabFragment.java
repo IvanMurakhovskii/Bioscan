@@ -41,7 +41,7 @@ public class StressResultTabFragment  extends Fragment {
                            final Bundle savedInstanceState) {
     Bundle bundle = getArguments();
     if(bundle != null){
-      inputDataParcelable =  bundle.getParcelable(CALCULATE_A_KEY);
+      inputDataParcelable = bundle.getParcelable(CALCULATE_A_KEY);
     }
     setHasOptionsMenu(true);
     return inflater.inflate(R.layout.fragment_tab_content, container, false);

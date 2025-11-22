@@ -50,4 +50,9 @@ public class ResultAFactoryLongMask extends ResultAFactory {
             return false;
         }
     }
+
+    @Override
+    public void calculateSummaryStress() {
+
+    }
 }

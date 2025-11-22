@@ -111,4 +111,9 @@ public class ResultAFactoryShortMask extends ResultAFactory {
             return false;
         }
     }
+
+    @Override
+    public void calculateSummaryStress() {
+
+    }
 }

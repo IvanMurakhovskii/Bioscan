@@ -1,5 +1,17 @@
 package com.murik.lite.model.resultbyMaxValue;
 
+import static com.murik.lite.service.Impl.BaseMeasureService.calculateDeltaTau;
+import static com.murik.lite.service.Impl.BaseMeasureService.calculateDifferenceLeftRight;
+import static com.murik.lite.service.Impl.BaseMeasureService.calculateT;
+import static com.murik.lite.service.Impl.BaseMeasureService.calculateT_80;
+import static com.murik.lite.service.Impl.BaseMeasureService.getAreaByMask;
+import static com.murik.lite.service.Impl.BaseMeasureService.getOneSensorResultParameters;
+import static com.murik.lite.service.Impl.BaseMeasureService.getPS2435;
+import static com.murik.lite.service.Impl.BaseMeasureService.getPS3425;
+import static com.murik.lite.service.Impl.BaseMeasureService.round;
+import static com.murik.lite.utils.ListUtils.getData;
+import static com.murik.lite.utils.SummaryColorCoefficientUtils.getColorCoefficient;
+
 import android.content.Context;
 import android.util.Log;
 
@@ -79,29 +91,16 @@ import com.murik.lite.model.Е.E_2_DIAGNOST_GRAY;
 import com.murik.lite.model.Е.E_30;
 import com.murik.lite.model.Е.E_60;
 import com.murik.lite.model.Е.E_80;
+import com.murik.lite.presentation.presenter.substances.SubstancesParametersData;
 import com.murik.lite.service.Impl.BaseMeasureService;
 import com.murik.lite.utils.ListUtils;
 
-import java.math.BigDecimal;
-import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.List;
 
 import lombok.Getter;
 import lombok.val;
 import lombok.var;
-
-import static com.murik.lite.service.Impl.BaseMeasureService.calculateDeltaTau;
-import static com.murik.lite.service.Impl.BaseMeasureService.calculateDifferenceLeftRight;
-import static com.murik.lite.service.Impl.BaseMeasureService.calculateT;
-import static com.murik.lite.service.Impl.BaseMeasureService.calculateT_80;
-import static com.murik.lite.service.Impl.BaseMeasureService.getAreaByMask;
-import static com.murik.lite.service.Impl.BaseMeasureService.getOneSensorResultParameters;
-import static com.murik.lite.service.Impl.BaseMeasureService.getPS2435;
-import static com.murik.lite.service.Impl.BaseMeasureService.getPS3425;
-import static com.murik.lite.service.Impl.BaseMeasureService.round;
-import static com.murik.lite.utils.ListUtils.getData;
-import static com.murik.lite.utils.SummaryColorCoefficientUtils.getColorCoefficient;
 
 @Getter
 public class ResultAFactoryOneSensor extends ResultAFactory {
@@ -120,7 +119,6 @@ public class ResultAFactoryOneSensor extends ResultAFactory {
         oneSensorShortMeasure = new OneSensorShortMeasure(getMaxSensResult());
         oneSensorLongMeasure = new OneSensorLongMeasure(getMaxSensResult());
         sensorValueAttitudeFor30 = new SensorValueAttitudeFor30(getMaxSensResult());
-
     }
 
     @Override
@@ -638,7 +636,6 @@ public class ResultAFactoryOneSensor extends ResultAFactory {
                     if (algorithm.equals(BluetoothDimensionAlgorithm._200)) {
                         createParametersFor_80(si, a_20_30, a_20_60, s30_60, L, En, E2, tau);
                     } else if (algorithm.equals(BluetoothDimensionAlgorithm.BASE)) {
-
                         createStressParametersFor_60(a_20_30, a_20_60, a_40_70, s30_60, En, E2, r1_2, tau, T);
                     } else if (algorithm.equals(BluetoothDimensionAlgorithm.SIMPLE)) {
                         createParametersFor_30(tau, En, E2, s20_30);
@@ -656,6 +653,7 @@ public class ResultAFactoryOneSensor extends ResultAFactory {
             return false;
         }
     }
+
     @Override
     public boolean calculateSecondStressResultA() {
 
@@ -711,7 +709,6 @@ public class ResultAFactoryOneSensor extends ResultAFactory {
                     if (algorithm.equals(BluetoothDimensionAlgorithm._200)) {
                         createParametersFor_80(si, a_20_30, a_20_60, s30_60, L, En, E2, tau);
                     } else if (algorithm.equals(BluetoothDimensionAlgorithm.BASE)) {
-
                         createSecondStressParametersFor_60(a_20_30, a_20_60, a_40_70, s30_60, En, E2, r1_2, tau, T);
                     } else if (algorithm.equals(BluetoothDimensionAlgorithm.SIMPLE)) {
                         createParametersFor_30(tau, En, E2, s20_30);
@@ -729,6 +726,42 @@ public class ResultAFactoryOneSensor extends ResultAFactory {
             return false;
         }
     }
+
+    public void calculateSummaryStress() {
+        var a_20_30 = 0d;
+        var a_20_60 = 0d;
+        var a_40_70 = 0d;
+
+        val a20 = getData(getMaxSensResult(), 20);
+        val a30 = getData(getMaxSensResult(), 30);
+        val a40 = getData(getMaxSensResult(), 40);
+        val a60 = getData(getMaxSensResult(), 60);
+        val a70 = getData(getMaxSensResult(), 70);
+
+        a_20_30 = a30 == 0 ? -9999 : round((double) a20 / a30);
+        a_20_60 = a60 == 0 ? -9999 : round((double) a20 / a60);
+        a_40_70 = a70 == 0 ? -9999 : round((double) a40 / a70);
+
+        val algorithm = BluetoothDimensionAlgorithm.getByAlgorithmId(getInputData().getAlgorithmId());
+
+        val oneSensorResultParameters = getOneSensorResultParameters(getMaxSensResult(), algorithm);
+
+        val s30_60 = oneSensorResultParameters.getS30_60();
+        val En = oneSensorResultParameters.getEn();
+        val E2 = oneSensorResultParameters.getE2();
+
+        val tau = calculateDeltaTau(algorithm.getMaxSignalTime(), getMaxSensResult());
+        val T = calculateT(algorithm.getMaxSignalTime(), getMaxSensResult());
+
+        val S_60 = BaseMeasureService.getAreaByMask(Const.MASK_60, getMaxSensResult());
+        val halfOfArea_60 = S_60 / 2.0d;
+
+        val r1_2 = ListUtils.findClosestValueIndex(getMaxSensResult(), halfOfArea_60);
+
+        createStressParametersFor_60(a_20_30, a_20_60, a_40_70, s30_60, En, E2, r1_2, tau, T);
+        createSecondStressParametersFor_60(a_20_30, a_20_60, a_40_70, s30_60, En, E2, r1_2, tau, T);
+    }
+
     private void createStressParametersFor_60(double a20_30, double a20_60, double a_40_70, Double s30_60, Double en, Double e2, int r1_2, final int tau, final int T) {
 
         val a15 = getData(getMaxSensResult(), 15);
@@ -776,21 +809,33 @@ public class ResultAFactoryOneSensor extends ResultAFactory {
         S_15_30.setStressResult();
         I_30.setStressResult();
         II_30.setStressResult();
+
+        ArrayList<ResultBySens> list = new ArrayList<>();
+
         getA().add(II);
+        list.add(II);
         getA().add(III);
+        list.add(III);
         getA().add(V);
+        list.add(V);
 //        getA().add(I);
         getA().add(IV);
+        list.add(IV);
 //        getA().add(VI);
         getA().add(T_60);
+        list.add(T_60);
 //        getA().add(E);
 //        getA().add(R1_2);
         //getA().add(S_30_60);
         //getA().add(S_15_30);
         getA().add(VI_L);
+        list.add(VI_L);
         getA().add(VII_L);
+        list.add(VII_L);
         getA().add(II_30);
+        list.add(II_30);
         getA().add(I_30);
+        list.add(I_30);
 
 //        getA().add(E2);
 
@@ -809,17 +854,16 @@ public class ResultAFactoryOneSensor extends ResultAFactory {
         double SPN = (SP - 10.65) / (25.7 - 10.65);
 
         double YZ = (1 - SPN) * 100;
-        ArrayList<ResultBySens> list = getA();
-        double sum =0 ;
-        for (ResultBySens resultBySens:list
-                ) {
-            sum+= resultBySens.getStressA();
+        double sum = 0;
+        for (ResultBySens resultBySens : list) {
+            sum += resultBySens.getStressA();
         }
         if (!list.isEmpty()) {
-            sum/=list.size();
+            sum /= list.size();
         }
 
-        setSummaryResult(sum*20);
+        setSummaryResult(sum * 20);
+        setSummaryRunStress(sum * 20);
 
 
 //        val totalResult = new TotalResult_60(getContext(), I, II, III, IV, V, VI, E, S_30_60, TAU, hand);
@@ -835,6 +879,7 @@ public class ResultAFactoryOneSensor extends ResultAFactory {
             getA().add(new E_2_60_GREY(e2, getInputData(), getContext()));
         }
     }
+
     private void createSecondStressParametersFor_60(double a20_30, double a20_60, double a_40_70, Double s30_60, Double en, Double e2, int r1_2, final int tau, final int T) {
 
         val a15 = getData(getMaxSensResult(), 15);
@@ -879,24 +924,35 @@ public class ResultAFactoryOneSensor extends ResultAFactory {
         val I_30 = new A_10_20(sensorValueAttitudeFor30.getA10_20(), getInputData(), getContext(), 1.81F, "I_30");
         val II_30 = new A_15_30(sensorValueAttitudeFor30.getA15_30(), getInputData(), getContext(), 1.81F, "II_30");
 
+        ArrayList<ResultBySens> list = new ArrayList<>();
+
         S_15_30.setSecondStressResult();
         I_30.setSecondStressResult();
         II_30.setSecondStressResult();
         getA().add(II);
+        list.add(II);
         getA().add(III);
+        list.add(III);
         getA().add(V);
+        list.add(V);
 //        getA().add(I);
         //getA().add(IV);
 //        getA().add(VI);
         getA().add(T_60);
+        list.add(T_60);
 //        getA().add(E);
 //        getA().add(R1_2);
         getA().add(S_30_60);
+        list.add(S_30_60);
         //getA().add(S_15_30);
         getA().add(VI_L);
+        list.add(VI_L);
         getA().add(VII_L);
+        list.add(VII_L);
         getA().add(II_30);
+        list.add(II_30);
         getA().add(I_30);
+        list.add(I_30);
 
 //        getA().add(E2);
 
@@ -915,17 +971,15 @@ public class ResultAFactoryOneSensor extends ResultAFactory {
         double SPN = (SP - 10.65) / (25.7 - 10.65);
 
         double YZ = (1 - SPN) * 100;
-        ArrayList<ResultBySens> list = getA();
-        double sum =0 ;
-        for (ResultBySens resultBySens:list
-        ) {
-            sum+= resultBySens.getSecondStressA();
-        }
-        if (!list.isEmpty()) {
-            sum/=list.size();
+        double sum = 0;
+        for (ResultBySens resultBySens : list) {
+            sum += resultBySens.getSecondStressA();
+        } if (!list.isEmpty()) {
+            sum /= list.size();
         }
 
-        setSummaryResult(sum*20);
+        setSummaryResult(sum * 20);
+        setSummaryStopStress(sum * 20);
 
 
 //        val totalResult = new TotalResult_60(getContext(), I, II, III, IV, V, VI, E, S_30_60, TAU, hand);

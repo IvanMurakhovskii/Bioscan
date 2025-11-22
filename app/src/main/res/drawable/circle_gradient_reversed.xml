@@ -18,8 +18,8 @@
                 android:useLevel="true">
                 <gradient
                     android:centerColor="#FCFC00"
-                    android:endColor="#00AF64"
-                    android:startColor="#710505"
+                    android:endColor="#710505"
+                    android:startColor="#00AF64"
                     android:type="sweep">
                 </gradient>
             </shape>

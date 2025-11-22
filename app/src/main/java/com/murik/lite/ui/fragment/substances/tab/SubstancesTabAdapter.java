@@ -14,8 +14,8 @@ public class SubstancesTabAdapter extends FragmentPagerAdapter {
 
 
     private MeasureDataParcelable sensorDataFullParcelable;
-    private final int PAGE_COUNT = 3;
-    private String tabTitle[] = new String[]{"Вещества", "Объектры", "Биопробы"};
+    private final int PAGE_COUNT = 6;
+    private String tabTitle[] = new String[]{"Вещества", "Вещества новые", "Объектры", "Биопробы", "Цветы", "Спиртосодержащие напитки"};
 
 
 

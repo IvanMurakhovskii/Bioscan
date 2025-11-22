@@ -1,72 +1,195 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/background_color"
+    android:padding="8dp">
 
-  <TextView
+  <LinearLayout
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      android:text="@string/input_max_signals"
-      android:textStyle="bold"
-      android:textSize="16sp"/>
+      android:orientation="vertical">
 
-  <android.support.design.widget.TextInputLayout
-      android:layout_width="250dp"
-      android:layout_height="wrap_content"
-      android:hint="@string/foreArmLeft"
-      android:paddingBottom="8dp">
-    <EditText
-        android:id="@+id/foreArmLeft"
+    <!-- Header Card -->
+    <android.support.v7.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:inputType="number"
-        />
-  </android.support.design.widget.TextInputLayout>
+        android:layout_marginBottom="8dp"
+        app:cardCornerRadius="8dp"
+        app:cardElevation="4dp">
 
-  <android.support.design.widget.TextInputLayout
-      android:layout_width="250dp"
-      android:layout_height="wrap_content"
-      android:paddingBottom="8dp"
-      android:hint="Предплечье правое">
-    <EditText
-        android:id="@+id/foreArmRight"
+      <LinearLayout
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:orientation="vertical"
+          android:padding="8dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/input_max_signals"
+            android:textAlignment="center"
+            android:textColor="@color/primary_text"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="Введите максимальные значения сигналов"
+            android:textAlignment="center"
+            android:textColor="@color/secondary_text"
+            android:textSize="14sp" />
+
+      </LinearLayout>
+    </android.support.v7.widget.CardView>
+
+    <!-- Input Fields Card -->
+    <android.support.v7.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:inputType="number"/>
-  </android.support.design.widget.TextInputLayout>
+        app:cardCornerRadius="8dp"
+        app:cardElevation="4dp">
 
-  <android.support.design.widget.TextInputLayout
-      android:layout_width="250dp"
-      android:layout_height="wrap_content"
-      android:paddingBottom="8dp"
-      android:hint="Печень (межбровье)">
-    <EditText
-        android:id="@+id/liver"
+      <LinearLayout
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:orientation="vertical"
+          android:padding="8dp">
+
+        <!-- ForeArm Left -->
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp"
+            app:boxStrokeColor="@color/colorPrimary">
+
+          <EditText
+              android:id="@+id/foreArmLeft"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:hint="@string/foreArmLeft"
+              android:inputType="numberDecimal"
+              android:minHeight="48dp"
+              android:background="@android:color/transparent"
+              android:textColor="@color/primary_text"
+              android:textSize="16sp" />
+
+        </android.support.design.widget.TextInputLayout>
+
+        <!-- ForeArm Right -->
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp"
+            app:boxStrokeColor="@color/colorPrimary">
+
+          <EditText
+              android:id="@+id/foreArmRight"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:hint="Предплечье правое"
+              android:inputType="numberDecimal"
+              android:minHeight="48dp"
+              android:background="@android:color/transparent"
+              android:textColor="@color/primary_text"
+              android:textSize="16sp" />
+
+        </android.support.design.widget.TextInputLayout>
+
+        <!-- Liver -->
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp"
+            app:boxStrokeColor="@color/colorPrimary">
+
+          <EditText
+              android:id="@+id/liver"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:hint="Печень (межбровье)"
+              android:inputType="numberDecimal"
+              android:minHeight="48dp"
+              android:background="@android:color/transparent"
+              android:textColor="@color/primary_text"
+              android:textSize="16sp" />
+
+        </android.support.design.widget.TextInputLayout>
+
+        <!-- Heart -->
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            app:boxStrokeColor="@color/colorPrimary">
+
+          <EditText
+              android:id="@+id/heart"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:hint="Сердце (губа левая)"
+              android:inputType="numberDecimal"
+              android:minHeight="48dp"
+              android:background="@android:color/transparent"
+              android:textColor="@color/primary_text"
+              android:textSize="16sp" />
+
+        </android.support.design.widget.TextInputLayout>
+
+        <!-- Calculate Button -->
+        <android.support.v7.widget.AppCompatButton
+            android:id="@+id/btn_calculate_additions"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/button_rounded_background"
+            android:enabled="false"
+            android:elevation="2dp"
+            android:minHeight="48dp"
+            android:text="Рассчитать"
+            android:textAllCaps="false"
+            android:textColor="@android:color/white"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+      </LinearLayout>
+    </android.support.v7.widget.CardView>
+
+    <!-- Info Card (Optional) -->
+    <android.support.v7.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:inputType="number"/>
-  </android.support.design.widget.TextInputLayout>
+        android:layout_marginTop="8dp"
+        app:cardCornerRadius="8dp"
+        app:cardElevation="2dp"
+        app:cardBackgroundColor="@color/card_info_background">
 
-  <android.support.design.widget.TextInputLayout
-      android:layout_width="250dp"
-      android:layout_height="wrap_content"
-      android:paddingBottom="8dp"
-      android:hint="Сердце (губа левая)">
-    <EditText
-        android:id="@+id/heart"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:inputType="number"/>
-  </android.support.design.widget.TextInputLayout>
+      <LinearLayout
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:orientation="vertical"
+          android:padding="12dp">
 
-  <android.support.v7.widget.AppCompatButton
-      android:id="@+id/btn_calculate_additions"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:layout_gravity="center"
-      android:layout_margin="2dp"
-      android:enabled="false"
-      style="@style/Widget.MaterialComponents.Button"
-      android:text="Рассчитать" />
-</LinearLayout>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="💡 Подсказка"
+            android:textColor="@color/primary_text"
+            android:textSize="14sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="Введите числовые значения максимальных сигналов для расчета"
+            android:textColor="@color/secondary_text"
+            android:textSize="12sp" />
+
+      </LinearLayout>
+    </android.support.v7.widget.CardView>
+
+  </LinearLayout>
+</ScrollView>

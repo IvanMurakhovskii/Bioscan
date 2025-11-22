@@ -25,4 +25,5 @@ public class Screens {
   public static final String STRESS_SUMMARY_RESULT = "STRESS_SUMMARY_RESULT";
   public static final String SECOND_STRESS_RESULT = "SECOND_STRESS_RESULT";
   public static final String SECOND_STRESS_SUMMARY_RESULT = "SECOND_STRESS_SUMMARY_RESULT";
+  public static final String SUMMARY_FULL_STRESS_RESULT = "SUMMARY_FULL_STRESS_RESULT";
 }

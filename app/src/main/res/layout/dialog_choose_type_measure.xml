@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="wrap_content"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:padding="16dp">
 
     <LinearLayout
         android:id="@+id/ll_one_sensor_settings"
@@ -12,8 +13,8 @@
 
         <RadioGroup
             android:id="@+id/rg_choose_type_measure"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="vertical"
             android:paddingBottom="16dp"
             android:visibility="gone">
@@ -23,98 +24,79 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:checked="true"
-                android:text="@string/by_sensor" />
+                android:text="@string/by_sensor"
+                android:textSize="16sp"
+                android:paddingVertical="8dp" />
 
             <RadioButton
                 android:id="@+id/rb_chart"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/chart" />
+                android:text="@string/chart"
+                android:textSize="16sp"
+                android:paddingVertical="8dp" />
         </RadioGroup>
 
-        <Switch
-            android:id="@+id/animals"
+        <LinearLayout
+            android:id="@+id/ll_animals"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:orientation="horizontal"
             android:visibility="gone"
-            android:text="Животные" />
+            android:paddingVertical="8dp">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Животные"
+                android:textSize="16sp"
+                android:gravity="center_vertical" />
+
+            <Switch
+                android:id="@+id/animals"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical" />
+        </LinearLayout>
 
         <LinearLayout
             android:id="@+id/ll_max_signal"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingBottom="16dp">
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textStyle="bold"
-                android:padding="8dp"
                 android:text="Тип диагностики:"
-                 />
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:paddingBottom="8dp" />
 
             <android.support.v7.widget.AppCompatSpinner
                 android:id="@+id/spinner_algorithm"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="48dp"
                 android:spinnerMode="dropdown"
-                android:background="@drawable/spinner_background"/>
+                android:background="@drawable/spinner_background"
+                android:paddingHorizontal="12dp" />
 
             <TextView
                 android:id="@+id/tv_algorithm_desc"
                 android:layout_width="match_parent"
-                android:textStyle="bold"
-                android:layout_height="wrap_content"/>
-
-<!--            <RadioGroup-->
-<!--                android:id="@+id/rg_registration_max_signal"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:orientation="vertical"-->
-<!--                android:paddingBottom="16dp">-->
-
-<!--                <RadioButton-->
-<!--                    android:id="@+id/rb_max_200"-->
-<!--                    android:layout_width="match_parent"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:text="200"-->
-<!--                    android:visibility="gone" />-->
-
-<!--                <RadioButton-->
-<!--                    android:id="@+id/rb_max_160"-->
-<!--                    android:layout_width="match_parent"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:text="160"-->
-<!--                    android:visibility="gone" />-->
-
-
-<!--                <RadioButton-->
-<!--                    android:id="@+id/rb_max_80"-->
-<!--                    android:layout_width="match_parent"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:text="80"-->
-<!--                    android:visibility="gone" />-->
-
-<!--                <RadioButton-->
-<!--                    android:id="@+id/rb_max_60"-->
-<!--                    android:layout_width="match_parent"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:checked="true"-->
-<!--                    android:text="60" />-->
-
-<!--                <RadioButton-->
-<!--                    android:id="@+id/rb_max_30"-->
-<!--                    android:layout_width="match_parent"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:text="30" />-->
-<!--            </RadioGroup>-->
-
+                android:layout_height="wrap_content"
+                android:textSize="14sp"
+                android:textColor="#666666"
+                android:paddingTop="4dp"
+                android:lineSpacingExtra="4sp" />
         </LinearLayout>
 
         <RadioGroup
             android:id="@+id/rg_expert_type"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="vertical"
             android:paddingBottom="16dp"
             android:visibility="gone">
@@ -124,126 +106,149 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:checked="true"
-                android:text="Пользователь" />
+                android:text="Пользователь"
+                android:textSize="16sp"
+                android:paddingVertical="8dp" />
 
             <RadioButton
                 android:id="@+id/rb_expert"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Эксперт" />
+                android:text="Эксперт"
+                android:textSize="16sp"
+                android:paddingVertical="8dp" />
         </RadioGroup>
 
         <RadioGroup
             android:id="@+id/rg_sensor_type"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="vertical"
             android:paddingBottom="16dp"
             android:visibility="gone">
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
+                android:text="Тип прибора:"
+                android:textSize="16sp"
                 android:textStyle="bold"
-                android:padding="8dp"
-                android:text="Тип прибора: " />
+                android:paddingBottom="8dp" />
 
             <RadioButton
                 android:id="@+id/rb_bioscaner"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:checked="true"
-                android:text="Биосканер" />
+                android:text="Биосканер"
+                android:textSize="16sp"
+                android:paddingVertical="8dp" />
 
             <RadioButton
                 android:id="@+id/rb_diagnost"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="НД" />
+                android:text="НД"
+                android:textSize="16sp"
+                android:paddingVertical="8dp" />
         </RadioGroup>
 
         <LinearLayout
             android:id="@+id/ll_sensors"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="vertical"
             android:visibility="gone">
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="4dp"
-                android:text="Выберите сенсор: "
-                />
+                android:text="Выберите сенсор:"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:paddingBottom="8dp" />
 
             <ScrollView
                 android:id="@+id/scroll_sensors"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="150dp"
+                android:padding="4dp">
 
                 <RadioGroup
                     android:id="@+id/rg_sensors"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:clickable="false"
                     android:orientation="vertical"
-                    android:padding="16dp"
-                    android:visibility="visible">
+                    android:padding="8dp">
 
                     <RadioButton
                         android:id="@+id/rb_sens1"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:checked="true"
-                        android:text="1 сенсор" />
+                        android:text="1 сенсор"
+                        android:textSize="16sp"
+                        android:paddingVertical="6dp" />
 
                     <RadioButton
                         android:id="@+id/rb_sens2"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="2 сенсор" />
+                        android:text="2 сенсор"
+                        android:textSize="16sp"
+                        android:paddingVertical="6dp" />
 
                     <RadioButton
                         android:id="@+id/rb_sens3"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="3 сенсор" />
+                        android:text="3 сенсор"
+                        android:textSize="16sp"
+                        android:paddingVertical="6dp" />
 
                     <RadioButton
                         android:id="@+id/rb_sens4"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="4 сенсор" />
+                        android:text="4 сенсор"
+                        android:textSize="16sp"
+                        android:paddingVertical="6dp" />
 
                     <RadioButton
                         android:id="@+id/rb_sens5"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="5 сенсор" />
+                        android:text="5 сенсор"
+                        android:textSize="16sp"
+                        android:paddingVertical="6dp" />
 
                     <RadioButton
                         android:id="@+id/rb_sens6"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="6 сенсор" />
+                        android:text="6 сенсор"
+                        android:textSize="16sp"
+                        android:paddingVertical="6dp" />
 
                     <RadioButton
                         android:id="@+id/rb_sens7"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="7 сенсор" />
+                        android:text="7 сенсор"
+                        android:textSize="16sp"
+                        android:paddingVertical="6dp" />
 
                     <RadioButton
                         android:id="@+id/rb_sens8"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="8 сенсор" />
+                        android:text="8 сенсор"
+                        android:textSize="16sp"
+                        android:paddingVertical="6dp" />
                 </RadioGroup>
             </ScrollView>
         </LinearLayout>
 
     </LinearLayout>
-
 
 </LinearLayout>

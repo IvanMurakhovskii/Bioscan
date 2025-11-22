@@ -53,10 +53,12 @@ public class ResultFragment extends MvpAppCompatFragment implements ResultView {
   private FloatingActionButton fab_substances;
   private FloatingActionButton fab_stress;
   private FloatingActionButton fab_secondStress;
+  private FloatingActionButton fabFullSummaryStress;
 
   private TextView addAlarmActionText;
   private TextView addPersonActionText;
   private TextView addStressActionText;
+  private TextView fabFullSummaryStressText;
   private TextView addSecondStressActionText;
 
   private boolean  isAllFabsVisible = false;
@@ -101,6 +103,8 @@ public class ResultFragment extends MvpAppCompatFragment implements ResultView {
     fab_substances = view.findViewById(R.id.substances_fab);
     fab_stress = view.findViewById(R.id.stress_fab);
     fab_secondStress = view.findViewById(R.id.second_stress_fab);
+    fabFullSummaryStress = view.findViewById(R.id.full_summary_stress_fab);
+    fabFullSummaryStressText = view.findViewById(R.id.full_summary_stress_fab_text);
     mResultPresenter.setContext(getContext());
 
     addAlarmActionText = view.findViewById(R.id.add_alarm_action_text);
@@ -116,6 +120,8 @@ public class ResultFragment extends MvpAppCompatFragment implements ResultView {
 
     fab_secondStress.setOnClickListener((event) -> mResultPresenter.onSecondStressClick(inputDataParcelable));
 
+    fabFullSummaryStress.setOnClickListener((event) -> mResultPresenter.onFullStressClick());
+
     isAllFabsVisible = false;
 
     fab_add.setOnClickListener((event) -> {
@@ -124,11 +130,13 @@ public class ResultFragment extends MvpAppCompatFragment implements ResultView {
         fab_substances.show();
         fab_stress.show();
         fab_secondStress.show();
+        fabFullSummaryStress.show();
 
         addAlarmActionText.setVisibility(View.VISIBLE);
         addPersonActionText.setVisibility(View.VISIBLE);
         addStressActionText.setVisibility(View.VISIBLE);
         addSecondStressActionText.setVisibility(View.VISIBLE);
+        fabFullSummaryStressText.setVisibility(View.VISIBLE);
 
         isAllFabsVisible = true;
       } else {
@@ -136,10 +144,12 @@ public class ResultFragment extends MvpAppCompatFragment implements ResultView {
         fab_substances.hide();
         fab_stress.hide();
         fab_secondStress.hide();
+        fabFullSummaryStress.hide();
         addAlarmActionText.setVisibility(View.GONE);
         addPersonActionText.setVisibility(View.GONE);
         addStressActionText.setVisibility(View.GONE);
         addSecondStressActionText.setVisibility(View.GONE);
+        fabFullSummaryStressText.setVisibility(View.GONE);
 
         isAllFabsVisible = false;
       }

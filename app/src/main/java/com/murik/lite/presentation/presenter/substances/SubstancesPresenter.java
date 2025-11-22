@@ -69,8 +69,6 @@ public class SubstancesPresenter extends MvpPresenter<SubstancesView> {
 
         val s30_60 = oneSensorResultParameters.getS30_60();
 
-        List<Substance> substances = new ArrayList<>();
-
         val parametersData = SubstancesParametersData.builder()
                 .II(a_40_60)
                 .III(a_30_60)
@@ -85,22 +83,13 @@ public class SubstancesPresenter extends MvpPresenter<SubstancesView> {
                 .I_30(sensorValueAttitudeFor30.getA10_20())
                 .build();
 
-//        final double II = a_40_60;
-//        final double III = a_30_60;
-//        final double V = a_20_60;
-//        final double IV = a_20_30;
-//        final int T_60 = T;
-//        final Double S_30_60 = s30_60;
-//        final Double S_15_30 = sensorValueAttitudeFor30.calculateAndGetS15_30();
-//        final double VI_L = a_25_45;
-//        final double VII_L = a_15_20;
-//        final double II_30 = sensorValueAttitudeFor30.getA15_30();
-//        final double I_30 = sensorValueAttitudeFor30.getA10_20();
-
         switch (page) {
             case SUBSTANCE_PAGE: return SubstancesUtils.getSubstances(parametersData);
+            case SUBSTANCE_PAGE_2: return SubstancesUtils.getSubstances2(parametersData);
             case OBJECT_PAGE: return SubstancesUtils.getObjects(parametersData);
             case BIOASSAYS: return SubstancesUtils.getBioassays(parametersData);
+            case FLOWER: return SubstancesUtils.getFlower(parametersData);
+            case ALCOHOL: return SubstancesUtils.getAlcohol(parametersData);
             default: return Collections.emptyList();
         }
     }

@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:weightSum="2">
+
+    <!-- Левая CardView - Спазм, замирание -->
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:layout_margin="4dp"
+        app:cardCornerRadius="12dp"
+        app:cardElevation="6dp"
+        app:cardUseCompatPadding="true">
+
+        <android.support.constraint.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:context=".ui.activity.start.StartActivity">
+
+            <!-- Guideline для разделения экрана -->
+            <android.support.constraint.Guideline
+                android:id="@+id/guideline_vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.5" />
+
+            <!-- Заголовок -->
+
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:padding="8dp"
+                android:text="Спазм, замирание"
+                android:textSize="18sp"
+                android:textColor="@android:color/black"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <!-- Прогресс бар для первой секции -->
+            <ProgressBar
+                android:id="@+id/summary_progress_bar_stop"
+                style="@style/CircularDeterminateProgressBarRevert"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="4dp"
+                android:progress="60"
+                app:layout_constraintBottom_toTopOf="@+id/summary_description_card_stop"
+                app:layout_constraintDimensionRatio="1:1"
+                app:layout_constraintEnd_toStartOf="@+id/guideline_vertical"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView2" />
+
+            <!-- Текст поверх прогресс бара -->
+            <TextView
+                android:id="@+id/text_view_progress_stop"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_margin="30sp"
+                android:gravity="center"
+                android:text="60%"
+                android:textSize="20sp"
+                app:layout_constraintBottom_toBottomOf="@+id/summary_progress_bar_stop"
+                app:layout_constraintEnd_toEndOf="@+id/summary_progress_bar_stop"
+                app:layout_constraintStart_toStartOf="@+id/summary_progress_bar_stop"
+                app:layout_constraintTop_toTopOf="@+id/summary_progress_bar_stop" />
+
+            <!-- Изображение для первой секции -->
+            <ImageView
+                android:id="@+id/result_image_stop"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginStart="4dp"
+                android:layout_marginEnd="8dp"
+                app:layout_constraintBottom_toBottomOf="@+id/summary_progress_bar_stop"
+                app:layout_constraintDimensionRatio="1:1"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/guideline_vertical"
+                app:layout_constraintTop_toTopOf="@+id/summary_progress_bar_stop" />
+
+            <!-- Карточка с описанием -->
+            <android.support.v7.widget.CardView
+                android:id="@+id/summary_description_card_stop"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="16dp"
+                app:cardBackgroundColor="@color/colorResultYellow"
+                app:cardCornerRadius="5dp"
+                app:cardUseCompatPadding="true"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/summary_progress_bar_stop">
+
+                <TextView
+                    android:id="@+id/summary_description_stop"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="#FFFFFF"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginRight="8dp"
+                    android:gravity="center"
+                    android:padding="16dp"
+                    android:textSize="20sp" />
+
+            </android.support.v7.widget.CardView>
+
+        </android.support.constraint.ConstraintLayout>
+    </android.support.v7.widget.CardView>
+
+    <!-- Правая CardView - Бей, беги -->
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:layout_margin="4dp"
+        app:cardCornerRadius="12dp"
+        app:cardElevation="6dp"
+        app:cardUseCompatPadding="true">
+
+        <android.support.constraint.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:context=".ui.activity.start.StartActivity">
+
+            <!-- Guideline для разделения экрана -->
+            <android.support.constraint.Guideline
+                android:id="@+id/guideline_vertical2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.5" />
+
+            <!-- Заголовок -->
+            <TextView
+                android:id="@+id/textView3"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:padding="8dp"
+                android:text="Бей, беги"
+                android:textColor="@android:color/black"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <!-- Прогресс бар для второй секции -->
+            <ProgressBar
+                android:id="@+id/summary_progress_bar_run"
+                style="@style/CircularDeterminateProgressBarRevert"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="4dp"
+                android:progress="60"
+                app:layout_constraintBottom_toTopOf="@+id/summary_description_card_run"
+                app:layout_constraintDimensionRatio="1:1"
+                app:layout_constraintEnd_toStartOf="@+id/guideline_vertical2"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView3" />
+
+            <!-- Текст поверх прогресс бара -->
+            <TextView
+                android:id="@+id/text_view_progress_run"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:gravity="center"
+                android:text="60%"
+                android:layout_margin="30sp"
+                android:textSize="20sp"
+                app:layout_constraintBottom_toBottomOf="@+id/summary_progress_bar_run"
+                app:layout_constraintEnd_toEndOf="@+id/summary_progress_bar_run"
+                app:layout_constraintStart_toStartOf="@+id/summary_progress_bar_run"
+                app:layout_constraintTop_toTopOf="@+id/summary_progress_bar_run" />
+
+            <!-- Изображение для второй секции -->
+            <ImageView
+                android:id="@+id/result_image_run"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginStart="4dp"
+                android:layout_marginEnd="8dp"
+                app:layout_constraintBottom_toBottomOf="@+id/summary_progress_bar_run"
+                app:layout_constraintDimensionRatio="1:1"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/guideline_vertical2"
+                app:layout_constraintTop_toTopOf="@+id/summary_progress_bar_run" />
+
+            <!-- Карточка с описанием -->
+            <android.support.v7.widget.CardView
+                android:id="@+id/summary_description_card_run"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="16dp"
+                app:cardBackgroundColor="@color/colorResultYellow"
+                app:cardCornerRadius="5dp"
+                app:cardUseCompatPadding="true"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/summary_progress_bar_run">
+
+                <TextView
+                    android:id="@+id/summary_description_run"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="#FFFFFF"
+                    android:gravity="center"
+                    android:padding="16dp"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginRight="8dp"
+                    android:textSize="20sp" />
+
+            </android.support.v7.widget.CardView>
+
+        </android.support.constraint.ConstraintLayout>
+    </android.support.v7.widget.CardView>
+
+</LinearLayout>

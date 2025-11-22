@@ -37,6 +37,7 @@ public class ChooseTypeMeasureDialogFragment extends DialogFragment {
     private RadioGroup rgSensorType;
     private RadioGroup rgExpert;
     private LinearLayout llSensors;
+    private LinearLayout llAnimals;
     private LinearLayout llMaxSignal;
     private Switch animalsSwitch;
     private ScrollView sensorsScroll;
@@ -65,6 +66,7 @@ public class ChooseTypeMeasureDialogFragment extends DialogFragment {
         llMaxSignal = view.findViewById(R.id.ll_max_signal);
         animalsSwitch = view.findViewById(R.id.animals);
         sensorsScroll = view.findViewById(R.id.scroll_sensors);
+        llAnimals = view.findViewById(R.id.ll_animals);
         algorithmSpinner = view.findViewById(R.id.spinner_algorithm);
         algorithmDescription = view.findViewById(R.id.tv_algorithm_desc);
 
@@ -93,6 +95,7 @@ public class ChooseTypeMeasureDialogFragment extends DialogFragment {
             animalsSwitch.setVisibility(View.VISIBLE);
             sensorsScroll.setVisibility(View.VISIBLE);
             llSensors.setVisibility(View.VISIBLE);
+            llAnimals.setVisibility(View.VISIBLE);
         }
 
         rgSensorType.setOnCheckedChangeListener(this::onSensorTypeChanged);

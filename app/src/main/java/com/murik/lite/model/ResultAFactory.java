@@ -26,6 +26,8 @@ public abstract class ResultAFactory {
 
     private Context context;
     private Double summaryResult = 0d;
+    private Double summaryRunStress = 0d;
+    private Double summaryStopStress = 0d;
 
     public ResultAFactory(DataByMaxParcelable inputData, int hand, Context context) {
 
@@ -58,6 +60,10 @@ public abstract class ResultAFactory {
     public abstract Double calculateAndGetAreaDifference();
 
     public abstract boolean calculateResultA();
+
+
+    public abstract void calculateSummaryStress();
+
     public boolean calculateStressResultA() {
         return calculateResultA();
     }
